@@ -45,13 +45,11 @@
     </main>
     <second-content></second-content>
     <the-carousel></the-carousel>
-    <!-- <most-sells></most-sells> -->
   </div>
 </template>
 
 
 <script>
-// import MostSells from "./FirstContent/MostSells.vue";
 import TheCarousel from "./TheCarousel.vue";
 import SecondContent from "./SecoundContent.vue";
 export default {

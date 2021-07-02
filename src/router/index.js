@@ -7,6 +7,7 @@ import AboutUs from '../Pages/Information/AboutUs.vue';
 import LogIn from '../components/TheForms/LogIn.vue';
 import TheRegister from '../components/TheForms/TheRegister.vue';
 import ForgetPassword from '../components/TheForms/ForgetPassword.vue';
+import SingleProduct from '../components/ProductPages/SingleProduct.vue';
 
 
 Vue.use(VueRouter)
@@ -45,13 +46,24 @@ const routes = [{
         path: '/forget',
         name: 'forgetpass',
         component: ForgetPassword
+    },
+    {
+        path: '/singleproduct/:slug',
+        name: 'singleproduct',
+        component: SingleProduct
     }
 ]
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
+    routes,
+    scrollBehavior() {
+        return {
+            x: 0,
+            y: 0
+        }
+    }
 })
 
 export default router

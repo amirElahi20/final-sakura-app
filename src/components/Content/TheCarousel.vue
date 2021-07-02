@@ -10,37 +10,43 @@
         [950, 4],
         [1200, 5],
       ]"
-      :navigate-to="someLocalProperty"
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
       :navigation-enabled="true"
     >
-      <slide v-for="item in 10" :key="item">
+      <slide v-for="product in BestProducts" :key="product.id">
         <div class="box">
           <div class="product-informartion">
             <img
+              :class="{ blurimg: !product.available }"
               class="img-box"
-              src="../.../../../../public/img/mockup-graphics-enNffryKuQI-unsplash.jpg"
+              :src="product.picture[0].picture"
               alt=""
             />
             <div class="products-cost">
-              <h3 class="product-name">زردآلو خشک شده</h3>
-              <h4 class="product-cost"><span>40000</span>تومان</h4>
+              <h3 class="product-name">{{ product.name }}</h3>
+              <h4 class="product-cost">
+                <span>{{ product.show_cost.toLocaleString() }}</span
+                >تومان
+              </h4>
+              <p class="available" v-if="!product.available">
+                کالای مورد نظر موجود نیست!
+              </p>
               <a class="product-btn" href="#">مشاهده محصول</a>
             </div>
           </div>
         </div>
       </slide>
       <slide>
-          <router- class="show" to="/products">
-        <div class="box">
+        <router-link class="show" to="/products">
+          <div class="box">
             <div class="show-more">
               <font-awesome-icon class="fa" icon="chevron-circle-right" />
               <h3>مشاهده همه محصولات</h3>
             </div>
-        </div>
-          </router->
+          </div>
+        </router-link>
       </slide>
     </carousel>
     <div class="u-center mybtn">
@@ -70,6 +76,16 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    BestProducts() {
+      return this.$store.getters.GetBestProducts;
+    },
+  },
+  created() {
+    if (this.BestProducts.length == 0) {
+      this.$store.dispatch("GetBestProductsFromServer");
+    }
+  },
 };
 </script>
 
@@ -77,6 +93,50 @@ export default {
 .u-center {
   margin: 70px 0 50px 0;
   text-align: center;
+}
+.available {
+  font-size: 12px;
+  direction: rtl;
+  color: red;
+  background-color: white;
+  padding: 2px;
+  border-radius: 5px;
+  position: absolute;
+  font-weight: bold;
+  margin-right: 50px;
+  margin-top: -230px;
+  animation: shake-animation 4.72s ease infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes shake-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  1.78571% {
+    transform: translate(5px, 0);
+  }
+  3.57143% {
+    transform: translate(0, 0);
+  }
+  5.35714% {
+    transform: translate(5px, 0);
+  }
+  7.14286% {
+    transform: translate(0, 0);
+  }
+  8.92857% {
+    transform: translate(5px, 0);
+  }
+  10.71429% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.blurimg {
+  filter: blur(4px);
 }
 .header-title {
   font-size: 1.5rem;
@@ -161,5 +221,7 @@ export default {
 }
 .show {
   cursor: pointer;
+  text-decoration: none;
+  color: orangered;
 }
 </style>

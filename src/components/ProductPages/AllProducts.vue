@@ -6,33 +6,37 @@
           <h2 class="heading-secondary">محصولات</h2>
         </div>
         <div class="row">
-          <div class="box" v-for="item in 10" :key="item">
+          <div class="box" v-for="product in FilterProducts" :key="product.id">
             <img
+            :class="{blurimg :!product.available }"
               class="image"
-              src="../../../public/img/pexels-pixabay-327098.jpg"
+              :src="product.picture[0].picture"
               alt=""
             />
-            <p class="paragraph">موز</p>
-            <h5 class="cost">50000 تومان</h5>
-            <router-link
-            to="/"
-              class="btn"
-              >مشاهده محصول</router-link
-            >
-            <!-- <p class="available" v-if="!product.available">
+            <p class="paragraph">{{ product.name }}</p>
+            <h5 class="cost">{{ product.show_cost.toLocaleString() }} تومان</h5>
+            <router-link :to="{name:'singleproduct' , params : {slug:product.slug}}" class="btn">مشاهده محصول</router-link>
+            <p class="available" v-if="!product.available">
               کالای مورد نظر موجود نیست!
-            </p> -->
+            </p>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
 export default {
-}
+  computed: {
+    FilterProducts() {
+      return this.$store.getters.GetProducts;
+    },
+  },
+  created() {
+    this.$store.dispatch("GetProductsFromServer");
+  },
+};
 </script>
 
 
@@ -58,14 +62,47 @@ $color-primary-light: orangered;
 }
 .available {
   font-size: 12px;
-  margin-top: 7px;
+  direction: rtl;
   color: red;
-  font-weight: bold;
-  border-bottom: 1px solid red;
+  background-color: white;
+  padding: 2px;
+  border-radius: 5px;
   position: absolute;
-  margin-top: -220px;
-  margin-right: 40px;
-  transform: rotate(-30deg);
+  font-weight: bold;
+  margin-right: 50px;
+  margin-top: -230px;
+  animation: shake-animation 4.72s ease infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes shake-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  1.78571% {
+    transform: translate(5px, 0);
+  }
+  3.57143% {
+    transform: translate(0, 0);
+  }
+  5.35714% {
+    transform: translate(5px, 0);
+  }
+  7.14286% {
+    transform: translate(0, 0);
+  }
+  8.92857% {
+    transform: translate(5px, 0);
+  }
+  10.71429% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.blurimg {
+  filter: blur(4px);
 }
 .total {
   height: auto;
@@ -79,7 +116,7 @@ $color-primary-light: orangered;
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 10px;
 }
 .box {

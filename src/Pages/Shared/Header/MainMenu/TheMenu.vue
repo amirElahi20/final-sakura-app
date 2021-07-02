@@ -20,11 +20,14 @@
               :class="{ active: !activePopup }"
             >
               <a href="#" class="sub">دسته بندی</a>
-              <transition name="fade">
-                <sub-menu
+              <!-- <transition name="fade"> -->
+              <!-- <sub-menu
                   :position="scrollPosition"
                   v-show="!activePopup"
-                ></sub-menu>
+                ></sub-menu> -->
+              <!-- </transition> -->
+              <transition name="fade">
+                <sub-menu v-show="!activePopup"></sub-menu>
               </transition>
             </li>
             <li>
@@ -53,7 +56,7 @@
             <li class="shopping">
               <router-link to="/shopping">
                 <span class="badge"><h5 class="h4">10</h5></span>
-                  <font-awesome-icon class="fa" icon="shopping-cart" />
+                <font-awesome-icon class="fa" icon="shopping-cart" />
               </router-link>
             </li>
           </ul>
@@ -64,17 +67,44 @@
 </template>
 
 <script>
-import SearchBox from '../SearchBox/SearchBox.vue'
+import SearchBox from "../SearchBox/SearchBox.vue";
+import SubMenu from "../SubMenus/SubMenu.vue";
 export default {
-  components:{
-    SearchBox
+  components: {
+    SearchBox,
+    SubMenu,
   },
   data() {
     return {
-      activePopup : true
-    }
+      activePopup: true,
+      scrollPosition: 0,
+      isSticky: false,
+    };
   },
-}
+
+  created() {
+    window.addEventListener("scroll", this.updateScroll);
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.updateScroll);
+  },
+  methods: {
+    mouseover() {
+      this.activePopup = false;
+    },
+    mouseleave() {
+      this.activePopup = true;
+    },
+    updateScroll() {
+      this.scrollPosition = window.scrollY;
+      if (this.scrollPosition >= 100) {
+        this.isSticky = true;
+      } else {
+        this.isSticky = false;
+      }
+    },
+  },
+};
 </script>
 
 
@@ -102,7 +132,7 @@ export default {
   margin: 0 auto;
   justify-content: space-between;
   direction: rtl;
-  width: 80%;
+  width: 89%;
   transition: all 0.4s;
   z-index: 998;
 }
@@ -115,6 +145,7 @@ export default {
   direction: rtl;
   transition: all 0.4s;
   padding: 12px;
+  // margin: 5px;
   height: 70px;
   width: 100%;
   position: fixed;
@@ -163,9 +194,6 @@ a {
   text-decoration: none;
   list-style: none;
 }
-.leftmenu li {
-
-}
 .leftmenu li a {
   color: white;
   text-decoration: none;
@@ -195,29 +223,10 @@ a {
   background-color: rgba(0, 0, 0, 0.836);
   opacity: 1;
 }
-
-.fade-enter-from {
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
-
-.fade-enter-active {
-  transition: all 0.4s;
-}
-
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-leave-active {
-  transition: all 0.4s;
-}
-
-.fade-leave-to {
-  opacity: 0;
-}
-  
 </style>

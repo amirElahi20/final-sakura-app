@@ -32,7 +32,7 @@ export default {
 }
 
 body {
-  padding: 5px;
+  // padding: 5px;
   font-family: "BYekan";
 }
 .english {
