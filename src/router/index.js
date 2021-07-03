@@ -8,7 +8,7 @@ import LogIn from '../components/TheForms/LogIn.vue';
 import TheRegister from '../components/TheForms/TheRegister.vue';
 import ForgetPassword from '../components/TheForms/ForgetPassword.vue';
 import SingleProduct from '../components/ProductPages/SingleProduct.vue';
-
+import ConfirmEmail from '../components/TheForms/ConfirmEmail.vue';
 
 Vue.use(VueRouter)
 
@@ -51,7 +51,12 @@ const routes = [{
         path: '/singleproduct/:slug',
         name: 'singleproduct',
         component: SingleProduct
-    }
+    },
+    {
+        path: '/accounts/api/v1/check_confirm_email/:token',
+        component: ConfirmEmail,
+        name: 'Confirm'
+    },
 ]
 
 const router = new VueRouter({

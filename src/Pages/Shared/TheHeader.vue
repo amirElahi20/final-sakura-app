@@ -3,7 +3,11 @@
     <header
       class="header"
       :class="{
-        layout: $route.name == 'login' || $route.name == 'register'|| $route.name =='forgetpass'
+        layout:
+          $route.name == 'login' ||
+          $route.name == 'register' ||
+          $route.name == 'forgetpass'||
+          $route.name == 'Confirm'
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />

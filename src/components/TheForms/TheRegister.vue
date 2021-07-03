@@ -5,57 +5,92 @@
         <div class="row">
           <div class="form">
             <div class="form__login">
-              <form action="#" class="list">
+              <form class="list" @submit.prevent="RegisterUser">
                 <h2 class="topform">ثبت نام</h2>
+
                 <div
                   class="list__group"
+                  :class="{ invalid: $v.username.$error }"
                 >
                   <label for="name" class="list__label">
-                    <fa class="fa" icon="user"></fa>نام کاربری</label
+                    <font-awesome-icon
+                      class="fa"
+                      icon="user"
+                    ></font-awesome-icon
+                    >نام کاربری</label
                   >
                   <input
+                    @input="$v.username.$touch()"
                     type="text"
                     class="list__input"
-                    placeholder="اسمتو بنویس "
+                    placeholder="اسمتو به انگلیسی بنویس "
                     id="name"
                     v-model.trim="username"
                   />
                 </div>
+                <p class="alert" v-if="!$v.username.alphaNum">
+                  فقط حروف انگلیسی و عدد
+                </p>
+                <p
+                  class="alert"
+                  v-if="!$v.username.required && $v.username.$dirty"
+                >
+                  نباید خالی باشد
+                </p>
+
                 <div
                   class="list__group"
+                  :class="{ invalid: $v.password.$error }"
                 >
                   <label for="name" class="list__label">
-                    <fa class="fa" icon="lock"></fa>رمز عبور</label
+                    <font-awesome-icon
+                      class="fa"
+                      icon="lock"
+                    ></font-awesome-icon
+                    >رمز عبور</label
                   >
                   <input
+                    @input="$v.password.$touch()"
                     v-model.trim="password"
                     :type="visibility"
                     class="list__input"
                     placeholder="رمز عبورتو وارد کن"
                     id="password"
                   />
-                  <fa
-                    @click="hidePassword"
-                    v-if="visibility == 'text'"
-                    class="eye eye-slash"
-                    icon="eye-slash"
-                  ></fa
-                  ><fa
-                    @click="showPassword"
+                  <font-awesome-icon
+                    @click="showpassword"
                     v-if="visibility == 'password'"
-                    class="eye eye-on"
+                    class="eye"
                     icon="eye"
-                  ></fa>
+                  ></font-awesome-icon>
+                  <font-awesome-icon
+                    @click="hidepassword"
+                    v-if="visibility == 'text'"
+                    class="eye"
+                    icon="eye-slash"
+                  ></font-awesome-icon>
                 </div>
-
-                <div
-                  class="list__group"
+                <p class="alert" v-if="!$v.password.minLength">
+                  رمز نباید کمتر از 6 کاراکتر باشد
+                </p>
+                <p
+                  class="alert"
+                  v-if="!$v.password.required && $v.password.$dirty"
                 >
+                  نباید خالی باشد
+                </p>
+
+                <div class="list__group" :class="{ invalid: $v.email.$error }">
                   <label for="name" class="list__label">
-                    <fa class="fa" icon="envelope"></fa>ایمیل</label
+                    <font-awesome-icon
+                      class="fa"
+                      icon="envelope"
+                    ></font-awesome-icon
+                    >ایمیل</label
                   >
 
                   <input
+                    @input="$v.email.$touch()"
                     v-model="email"
                     type="email"
                     class="list__input"
@@ -63,13 +98,22 @@
                     id="email"
                   />
                 </div>
+                <p class="alert" v-if="!$v.email.email">
+                  ایمیل وارد شده معتبر نمیباشد
+                </p>
+                <p class="alert" v-if="!$v.email.required && $v.email.$dirty">
+                  نباید خالی باشد
+                </p>
+
                 <button class="submit-btn" type="submit">ثبت نام</button>
               </form>
               <h5 class="txt">
                 عضو هستید؟؟ پس
                 <router-link class="router" to="/login">وارد شوید</router-link>
               </h5>
-              <router-link class="back-btn" to="/">بازگشت به صفحه اصلی</router-link>
+              <router-link class="back-btn" to="/"
+                >بازگشت به صفحه اصلی</router-link
+              >
             </div>
           </div>
         </div>
@@ -80,8 +124,56 @@
 
 
 <script>
-
+import {
+  required,
+  maxLength,
+  minLength,
+  alphaNum,
+  email,
+} from "vuelidate/lib/validators";
 export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      email: "",
+      visibility: "password",
+    };
+  },
+  validations: {
+    email: {
+      required,
+      email,
+      maxLength: maxLength(100),
+    },
+    username: {
+      required,
+      alphaNum,
+    },
+    password: {
+      minLength: minLength(6),
+      required,
+    },
+  },
+  methods: {
+    RegisterUser() {
+     this.$v.$touch()
+      if (!this.$v.$error) {
+        const register = {
+          username: this.username,
+          password: this.password,
+          email: this.email,
+        };
+        this.$store.dispatch("RegisterUser", register);
+      }
+    },
+    showpassword() {
+      this.visibility = "text";
+    },
+    hidepassword() {
+      this.visibility = "password";
+    },
+  },
 };
 </script>
 
@@ -133,10 +225,10 @@ export default {
   color: green;
 }
 .eye {
+  color: gray;
   position: absolute;
-  margin-top: -34px;
-  margin-left: 10px;
-  color: rgb(90, 92, 92);
+  margin-top: -35px;
+  margin-left: 15px;
   cursor: pointer;
 }
 .fa {

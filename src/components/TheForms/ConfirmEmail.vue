@@ -1,57 +1,65 @@
 <template>
-    <div class="confirm">
-        <div class="topalert">
-            <h3>!!توجه کنید!!</h3>
-        </div>
-        <div class="mainalert">با کلیک بر روی دکمه زیر ایمیل خود را فعال کنید</div>
-        <router-link class="btn" @click="confirm" to="/login"> فعالسازی ایمیل</router-link>
+  <div class="confirm">
+    <div class="topalert">
+      <h3>!!توجه کنید!!</h3>
     </div>
+    <div class="mainalert">با کلیک بر روی دکمه زیر ایمیل خود را فعال کنید</div>
+    <a href="#" @click="confirm" class="btn">فعالسازی ایمیل</a>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
- import { useToast } from "vue-toastification";
-
+import Vue from "vue";
 export default {
-    data() {
-        return{
-          token: this.$route.params.token,
-          toast : useToast()
-        }
-    },
-    methods:{
-      confirm() {
-        axios.post('https://asha4f.pythonanywhere.com/accounts/api/v1/check_confirm_email/',{
-          token : this.token
+  data() {
+    return {
+      token: this.$route.params.token,
+    };
+  },
+  methods: {
+    confirm() {
+      this.$http
+        .post("accounts/api/v1/check_confirm_email/", {
+          token: this.token,
         })
-        .then(response=>{
-            console.log(response);
-            this.toast.success("ایمیل شما با موفقیت فعال شد");
-            // this.$router.push('/login');
-        })
+        .then((response) => {
+          console.log("this is confirm", response);
+          Vue.swal("انجام شد", "ایمیل شما با موفقیت تایید شد", "success");
+          this.$router.push('/login');
+        });
     },
-    }
-}
+    toast() {
+      Vue.swal({
+        title: "Deleted!",
+        text: "Your row has been deleted.",
+        type: "success",
+        timeer: 1000,
+      });
+    },
+  },
+};
+// http://localhost:8080/
+// https://asha4f.pythonanywhere.com/accounts/api/v1/check_confirm_email/
 </script>
 
 
 <style lang="scss" scoped>
-  .topalert{
-      background-color: orange;
-      padding: 20px;
-      font-size: 20px;
-      margin-bottom: 2rem;
-  }
-  .confirm{
-      text-align: center;
-      color: orangered;
-  }
-  .mainalert{
-      font-size: 18px;
-      margin-bottom: 2rem;
-  }
-  .btn{
-   text-decoration: none;
+.topalert {
+  background-color: orange;
+  padding: 20px;
+  font-size: 20px;
+  margin-bottom: 2rem;
+}
+.confirm {
+  text-align: center;
+  color: orangered;
+}
+.mainalert {
+  font-size: 18px;
+  margin-bottom: 2rem;
+}
+.btn {
+  text-decoration: none;
   padding: 20px 40px;
   display: inline-block;
   border-radius: 100px;
@@ -86,6 +94,4 @@ export default {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
-
-
 </style>

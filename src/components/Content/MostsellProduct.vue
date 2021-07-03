@@ -33,7 +33,11 @@
               <p class="available" v-if="!product.available">
                 کالای مورد نظر موجود نیست!
               </p>
-              <a class="product-btn" href="#">مشاهده محصول</a>
+              <router-link
+                :to="{ name: 'singleproduct', params: { slug: product.slug } }"
+                class="product-btn"
+                >مشاهده محصول</router-link
+              >
             </div>
           </div>
         </div>
