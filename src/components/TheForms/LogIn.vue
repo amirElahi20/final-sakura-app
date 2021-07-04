@@ -5,11 +5,15 @@
         <div class="row">
           <div class="form">
             <div class="form__login">
-              <form class="list">
+              <form class="list" @submit.prevent="LoginUser()">
                 <h2 class="topform">ورود</h2>
                 <div class="list__group">
                   <label for="name" class="list__label"
-                    ><fa class="fa" icon="user"></fa>نام کاربری</label
+                    ><font-awesome-icon
+                      class="fa"
+                      icon="user"
+                    ></font-awesome-icon
+                    >نام کاربری</label
                   >
                   <input
                     type="text"
@@ -23,7 +27,11 @@
                 </div>
                 <div class="list__group">
                   <label for="name" class="list__label"
-                    ><fa class="fa" icon="lock"></fa>رمز عبور</label
+                    ><font-awesome-icon
+                      class="fa"
+                      icon="lock"
+                    ></font-awesome-icon
+                    >رمز عبور</label
                   >
                   <input
                     :type="visibility"
@@ -32,16 +40,18 @@
                     id="password"
                     v-model="password"
                   />
-                  <fa
-                    v-if="visibility == 'text'"
-                    class="eye eye-slash"
-                    icon="eye-slash"
-                  ></fa
-                  ><fa
+                  <font-awesome-icon
+                    @click="showpassword"
                     v-if="visibility == 'password'"
-                    class="eye eye-on"
+                    class="eye"
                     icon="eye"
-                  ></fa>
+                  ></font-awesome-icon>
+                  <font-awesome-icon
+                    @click="hidepassword"
+                    v-if="visibility == 'text'"
+                    class="eye"
+                    icon="eye-slash"
+                  ></font-awesome-icon>
                 </div>
 
                 <button class="submit-btn" type="submit">ورود</button>
@@ -70,7 +80,30 @@
 
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      visibility: "password",
+    };
+  },
+  methods: {
+    LoginUser() {
+      const login = {
+        username: this.username,
+        password: this.password,
+      };
+      this.$store.dispatch("LoginUser", login);
+    },
+    showpassword() {
+      this.visibility = "text";
+    },
+    hidepassword() {
+      this.visibility = "password";
+    },
+  },
+};
 </script>
 
 

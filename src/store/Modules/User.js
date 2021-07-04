@@ -1,14 +1,38 @@
 import Vue from "vue";
+import store from "..";
+import router from '../../router/index';
 
 const state = {
-
+    IsUserAuthenticated: false,
+    UserName: ''
 };
 
 const getters = {
-
+    IsAuthenticated(state) {
+        return state.IsUserAuthenticated;
+    },
+    GetUsername() {
+        return state.UserName;
+    }
 };
 
 const mutations = {
+    SetAuthCookie(state, token) {
+        Vue.cookie.set(
+            "Sakura",
+            token,
+            1
+        );
+    },
+    DeleteAuthCookie() {
+        Vue.cookie.delete('Sakura')
+    },
+    SetUserAuth(state, Auth) {
+        state.IsUserAuthenticated = Auth
+    },
+    SetUsername(state, username) {
+        state.UserName = username
+    }
 
 };
 
@@ -30,8 +54,50 @@ const actions = {
                 }
 
             )
+    },
+    LoginUser(context, loginData) {
+        Vue.http.post('accounts/api/v1/obtain_token/', loginData)
+            .then(response => {
+                console.log("this is login", response.body.access)
+                context.commit("SetAuthCookie", response.body.access)
+                context.commit("SetUserAuth", true);
+                store.dispatch("checkForLogin")
+                    // Vue.swal("انجام شد", "ورود با موفقیت انجام شد", "success");
+
+                router.push('/')
+            }).catch(error => {
+                Vue.swal("انجام نشد", "مجددا تلاش فرمایید", "error");
+                console.log(error)
+            })
+    },
+    checkForLogin(context) {
+        Vue.http.get('accounts/api/v1/username/', {
+            headers: {
+                'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            console.log("username-username", response.body.username);
+            context.commit('SetUsername', response.body.username);
+            context.commit("SetUserAuth", true);
+
+        })
+    },
+    SignOutUser(context) {
+        context.commit('SetUsername', '');
+        context.commit("SetUserAuth", false);
+        context.commit("DeleteAuthCookie");
     }
 };
+// getUser() {
+//         this.$http.get('http://localhost:8000/api/user', {
+// headers: {
+//         'Authorization': 'Bearer eyJ0e.....etc',
+//         'Accept': 'application/json'
+//     }
+//     //         }).then((response) => {
+//             this.name = response.data.name
+//         });
 // Email sent
 export default {
     state,

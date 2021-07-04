@@ -9,11 +9,15 @@
       <div class="container">
         <div class="right">
           <ul class="menu r">
-            <li>
+            <li v-if="!IsAuthenticated">
               <router-link to="/login" class="login" exact>ورود</router-link>
               <router-link to="/register" class="login" exact
                 >ثبت نام</router-link
               >
+            </li>
+            <li v-else>
+              <a class="login" exact>{{ Username }}</a>
+              <a @click="signout" class="login" exact>خروج</a>
             </li>
             <li>
               <span class="english">0216400010</span>
@@ -69,7 +73,46 @@
 </template>
 
 <script>
-export default {};
+import Vue from "vue";
+export default {
+  computed: {
+    IsAuthenticated() {
+      return this.$store.getters.IsAuthenticated;
+    },
+    Username() {
+      return this.$store.getters.GetUsername;
+    },
+  },
+  created() {
+    this.$store.dispatch("checkForLogin");
+  },
+  methods: {
+    signout() {
+      Vue.swal({
+        title: "خارج میشوید؟؟",
+        text: "مطمئن هستید؟؟",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "بله خارج میشوم",
+        cancelButtonText: "خیر ، کنسل کن",
+        showCloseButton: true,
+        showLoaderOnConfirm: true,
+      }).then((result) => {
+        if (result.value) {
+          this.$store.dispatch("SignOutUser");
+
+          this.$swal(
+            "خارج شدید",
+            "از سایت خارج شدید ، برای خرید میتوانید مجددا وارد شوید",
+            "success"
+          );
+        } else {
+          this.$swal("کنسل شد", "همجنان در سایت هستید", "info");
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -99,7 +142,6 @@ export default {};
   border-radius: 100px;
   font-size: 30px;
   padding: 1px;
-
 }
 .whatsapp:hover {
   color: green;

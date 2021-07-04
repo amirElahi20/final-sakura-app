@@ -28,18 +28,9 @@ export default {
           this.$router.push('/login');
         });
     },
-    toast() {
-      Vue.swal({
-        title: "Deleted!",
-        text: "Your row has been deleted.",
-        type: "success",
-        timeer: 1000,
-      });
-    },
   },
 };
-// http://localhost:8080/
-// https://asha4f.pythonanywhere.com/accounts/api/v1/check_confirm_email/
+
 </script>
 
 
