@@ -9,6 +9,11 @@ import TheRegister from '../components/TheForms/TheRegister.vue';
 import ForgetPassword from '../components/TheForms/ForgetPassword.vue';
 import SingleProduct from '../components/ProductPages/SingleProduct.vue';
 import ConfirmEmail from '../components/TheForms/ConfirmEmail.vue';
+import ClientInfo from '../Pages/Account/Client/ClientInfo.vue';
+import EditAccount from '../Pages/Account/Client/EditAccount.vue';
+import ThePassword from '../Pages/Account/Client/ThePassword';
+import ThePurches from '../Pages/Account/Client/ThePurches.vue';
+import ShopCart from '../components/Shopping/ShopCart.vue';
 
 Vue.use(VueRouter)
 
@@ -57,6 +62,31 @@ const routes = [{
         component: ConfirmEmail,
         name: 'Confirm'
     },
+    {
+        path: '/clientaccount',
+        name: 'Account',
+        component: ClientInfo
+    },
+    {
+        path: '/editaccount',
+        name: 'editacoount',
+        component: EditAccount
+    },
+    {
+        path: '/changepassword',
+        name: 'passwordchanged',
+        component: ThePassword
+    },
+    {
+        path: '/purches',
+        name: 'purches',
+        component: ThePurches
+    },
+    {
+        path: '/shopcart',
+        name: 'shopcart',
+        component: ShopCart
+    }
 ]
 
 const router = new VueRouter({

@@ -24,11 +24,11 @@ Vue.use(VueCookie);
 Vue.http.options.root = 'https://asha4f.pythonanywhere.com/';
 
 
-// Vue.http.interceptors.push((request, next) => {
-//     request.headers.set('Authorization', 'Bearer ' + Vue.cookie.get('Sakura'))
-//     request.headers.set('Accept', 'application/json')
-//     next()
-// });
+Vue.http.interceptors.push((request, next) => {
+    request.headers.set('Authorization', 'Bearer ' + Vue.cookie.get('Sakura'))
+    request.headers.set('Accept', 'application/json')
+    next()
+});
 
 new Vue({
     router,

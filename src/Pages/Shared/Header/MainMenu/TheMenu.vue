@@ -20,12 +20,6 @@
               :class="{ active: !activePopup }"
             >
               <a href="#" class="sub">دسته بندی</a>
-              <!-- <transition name="fade"> -->
-              <!-- <sub-menu
-                  :position="scrollPosition"
-                  v-show="!activePopup"
-                ></sub-menu> -->
-              <!-- </transition> -->
               <transition name="fade">
                 <sub-menu v-show="!activePopup"></sub-menu>
               </transition>
@@ -54,7 +48,7 @@
           <ul class="menu l">
             <search-box></search-box>
             <li class="shopping">
-              <router-link to="/shopping">
+              <router-link to="/shopcart">
                 <span class="badge"><h5 class="h4">10</h5></span>
                 <font-awesome-icon class="fa" icon="shopping-cart" />
               </router-link>

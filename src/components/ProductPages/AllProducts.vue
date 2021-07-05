@@ -108,7 +108,7 @@ $color-primary-light: orangered;
   height: auto;
   display: flex;
   direction: rtl;
-  padding: 5rem 0 5rem 0;
+  padding: 2rem 0 5rem 0;
 }
 .left {
   width: 100%;
@@ -125,7 +125,7 @@ $color-primary-light: orangered;
   padding: 15px;
   margin-left: 20px;
   margin-top: 20px;
-  border-radius: 10px;
+  border-radius: 35px;
   width: 240px;
   border: 1px solid brown;
   transition: all 0.5s;
@@ -137,7 +137,7 @@ $color-primary-light: orangered;
   width: 100%;
   height: 190px;
   border: 1px solid brown;
-  border-radius: 10px;
+  border-radius: 35px;
 }
 .blurimg {
   filter: blur(7px);
@@ -152,20 +152,15 @@ $color-primary-light: orangered;
 .btn {
   display: block;
   text-align: center;
-  background-color: orangered;
+  background-color: orange;
   text-decoration: none;
-  padding: 5px;
-  border-radius: 10px;
-  font-size: 13px;
+  padding: 10px 5px;
+  border-radius: 40px;
+  font-size: 16px;
   margin-top: 10px;
   cursor: pointer;
   color: white;
-  border: 1px solid orangered;
+  border: 1px solid orange;
   transition: all 0.5s;
-  &:hover {
-    background-color: white;
-    border: 1px solid orangered;
-    color: orangered;
-  }
 }
 </style>

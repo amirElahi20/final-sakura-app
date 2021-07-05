@@ -90,7 +90,7 @@ export default {
 .left {
   color: white;
   width: 80%;
-  background-color: orangered;
+  background-color: orange;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -104,7 +104,7 @@ ul {
 }
 .menu_list{
     // font-size: 50px;
-    background-color: orangered;
+    background-color: orange;
     color: white;
 }
 .menu_list a{

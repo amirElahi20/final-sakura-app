@@ -1,0 +1,418 @@
+<template>
+  <div class="total-shop">
+    <h1 class="english heading-secondary">hannaneh</h1>
+    <div class="shopping-cart">
+      <div class="column-labels">
+        <label class="product-image">عکس ها</label>
+        <label class="product-details">محصولات</label>
+        <label class="product-price">قیمت</label>
+        <label class="product-quantity">تعداد</label>
+        <label class="product-removal">حذف</label>
+        <label class="product-line-price">کل</label>
+      </div>
+
+      <div v-for="item in 5" :key="item" class="product">
+        <div class="product-image">
+          <img
+            src="../../../public/img/mockup-graphics-enNffryKuQI-unsplash.jpg"
+          />
+        </div>
+        <div class="product-details">
+          <div class="product-title">پرتقال</div>
+          <p class="product-description">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روکاربردهای متنوع
+            با هدف بهبود ابزارهای ک
+          </p>
+        </div>
+        <div class="product-price">
+          {{ cost.toLocaleString() }} <span class="toman">تومان</span>
+        </div>
+        <div class="product-quantity">
+          <div class="counter-counter">
+            <div @click="addone" class="counter plus">+</div>
+            <div class="cost-box">{{ counterproduct }}</div>
+            <div @click="removeone" class="counter minus">-</div>
+          </div>
+        </div>
+        <div class="product-removal">
+          <button class="remove-product">حذف</button>
+        </div>
+        <div class="product-line-price">
+          {{ cost.toLocaleString() }} <span class="toman">تومان</span>
+        </div>
+      </div>
+
+      <div class="totals">
+        <div class="totals-item">
+          <label
+            >{{ cost.toLocaleString() }} <span class="toman">تومان</span></label
+          >
+          <div class="totals-value" id="cart-subtotal">مبلغ کالاها</div>
+        </div>
+        <div class="totals-item">
+          <label
+            >{{ cost.toLocaleString() }} <span class="toman">تومان</span></label
+          >
+          <div class="totals-value" id="cart-shipping">هزینه ارسال</div>
+        </div>
+        <div class="totals-item totals-item-total">
+          <label
+            >{{ cost.toLocaleString() }} <span class="toman">تومان</span></label
+          >
+          <div class="totals-value" id="cart-total">مبلغ کل</div>
+        </div>
+      </div>
+
+      <button class="checkout">پرداخت</button>
+    </div>
+  </div>
+</template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      cost: 20000,
+      counterproduct: 1,
+    };
+  },
+  methods: {
+    addone() {
+      this.counterproduct += 1;
+    },
+    removeone() {
+      this.counterproduct -= 1;
+    },
+  },
+  created(){
+      this.$store.dispatch('ShowOrderRows');
+  }
+};
+</script>
+
+
+<style lang="scss" scoped>
+.counter {
+  //   display: inline;
+  //   position: absolute;
+  padding: 1px 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  //   margin-top: -2px;
+  color: white;
+}
+.plus {
+  background-color: orange;
+  //   margin-left: -35px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+.minus {
+  background-color: orangered;
+  //   margin-left: 5px;
+  margin-left: 1px;
+  margin-top: 10px;
+}
+.cost-box {
+  border: 1px solid black;
+  display: inline;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+.toman {
+  font-size: 10px;
+  font-weight: bold;
+}
+.username {
+  margin-bottom: 1rem;
+}
+.total-shop {
+  width: 80%;
+  margin: 6rem auto;
+  // direction: rtl;
+}
+$color-primary-dark: orange;
+$color-primary-light: orangered;
+.heading-secondary {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-dark,
+    $color-primary-light
+  );
+  -webkit-background-clip: text;
+  display: inline-block;
+  color: transparent;
+  transition: all 0.3s;
+}
+
+// @import "compass/css3";
+
+/*
+I wanted to go with a mobile first approach, but it actually lead to more verbose CSS in this case, so I've gone web first. Can't always force things...
+
+Side note: I know that this style of nesting in SASS doesn't result in the most performance efficient CSS code... but on the OCD/organizational side, I like it. So for CodePen purposes, CSS selector performance be damned.
+*/
+
+/* Global settings */
+$color-border: orange;
+$color-label: orangered;
+$font-default: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, sans-serif;
+$font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+
+/* Global "table" column settings */
+.product-image {
+  float: left;
+  width: 20%;
+}
+.product-details {
+  float: left;
+  //   direction: rtl;
+  width: 37%;
+}
+.product-price {
+  float: left;
+  width: 12%;
+}
+.product-quantity {
+  float: left;
+  width: 10%;
+}
+.product-removal {
+  float: left;
+  width: 9%;
+  color: orangered;
+}
+.product-line-price {
+  float: left;
+  width: 12%;
+  text-align: right;
+}
+
+/* This is used as the traditional .clearfix class */
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  zoom: 1;
+}
+
+/* Apply clearfix in a few places */
+.shopping-cart,
+.column-labels,
+.product,
+.totals-item {
+  @extend .group;
+}
+
+/* Apply dollar signs */
+
+/* Body/Header stuff */
+body {
+  padding: 0px 30px 30px 20px;
+  font-family: $font-default;
+  font-weight: 100;
+}
+
+h1 {
+  font-weight: 100;
+}
+
+label {
+  color: $color-label;
+}
+
+.shopping-cart {
+  margin-top: -45px;
+}
+
+/* Column headers */
+.column-labels {
+  label {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid $color-border;
+  }
+  .product-details {
+    text-indent: 110px;
+  }
+  .product-image {
+    text-indent: -9998px;
+  }
+  .product-removal {
+    text-indent: 5px;
+  }
+}
+
+/* Product entries */
+.product {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-border;
+
+  .product-image {
+    text-align: center;
+    img {
+      width: 100px;
+    }
+  }
+
+  .product-details {
+    .product-title {
+      margin-right: 20px;
+      direction: rtl;
+      font-weight: bold;
+    }
+    .product-description {
+      margin: 5px 20px 5px 0;
+      line-height: 1.4em;
+      direction: rtl;
+      font-size: 13px;
+    }
+  }
+  .remove-product {
+    border: 0;
+    padding: 4px 8px;
+    background-color: orange;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 3px;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+
+  .remove-product:hover {
+    background-color: red;
+  }
+}
+
+/* Totals section */
+.totals {
+  .totals-item {
+    float: right;
+    clear: both;
+    direction: rtl;
+    width: 100%;
+    margin-bottom: 10px;
+
+    label {
+      float: left;
+      clear: both;
+      width: 79%;
+      text-align: right;
+    }
+
+    .totals-value {
+      float: right;
+      width: 21%;
+      text-align: right;
+    }
+  }
+
+  .totals-item-total {
+  }
+}
+
+.checkout {
+  float: right;
+  border: 0;
+  margin-top: 20px;
+  padding: 6px 25px;
+  background-color: orange;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.checkout:hover {
+  background-color: green;
+}
+
+/* Make adjustments for tablet */
+@media screen and (max-width: 650px) {
+  .shopping-cart {
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid $color-border;
+  }
+
+  .column-labels {
+    display: none;
+  }
+
+  .product-image {
+    float: right;
+    width: auto;
+    img {
+      margin: 0 0 10px 10px;
+    }
+  }
+
+  .product-details {
+    float: none;
+    margin-bottom: 10px;
+    width: auto;
+  }
+
+  .product-price {
+    clear: both;
+    width: 70px;
+  }
+
+  .product-quantity {
+    width: 100px;
+    .counter-counter {
+      margin-left: 20px;
+    }
+  }
+
+  .product-removal {
+    width: auto;
+  }
+
+  .product-line-price {
+    float: right;
+    width: 70px;
+  }
+}
+
+/* Make more adjustments for phone */
+@media screen and (max-width: 350px) {
+  .product-removal {
+    float: right;
+  }
+
+  .product-line-price {
+    float: right;
+    clear: left;
+    width: auto;
+    margin-top: 10px;
+  }
+
+  .totals {
+    .totals-item {
+      label {
+        width: 60%;
+      }
+
+      .totals-value {
+        width: 40%;
+      }
+    }
+  }
+}
+</style>

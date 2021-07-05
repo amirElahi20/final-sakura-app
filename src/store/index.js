@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Products from '../store/Modules/Products';
 import SubMenu from '../store/Modules/SubMenu';
 import User from '../store/Modules/User';
+import Order from '../store/Modules/Order';
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     modules: {
         Products,
         SubMenu,
-        User
+        User,
+        Order
     }
 })

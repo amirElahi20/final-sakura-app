@@ -62,11 +62,11 @@ const actions = {
                 context.commit("SetAuthCookie", response.body.access)
                 context.commit("SetUserAuth", true);
                 store.dispatch("checkForLogin")
-                    // Vue.swal("انجام شد", "ورود با موفقیت انجام شد", "success");
+                Vue.swal("انجام شد", "ورود با موفقیت انجام شد", "success");
 
                 router.push('/')
             }).catch(error => {
-                Vue.swal("انجام نشد", "مجددا تلاش فرمایید", "error");
+                Vue.swal("انجام نشد", "اطلاعات وارد شده صحیح نیستند", "error");
                 console.log(error)
             })
     },
@@ -89,16 +89,7 @@ const actions = {
         context.commit("DeleteAuthCookie");
     }
 };
-// getUser() {
-//         this.$http.get('http://localhost:8000/api/user', {
-// headers: {
-//         'Authorization': 'Bearer eyJ0e.....etc',
-//         'Accept': 'application/json'
-//     }
-//     //         }).then((response) => {
-//             this.name = response.data.name
-//         });
-// Email sent
+
 export default {
     state,
     getters,

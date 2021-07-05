@@ -16,9 +16,41 @@
               >
             </li>
             <li v-else>
-              <a class="login" exact>{{ Username }}</a>
+              <a class="login" @click="client" exact v-click-outside="hide"
+                >{{ Username }}
+                <font-awesome-icon
+                  class="caret"
+                  v-if="!subClient"
+                  icon="caret-left"
+                />
+                <font-awesome-icon
+                  class="caret"
+                  v-if="subClient"
+                  icon="caret-right"
+                />
+              </a>
               <a @click="signout" class="login" exact>خروج</a>
             </li>
+
+            <div class="sub-client" v-if="subClient">
+              <ul>
+                <li>
+                  <router-link to="/clientaccount"
+                    >مشاهده حساب کاربری</router-link
+                  >
+                </li>
+                <li>
+                  <router-link to="/editaccount"
+                    >ویرایش حساب کاربری</router-link
+                  >
+                </li>
+                <li>
+                  <router-link to="/changepassword">تغییر رمز عبور</router-link>
+                </li>
+                <li><router-link to="/purches">فاکتورهای من</router-link></li>
+              </ul>
+            </div>
+
             <li>
               <span class="english">0216400010</span>
               <font-awesome-icon class="fa" icon="phone" />
@@ -74,7 +106,13 @@
 
 <script>
 import Vue from "vue";
+import ClickOutside from "vue-click-outside";
 export default {
+  data() {
+    return {
+      subClient: false,
+    };
+  },
   computed: {
     IsAuthenticated() {
       return this.$store.getters.IsAuthenticated;
@@ -107,21 +145,58 @@ export default {
             "success"
           );
         } else {
-          this.$swal("کنسل شد", "همجنان در سایت هستید", "info");
+          this.$swal("کنسل شد", "همچنان در سایت هستید", "info");
         }
       });
     },
+    client() {
+      this.subClient = !this.subClient;
+    },
+    hide() {
+      this.subClient = false;
+    },
+  },
+  directives: {
+    ClickOutside,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.sub-client {
+  background-color: white;
+  z-index: 999;
+  position: absolute;
+  margin-top: 0px;
+  border-radius: 10px;
+  margin-right: 114px;
+  padding: 15px;
+}
+.sub-client ul {
+  list-style: none;
+  color: black;
+}
+.sub-client ul li {
+  margin-top: 10px;
+}
+.sub-client ul li a {
+  color: black;
+  transition: all 0.4s;
+  &:hover {
+    color: orange;
+  }
+}
+.caret {
+
+  margin-right: 10px;
+  position: absolute;
+  margin-top: 2px;
+}
 .topnav {
   padding-top: 20px;
   height: 100%;
   display: flex;
-  // width: 100%;
-  // margin: 0 auto;
+
 }
 
 .left {
@@ -134,7 +209,6 @@ export default {
   display: flex;
   justify-content: space-between;
   direction: rtl;
-  // width: 1500px;
   margin: 0 auto;
 }
 .whatsapp {
@@ -191,7 +265,6 @@ export default {
   text-decoration: none;
   padding: 8px 25px;
   border-radius: 15px;
-  // position: relative;
   border: 1px solid gold;
   margin-top: -10px;
   margin-left: 10px;

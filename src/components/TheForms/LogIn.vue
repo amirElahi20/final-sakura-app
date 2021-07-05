@@ -5,9 +5,12 @@
         <div class="row">
           <div class="form">
             <div class="form__login">
-              <form class="list" @submit.prevent="LoginUser()">
+              <form class="list" @submit.prevent="LoginUser">
                 <h2 class="topform">ورود</h2>
-                <div class="list__group">
+                <div
+                  class="list__group"
+                  :class="{ invalid: $v.username.$error }"
+                >
                   <label for="name" class="list__label"
                     ><font-awesome-icon
                       class="fa"
@@ -16,6 +19,7 @@
                     >نام کاربری</label
                   >
                   <input
+                    @input="$v.username.$touch()"
                     type="text"
                     class="list__input"
                     placeholder="اسمتو بنویس "
@@ -25,7 +29,20 @@
                     maxlength="100"
                   />
                 </div>
-                <div class="list__group">
+                <p class="alert" v-if="!$v.username.alphaNum">
+                  فقط حروف انگلیسی و عدد
+                </p>
+                <p
+                  class="alert"
+                  v-if="!$v.username.required && $v.username.$dirty"
+                >
+                  نباید خالی باشد
+                </p>
+
+                <div
+                  class="list__group"
+                  :class="{ invalid: $v.password.$error }"
+                >
                   <label for="name" class="list__label"
                     ><font-awesome-icon
                       class="fa"
@@ -35,6 +52,7 @@
                   >
                   <input
                     :type="visibility"
+                    @input="$v.password.$touch()"
                     class="list__input"
                     placeholder="رمز عبورتو وارد کن"
                     id="password"
@@ -53,6 +71,15 @@
                     icon="eye-slash"
                   ></font-awesome-icon>
                 </div>
+                <p class="alert" v-if="!$v.password.minLength">
+                  رمز نباید کمتر از 6 کاراکتر باشد
+                </p>
+                <p
+                  class="alert"
+                  v-if="!$v.password.required && $v.password.$dirty"
+                >
+                  نباید خالی باشد
+                </p>
 
                 <button class="submit-btn" type="submit">ورود</button>
               </form>
@@ -80,6 +107,13 @@
 
 
 <script>
+import {
+  required,
+  // maxLength,
+  minLength,
+  alphaNum,
+  // email,
+} from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -90,17 +124,30 @@ export default {
   },
   methods: {
     LoginUser() {
-      const login = {
-        username: this.username,
-        password: this.password,
-      };
-      this.$store.dispatch("LoginUser", login);
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        const login = {
+          username: this.username,
+          password: this.password,
+        };
+        this.$store.dispatch("LoginUser", login);
+      }
     },
     showpassword() {
       this.visibility = "text";
     },
     hidepassword() {
       this.visibility = "password";
+    },
+  },
+  validations: {
+    password: {
+      minLength: minLength(6),
+      required,
+    },
+    username: {
+      required,
+      alphaNum,
     },
   },
 };
@@ -156,7 +203,9 @@ export default {
 }
 .alert {
   color: red;
-  text-align: start;
+  // text-align: start;
+  text-align: end;
+  margin-top: -15px;
 }
 .eye {
   position: absolute;

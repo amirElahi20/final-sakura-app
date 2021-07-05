@@ -11,7 +11,7 @@
           {{ SingleProduct.product_cost[select].cost.toLocaleString() }}
           <span>تومان</span>
         </h1>
-        <a class="addbasket" href="#">
+        <a @click="AddToOrder(SingleProduct.id , SingleProduct.product_cost[select].id)" class="addbasket">
           <h3 class="add-to-basket">
             افزودن به سبد خرید<font-awesome-icon
               class="fa"
@@ -151,6 +151,9 @@ export default {
       packet: false,
       select: 3,
       count: 1,
+      id : 5,
+      pack : ''
+
     };
   },
   components: {
@@ -197,6 +200,16 @@ export default {
     minus() {
       this.count -= 1;
     },
+    AddToOrder(resId,packID){
+      this.pack = packID
+      const orderDetail = {
+     product : resId,
+     amount : this.count,
+     pack : packID
+     
+      }
+      this.$store.dispatch('AddProductToOrder' , orderDetail);
+    }
   },
 };
 </script>
@@ -264,6 +277,7 @@ export default {
 }
 .addbasket {
   text-decoration: none;
+  cursor: pointer;
 }
 .left {
   margin-right: 70px;
