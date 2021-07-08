@@ -3,15 +3,27 @@
     <div class="singleproduct">
       <div class="right">
         <img
-          :src="SingleProduct.picture[0].picture"
+          v-for="(pic, I) in SingleProduct.picture"
+          :key="I"
+          :src="pic.picture"
           class="product-img"
           alt=""
         />
-        <h1 class="product-cost-cost">
-          {{ SingleProduct.product_cost[select].cost.toLocaleString() }}
-          <span>تومان</span>
+        <!-- {{SingleProduct.product_cost[1].cost}} -->
+        <h1
+          class="product-cost-cost"
+          v-for="costs in SingleProduct.product_cost"
+          :key="costs.id"
+        >
+             {{SingleProduct.product_cost[select].cost}}
+            <span>تومان</span>
         </h1>
-        <a @click="AddToOrder(SingleProduct.id , SingleProduct.product_cost[select].id)" class="addbasket">
+        <a
+          @click="
+            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].id)
+          "
+          class="addbasket"
+        >
           <h3 class="add-to-basket">
             افزودن به سبد خرید<font-awesome-icon
               class="fa"
@@ -66,22 +78,36 @@
           </div>
           <font-awesome-icon v-if="packet" class="icon2 packet" icon="check" />
 
+
+
+
+
+
           <div v-if="glass" class="pack-weight">
             <select v-model="select" name="format" class="format">
               <option selected disabled>حجم بسته شیشه ای</option>
               <option
                 v-for="(cost, index) in SingleProduct.product_cost"
-                :key="index"
+                :key="cost.id"
                 :value="index"
-                v-show="SingleProduct.product_cost[index].pack.parent == 8"
-              >
-                {{ SingleProduct.product_cost[index].pack.weight }} گرم
+               v-show="SingleProduct.product_cost[index].pack.parent == 8"
+              > {{ cost.pack.weight }}
               </option>
             </select>
           </div>
+
+
+
+
+
+ <!-- v-show="SingleProduct.product_cost[index].pack.parent == 8" -->
+
+
+
           <font-awesome-icon v-if="glass" class="icon2 glass" icon="check" />
 
           <footer class="count-box">
+            {{select}}
             <h5>تعداد</h5>
             <button @click="plus" class="count-icon plus">+</button>
 
@@ -113,7 +139,7 @@
         :mouse-drag="true"
         :navigation-enabled="true"
       >
-        <slide v-for="similar in SimilarProduct" :key="similar.id">
+        <slide v-for="(similar, Index) in SimilarProduct" :key="Index">
           <div class="box">
             <div class="product-informartion">
               <img class="img-box" :src="similar.picture[0].picture" alt="" />
@@ -151,9 +177,9 @@ export default {
       packet: false,
       select: 3,
       count: 1,
-      id : 5,
-      pack : ''
-
+      id: 5,
+      pack: "",
+      array: 0,
     };
   },
   components: {
@@ -176,6 +202,8 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch("ShowOrderRows");
+
     this.$store.dispatch("GetSinlgeProductsFromServer", {
       slug: this.$route.params.slug,
     });
@@ -200,16 +228,15 @@ export default {
     minus() {
       this.count -= 1;
     },
-    AddToOrder(resId,packID){
-      this.pack = packID
+    AddToOrder(resId, packID) {
+      this.pack = packID;
       const orderDetail = {
-     product : resId,
-     amount : this.count,
-     pack : packID
-     
-      }
-      this.$store.dispatch('AddProductToOrder' , orderDetail);
-    }
+        product: resId,
+        amount: this.count,
+        pack: packID,
+      };
+      this.$store.dispatch("AddProductToOrder", orderDetail);
+    },
   },
 };
 </script>

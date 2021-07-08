@@ -1,15 +1,35 @@
 import Vue from "vue";
+import store from "..";
 
 const state = {
-
+    UserShopCart: [{}],
+    IsExistShopCart: false,
+    CountOrder: [],
 };
 
 const getters = {
+    GetUserShopCart(state) {
+        return state.UserShopCart
+    },
+    IsExistShopCart(state) {
+        return state.IsExistShopCart
+    },
+    getCountOrder(state) {
+        return state.CountOrder
+    }
 
 };
 
 const mutations = {
-
+    SetUserShopCart(state, shopCart) {
+        state.UserShopCart = shopCart
+    },
+    SetExist(state, isExist) {
+        state.IsExistShopCart = isExist;
+    },
+    SetCount(state, count) {
+        state.CountOrder = count
+    }
 };
 
 const actions = {
@@ -21,24 +41,49 @@ const actions = {
             amount: orderDetail.amount,
             pack: orderDetail.pack
 
-        }).then(response => {
-            console.log(response)
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + Vue.cookie.get('Sakura')
+            }
+        }).then(() => {
+            // console.log(response)
+            store.dispatch("ShowOrderRows")
             Vue.swal("انجام شد", "محصول مورد نظر با موفقیت به سبد خرید اضافه شد", "success");
-        }).catch(error => {
-            console.log(error)
+        }).catch(() => {
+            // console.log(error)
             Vue.swal("توجه", "برای خرید باید ابتدا وارد سایت شوید", "info");
         })
     },
-    ShowOrderRows() {
-        Vue.http.get('shop/v1/Show_all_Order/', {
-            responseType: 'json'
+
+
+    ShowOrderRows({ commit }) {
+        Vue.http.get('shop/v1/Show_Order/', {
+            headers: {
+                'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
+            }
         }).then(response => {
-            console.log("total orders", response)
-                // context.commit('SetProducts', response.body)
+            // store.dispatch('CountUserOrders');
+            commit('SetUserShopCart', response.body)
+            commit('SetCount', response.data[0].rows.length)
+                // console.log("length", response.data[0].rows.length)
+            console.log("response show order", response.body)
+        }).catch(err => {
+            console.log(err);
+        })
+    },
+    CountUserOrders({ commit }) {
+        Vue.http.get('shop/v1/Show_Order/', {
+            headers: {
+                'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
+            }
+        }).then(response => {
+            commit('SetCount', response.data[0].rows.length)
+                // return response.json();
+        }).catch(err => {
+            console.log(err);
         })
     }
-};
-// 'shop/v1/Show_Order/'
+}
 export default {
     state,
     getters,

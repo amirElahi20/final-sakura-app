@@ -41,7 +41,7 @@ const actions = {
         Vue.http.post('accounts/api/v1/register/', registerData)
             .then((response) => response.json())
             .then((json) => {
-                    console.log("my json", json);
+                    // console.log("my json", json);
                     if (json.user == false) {
                         Vue.swal("انجام نشد", "نام کاربری تکراری است", "error");
                     } else if (json.email == false) {
@@ -58,10 +58,11 @@ const actions = {
     LoginUser(context, loginData) {
         Vue.http.post('accounts/api/v1/obtain_token/', loginData)
             .then(response => {
-                console.log("this is login", response.body.access)
+                // console.log("this is login", response.body.access)
                 context.commit("SetAuthCookie", response.body.access)
                 context.commit("SetUserAuth", true);
-                store.dispatch("checkForLogin")
+                store.dispatch("checkForLogin");
+                store.dispatch("CountUserOrders")
                 Vue.swal("انجام شد", "ورود با موفقیت انجام شد", "success");
 
                 router.push('/')
@@ -77,7 +78,7 @@ const actions = {
                 'Accept': 'application/json'
             }
         }).then(response => {
-            console.log("username-username", response.body.username);
+            // console.log("username-username", response.body.username);
             context.commit('SetUsername', response.body.username);
             context.commit("SetUserAuth", true);
 

@@ -47,9 +47,17 @@
         <div class="left">
           <ul class="menu l">
             <search-box></search-box>
-            <li class="shopping">
+            <li v-if="IsAuthenticated" class="shopping">
               <router-link to="/shopcart">
-                <span class="badge"><h5 class="h4">10</h5></span>
+                <span class="badge"
+                  ><h5 class="h4">{{getCountOrder}}</h5></span
+                >
+                <font-awesome-icon class="fa" icon="shopping-cart" />
+              </router-link>
+            </li>
+            <li v-else class="shopping">
+              <router-link to="/shopcart">
+                <span class="badge"><h5 class="h4">0</h5></span>
                 <font-awesome-icon class="fa" icon="shopping-cart" />
               </router-link>
             </li>
@@ -77,6 +85,7 @@ export default {
   },
 
   created() {
+    this.$store.dispatch("ShowOrderRows");
     window.addEventListener("scroll", this.updateScroll);
   },
   unmounted() {
@@ -97,6 +106,19 @@ export default {
         this.isSticky = false;
       }
     },
+   
+  },
+  computed: {
+    userOrders() {
+      return this.$store.getters.GetUserShopCart;
+    },
+    IsAuthenticated() {
+      return this.$store.getters.IsAuthenticated;
+    },
+    getCountOrder(){
+      return this.$store.getters.getCountOrder;
+    }
+   
   },
 };
 </script>
@@ -217,10 +239,12 @@ a {
   background-color: rgba(0, 0, 0, 0.836);
   opacity: 1;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

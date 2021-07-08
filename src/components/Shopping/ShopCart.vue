@@ -1,99 +1,190 @@
 <template>
-  <div class="total-shop">
-    <h1 class="english heading-secondary">hannaneh</h1>
-    <div class="shopping-cart">
-      <div class="column-labels">
-        <label class="product-image">عکس ها</label>
-        <label class="product-details">محصولات</label>
-        <label class="product-price">قیمت</label>
-        <label class="product-quantity">تعداد</label>
-        <label class="product-removal">حذف</label>
-        <label class="product-line-price">کل</label>
-      </div>
+  <div>
+    <div class="total-shop" v-if="IsAuthenticated">
+      <h1 class="english heading-secondary">{{ Username }}</h1>
+      <div class="shopping-cart">
+        <div class="column-labels">
+          <label class="product-image">عکس ها</label>
+          <label class="product-details">محصولات</label>
+          <label class="product-price">قیمت</label>
+          <label class="product-quantity">تعداد</label>
+          <label class="product-removal">حذف</label>
+          <label class="product-line-price">کل</label>
+        </div>
 
-      <div v-for="item in 5" :key="item" class="product">
-        <div class="product-image">
-          <img
-            src="../../../public/img/mockup-graphics-enNffryKuQI-unsplash.jpg"
-          />
-        </div>
-        <div class="product-details">
-          <div class="product-title">پرتقال</div>
-          <p class="product-description">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روکاربردهای متنوع
-            با هدف بهبود ابزارهای ک
-          </p>
-        </div>
-        <div class="product-price">
-          {{ cost.toLocaleString() }} <span class="toman">تومان</span>
-        </div>
-        <div class="product-quantity">
-          <div class="counter-counter">
-            <div @click="addone" class="counter plus">+</div>
-            <div class="cost-box">{{ counterproduct }}</div>
-            <div @click="removeone" class="counter minus">-</div>
+        <div
+          v-for="order in userOrders[0].rows"
+          :key="order.id"
+          class="product"
+        >
+          <div class="product-image">
+            <img class="img-product" :src="order.product.picture[0].picture" />
+          </div>
+          <div class="product-details">
+            <div class="product-title"></div>
+            <p class="product-description">
+              <font-awesome-icon class="icon-pack" icon="box" /> پاکتی
+              <br /><br />
+              <font-awesome-icon class="icon-pack" icon="weight" />100گرم
+              <br />
+            </p>
+          </div>
+          <div class="product-price">
+            {{ order.pack.cost.toLocaleString() }}
+            <span class="toman">تومان</span>
+          </div>
+          <div class="product-quantity">
+            <div class="counter-counter">
+              <div @click="addone" class="counter plus">+</div>
+              <div class="cost-box">{{ order.amount }}</div>
+              <div @click="removeone" class="counter minus">-</div>
+            </div>
+          </div>
+          <div class="product-removal">
+            <button class="remove-product">حذف</button>
+          </div>
+          <div class="product-line-price">
+            {{ order.price.toLocaleString() }} <span class="toman">تومان</span>
           </div>
         </div>
-        <div class="product-removal">
-          <button class="remove-product">حذف</button>
+
+        <div class="totals">
+          <div class="totals-item">
+            <label>
+              {{ userOrders[index].total_price }}
+
+              <span class="toman">تومان</span></label
+            >
+            <div class="totals-value" id="cart-subtotal">مبلغ کالاها</div>
+          </div>
+          <div class="totals-item">
+            <label
+              >{{ cost.toLocaleString() }}
+              <span class="toman">تومان</span></label
+            >
+            <div class="totals-value" id="cart-shipping">هزینه ارسال</div>
+          </div>
+          <div class="totals-item totals-item-total">
+            <label
+              >{{ (userOrders[index].total_price + cost).toLocaleString() }}
+              <span class="toman">تومان</span></label
+            >
+            <div class="totals-value" id="cart-total">مبلغ کل</div>
+          </div>
         </div>
-        <div class="product-line-price">
-          {{ cost.toLocaleString() }} <span class="toman">تومان</span>
+
+        <button class="checkout">پرداخت</button>
+        <div class="back">
+          <router-link class="login log" to="/"
+            >بازگشت به خانه اصلی</router-link
+          >
         </div>
       </div>
-
-      <div class="totals">
-        <div class="totals-item">
-          <label
-            >{{ cost.toLocaleString() }} <span class="toman">تومان</span></label
-          >
-          <div class="totals-value" id="cart-subtotal">مبلغ کالاها</div>
-        </div>
-        <div class="totals-item">
-          <label
-            >{{ cost.toLocaleString() }} <span class="toman">تومان</span></label
-          >
-          <div class="totals-value" id="cart-shipping">هزینه ارسال</div>
-        </div>
-        <div class="totals-item totals-item-total">
-          <label
-            >{{ cost.toLocaleString() }} <span class="toman">تومان</span></label
-          >
-          <div class="totals-value" id="cart-total">مبلغ کل</div>
-        </div>
+    </div>
+    <div v-else>
+      <div class="attention">
+        <font-awesome-icon class="shop-bag" icon="shopping-cart" />
+        <h1>کاربر گرامی</h1>
+        <h4>برای مشاهده سبد خرید خود باید وارد سایت شوید</h4>
+        <router-link class="login" to="/login">ورود</router-link>
+        <router-link class="login" to="/register">ثبت نام</router-link>
+        <router-link class="login" to="/">بازگشت به خانه اصلی</router-link>
       </div>
-
-      <button class="checkout">پرداخت</button>
     </div>
   </div>
 </template>
 
 
 <script>
+import Vue from "vue";
 export default {
   data() {
     return {
       cost: 20000,
-      counterproduct: 1,
+      index: 0,
     };
   },
   methods: {
     addone() {
-      this.counterproduct += 1;
+      this.$http.post(
+        "shop/v1/modify_Order/",
+        { product : "1" , pack : "8" , amount : "-1" },
+        {
+          headers: {
+            Authorization: "Bearer " + Vue.cookie.get("Sakura"),
+          },
+        }
+      );
     },
     removeone() {
       this.counterproduct -= 1;
     },
   },
-  created(){
-      this.$store.dispatch('ShowOrderRows');
-  }
+  created() {
+    return this.$store.dispatch("ShowOrderRows");
+  },
+  computed: {
+    userOrders() {
+      return this.$store.getters.GetUserShopCart;
+    },
+    Username() {
+      return this.$store.getters.GetUsername;
+    },
+    IsAuthenticated() {
+      return this.$store.getters.IsAuthenticated;
+    },
+  },
 };
 </script>
 
 
 <style lang="scss" scoped>
+.back {
+  margin-top: 200px;
+}
+.icon-pack {
+  font-size: 15px;
+  color: orange;
+  margin-left: 10px;
+}
+.img-product {
+  height: 80px;
+  border-radius: 100%;
+}
+.attention {
+  background-color: orange;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 50px;
+  border-radius: 15px;
+}
+
+.shop-bag {
+  font-size: 80px;
+  margin-top: 20px;
+  // position: absolute;
+  // margin-left: 500px;
+}
+.login {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  background-color: orangered;
+  margin-top: 20px;
+  border-radius: 15px;
+  transition: all 0.4s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 .counter {
   //   display: inline;
   //   position: absolute;
@@ -170,16 +261,18 @@ $font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 /* Global "table" column settings */
 .product-image {
   float: left;
-  width: 20%;
+  width: 30%;
+  height: 20%;
 }
 .product-details {
   float: left;
   //   direction: rtl;
-  width: 37%;
+  width: 15%;
 }
 .product-price {
   float: left;
-  width: 12%;
+  text-align: center;
+  width: 24%;
 }
 .product-quantity {
   float: left;

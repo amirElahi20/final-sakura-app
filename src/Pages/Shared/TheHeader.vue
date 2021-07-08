@@ -7,7 +7,8 @@
           $route.name == 'login' ||
           $route.name == 'register' ||
           $route.name == 'forgetpass'||
-          $route.name == 'Confirm'
+          $route.name == 'Confirm' ||
+          $route.name == 'shopcart'
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />

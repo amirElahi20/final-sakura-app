@@ -16,7 +16,11 @@
               >
             </li>
             <li v-else>
-              <a class="login" @click="client" exact v-click-outside="hide"
+              <a
+                class="login english"
+                @click="client"
+                exact
+                v-click-outside="hide"
                 >{{ Username }}
                 <font-awesome-icon
                   class="caret"
@@ -139,6 +143,7 @@ export default {
         if (result.value) {
           this.$store.dispatch("SignOutUser");
 
+
           this.$swal(
             "خارج شدید",
             "از سایت خارج شدید ، برای خرید میتوانید مجددا وارد شوید",
@@ -187,7 +192,6 @@ export default {
   }
 }
 .caret {
-
   margin-right: 10px;
   position: absolute;
   margin-top: 2px;
@@ -196,7 +200,6 @@ export default {
   padding-top: 20px;
   height: 100%;
   display: flex;
-
 }
 
 .left {

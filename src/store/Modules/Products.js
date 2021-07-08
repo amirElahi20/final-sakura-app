@@ -5,7 +5,7 @@ const state = {
     BestProducts: [],
     Products: [],
     SingleProduct: {},
-    SimilarProduct: []
+    SimilarProduct: {}
 };
 
 const getters = {
@@ -49,7 +49,7 @@ const actions = {
         Vue.http.get('product/api/v1/top_product/', {
             responseType: 'json'
         }).then(response => {
-            console.log(response)
+            // console.log(response)
             context.commit('SetMostSellProducts', response.body)
         })
     },
@@ -57,7 +57,7 @@ const actions = {
         Vue.http.get('product/api/v1/best_product/', {
             responseType: 'json'
         }).then(response => {
-            console.log(response)
+            // console.log(response)
             context.commit('SetBestProducts', response.body)
         })
 
@@ -66,7 +66,7 @@ const actions = {
         Vue.http.get('product/api/v1/product_list/', {
             responseType: 'json'
         }).then(response => {
-            console.log("total products", response)
+            // console.log("total products", response)
             context.commit('SetProducts', response.body)
         })
 
@@ -74,17 +74,20 @@ const actions = {
     GetSinlgeProductsFromServer(context, Filter) {
         Vue.http.get('product/api/v1/product/' + Filter.slug)
             .then(response => {
-                console.log(response);
-                console.log(Filter)
+                console.log("Single product", response.data);
+                // console.log(Filter)
                 context.commit("SetSingleProduct", response.data)
             })
     },
     GetSimilarProductsFromServer(context, name) {
         Vue.http.get('product/api/v1/similar_product/' + name.slug)
             .then(response => {
-                console.log("this is slug", name.slug)
-                console.log("this is similar product", response.body);
-                context.commit("SetSimilarProduct", response.body)
+                return response.json()
+            }).then(data => {
+                // console.log("similar product", data)
+                // console.log("this is slug", name.slug)
+                // console.log("this is similar product", response.body);
+                context.commit("SetSimilarProduct", data)
             })
     },
 };
