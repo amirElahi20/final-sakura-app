@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="total-shop" v-if="IsAuthenticated">
+    <div class="total-shop" v-if="IsAuthenticated && getCountOrder != 0">
       <h1 class="english heading-secondary">{{ Username }}</h1>
       <div class="shopping-cart">
         <div class="column-labels">
@@ -35,13 +35,43 @@
           </div>
           <div class="product-quantity">
             <div class="counter-counter">
-              <div @click="addone" class="counter plus">+</div>
-              <div class="cost-box">{{ order.amount }}</div>
-              <div @click="removeone" class="counter minus">-</div>
+              <div
+                :disabled="pendingRequest"
+                @click="addone(order.pack.id, order.product.id)"
+                class="counter plus"
+              >
+                +
+              </div>
+              <div v-if="!pendingRequest" class="cost-box">
+                {{ order.amount }}
+              </div>
+              <loading
+                class="vld-parent"
+                :active="pendingRequest"
+                :is-full-page="fullPage"
+                loader="dots"
+                backgroundColor="#ffffff"
+                color="#FFA500"
+                blue="10px"
+              />
+              <div
+                :disabled="pendingRequest"
+                @click="removeone(order.pack.id, order.product.id)"
+                class="counter minus"
+              >
+                -
+              </div>
             </div>
           </div>
           <div class="product-removal">
-            <button class="remove-product">حذف</button>
+            <button
+              @click="
+                deleteOrder(order.pack.id, order.product.id, order.amount)
+              "
+              class="remove-product"
+            >
+              حذف
+            </button>
           </div>
           <div class="product-line-price">
             {{ order.price.toLocaleString() }} <span class="toman">تومان</span>
@@ -81,7 +111,15 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-if="IsAuthenticated && getCountOrder == 0">
+      <div class="attention">
+        <font-awesome-icon class="shop-bag" icon="shopping-basket" />
+        <h1>کاربر گرامی</h1>
+        <h2>سبد خرید شما خالی میباشد</h2>
+        <router-link class="login" to="/">بازگشت به خانه اصلی</router-link>
+      </div>
+    </div>
+    <div v-if="!IsAuthenticated">
       <div class="attention">
         <font-awesome-icon class="shop-bag" icon="shopping-cart" />
         <h1>کاربر گرامی</h1>
@@ -96,28 +134,110 @@
 
 
 <script>
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
 import Vue from "vue";
 export default {
   data() {
     return {
       cost: 20000,
       index: 0,
+      pendingRequest: false,
+      fullPage: true,
+      loader: "bars",
     };
   },
+  components: {
+    Loading,
+  },
   methods: {
-    addone() {
-      this.$http.post(
-        "shop/v1/modify_Order/",
-        { product : "1" , pack : "8" , amount : "-1" },
-        {
-          headers: {
-            Authorization: "Bearer " + Vue.cookie.get("Sakura"),
+    async addone(packId, productId) {
+      console.log("pack", packId);
+      console.log("product", productId);
+      let productpack = packId.toString();
+      let productproduct = productId.toString();
+      this.pendingRequest = true;
+      await this.$http
+        .post(
+          "shop/v1/modify_Order/",
+          {
+            product: productproduct,
+            amount: "+1",
+            pack: productpack,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: "Bearer " + Vue.cookie.get("Sakura"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("ShowOrderRows");
+          this.pendingRequest = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.pendingRequest = false;
+        });
     },
-    removeone() {
-      this.counterproduct -= 1;
+    async removeone(packId, productId) {
+      let productpack = packId.toString();
+      let productproduct = productId.toString();
+      this.pendingRequest = true;
+      await this.$http
+        .post(
+          "shop/v1/modify_Order/",
+          {
+            product: productproduct,
+            amount: "-1",
+            pack: productpack,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + Vue.cookie.get("Sakura"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("ShowOrderRows");
+          this.pendingRequest = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.pendingRequest = false;
+        });
+    },
+    async deleteOrder(packId, productId, amount) {
+      let productpack = packId.toString();
+      let productamount = amount.toString();
+      let productproduct = productId.toString();
+      this.pendingRequest = true;
+      await this.$http
+        .post(
+          "shop/v1/Cancel_Order_Row/",
+          {
+            product: productproduct,
+            amount: productamount,
+            pack: productpack,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + Vue.cookie.get("Sakura"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("ShowOrderRows");
+          this.pendingRequest = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.pendingRequest = false;
+        });
     },
   },
   created() {
@@ -132,6 +252,9 @@ export default {
     },
     IsAuthenticated() {
       return this.$store.getters.IsAuthenticated;
+    },
+    getCountOrder() {
+      return this.$store.getters.getCountOrder;
     },
   },
 };

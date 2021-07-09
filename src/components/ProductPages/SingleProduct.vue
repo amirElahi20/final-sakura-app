@@ -9,11 +9,8 @@
           class="product-img"
           alt=""
         />
-        <!-- {{SingleProduct.product_cost[1].cost}} -->
         <h1
           class="product-cost-cost"
-          v-for="costs in SingleProduct.product_cost"
-          :key="costs.id"
         >
              {{SingleProduct.product_cost[select].cost}}
             <span>تومان</span>
@@ -70,9 +67,9 @@
                 v-for="(cost, index) in SingleProduct.product_cost"
                 :key="index"
                 :value="index"
-                v-show="SingleProduct.product_cost[index].pack.parent == 5"
+                v-show="SingleProduct.product_cost[index].pack.parent == 8"
               >
-                {{ SingleProduct.product_cost[index].pack.weight }} گرم
+                {{ cost.pack.weight }} گرم 
               </option>
             </select>
           </div>
@@ -90,8 +87,8 @@
                 v-for="(cost, index) in SingleProduct.product_cost"
                 :key="cost.id"
                 :value="index"
-               v-show="SingleProduct.product_cost[index].pack.parent == 8"
-              > {{ cost.pack.weight }}
+               v-show="SingleProduct.product_cost[index].pack.parent == 5"
+              > {{ cost.pack.weight }} گرم
               </option>
             </select>
           </div>
@@ -100,14 +97,12 @@
 
 
 
- <!-- v-show="SingleProduct.product_cost[index].pack.parent == 8" -->
 
 
 
           <font-awesome-icon v-if="glass" class="icon2 glass" icon="check" />
 
           <footer class="count-box">
-            {{select}}
             <h5>تعداد</h5>
             <button @click="plus" class="count-icon plus">+</button>
 
@@ -137,7 +132,7 @@
         paginationColor="#ffA400"
         paginationActiveColor="#ff4500"
         :mouse-drag="true"
-        :navigation-enabled="true"
+        
       >
         <slide v-for="(similar, Index) in SimilarProduct" :key="Index">
           <div class="box">
@@ -175,7 +170,7 @@ export default {
     return {
       glass: true,
       packet: false,
-      select: 3,
+      select: 0,
       count: 1,
       id: 5,
       pack: "",
@@ -215,12 +210,12 @@ export default {
     selectenvelope() {
       this.glass = false;
       this.packet = true;
-      this.select = 0;
+      this.select = 2;
     },
     selectglass() {
       this.glass = true;
       this.packet = false;
-      this.select = 2;
+      this.select = 0;
     },
     plus() {
       this.count += 1;

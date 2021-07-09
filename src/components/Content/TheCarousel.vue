@@ -13,7 +13,7 @@
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
-      :navigation-enabled="true"
+      
     >
       <slide v-for="product in BestProducts" :key="product.id">
         <div class="box">
