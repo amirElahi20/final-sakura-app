@@ -72,18 +72,19 @@ export default {
 
 <style lang="scss" scoped>
 .sub-menu {
-  width: 1200px;
+  width: 100%;
   height: 400px;
   display: flex;
   //   background-color: orangered;
   margin-top: 8px;
-  position: absolute;
+  // position: absolute;
 }
 .active {
   background-color: orangered;
 }
 .right {
   background-color: white;
+  direction: rtl;
   width: 20%;
   border-bottom-right-radius: 10px;
 }
@@ -130,5 +131,6 @@ ul {
   color: orange;
   float: left;
   margin-left: 15px;
+  margin-top: 4px;
 }
 </style>

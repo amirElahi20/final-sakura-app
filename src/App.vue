@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <submenu-responsive></submenu-responsive> -->
     <the-header></the-header>
     <transition name="fade">
       <router-view> </router-view>
@@ -9,9 +10,12 @@
 
 <script>
 import TheHeader from "./Pages/Shared/TheHeader.vue";
+// import SubmenuResponsive from "./Pages/Responsive/SubmenuResponsive.vue";
+
 export default {
   components: {
     TheHeader,
+    // SubmenuResponsive,
   },
 };
 </script>

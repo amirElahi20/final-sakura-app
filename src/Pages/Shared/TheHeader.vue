@@ -6,9 +6,9 @@
         layout:
           $route.name == 'login' ||
           $route.name == 'register' ||
-          $route.name == 'forgetpass'||
+          $route.name == 'forgetpass' ||
           $route.name == 'Confirm' ||
-          $route.name == 'shopcart'
+          $route.name == 'shopcart',
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />
@@ -39,14 +39,18 @@ export default {
   height: 75vh;
   background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);
   position: relative;
+  @media screen and (max-width: 900px) {
+    height: 50vh;
+  }
 }
 img {
   position: absolute;
   width: 100%;
   height: 75vh;
   z-index: -1;
-  //   background-color: red;
-  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);
+   @media screen and (max-width: 900px) {
+    height: 50vh;
+  }
 }
 .layout {
   display: none;

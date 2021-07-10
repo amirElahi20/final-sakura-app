@@ -25,29 +25,19 @@ export default {};
   border-radius: 10px;
   padding: 40px;
   margin-top: 50px;
-  width: 450px;
+  width: 75%;
+  z-index: 1;
+  // height: 200px;
+ @media screen and (max-width: 900px) {
+    margin-top:0px ;
+  }
 }
-.head1 {
-  background-image: none !important;
-  width: 110px;
-  position: absolute;
-  top: -40px;
-  margin-left: -220px;
-}
-.head2 {
-  background-image: none !important;
-  width: 190px;
-  position: absolute;
-  bottom: -110px;
-  margin-left: 180px;
-}
-.head3{
-  width: 80px;
-}
+
 .heading-primary {
   color: white;
   backface-visibility: hidden;
   margin-bottom: 60px;
+  
   
 }
 .heading-primary-main {
@@ -55,6 +45,9 @@ export default {};
   font-size: 30px;
   font-weight: 400;
   letter-spacing: 0;
+   @media screen and (max-width: 900px) {
+    font-size: 25px;
+  }
 
   animation-name: moveInRight;
   animation-duration: 2s;
@@ -64,6 +57,9 @@ export default {};
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 0;
+    @media screen and (max-width: 900px) {
+    font-size: 15px;
+  }
   animation-name: moveInLeft;
   animation-duration: 2s;
 }

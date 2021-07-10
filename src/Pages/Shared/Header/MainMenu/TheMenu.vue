@@ -132,6 +132,9 @@ export default {
   direction: rtl;
   height: auto;
   margin-top: 10px;
+  @media only screen and (max-width: 1100px){
+display: none;
+  }
 }
 .r li {
   margin-left: 15px;
@@ -160,12 +163,15 @@ export default {
   display: flex;
   direction: rtl;
   transition: all 0.4s;
-  padding: 12px;
+  padding: 20px 12px;
   // margin: 5px;
-  height: 70px;
+  height: 80px;
   width: 100%;
   position: fixed;
   z-index: 999;
+    @media only screen and (max-width: 1100px){
+display: none;
+  }
 
   .badge {
     margin-top: -85px;

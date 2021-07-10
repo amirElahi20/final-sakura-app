@@ -4,7 +4,14 @@
 **********************and instagram . Also you can find the login , register and log out button here *******
 ************************************************************************************************************ -->
   <div>
-    <!-- <top-responsive></top-responsive> -->
+    <!-- <transition name="fade"> -->
+      <submenu-responsive @closeSub="closeValue" v-if="activeSub"></submenu-responsive>
+    <!-- </transition> -->
+    <transition name="fade2">
+      <div class="popup" v-if="activeSub"></div>
+    </transition>
+    <top-responsive @show="showValue"></top-responsive>
+    <nav-responsive></nav-responsive>
     <div class="topnav">
       <div class="container">
         <div class="right">
@@ -96,7 +103,7 @@
         </div>
       </div>
     </div>
-    <svg height="1" width="98%">
+    <svg class="svg" height="1" width="98%">
       <line
         x1="10%"
         y1="0"
@@ -109,13 +116,22 @@
 </template>
 
 <script>
+import NavResponsive from "../../../Responsive/NavResponsive.vue";
+import TopResponsive from "../../../Responsive/TopResponsive.vue";
 import Vue from "vue";
 import ClickOutside from "vue-click-outside";
+import SubmenuResponsive from "../../../Responsive/SubmenuResponsive.vue";
 export default {
   data() {
     return {
       subClient: false,
+      activeSub: false,
     };
+  },
+  components: {
+    TopResponsive,
+    NavResponsive,
+    SubmenuResponsive,
   },
   computed: {
     IsAuthenticated() {
@@ -143,7 +159,6 @@ export default {
         if (result.value) {
           this.$store.dispatch("SignOutUser");
 
-
           this.$swal(
             "خارج شدید",
             "از سایت خارج شدید ، برای خرید میتوانید مجددا وارد شوید",
@@ -160,6 +175,14 @@ export default {
     hide() {
       this.subClient = false;
     },
+    showValue(value) {
+      this.activeSub = value;
+      console.log(value);
+    },
+    closeValue(value) {
+      this.activeSub = value;
+      console.log("click out side", value);
+    },
   },
   directives: {
     ClickOutside,
@@ -168,6 +191,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.836);
+  opacity: 1;
+}
 .sub-client {
   background-color: white;
   z-index: 999;
@@ -200,6 +233,15 @@ export default {
   padding-top: 20px;
   height: 100%;
   display: flex;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+.svg {
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 }
 
 .left {
@@ -213,6 +255,7 @@ export default {
   justify-content: space-between;
   direction: rtl;
   margin: 0 auto;
+  width: 79%;
 }
 .whatsapp {
   transition: all 0.3s;
@@ -310,5 +353,21 @@ a {
 }
 span {
   padding-left: 3px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade2-enter-active,
+.fade2-leave-active {
+  transition: opacity 0.5s;
+}
+.fade2-enter,
+.fade2-leave-to {
+  opacity: 0;
 }
 </style>
