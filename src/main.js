@@ -21,8 +21,8 @@ Vue.use(VueSweetalert2)
 Vue.use(Vuelidate);
 Vue.use(VueCookie);
 
-// Vue.http.options.root = 'https://api.sdriedf.ir/';
-Vue.http.options.root = 'http://asha4f.pythonanywhere.com/'
+Vue.http.options.root = 'https://api.sdriedf.ir/';
+// Vue.http.options.root = 'http://asha4f.pythonanywhere.com/'
 
 
 // Vue.http.interceptors.push((request, next) => {

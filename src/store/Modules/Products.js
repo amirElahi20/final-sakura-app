@@ -72,14 +72,16 @@ const actions = {
 
     },
     GetSinlgeProductsFromServer(context, Filter) {
+        console.log("Single product slug", Filter.slug);
         Vue.http.get('product/api/v1/product/' + Filter.slug)
             .then(response => {
                 console.log("Single product", response.data);
-                // console.log(Filter)
                 context.commit("SetSingleProduct", response.data)
             })
     },
+    // product/api/v1/similar_product/موز/
     GetSimilarProductsFromServer(context, name) {
+        console.log("similar product slug", name.slug)
         Vue.http.get('product/api/v1/similar_product/' + name.slug)
             .then(response => {
                 return response.json()

@@ -2,18 +2,22 @@
   <div>
     <div class="singleproduct">
       <div class="right">
-        <img
+        <!-- <img
           v-for="(pic, I) in SingleProduct.picture"
           :key="I"
           :src="pic.picture"
           class="product-img"
           alt=""
+        /> -->
+        <img
+          src="../../../public/img/koen-emmers-uYM_PQJ8VvY-unsplash.jpg"
+          class="product-img"
+          alt=""
         />
-        <h1
-          class="product-cost-cost"
-        >
-             {{SingleProduct.product_cost[select].cost}}
-            <span>تومان</span>
+        <h1 class="product-cost-cost">
+          <!-- {{SingleProduct.product_cost[select].cost}} -->
+          20000
+          <span>تومان</span>
         </h1>
         <a
           @click="
@@ -67,18 +71,15 @@
                 v-for="(cost, index) in SingleProduct.product_cost"
                 :key="index"
                 :value="index"
-                v-show="SingleProduct.product_cost[index].pack.parent == 8"
+                v-show="
+                  SingleProduct.product_cost[index].pack.parent == 'پاکتی'
+                "
               >
-                {{ cost.pack.weight }} گرم 
+                {{ cost.pack.weight }} گرم
               </option>
             </select>
           </div>
           <font-awesome-icon v-if="packet" class="icon2 packet" icon="check" />
-
-
-
-
-
 
           <div v-if="glass" class="pack-weight">
             <select v-model="select" name="format" class="format">
@@ -87,18 +88,12 @@
                 v-for="(cost, index) in SingleProduct.product_cost"
                 :key="cost.id"
                 :value="index"
-               v-show="SingleProduct.product_cost[index].pack.parent == 5"
-              > {{ cost.pack.weight }} گرم
+                v-show="SingleProduct.product_cost[index].pack.parent == 5"
+              >
+                {{ cost.pack.weight }} گرم
               </option>
             </select>
           </div>
-
-
-
-
-
-
-
 
           <font-awesome-icon v-if="glass" class="icon2 glass" icon="check" />
 
@@ -118,6 +113,100 @@
         </div>
       </div>
     </div>
+
+    <!-- this isstart of  reponsive page of single prodict pages -->
+    <div class="class-box">
+      <div class="top">
+        <div class="product-name2">
+          <h2>موز</h2>
+        </div>
+        <img
+          src="../../../public/img/koen-emmers-uYM_PQJ8VvY-unsplash.jpg"
+          class="product-img2"
+          alt=""
+        />
+        <div class="cost-box-product">
+          <h1 class="cost-of-product">
+            20000
+            <span>تومان</span>
+          </h1>
+        </div>
+        <h3 class="add-to-basket2">
+          <font-awesome-icon class="fa" icon="shopping-cart" />افزودن به سبد
+          خرید
+        </h3>
+        <div class="pack-type2">
+          <h3 class="title-pack">نوع بسته بندی را انتخاب کنید</h3>
+          <img
+            @click="selectenvelope"
+            class="pack-logo2"
+            src="../../../public/img/envelope.png"
+            alt=""
+          />
+          <font-awesome-icon v-if="packet" class="icon2 packet2" icon="check" />
+
+          <img
+            class="pack-logo2"
+            @click="selectglass"
+            src="../../../public/img/jar.png"
+            alt=""
+          />
+          <font-awesome-icon v-if="glass" class="icon2 glass2" icon="check" />
+        </div>
+        <div v-if="packet" class="pack-weight2">
+          <select v-model="select" name="format" class="format2">
+            <option selected disabled>حجم بسته پاکتی</option>
+            <option
+              v-for="(cost, index) in SingleProduct.product_cost"
+              :key="index"
+              :value="index"
+              v-show="SingleProduct.product_cost[index].pack.parent == 'پاکتی'"
+            >
+              {{ cost.pack.weight }} گرم
+            </option>
+          </select>
+        </div>
+
+        <div v-if="glass" class="pack-weight2">
+          <select v-model="select" name="format" class="format2">
+            <option selected disabled>حجم بسته شیشه ای</option>
+            <option
+              v-for="(cost, index) in SingleProduct.product_cost"
+              :key="cost.id"
+              :value="index"
+              v-show="SingleProduct.product_cost[index].pack.parent == 5"
+            >
+              {{ cost.pack.weight }} گرم
+            </option>
+          </select>
+        </div>
+        <footer class="count-box2">
+          <!-- <h5>تعداد</h5> -->
+          <button @click="plus" class="count-icon plus">+</button>
+
+          <div class="input-count2">{{ count }}</div>
+          <button
+            :disabled="count === 1"
+            @click="minus"
+            class="count-icon minus"
+          >
+            -
+          </button>
+        </footer>
+
+        <h4 class="explain2">توضیح محصول :</h4>
+        <p class="product-paragraph2">
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
+          کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی
+          در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه
+        </p>
+      </div>
+    </div>
+
+    <!-- this is end of reponsive page of single prodict pages -->
+
     <div class="similar">
       <div class="u-center">
         <h2 class="header-title">محصولات مشابه</h2>
@@ -132,7 +221,6 @@
         paginationColor="#ffA400"
         paginationActiveColor="#ff4500"
         :mouse-drag="true"
-        
       >
         <slide v-for="(similar, Index) in SimilarProduct" :key="Index">
           <div class="box">
@@ -238,13 +326,125 @@ export default {
 
 
 <style lang="scss" scoped>
+.product-name2 {
+  text-align: center;
+  margin-bottom: 0.4rem;
+  font-size: 20px;
+}
+.input-count2 {
+  width: 20%;
+  padding-top: 5px;
+  margin: 5px;
+  height: 30px;
+  border: 1px solid black;
+  // display: inline-block;
+  border-radius: 10px;
+  text-indent: 10px;
+  margin-top: 0px;
+}
+.count-box2 {
+  display: flex;
+  justify-content: center;
+  // margin: 0 auto;
+  // width: 100%;
+}
+.count-box2 h5 {
+  text-align: center;
+}
+.pack-weight2 {
+  // background-color: red;
+  width: 100%;
+  margin: 1rem auto;
+}
+.format2 {
+  width: 50%;
+  height: 40px;
+  text-indent: 10;
+  margin-left: 25%;
+  background-color: white;
+  color: red;
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+  font-family: "BYekan";
+}
+.pack-logo2 {
+  width: 50px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+.add-to-basket2 {
+  text-align: center;
+  margin-top: 10px;
+  background-color: orangered;
+  padding: 5px 0;
+  border-radius: 10px;
+  color: white;
+  transition: all 0.4s;
+
+  &:hover {
+    background-color: orange;
+  }
+}
+.pack-type2 {
+  width: 90%;
+  margin-left: 20px;
+  text-align: center;
+}
+.pack-type2 img {
+  margin-left: 30px;
+}
+.glass2 {
+  margin-left: -45px;
+}
+.packet2 {
+  margin-left: -45px;
+}
+.explain2 {
+  margin-top: 1rem;
+  direction: rtl;
+}
+.product-paragraph2 {
+  margin-top: 10px;
+  text-align: end;
+}
+.class-box {
+  width: 50%;
+  margin: 2rem auto;
+  height: auto;
+  padding: 10px;
+  display: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  @media screen and (max-width: 500px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 922px) {
+    display: flex;
+  }
+}
+.product-img2 {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.cost-of-product {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 0px;
+}
+.cost-box-product {
+  text-align: center;
+}
+
 .product-img {
   width: 100%;
   height: 300px;
   border-radius: 10px;
 }
 .singleproduct {
-  width: 70%;
+  width: 80%;
   height: 410px;
   border-radius: 10px;
   margin: 2rem auto;
@@ -255,6 +455,9 @@ export default {
   direction: rtl;
   display: flex;
   flex-wrap: wrap;
+  @media screen and (max-width: 922px) {
+    display: none;
+  }
 }
 .icon2 {
   font-size: 30px;
@@ -272,14 +475,14 @@ export default {
 .right {
   width: 40%;
   height: 400px;
-  //   border: 1px solid black;
-  //   background-color: red;
+  @media screen and (max-width: 1096px) {
+    width: 30%;
+  }
 }
 .product-cost-cost {
   text-align: center;
   border: 1px solid black;
   border-radius: 10px;
-  //   margin-top: 10px;
 }
 .add-to-basket {
   text-align: center;
@@ -303,6 +506,9 @@ export default {
 }
 .left {
   margin-right: 70px;
+  @media screen and (max-width: 1096px) {
+    width: 60%;
+  }
 }
 .pack-logo {
   width: 50px;
@@ -310,7 +516,6 @@ export default {
   cursor: pointer;
 }
 .pack-weight {
-  // background-color: red;
   display: inline;
   position: absolute;
   margin-right: 250px;
@@ -323,7 +528,6 @@ export default {
 .format {
   width: 150px;
   height: 40px;
-  // text-align: right;
   text-indent: 10px;
   border-radius: 10px;
   border: 0.5px solid brown;
@@ -332,18 +536,14 @@ export default {
   background-color: white;
   margin-right: 35px;
   cursor: pointer;
-  //   appearance: none;
-  // text-align: center;
   outline: none;
   font-family: "BYekan";
 }
 
 .count-box {
   width: 170px;
-  //   background-color: yellow;
   padding: 10px;
   border-radius: 10px;
-  //   margin-right: -50px;
   margin-right: 280px;
   margin-top: -2.5rem;
   margin-bottom: 0.5rem;

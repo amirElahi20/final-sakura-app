@@ -71,6 +71,7 @@ const actions = {
                 console.log(error)
             })
     },
+    // accounts/api/v1/username/
     checkForLogin(context) {
         Vue.http.get('accounts/api/v1/username/', {
             headers: {

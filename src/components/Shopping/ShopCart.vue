@@ -268,14 +268,14 @@ export default {
 .icon-pack {
   font-size: 15px;
   color: orange;
-  margin-left: 10px;
+  // margin-left: 10px;
 }
 .img-product {
   height: 80px;
   border-radius: 100%;
 }
 .attention {
-  background-color: orange;
+  // background-color: orange;
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -290,7 +290,7 @@ export default {
 
 .shop-bag {
   font-size: 80px;
-  margin-top: 20px;
+  margin: 20px 0px;
   // position: absolute;
   // margin-left: 500px;
 }

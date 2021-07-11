@@ -10,7 +10,7 @@
             <router-link to="/search" ><font-awesome-icon class="icon icon2" icon="search"></font-awesome-icon>جست و جو</router-link>
           </li>
           <li>
-            <router-link to="/shopcart" ><font-awesome-icon class="icon icon3" icon="shopping-cart"></font-awesome-icon>سبد خرید</router-link>
+            <router-link to="/shopcart" ><font-awesome-icon class="icon icon3" icon="shopping-cart"></font-awesome-icon> <span class="badge">5</span> سبد خرید</router-link>
           </li>
           <li>
             <a  @click="showSubMenu"><font-awesome-icon class="icon icon4" icon="bars"></font-awesome-icon>دسته بندی</a>
@@ -48,7 +48,6 @@ export default {
 
 <style lang="scss" scoped>
 .res-header {
-//   height: 90px;
   margin: 0 auto;
   display: none;
 
@@ -57,6 +56,17 @@ export default {
   }
 
   
+}
+.badge{
+  position: absolute;
+  background-color: orangered;
+  padding:1px 0 0 3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100px;
+  font-size: 15px;
+  margin-top: -30px;
+  margin-left: 30px;
 }
 .icon {
   display: block;
@@ -78,18 +88,16 @@ export default {
 .icon5 {
   margin-left: 5px;
 }
-
+li{
+  cursor: pointer;
+}
 .container {
   width: 100%;
-  // margin: 0 auto;
-  background-color: rgb(36, 34, 34);
+  background-color: rgb(255, 166, 0);
   bottom: 0;
   position: fixed;
-  // position: absolute;
   z-index: 999;
   height: 70px;
-//   margin-bottom: 8px;
-//   padding: 10px 0 20px 0;
 }
 ul {
   display: flex;
@@ -102,14 +110,13 @@ a {
   color: white;
   transition: all 0.3s;
   font-size: 15px;
-  // display: block;
   text-decoration: none;
 }
 a:hover {
-  color: darkturquoise;
+  color: black;
 }
 a:active {
-  color: darkturquoise;
+  color: black;
 }
 
 </style>

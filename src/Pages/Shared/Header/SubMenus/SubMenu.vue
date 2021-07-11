@@ -72,12 +72,11 @@ export default {
 
 <style lang="scss" scoped>
 .sub-menu {
-  width: 100%;
-  height: 400px;
+  width: 80%;
+  height: auto;
   display: flex;
-  //   background-color: orangered;
   margin-top: 8px;
-  // position: absolute;
+  position: absolute;
 }
 .active {
   background-color: orangered;
@@ -99,12 +98,10 @@ ul {
   list-style: none;
 }
 .menu-list {
-  // background-color: red;
   padding: 25px 0;
   transition: all 0.4s;
 }
 .menu_list{
-    // font-size: 50px;
     background-color: orange;
     color: white;
 }

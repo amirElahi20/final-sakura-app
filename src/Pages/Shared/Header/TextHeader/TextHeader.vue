@@ -25,11 +25,11 @@ export default {};
   border-radius: 10px;
   padding: 40px;
   margin-top: 50px;
-  width: 75%;
+  width: 40%;
   z-index: 1;
-  // height: 200px;
  @media screen and (max-width: 900px) {
     margin-top:0px ;
+    width: 70%;
   }
 }
 

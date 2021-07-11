@@ -1,6 +1,5 @@
 <template>
   <div class="sub-responsive">
-    <!-- <div class="popup"></div> -->
     <div class="sub-menu">
       <div class="right">
         <font-awesome-icon icon="times" @click="closeMenu" class="close-icon" />
@@ -15,7 +14,6 @@
             :key="sub.id"
           >
             <font-awesome-icon
-              @click="closeMenu"
               class="icon circle-icon"
               icon="circle"
             />
@@ -83,11 +81,10 @@ export default {
 
 <style lang="scss" scoped>
 .close-icon {
-  // float: left;
-  // margin: 15px 0 0 25px;
   color: orangered;
   font-size: 25px;
   margin: 15px 10px 10px 0;
+  cursor: pointer;
 }
 .sub-responsive {
   display: none;
@@ -123,10 +120,8 @@ export default {
   background-color: orangered;
 }
 .right {
-  background-color: white;
+  background-color:white;
   width: 30%;
-  //   padding-right: 10px;
-  // margin-right: 10px;
   @media screen and (max-width: 670px) {
     width: 40%;
   }
@@ -145,13 +140,12 @@ ul {
   list-style: none;
 }
 .menu-list {
-  // background-color: red;
   padding: 25px 0;
   transition: all 0.4s;
 }
 .menu_list {
-  // font-size: 50px;
   background-color: orange;
+  height: auto;
   color: white;
 }
 .menu_list a {
@@ -207,6 +201,6 @@ ul {
   }
 }
 .left ul {
-  margin: 60px 15px 0 0;
+  margin: 20px 15px 0 0;
 }
 </style>

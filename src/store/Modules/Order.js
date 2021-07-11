@@ -57,7 +57,7 @@ const actions = {
 
 
     ShowOrderRows({ commit }) {
-        Vue.http.get('shop/v1/Show_Order/', {
+        Vue.http.get('shop/api/v1/Show_Order/', {
             headers: {
                 'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
             }
@@ -72,7 +72,7 @@ const actions = {
         })
     },
     CountUserOrders({ commit }) {
-        Vue.http.get('shop/v1/Show_Order/', {
+        Vue.http.get('shop/api/v1/Show_Order/', {
             headers: {
                 'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
             }
