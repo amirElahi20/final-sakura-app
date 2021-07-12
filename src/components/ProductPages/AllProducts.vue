@@ -111,13 +111,16 @@ $color-primary-light: orangered;
   padding: 2rem 0 5rem 0;
 }
 .left {
-  width: 100%;
+  width: 80%;
+  // background-color: red;
+  margin: 0 auto;
 }
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: 10px;
+  justify-content: center;
+  // padding: 10px;
+  margin-right: 20px;
 }
 .box {
   background-color: white;
@@ -125,19 +128,25 @@ $color-primary-light: orangered;
   padding: 15px;
   margin-left: 20px;
   margin-top: 20px;
-  border-radius: 35px;
+  // border-radius: 35px;
   width: 240px;
   border: 1px solid brown;
   transition: all 0.5s;
   &:hover {
     box-shadow: 0.5rem 1rem 1rem rgba(rgb(163, 158, 158), 0.5);
   }
+  @media screen and (max-width: 540px) {
+    width: 200px;
+  }
+  @media screen and (max-width: 460px) {
+    width: 250px;
+  }
 }
 .image {
   width: 100%;
   height: 190px;
-  border: 1px solid brown;
-  border-radius: 35px;
+  // border: 1px solid brown;
+  // border-radius: 35px;
 }
 .blurimg {
   filter: blur(7px);
@@ -155,7 +164,7 @@ $color-primary-light: orangered;
   background-color: orange;
   text-decoration: none;
   padding: 10px 5px;
-  border-radius: 40px;
+  // border-radius: 40px;
   font-size: 16px;
   margin-top: 10px;
   cursor: pointer;

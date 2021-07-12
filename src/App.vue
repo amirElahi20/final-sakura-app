@@ -5,16 +5,19 @@
     <transition name="fade">
       <router-view> </router-view>
     </transition>
+    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
+import TheFooter from './Pages/Shared/Footer/TheFooter.vue';
 import TheHeader from "./Pages/Shared/TheHeader.vue";
 // import SubmenuResponsive from "./Pages/Responsive/SubmenuResponsive.vue";
 
 export default {
   components: {
     TheHeader,
+    TheFooter,
     // SubmenuResponsive,
   },
 };

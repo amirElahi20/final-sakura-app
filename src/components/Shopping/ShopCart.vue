@@ -160,7 +160,7 @@ export default {
       this.pendingRequest = true;
       await this.$http
         .post(
-          "shop/v1/modify_Order/",
+          "shop/api/v1/modify_Order_Row/",
           {
             product: productproduct,
             amount: "+1",
@@ -188,7 +188,7 @@ export default {
       this.pendingRequest = true;
       await this.$http
         .post(
-          "shop/v1/modify_Order/",
+          "shop/api/v1/modify_Order_Row/",
           {
             product: productproduct,
             amount: "-1",
@@ -217,7 +217,7 @@ export default {
       this.pendingRequest = true;
       await this.$http
         .post(
-          "shop/v1/Cancel_Order_Row/",
+          "shop/api/v1/Cancel_Order_Row/",
           {
             product: productproduct,
             amount: productamount,

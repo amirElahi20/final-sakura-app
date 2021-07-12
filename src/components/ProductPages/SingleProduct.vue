@@ -2,26 +2,20 @@
   <div>
     <div class="singleproduct">
       <div class="right">
-        <!-- <img
+        <img
           v-for="(pic, I) in SingleProduct.picture"
           :key="I"
           :src="pic.picture"
           class="product-img"
           alt=""
-        /> -->
-        <img
-          src="../../../public/img/koen-emmers-uYM_PQJ8VvY-unsplash.jpg"
-          class="product-img"
-          alt=""
         />
         <h1 class="product-cost-cost">
-          <!-- {{SingleProduct.product_cost[select].cost}} -->
-          20000
+          {{ SingleProduct.product_cost[select].cost }}
           <span>تومان</span>
         </h1>
         <a
           @click="
-            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].id)
+            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].pack.id)
           "
           class="addbasket"
         >
@@ -39,13 +33,7 @@
           <div class="product-explain">
             <h4>توضیح محصول :</h4>
             <p class="product-paragraph">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-              نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-              کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-              جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
-              طراحان رایانه ای علی الخصوص طراحان خلاقی، و فر
+              {{ SingleProduct.description }}
             </p>
           </div>
           <div class="pack-type">
@@ -71,9 +59,7 @@
                 v-for="(cost, index) in SingleProduct.product_cost"
                 :key="index"
                 :value="index"
-                v-show="
-                  SingleProduct.product_cost[index].pack.parent == 'پاکتی'
-                "
+                v-show="SingleProduct.product_cost[index].pack.parent == 1"
               >
                 {{ cost.pack.weight }} گرم
               </option>
@@ -88,7 +74,7 @@
                 v-for="(cost, index) in SingleProduct.product_cost"
                 :key="cost.id"
                 :value="index"
-                v-show="SingleProduct.product_cost[index].pack.parent == 5"
+                v-show="SingleProduct.product_cost[index].pack.parent == 4"
               >
                 {{ cost.pack.weight }} گرم
               </option>
@@ -114,27 +100,40 @@
       </div>
     </div>
 
-    <!-- this isstart of  reponsive page of single prodict pages -->
+    <!-- **********
+    *************************
+    this isstart of  reponsive page of single prodict pages
+    ******************************
+    ********************************** -->
     <div class="class-box">
       <div class="top">
         <div class="product-name2">
-          <h2>موز</h2>
+          <h2>{{ SingleProduct.name }}</h2>
         </div>
         <img
-          src="../../../public/img/koen-emmers-uYM_PQJ8VvY-unsplash.jpg"
-          class="product-img2"
+          v-for="(pic, I) in SingleProduct.picture"
+          :key="I"
+          :src="pic.picture"
+          class="product-img"
           alt=""
         />
         <div class="cost-box-product">
           <h1 class="cost-of-product">
-            20000
+            {{ SingleProduct.product_cost[select].cost }}
             <span>تومان</span>
           </h1>
         </div>
-        <h3 class="add-to-basket2">
-          <font-awesome-icon class="fa" icon="shopping-cart" />افزودن به سبد
-          خرید
-        </h3>
+        <a
+          @click="
+            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].id)
+          "
+          class="addbasket"
+        >
+          <h3 class="add-to-basket2">
+            <font-awesome-icon class="fa" icon="shopping-cart" />افزودن به سبد
+            خرید
+          </h3>
+        </a>
         <div class="pack-type2">
           <h3 class="title-pack">نوع بسته بندی را انتخاب کنید</h3>
           <img
@@ -160,7 +159,7 @@
               v-for="(cost, index) in SingleProduct.product_cost"
               :key="index"
               :value="index"
-              v-show="SingleProduct.product_cost[index].pack.parent == 'پاکتی'"
+              v-show="SingleProduct.product_cost[index].pack.parent == 1"
             >
               {{ cost.pack.weight }} گرم
             </option>
@@ -174,14 +173,13 @@
               v-for="(cost, index) in SingleProduct.product_cost"
               :key="cost.id"
               :value="index"
-              v-show="SingleProduct.product_cost[index].pack.parent == 5"
+              v-show="SingleProduct.product_cost[index].pack.parent == 4"
             >
               {{ cost.pack.weight }} گرم
             </option>
           </select>
         </div>
         <footer class="count-box2">
-          <!-- <h5>تعداد</h5> -->
           <button @click="plus" class="count-icon plus">+</button>
 
           <div class="input-count2">{{ count }}</div>
@@ -196,16 +194,16 @@
 
         <h4 class="explain2">توضیح محصول :</h4>
         <p class="product-paragraph2">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
-          کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی
-          در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه
+          {{ SingleProduct.description }}
         </p>
       </div>
     </div>
 
-    <!-- this is end of reponsive page of single prodict pages -->
+    <!--*****************************
+    *******************************
+     this is end of reponsive page of single prodict pages 
+     ***************************
+     ********************************-->
 
     <div class="similar">
       <div class="u-center">
@@ -258,7 +256,7 @@ export default {
     return {
       glass: true,
       packet: false,
-      select: 0,
+      select: 2,
       count: 1,
       id: 5,
       pack: "",
@@ -298,12 +296,12 @@ export default {
     selectenvelope() {
       this.glass = false;
       this.packet = true;
-      this.select = 2;
+      this.select = 0;
     },
     selectglass() {
       this.glass = true;
       this.packet = false;
-      this.select = 0;
+      this.select = 2;
     },
     plus() {
       this.count += 1;
@@ -359,10 +357,10 @@ export default {
 .format2 {
   width: 50%;
   height: 40px;
-  text-indent: 10;
+  text-indent: 10px;
+  direction: rtl;
   margin-left: 25%;
   background-color: white;
-  color: red;
   outline: none;
   border-radius: 10px;
   border: 1px solid black;
@@ -444,7 +442,7 @@ export default {
   border-radius: 10px;
 }
 .singleproduct {
-  width: 80%;
+  width: 60%;
   height: 410px;
   border-radius: 10px;
   margin: 2rem auto;

@@ -1,44 +1,46 @@
 <template>
   <div>
-    <div class="contact">
-      <h1 class="call">
-        <font-awesome-icon class="icon" icon="phone"></font-awesome-icon>تماس با ساکورا شاپ
-      </h1>
-      <svg height="1" width="100%">
-        <line
-          x1="80%"
-          y1="0"
-          x2="97%"
-          y2="0"
-          style="stroke: rgb(255, 255, 255); stroke-width: 10"
-        />
-      </svg>
-      <section class="question">
-        <ul class="topul">
-          <li>
-            <p>
-              لطفا پیش از ارسال ایمیل یا تماس تلفنی ، ابتدا پرسش های متداول را
-              مشاهده کنید
-            </p>
-          </li>
-          <li><a href="" class="btn">پرسش های متداول</a></li>
-        </ul>
-      </section>
-      <svg height="1" width="100%">
-        <line
-          x1="3%"
-          y1="0"
-          x2="97%"
-          y2="0"
-          style="stroke: rgb(255, 255, 255); stroke-width: 1"
-        />
-      </svg>
-      <section class="form">
-        <li>
-          <label> موضوع</label>
-          <div class="select">
-            <select v-model="title" name="format" id="format">
-              <option value="" selected disabled>--انتخاب موضوع--</option>
+    <div class="contact-form">
+      <div class="first-container">
+        <div class="info-container">
+          <div>
+            <img class="icon" />
+            <h3>
+              <font-awesome-icon class="info-icon" icon="map-marker-alt" />
+              نشانی
+            </h3>
+            <p>استان فارس / شیراز</p>
+          </div>
+          <div>
+            <img class="icon" />
+            <h3>
+              <font-awesome-icon class="info-icon" icon="phone" />شماره تماس
+            </h3>
+            <p>09302555881144</p>
+          </div>
+          <div>
+            <img class="icon" />
+            <h3>
+              <font-awesome-icon class="info-icon" icon="envelope" />ایمیل
+            </h3>
+            <p class="english">contact@example.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="second-container">
+        <h2>پیغام به ساکورا</h2>
+        <form>
+          <div class="form-group">
+            <label for="name-input">نام خود را وارد کنید</label>
+            <input id="name-input" type="text" placeholder="نام" required />
+            <input type="text" placeholder="نام خانوادگی" required />
+          </div>
+           <div class="form-group">
+            <label for="name-input">موضوع خود را انتخاب کنید</label>
+             <select
+              name="format"
+            >
+              <option value="" selected disabled>انتخاب موضوع</option>
               <option value="1">پیشنهادات</option>
               <option value="2">انتقادات</option>
               <option value="3">مدیریت</option>
@@ -46,247 +48,271 @@
               <option value="5">سایر موضوعات</option>
             </select>
           </div>
-        </li>
-
-        <li>
-          <label>نام و نام خانوادگی</label>
-          <input v-model.trim="name" class="input" type="text" />
-        </li>
-        <li>
-          <label> ایمیل</label>
-          <input v-model="email" type="email" />
-        </li>
-        <li>
-          <label>تلفن تماس</label>
-          <input v-model="phone" type="text" />
-        </li>
-        <li>
-          <label>متن پیام</label>
-          <textarea
-            v-model="body"
-            class="message"
-            rows="10"
-            cols="50"
-            autofocus
-          ></textarea>
-        </li>
-        <button>ارسال پیام</button>
-      </section>
-
-      <svg height="1" width="100%">
-        <line
-          x1="3%"
-          y1="0"
-          x2="97%"
-          y2="0"
-          style="stroke: rgb(255, 255, 255); stroke-width: 1"
-        />
-      </svg>
-
-      <section class="bottom">
-        <div class="last">
-          <ul class="contactul">
-            <li class="li">
-              <font-awesome-icon class="icon icon1" icon="phone"></font-awesome-icon>شماره تماس ما
-              <span>0214557896</span>
-            </li>
-            <li class="li">
-              <font-awesome-icon class="icon icon1" icon="envelope"></font-awesome-icon>ایمیل ما
-              <span class="english">info@gmail.com</span>
-            </li>
-            <li class="li">
-              <font-awesome-icon class="icon icon1" icon="clock"></font-awesome-icon>پاسخگویی 24 ساعته و 7 روز
-              هفته
-            </li>
-          </ul>
-        </div>
-      </section>
+          <div class="form-group">
+            <label for="email-input">ایمیل خود را وارد کنید</label>
+            <input
+              id="email-input"
+              type="text"
+              placeholder="مثال : someone@gmail.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone-input">شماره تماس خود را وارد کنید</label>
+            <input
+              id="phone-input"
+              type="text"
+              placeholder="مثال:0912000004"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="message-textarea">پیغام خود را بنویسید</label>
+            <textarea id="message-textarea" placeholder="پیام شما"></textarea>
+          </div>
+          <button>ارسال پیام</button>
+        </form>
+        <router-link to="/" class="back-btn">بازگشت به صفحه اصلی</router-link>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
-export default {};
+import Vue from "vue";
+import {
+  required,
+  maxLength,
+  minLength,
+  numeric,
+  email,
+  not,
+} from "vuelidate/lib/validators";
+export default {
+  data() {
+    return {
+      title: "",
+      name: "",
+      email: "",
+      phone: "",
+      body: "",
+    };
+  },
+  validations: {
+    title: {
+      required,
+    },
+    name: {
+      persianalpha: not(numeric),
+      required,
+    },
+    email: {
+      email,
+      required,
+    },
+    phone: {
+      numeric,
+      required,
+      minLength: minLength(11),
+      maxLength: maxLength(11),
+    },
+    body: {
+      required,
+      minLength: minLength(30),
+    },
+  },
+  methods: {
+    SendRequestToServer() {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        const request = {
+          title: this.title,
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          body: this.body,
+        };
+        Vue.http
+          .post("site_model/api/v1/contact_us/", request)
+
+          .then((response) => {
+            console.log(response);
+            this.toast.success("پیام شما با موفقیت ارسال شد");
+          });
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.invalidtext textarea {
-  border: 1px solid red;
-}
-.invalidtext label {
-  color: red;
-}
-.invalid input {
-  border: 1px solid red !important;
-}
-.invalid label {
-  color: red;
-}
-.invalidformat {
-  border: 1px solid red !important;
-}
-.contact {
-  width: 65%;
-  background-color: whitesmoke;
-  border-radius: 10px;
-  border: 1px solid black;
-  margin: 2rem auto;
-  margin-bottom: 5rem;
-  border-radius: 50px;
-}
-.alert {
-  color: red;
-  font-size: 12px;
-  font-weight: bold;
-}
-#format {
-  width: 88%;
-  // text-indent: 10px;
-  height: 40px;
-  text-align: right;
-  text-indent: 10px;
-  border-radius: 10px;
-  // border: 0.5px solid orangered;
-  display: block;
-  background-image: none;
-  background-color: white;
-  appearance: none;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   outline: none;
-  font-family: "BYekan";
 }
-.contactul {
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f2f2f2;
+}
+
+.contact-form {
+  width: 80vw;
   direction: rtl;
-}
-.last {
-  // text-align: center;
-  margin-right: 40%;
-  padding: 3rem 0 3rem 0;
-}
-.li {
-  margin-top: 10px;
-}
-li {
-  text-decoration: none;
-  list-style: none;
-}
-.question {
-  margin-top: 2rem;
-}
-.call {
-  direction: rtl;
-  padding: 30px 30px 0 0;
-  font-size: 18px;
-  //   font-weight: 400;
-}
-.icon {
-  margin-left: 5px;
-}
-.topul {
   display: flex;
   justify-content: space-between;
-  direction: rtl;
-  margin-bottom: 1rem;
-  padding: 0 30px;
+  background: #fff;
+  margin: 50px auto;
 }
-
-.btn {
-  background-color: orangered;
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-  transition: all 0.3s;
-  text-decoration: none;
-  border: 1px solid orangered;
-
-  &:hover {
-    border: 1px solid orangered;
-    color: orangered;
-    background-color: white;
-  }
-}
-.map {
-  width: 458px;
-  border-radius: 10px;
-}
-.form {
-  display: grid;
-  direction: rtl;
-  // grid-template-columns: repeat(2, 500px);
-  grid-template-rows: repeat(2, 100px);
-  grid-template-columns: repeat(auto-fill, minmax(350px, 4fr));
-  margin-right: 30px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-.icon1 {
-  font-size: 20px;
-  margin-left: 10px;
-}
-input {
-  // padding: 8px 155px;
-  // position: absolute;
-  width: 88%;
-  text-indent: 10px;
-  height: 40%;
-  text-align: right;
-  border-radius: 10px;
-  border: 0.5px solid rgb(138, 10, 99);
-  display: block;
-}
-
-.massege {
-  width: 800px;
-}
-textarea {
-  display: block;
-  resize: none;
-  text-indent: 10px;
-  width: 88%;
-  border-radius: 10px;
-  border: 0.5px solid rgb(138, 10, 99);
-  text-indent: 10px;
-  border: 1px solid rgb(138, 10, 99);
-  outline: none;
-  background-color: transparent;
-  font-family: "BYekan";
-  background-color: white;
-}
-button {
-  width: 30%;
-  height: 20%;
-  margin-right: 56%;
-  margin-top: 35%;
-  border-radius: 5px;
-  border: 1px solid gold;
-  color: black;
-  background-color: gold;
-  transition: all 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    color: white;
-    border: 1px solid green;
-    background-color: green;
-  }
-}
-.info {
-  display: flex;
-  direction: rtl;
-  margin-top: 2rem;
-  padding: 30px;
-  justify-content: space-between;
-}
-.right {
-  width: 40%;
-}
-.left {
+.contact-form > * {
   width: 50%;
 }
-.box {
-  margin-bottom: 3rem;
+.contact-form .first-container {
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("https://colorlib.com/etc/cf/ContactFrom_v17/images/bg-01.jpg") center
+      center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.box:last-child {
-  margin-bottom: 0;
+.contact-form .first-container .info-container div {
+  margin: 24px 0;
+}
+.contact-form .first-container .info-container div h3 {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  padding-bottom: 10px;
+}
+.contact-form .first-container .info-container div:first-of-type p {
+  max-width: 260px;
+  color: #999;
+}
+.contact-form .first-container .info-container div p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: orange;
+}
+.contact-form .second-container {
+  padding: 30px;
+}
+.contact-form .second-container h2 {
+  font-size: 30px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.contact-form .second-container form {
+  display: flex;
+  flex-direction: column;
+}
+.contact-form .second-container form .form-group {
+  margin-bottom: 10px;
+}
+.contact-form .second-container form .form-group * {
+  min-height: 55px;
+  border: 1px solid #e6e6e6;
+  padding: 0 20px;
+}
+.contact-form .second-container form .form-group label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  font-size: 16px;
+  color: #333;
+  text-transform: uppercase;
+  margin-top: -1px;
+}
+.contact-form .second-container form .form-group:first-of-type input {
+  width: 50%;
+}
+.contact-form .second-container form .form-group input {
+  width: 100%;
+  font-size: 15px;
+  margin-top: -2px;
+  font-family: "BYekan";
+}
+.contact-form .second-container form .form-group select{
+  width: 100%;
+  font-size: 15px;
+  height: 10px;
+  margin-top: -2px;
+  font-family: "BYekan";
+  cursor: pointer;
+}
+.contact-form .second-container form .form-group select option{
+    font-family: "BYekan";
+
+}
+.contact-form .second-container form .form-group input::placeholder,
+.contact-form .second-container form .form-group textarea::placeholder {
+  color: #999;
+  font-family: "BYekan";
+}
+.contact-form .second-container form .form-group textarea {
+  width: 100%;
+  min-height: 80px;
+  resize: none;
+  padding: 10px 20px;
+  margin-top: -1px;
+}
+.contact-form .second-container form button {
+  width: 200px;
+  height: 50px;
+  background: orange;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 0;
+  transition: all 0.3s;
+  position: relative;
+  right: calc(50% - 100px);
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+.contact-form .second-container form button:hover {
+  background: green;
+}
+
+@media screen and (max-width: 800px) {
+  .contact-form {
+    width: 90vw;
+  }
+}
+@media screen and (max-width: 700px) {
+  .contact-form {
+    flex-direction: column-reverse;
+  }
+  .contact-form > * {
+    width: 100%;
+  }
+  .contact-form .first-container {
+    padding: 40px 0;
+  }
+}
+.info-icon {
+  margin-left: 5px;
+}
+.back-btn {
+  margin-top: 30px;
+  background-color: orangered;
+  right: calc(50% - 100px);
+  position: relative;
+  color: white;
+  text-decoration: none;
+  padding: 10px 31.1px;
+
 }
 </style>

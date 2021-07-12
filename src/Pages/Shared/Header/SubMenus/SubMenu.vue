@@ -85,7 +85,6 @@ export default {
   background-color: white;
   direction: rtl;
   width: 20%;
-  border-bottom-right-radius: 10px;
 }
 .left {
   color: white;

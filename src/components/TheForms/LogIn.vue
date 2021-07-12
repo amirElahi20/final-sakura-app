@@ -125,13 +125,13 @@ export default {
   methods: {
     LoginUser() {
       this.$v.$touch();
-      // if (!this.$v.$error) {
+      if (!this.$v.$error) {
         const login = {
           username: this.username,
           password: this.password,
         };
         this.$store.dispatch("LoginUser", login);
-      // }
+      }
     },
     showpassword() {
       this.visibility = "text";

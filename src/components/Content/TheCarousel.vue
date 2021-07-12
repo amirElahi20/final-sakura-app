@@ -54,15 +54,6 @@
         <a class="total-probtn" href="#">مشاهده همه</a>
       </div>
     </div>
-    <svg class="svg" height="1" width="98%">
-      <line
-        x1="10%"
-        y1="0"
-        x2="92%"
-        y2="0"
-        style="stroke: rgb(255, 69, 0); stroke-width: 0.5"
-      />
-    </svg>
   </div>
 </template>
 

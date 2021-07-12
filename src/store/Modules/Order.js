@@ -34,12 +34,12 @@ const mutations = {
 
 const actions = {
     AddProductToOrder(context, orderDetail) {
-        console.log(orderDetail)
-        Vue.http.post('shop/api/v1/new_Order/', {
+        console.log("order details", orderDetail)
+        Vue.http.post('shop/api/v1/new_Order_Row/', {
 
             product: orderDetail.product,
             amount: orderDetail.amount,
-            pack: orderDetail.pack
+            product_cost: orderDetail.pack
 
         }, {
             headers: {

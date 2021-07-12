@@ -8,7 +8,8 @@
           $route.name == 'register' ||
           $route.name == 'forgetpass' ||
           $route.name == 'Confirm' ||
-          $route.name == 'shopcart',
+          $route.name == 'shopcart'||
+          $route.name == 'ContactUs',
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />
