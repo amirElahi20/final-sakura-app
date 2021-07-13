@@ -1,50 +1,184 @@
 <template>
-  <div>
-<!--Some of this HTML is directly from Pavilion.  You can change it to whatever you want if you want to mimic this design.-->
-<footer class="flex-rw">
-  
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header">درباره ساکورا</h4></li>
-    <li><a href='/shop/about-mission' class="generic-anchor footer-list-anchor" itemprop="significantLink">درباره ما</a></li>
-    <li><a href='/promos.html' class="generic-anchor footer-list-anchor" itemprop="significantLink">ارتباط با ما</a></li>
-    <li><a href='/retailers/new-retailers.html' class="generic-anchor footer-list-anchor" itemprop="significantLink">لیست محصولات</a></li>
+  <div
+    :class="{
+      layout:
+        $route.name == 'login' ||
+        $route.name == 'register' ||
+        $route.name == 'forgetpass' ||
+        $route.name == 'Confirm' ||
+        $route.name == 'shopcart' ||
+        $route.name == 'ContactUs' ||
+        $route.name == 'purches' ||
+        $route.name == 'UserDashboard' ||
+        $route.name == 'useraccount',
+    }"
+  >
+    <!--Some of this HTML is directly from Pavilion.  You can change it to whatever you want if you want to mimic this design.-->
+    <footer class="flex-rw">
+      <ul class="footer-list-top">
+        <li>
+          <h4 class="footer-list-header">درباره ساکورا</h4>
+        </li>
+        <li>
+          <a
+            href="/shop/about-mission"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >درباره ما</a
+          >
+        </li>
+        <li>
+          <a
+            href="/promos.html"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >ارتباط با ما</a
+          >
+        </li>
+        <li>
+          <a
+            href="/retailers/new-retailers.html"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >لیست محصولات</a
+          >
+        </li>
 
-    <li><a href='/job-openings.html' itemprop="significantLink" class="generic-anchor footer-list-anchor">موقعیت های شغلی</a></li>
+        <li>
+          <a
+            href="/job-openings.html"
+            itemprop="significantLink"
+            class="generic-anchor footer-list-anchor"
+            >موقعیت های شغلی</a
+          >
+        </li>
 
-    <li><a href='/shop/about-show-schedule' class="generic-anchor footer-list-anchor" itemprop="significantLink">اخبار</a></li>
-  </ul>
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header">محصولات</h4></li>
+        <li>
+          <a
+            href="/shop/about-show-schedule"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >اخبار</a
+          >
+        </li>
+      </ul>
+      <ul class="footer-list-top">
+        <li>
+          <h4 class="footer-list-header">محصولات</h4>
+        </li>
 
-
-    <li><a href='/Angels/cat/id/70' class="generic-anchor footer-list-anchor">میوه خشک</a></li>
-    <li><a href='/Home-Decor/cat/id/64' class="generic-anchor footer-list-anchor">آجیل</a></li>
-    <li><a href='/Mugs/cat/id/32' class="generic-anchor footer-list-anchor">گز</a></li>
-    <li><a href='/Pet-Lover/cat/id/108' class="generic-anchor footer-list-anchor">خشکبار</a></li>
-    <li><a href='/Ladies-Accessories/cat/id/117' class="generic-anchor footer-list-anchor" target="_blank">محصولات تر</a></li>
-  </ul>
-  <ul class="footer-list-top">
-    <li id='help'>
-      <h4 class="footer-list-header">خدمات مشتریان</h4></li>
-    <li><a href='/shop/about-contact' class="generic-anchor footer-list-anchor" itemprop="significantLink">راهنمای خرید</a></li>
-    <li><a href='/faq.html' class="generic-anchor footer-list-anchor" itemprop="significantLink">پاسخ به پرسش های متداول</a></li>
-    <li id='find-a-store'><a href='/shop/store-locator' class="generic-anchor footer-list-anchor" itemprop="significantLink">رویه های بازگرداندن کالا</a></li>
-    <li id='user-registration'><a href='/shop/user-registration?URL=' class="generic-anchor footer-list-anchor" itemprop="significantLink">شرایط استفاده</a></li>
-    <li id='order-tracking'><a href='/shop/order-status' itemprop="significantLink" class="generic-anchor footer-list-anchor">گزارش باگ</a></li>
-  </ul>
-  <section class="footer-social-section flex-rw">
-      <span class="footer-social-overlap footer-social-connect">
-      ارتباطی <span class="footer-social-small">های</span> پل
-      </span>
-      <span class="footer-social-overlap footer-social-icons-wrapper">
-      <a href="#"  target="_blank" title="whatsapp" itemprop="significantLink"><font-awesome-icon class="whatsapp" :icon="['fab', 'whatsapp']"></font-awesome-icon></a>
-      <a href="#"  target="_blank" title="Youtube" itemprop="significantLink"><font-awesome-icon class="telegram" :icon="['fab', 'telegram']"></font-awesome-icon></a>
-      <a href="#"  target="_blank" title="Google Plus" itemprop="significantLink"><font-awesome-icon class="instagram" :icon="['fab', 'instagram']"></font-awesome-icon></a>
-      </span>
-  </section>
-</footer>
+        <li>
+          <a href="/Angels/cat/id/70" class="generic-anchor footer-list-anchor"
+            >میوه خشک</a
+          >
+        </li>
+        <li>
+          <a
+            href="/Home-Decor/cat/id/64"
+            class="generic-anchor footer-list-anchor"
+            >آجیل</a
+          >
+        </li>
+        <li>
+          <a href="/Mugs/cat/id/32" class="generic-anchor footer-list-anchor"
+            >گز</a
+          >
+        </li>
+        <li>
+          <a
+            href="/Pet-Lover/cat/id/108"
+            class="generic-anchor footer-list-anchor"
+            >خشکبار</a
+          >
+        </li>
+        <li>
+          <a
+            href="/Ladies-Accessories/cat/id/117"
+            class="generic-anchor footer-list-anchor"
+            target="_blank"
+            >محصولات تر</a
+          >
+        </li>
+      </ul>
+      <ul class="footer-list-top">
+        <li id="help">
+          <h4 class="footer-list-header">خدمات مشتریان</h4>
+        </li>
+        <li>
+          <a
+            href="/shop/about-contact"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >راهنمای خرید</a
+          >
+        </li>
+        <li>
+          <a
+            href="/faq.html"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >پاسخ به پرسش های متداول</a
+          >
+        </li>
+        <li id="find-a-store">
+          <a
+            href="/shop/store-locator"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >رویه های بازگرداندن کالا</a
+          >
+        </li>
+        <li id="user-registration">
+          <a
+            href="/shop/user-registration?URL="
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >شرایط استفاده</a
+          >
+        </li>
+        <li id="order-tracking">
+          <a
+            href="/shop/order-status"
+            itemprop="significantLink"
+            class="generic-anchor footer-list-anchor"
+            >گزارش باگ</a
+          >
+        </li>
+      </ul>
+      <section class="footer-social-section flex-rw">
+        <span class="footer-social-overlap footer-social-connect">
+          ارتباطی <span class="footer-social-small">های</span> پل
+        </span>
+        <span class="footer-social-overlap footer-social-icons-wrapper">
+          <a
+            href="#"
+            target="_blank"
+            title="whatsapp"
+            itemprop="significantLink"
+            ><font-awesome-icon
+              class="whatsapp"
+              :icon="['fab', 'whatsapp']"
+            ></font-awesome-icon
+          ></a>
+          <a href="#" target="_blank" title="Youtube" itemprop="significantLink"
+            ><font-awesome-icon
+              class="telegram"
+              :icon="['fab', 'telegram']"
+            ></font-awesome-icon
+          ></a>
+          <a
+            href="#"
+            target="_blank"
+            title="Google Plus"
+            itemprop="significantLink"
+            ><font-awesome-icon
+              class="instagram"
+              :icon="['fab', 'instagram']"
+            ></font-awesome-icon
+          ></a>
+        </span>
+      </section>
+    </footer>
   </div>
 </template>
 
@@ -58,13 +192,14 @@ export default {};
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
-font-family: "BYekan";
--webkit-font-smoothing: antialiased;
+  font-family: "BYekan";
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
   display: flex;
@@ -122,17 +257,16 @@ footer {
   padding: 10px 0 5px 0;
   color: #fff;
   font: 2.3vw "BYekan";
-@media screen and (max-width: 500px) {
+  @media screen and (max-width: 500px) {
     font: 4vw "BYekan";
-}
-
+  }
 }
 
 .footer-list-anchor {
   font: 1.3em "BYekan";
   @media screen and (max-width: 500px) {
     font: 3vw "BYekan";
-}
+  }
 }
 
 .footer-social-section {
@@ -141,7 +275,11 @@ footer {
   justify-content: space-around;
   position: relative;
   margin-top: 5px;
-  margin-bottom: 5rem;
+  // margin-bottom: 5rem;
+  @media screen and (max-width: 800px) {
+    // font: 7vw "BYekan";
+    margin-bottom: 5rem;
+  }
 }
 
 .footer-social-section::after {
@@ -169,7 +307,7 @@ footer {
   @media screen and (max-width: 500px) {
     font: 7vw "BYekan";
     margin-top: 25px;
-}
+  }
 }
 
 .footer-social-small {
@@ -213,7 +351,7 @@ footer {
   color: white;
   @media screen and (max-width: 500px) {
     font-size: 50px;
-}
+  }
 }
 .whatsapp:hover {
   color: green;
@@ -244,5 +382,8 @@ footer {
     #d6249f 60%,
     #285aeb 90%
   );
+}
+.layout {
+  display: none;
 }
 </style>

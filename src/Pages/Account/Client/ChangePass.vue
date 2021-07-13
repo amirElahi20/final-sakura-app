@@ -2,34 +2,19 @@
   <div>
     <div class="contact-form">
       <div class="second-container">
-        <h2>ویرایش </h2>
+        <h2>تغییر رمز</h2>
         <form>
-          <div class="form-group">
-            <label for="name-input">نام خود را وارد کنید</label>
-            <input id="name-input" type="text" placeholder="نام" required />
-            <input type="text" placeholder="نام خانوادگی" required />
-          </div>
            <div class="form-group">
-            <label for="name-input">نام کاربری خود را وارد کنید</label>
-            <input type="text" placeholder="نام کاربری" required />
+            <label for="name-input">رمز کنونی را وارد کنید</label>
+            <input type="password" placeholder="رمز" required />
           </div>
           <div class="form-group">
-            <label for="email-input">ایمیل خود را وارد کنید</label>
-            <input
-              id="email-input"
-              type="text"
-              placeholder="مثال : someone@gmail.com"
-              required
-            />
+            <label for="name-input">رمز جدید را وارد کنید</label>
+            <input type="password" placeholder="رمز جدید" required />
           </div>
-          <div class="form-group">
-            <label for="phone-input">شماره تماس خود را وارد کنید</label>
-            <input
-              id="phone-input"
-              type="text"
-              placeholder="مثال:0912000004"
-              required
-            />
+         <div class="form-group">
+            <label for="name-input">تکرار رمز جدید</label>
+            <input type="password" placeholder="تکرار رمز" required />
           </div>
           <button>اعمال تغییرات</button>
         </form>
@@ -195,7 +180,7 @@ body {
   margin-top: -1px;
 }
 .contact-form .second-container form .form-group:first-of-type input {
-  width: 50%;
+  width: 100%;
 }
 .contact-form .second-container form .form-group input {
   width: 100%;

@@ -9,7 +9,10 @@
           $route.name == 'forgetpass' ||
           $route.name == 'Confirm' ||
           $route.name == 'shopcart'||
-          $route.name == 'ContactUs',
+          $route.name == 'ContactUs'||
+          $route.name =='purches' ||
+          $route.name == 'UserDashboard' ||
+          $route.name =='useraccount'
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />

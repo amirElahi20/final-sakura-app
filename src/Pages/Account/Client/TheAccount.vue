@@ -2,34 +2,28 @@
   <div>
     <div class="contact-form">
       <div class="second-container">
-        <h2>ویرایش </h2>
+        <h2>مشاهده</h2>
         <form>
           <div class="form-group">
-            <label for="name-input">نام خود را وارد کنید</label>
-            <input id="name-input" type="text" placeholder="نام" required />
-            <input type="text" placeholder="نام خانوادگی" required />
-          </div>
-           <div class="form-group">
-            <label for="name-input">نام کاربری خود را وارد کنید</label>
-            <input type="text" placeholder="نام کاربری" required />
+            <label for="name-input">نام شما:</label>
+            <div id="name-input" type="text">امیررضا</div>
+            <div id="name-input" type="text">الهی</div>
           </div>
           <div class="form-group">
-            <label for="email-input">ایمیل خود را وارد کنید</label>
-            <input
-              id="email-input"
-              type="text"
-              placeholder="مثال : someone@gmail.com"
-              required
-            />
+            <label for="name-input">نام کاربری:</label>
+            <div id="name-input" class="english" type="text">Amir24</div>
+          </div>
+          <div class="form-group">
+            <label for="email-input">ایمیل شما:</label>
+            <div id="name-input" class="english" type="text">
+              info@gmail.com
+            </div>
           </div>
           <div class="form-group">
             <label for="phone-input">شماره تماس خود را وارد کنید</label>
-            <input
-              id="phone-input"
-              type="text"
-              placeholder="مثال:0912000004"
-              required
-            />
+            <div id="name-input" class="english" type="text">
+              09033757791
+            </div>
           </div>
           <button>اعمال تغییرات</button>
         </form>
@@ -115,7 +109,7 @@ export default {
 }
 
 body {
-//   height: 100vh;
+  //   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -128,7 +122,7 @@ body {
   display: flex;
   justify-content: space-between;
   background: #fff;
-//   margin: 20px 0;
+  //   margin: 20px 0;
 }
 .contact-form > * {
   width: 50%;
@@ -188,11 +182,14 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
+  height: 10px;
   border: 1px solid #e6e6e6;
   font-size: 16px;
   color: #333;
   text-transform: uppercase;
-  margin-top: -1px;
+}
+.contact-form .second-container form .form-group div {
+  padding-top: 13px;
 }
 .contact-form .second-container form .form-group:first-of-type input {
   width: 50%;
@@ -203,7 +200,7 @@ body {
   margin-top: -2px;
   font-family: "BYekan";
 }
-.contact-form .second-container form .form-group select{
+.contact-form .second-container form .form-group select {
   width: 100%;
   font-size: 15px;
   height: 10px;
@@ -211,9 +208,8 @@ body {
   font-family: "BYekan";
   cursor: pointer;
 }
-.contact-form .second-container form .form-group select option{
-    font-family: "BYekan";
-
+.contact-form .second-container form .form-group select option {
+  font-family: "BYekan";
 }
 .contact-form .second-container form .form-group input::placeholder,
 .contact-form .second-container form .form-group textarea::placeholder {
@@ -274,6 +270,5 @@ body {
   color: white;
   text-decoration: none;
   padding: 10px 31.1px;
-
 }
 </style>

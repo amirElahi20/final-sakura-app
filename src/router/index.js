@@ -9,12 +9,14 @@ import TheRegister from '../components/TheForms/TheRegister.vue';
 import ForgetPassword from '../components/TheForms/ForgetPassword.vue';
 import SingleProduct from '../components/ProductPages/SingleProduct.vue';
 import ConfirmEmail from '../components/TheForms/ConfirmEmail.vue';
-import ClientInfo from '../Pages/Account/Client/ClientInfo.vue';
-import EditAccount from '../Pages/Account/Client/EditAccount.vue';
-import ThePassword from '../Pages/Account/Client/ThePassword';
-import ThePurches from '../Pages/Account/Client/ThePurches.vue';
+import UserDashboard from '../Pages/Account/Client/UserDashboard.vue';
 import ShopCart from '../components/Shopping/ShopCart.vue';
-
+import TheAccount from '../Pages/Account/Client/TheAccount.vue';
+import EditAccount from '../Pages/Account/Client/EditAccount.vue';
+import ChangePass from '../Pages/Account/Client/ChangePass.vue';
+import UserOrders from '../Pages/Account/Client/UserOrders.vue';
+import UserPurches from '../Pages/Account/Client/UserPurches.vue';
+import UserTickets from '../Pages/Account/Client/UserTickets.vue'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -63,30 +65,56 @@ const routes = [{
         name: 'Confirm'
     },
     {
-        path: '/clientaccount',
-        name: 'Account',
-        component: ClientInfo
-    },
-    {
-        path: '/editaccount',
-        name: 'editacoount',
-        component: EditAccount
-    },
-    {
-        path: '/changepassword',
-        name: 'passwordchanged',
-        component: ThePassword
-    },
-    {
-        path: '/purches',
-        name: 'purches',
-        component: ThePurches
-    },
-    {
         path: '/shopcart',
         name: 'shopcart',
         component: ShopCart
-    }
+    },
+    {
+        path: '/UserDashboard',
+        name: 'UserDashboard',
+        component: UserDashboard,
+        TheAccount,
+        children: [
+
+            {
+                path: '/UserDashboard/Account',
+                name: 'useraccount',
+                component: TheAccount
+            },
+
+            {
+                path: '/UserDashboard/edit',
+                name: 'useraccount',
+                component: EditAccount
+            },
+            {
+                path: '/UserDashboard/changepass',
+                name: 'useraccount',
+                component: ChangePass
+            },
+            {
+                path: '/UserDashboard/purches',
+                name: 'useraccount',
+                component: UserPurches
+            },
+            {
+                path: '/UserDashboard/tickets',
+                name: 'useraccount',
+                component: UserTickets
+            },
+
+            {
+                path: '/UserDashboard/orders',
+                name: 'useraccount',
+                component: UserOrders
+            },
+        ]
+    },
+    // {
+    //     path: '/UserDashboard/Account',
+    //     name: 'useraccount',
+    //     component: TheAccount
+    // }
 ]
 
 const router = new VueRouter({

@@ -2,6 +2,7 @@
   <div>
     <div class="total-shop" v-if="IsAuthenticated && getCountOrder != 0">
       <h1 class="english heading-secondary">{{ Username }}</h1>
+      <!-- {{userOrders[0].rows}} -->
       <div class="shopping-cart">
         <div class="column-labels">
           <label class="product-image">عکس ها</label>
@@ -13,35 +14,42 @@
         </div>
 
         <div
-          v-for="order in userOrders[0].rows"
-          :key="order.id"
+          v-for="(order, index) in userOrders[0].rows"
+          :key="index"
           class="product"
         >
           <div class="product-image">
-            <img class="img-product" :src="order.product.picture[0].picture" />
+            <router-link
+              :to="{
+                name: 'singleproduct',
+                params: { slug: order.product.slug },
+              }"
+            >
+              <img
+                class="img-product"
+                :src="order.product.picture[0].picture"
+              />
+            </router-link>
           </div>
           <div class="product-details">
-            <div class="product-title"></div>
+            <div class="product-title">{{ order.product.name }}</div>
+            <br />
             <p class="product-description">
-              <font-awesome-icon class="icon-pack" icon="box" /> پاکتی
-              <br /><br />
-              <font-awesome-icon class="icon-pack" icon="weight" />100گرم
+              <!-- {{order.product_cost.discount}} -->
+              <font-awesome-icon class="icon-pack" icon="box" />
+              {{ order.product_cost.pack.title }} <br /><br />
+              <font-awesome-icon class="icon-pack" icon="weight" /> تخفیف
+              {{ order.product_cost.discount }} درصد
               <br />
             </p>
           </div>
           <div class="product-price">
-            {{ order.pack.cost.toLocaleString() }}
+            {{ order.product_cost.cost.toLocaleString() }}
             <span class="toman">تومان</span>
           </div>
+
           <div class="product-quantity">
             <div class="counter-counter">
-              <div
-                :disabled="pendingRequest"
-                @click="addone(order.pack.id, order.product.id)"
-                class="counter plus"
-              >
-                +
-              </div>
               <div v-if="!pendingRequest" class="cost-box">
                 {{ order.amount }}
               </div>
@@ -56,17 +64,37 @@
               />
               <div
                 :disabled="pendingRequest"
-                @click="removeone(order.pack.id, order.product.id)"
+                @click="addone(order.product_cost.pack.id, order.product.id)"
+                class="counter plus"
+              >
+                +
+              </div>
+              <div
+                v-if="order.amount != 1"
+                :disabled="pendingRequest"
+                @click="removeone(order.product_cost.pack.id, order.product.id)"
                 class="counter minus"
               >
                 -
+              </div>
+              <div
+                v-if="order.amount == 1"
+                :disabled="pendingRequest"
+                @click="removeone(order.product_cost.pack.id, order.product.id)"
+                class="counter minus"
+              >
+                <font-awesome-icon icon="trash-alt" class="trash-icon" />
               </div>
             </div>
           </div>
           <div class="product-removal">
             <button
               @click="
-                deleteOrder(order.pack.id, order.product.id, order.amount)
+                deleteOrder(
+                  order.product_cost.pack.id,
+                  order.product.id,
+                  order.amount
+                )
               "
               class="remove-product"
             >
@@ -74,29 +102,31 @@
             </button>
           </div>
           <div class="product-line-price">
-            {{ order.price.toLocaleString() }} <span class="toman">تومان</span>
+            <!-- {{ order.price.toLocaleString() }} -->
+            {{ order.price.toLocaleString() }}
+            <span class="toman">تومان</span>
           </div>
         </div>
 
         <div class="totals">
           <div class="totals-item">
             <label>
-              {{ userOrders[index].total_price }}
+              {{ userOrders[0].total_price.toLocaleString() }}
 
               <span class="toman">تومان</span></label
             >
             <div class="totals-value" id="cart-subtotal">مبلغ کالاها</div>
           </div>
           <div class="totals-item">
-            <label
-              >{{ cost.toLocaleString() }}
+            <label>
+              {{ cost.toLocaleString() }}
               <span class="toman">تومان</span></label
             >
             <div class="totals-value" id="cart-shipping">هزینه ارسال</div>
           </div>
           <div class="totals-item totals-item-total">
-            <label
-              >{{ (userOrders[index].total_price + cost).toLocaleString() }}
+            <label>
+              {{ (userOrders[0].total_price + cost).toLocaleString() }}
               <span class="toman">تومان</span></label
             >
             <div class="totals-value" id="cart-total">مبلغ کل</div>
@@ -262,20 +292,21 @@ export default {
 
 
 <style lang="scss" scoped>
+.trash-icon {
+  margin: 5px -2px;
+}
 .back {
   margin-top: 200px;
 }
 .icon-pack {
   font-size: 15px;
   color: orange;
-  // margin-left: 10px;
 }
 .img-product {
   height: 80px;
   border-radius: 100%;
 }
 .attention {
-  // background-color: orange;
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -291,8 +322,6 @@ export default {
 .shop-bag {
   font-size: 80px;
   margin: 20px 0px;
-  // position: absolute;
-  // margin-left: 500px;
 }
 .login {
   text-decoration: none;
@@ -309,25 +338,20 @@ export default {
 }
 
 .counter {
-  //   display: inline;
-  //   position: absolute;
   padding: 1px 10px;
   width: 30px;
   height: 30px;
   border-radius: 50px;
   cursor: pointer;
-  //   margin-top: -2px;
   color: white;
 }
 .plus {
   background-color: orange;
-  //   margin-left: -35px;
-  margin-top: -10px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 .minus {
   background-color: orangered;
-  //   margin-left: 5px;
   margin-left: 1px;
   margin-top: 10px;
 }
@@ -347,7 +371,6 @@ export default {
 .total-shop {
   width: 80%;
   margin: 6rem auto;
-  // direction: rtl;
 }
 $color-primary-dark: orange;
 $color-primary-light: orangered;
@@ -365,8 +388,6 @@ $color-primary-light: orangered;
   color: transparent;
   transition: all 0.3s;
 }
-
-// @import "compass/css3";
 
 /*
 I wanted to go with a mobile first approach, but it actually lead to more verbose CSS in this case, so I've gone web first. Can't always force things...
@@ -389,7 +410,6 @@ $font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 }
 .product-details {
   float: left;
-  //   direction: rtl;
   width: 15%;
 }
 .product-price {

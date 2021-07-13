@@ -15,7 +15,7 @@
         </h1>
         <a
           @click="
-            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].pack.id)
+            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].id)
           "
           class="addbasket"
         >
@@ -442,7 +442,7 @@ export default {
   border-radius: 10px;
 }
 .singleproduct {
-  width: 60%;
+  width: 80%;
   height: 410px;
   border-radius: 10px;
   margin: 2rem auto;
@@ -471,7 +471,7 @@ export default {
   margin-top: -70px;
 }
 .right {
-  width: 40%;
+  width: 30%;
   height: 400px;
   @media screen and (max-width: 1096px) {
     width: 30%;
@@ -504,6 +504,7 @@ export default {
 }
 .left {
   margin-right: 70px;
+  width: 50%;
   @media screen and (max-width: 1096px) {
     width: 60%;
   }
@@ -625,6 +626,7 @@ export default {
 .similar {
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 2rem;
 }
 .u-center {
   margin: 70px 0 50px 0;

@@ -3,7 +3,7 @@
     <!-- <submenu-responsive></submenu-responsive> -->
     <the-header></the-header>
     <transition name="fade">
-      <router-view> </router-view>
+      <router-view></router-view>
     </transition>
     <the-footer></the-footer>
   </div>

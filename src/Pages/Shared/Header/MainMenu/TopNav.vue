@@ -4,9 +4,7 @@
 **********************and instagram . Also you can find the login , register and log out button here *******
 ************************************************************************************************************ -->
   <div>
-    <!-- <transition name="fade"> -->
       <submenu-responsive @closeSub="closeValue" v-if="activeSub"></submenu-responsive>
-    <!-- </transition> -->
     <transition name="fade2">
       <div class="popup" v-if="activeSub"></div>
     </transition>
@@ -23,44 +21,15 @@
               >
             </li>
             <li v-else>
-              <a
+              <router-link to="/UserDashboard/Account"
                 class="login english"
                 @click="client"
                 exact
                 v-click-outside="hide"
                 >{{ Username }}
-                <font-awesome-icon
-                  class="caret"
-                  v-if="!subClient"
-                  icon="caret-left"
-                />
-                <font-awesome-icon
-                  class="caret"
-                  v-if="subClient"
-                  icon="caret-right"
-                />
-              </a>
+              </router-link>
               <a @click="signout" class="login" exact>خروج</a>
             </li>
-
-            <div class="sub-client" v-if="subClient">
-              <ul>
-                <li>
-                  <router-link to="/clientaccount"
-                    >مشاهده حساب کاربری</router-link
-                  >
-                </li>
-                <li>
-                  <router-link to="/editaccount"
-                    >ویرایش حساب کاربری</router-link
-                  >
-                </li>
-                <li>
-                  <router-link to="/changepassword">تغییر رمز عبور</router-link>
-                </li>
-                <li><router-link to="/purches">فاکتورهای من</router-link></li>
-              </ul>
-            </div>
 
             <li>
               <span class="english">0216400010</span>
