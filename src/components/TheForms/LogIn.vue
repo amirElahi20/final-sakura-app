@@ -126,11 +126,11 @@ export default {
     LoginUser() {
       this.$v.$touch();
       // if (!this.$v.$error) {
-        const login = {
-          username: this.username,
-          password: this.password,
-        };
-        this.$store.dispatch("LoginUser", login);
+      const login = {
+        username: this.username,
+        password: this.password,
+      };
+      this.$store.dispatch("LoginUser", login);
       // }
     },
     showpassword() {
@@ -156,40 +156,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.popup {
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.836);
-  opacity: 1;
-}
-
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  transition: all 0.4s;
-}
-
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-leave-active {
-  transition: all 0.4s;
-}
-
-.fade-leave-to {
-  opacity: 0;
-}
 .router {
   text-decoration: none;
   color: orange;
@@ -248,6 +214,7 @@ p {
 }
 .form {
   width: 100%;
+  margin: 0 auto;
   height: 38rem;
   background-image: linear-gradient(
       105deg,
@@ -259,12 +226,20 @@ p {
   background-size: cover;
   background-position: left;
   position: relative;
-  border-radius: 30px;
-  box-shadow: 1rem 2rem 2rem rgba(rgb(15, 15, 15), 0.8);
-
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.4) 0px 10px 10px -5px;
   &__login {
-    width: 50%;
+    width: 60%;
     padding: 6rem;
+      @media screen and (max-width: 800px) {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(315deg, #fffdfd 0%, #fffdfda2 74%);
+      background-position: left;
+      position: relative;
+        background-size: cover;
+
+    }
   }
 }
 .list {
@@ -276,14 +251,20 @@ p {
     font-size: 17px;
     height: 50px;
     padding-right: 10px;
-    border-radius: 10px;
+    // border-radius: 10px;
     background-color: rgba(rgb(255, 255, 255), 0.9);
     border: none;
     text-align: right;
     border: 1px solid black;
     width: 90%;
+    // width: 250px;
+    position: relative;
+    // margin: 0 auto;
     display: block;
     color: inherit;
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
   }
 
   &__label {
@@ -295,6 +276,11 @@ p {
     direction: rtl;
     transition: all 0.3s;
     margin-bottom: 10px;
+     @media screen and (max-width: 500px) {
+    // margin-right: 3.5rem;
+    // text-align: left;
+    // margin-right: 15%;
+    }
   }
 }
 .submit-btn {
@@ -302,7 +288,7 @@ p {
   display: flex;
   width: 90%;
   cursor: pointer;
-  border-radius: 10px;
+  // border-radius: 10px;
   justify-content: center;
   align-items: center;
   color: black;
@@ -313,6 +299,9 @@ p {
   &:hover {
     transform: scale(1.1);
   }
+  @media screen and (max-width: 500px) {
+      width: 100%;
+    }
 }
 
 .txt {
@@ -327,7 +316,7 @@ p {
   justify-content: center;
   width: 90%;
   margin-top: 1rem;
-  border-radius: 10px;
+  // border-radius: 10px;
   background-color: orangered;
   color: white;
   cursor: pointer;
@@ -336,5 +325,8 @@ p {
   &:hover {
     transform: scale(1.1);
   }
+   @media screen and (max-width: 500px) {
+      width: 100%;
+    }
 }
 </style>

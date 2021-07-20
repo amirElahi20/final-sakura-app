@@ -3,8 +3,18 @@
     <div id="viewport">
       <div class="popup" v-show="!activeSide"></div>
 
-      <font-awesome-icon v-if="activeSide" @click="Showsidebar" icon="bars" class="bars-icon" />
-      <font-awesome-icon v-if="!activeSide" @click="hide" icon="times" class="times-icon" />
+      <font-awesome-icon
+        v-if="activeSide"
+        @click="Showsidebar"
+        icon="bars"
+        class="bars-icon"
+      />
+      <font-awesome-icon
+        v-if="!activeSide"
+        @click="hide"
+        icon="times"
+        class="times-icon"
+      />
 
       <div class="sidebar" :class="{ side: activeSide }">
         <header>
@@ -49,8 +59,14 @@
           </li>
           <li>
             <router-link to="/" class="back-btn"
-              ><font-awesome-icon icon="undo"></font-awesome-icon>
-              بازگشت به صفحه اصلی</router-link
+              ><font-awesome-icon icon="undo"></font-awesome-icon> بازگشت به
+              صفحه اصلی</router-link
+            >
+          </li>
+          <li>
+            <a @click="signOut"  class="login" exact>
+              <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
+              خروج</a
             >
           </li>
         </ul>
@@ -64,7 +80,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
-
+import Vue from 'vue'
 // import TheAccount from "../Client/TheAccount.vue";
 export default {
   data() {
@@ -75,6 +91,31 @@ export default {
   methods: {
     Showsidebar() {
       this.activeSide = false;
+    },
+     signOut() {
+      Vue.swal({
+        title: "خارج میشوید؟؟",
+        text: "مطمئن هستید؟؟",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "بله خارج میشوم",
+        cancelButtonText: "خیر ، کنسل کن",
+        showCloseButton: true,
+        showLoaderOnConfirm: true,
+      }).then((result) => {
+        if (result.value) {
+          this.$store.dispatch("SignOutUser");
+
+          this.$swal(
+            "خارج شدید",
+            "از سایت خارج شدید ، برای خرید میتوانید مجددا وارد شوید",
+            "success"
+          );
+          this.$router.push('/')
+        } else {
+          this.$swal("کنسل شد", "همچنان در سایت هستید", "info");
+        }
+      });
     },
     hide() {
       this.activeSide = true;
@@ -94,7 +135,9 @@ body {
   overflow-x: hidden;
   font-size: 16px;
 }
-
+.login{
+  cursor: pointer;
+}
 /* Toggle Styles */
 
 #viewport {
@@ -137,7 +180,6 @@ body {
   display: block;
   @media screen and (max-width: 700px) {
     display: none;
-
   }
 }
 
@@ -147,10 +189,8 @@ body {
   line-height: 52px;
   // margin-left: 1px;
   text-align: center;
-   @media screen and (max-width: 700px) {
-      margin-top: 55px;
-
-
+  @media screen and (max-width: 700px) {
+    margin-top: 55px;
   }
 }
 
@@ -194,8 +234,8 @@ body {
     display: block;
   }
 }
-.times-icon{
-   font-size: 35px;
+.times-icon {
+  font-size: 35px;
   position: absolute;
   z-index: 9999;
   margin: 15px 10px;

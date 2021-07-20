@@ -294,6 +294,7 @@ export default {
 <style lang="scss" scoped>
 .trash-icon {
   margin: 5px -2px;
+  padding-bottom: 1px;
 }
 .back {
   margin-top: 200px;
@@ -347,12 +348,14 @@ export default {
 }
 .plus {
   background-color: orange;
-  margin-top: 10px;
+  margin-top: 15px;
+  padding-top: 5px;
   margin-bottom: 10px;
 }
 .minus {
   background-color: orangered;
   margin-left: 1px;
+  padding-top: 5px;
   margin-top: 10px;
 }
 .cost-box {

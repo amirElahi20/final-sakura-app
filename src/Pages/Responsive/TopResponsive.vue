@@ -3,20 +3,69 @@
     <div class="res-header">
       <div class="container">
         <ul>
-          <li>
-            <router-link to="/login" ><font-awesome-icon class="icon icon1" icon="user"></font-awesome-icon>ورود</router-link>
+          <li v-if="!IsAuthenticated">
+            <router-link to="/login"
+              ><font-awesome-icon
+                class="icon icon1"
+                icon="user"
+              ></font-awesome-icon
+              >ورود</router-link
+            >
+          </li>
+          <li v-else>
+            <router-link to="/UserDashboard/Account"
+              ><font-awesome-icon
+                class="icon icon1"
+                icon="user"
+              ></font-awesome-icon
+              >{{ Username }}</router-link
+            >
           </li>
           <li>
-            <router-link to="/search" ><font-awesome-icon class="icon icon2" icon="search"></font-awesome-icon>جست و جو</router-link>
+            <router-link to="/search"
+              ><font-awesome-icon
+                class="icon icon2"
+                icon="search"
+              ></font-awesome-icon
+              >جست و جو</router-link
+            >
+          </li>
+          <li v-if="IsAuthenticated">
+            <router-link to="/shopcart"
+              ><font-awesome-icon
+                class="icon icon3"
+                icon="shopping-cart"
+              ></font-awesome-icon>
+              <span class="badge">{{ getCountOrder }}</span> سبد
+              خرید</router-link
+            >
+          </li>
+          <li v-else class="shopping">
+            <router-link to="/shopcart">
+              <font-awesome-icon
+                class="icon icon3"
+                icon="shopping-cart"
+              ></font-awesome-icon>
+              <span class="badge">0</span> سبد خرید
+            </router-link>
           </li>
           <li>
-            <router-link to="/shopcart" ><font-awesome-icon class="icon icon3" icon="shopping-cart"></font-awesome-icon> <span class="badge">5</span> سبد خرید</router-link>
+            <a @click="showSubMenu"
+              ><font-awesome-icon
+                class="icon icon4"
+                icon="bars"
+              ></font-awesome-icon
+              >دسته بندی</a
+            >
           </li>
           <li>
-            <a  @click="showSubMenu"><font-awesome-icon class="icon icon4" icon="bars"></font-awesome-icon>دسته بندی</a>
-          </li>
-          <li>
-            <router-link to="/"><font-awesome-icon class="icon icon5" icon="home"></font-awesome-icon>خانه</router-link>
+            <router-link to="/"
+              ><font-awesome-icon
+                class="icon icon5"
+                icon="home"
+              ></font-awesome-icon
+              >خانه</router-link
+            >
           </li>
         </ul>
       </div>
@@ -24,25 +73,35 @@
   </div>
 </template>
 
-
 <script>
 import ClickOutside from "vue-click-outside";
 
 export default {
-    data() {
-        return {
-            isActive : false
-        }
+  data() {
+    return {
+      isActive: false,
+    };
+  },
+  directives: {
+    ClickOutside,
+  },
+  methods: {
+    showSubMenu() {
+      this.isActive = !this.isActive;
+      this.$emit("show", true);
     },
-    directives:{
-        ClickOutside
+  },
+  computed: {
+    IsAuthenticated() {
+      return this.$store.getters.IsAuthenticated;
     },
-    methods:{
-        showSubMenu(){
-            this.isActive = !this.isActive;
-            this.$emit('show' , true)
-        },
-    }
+    Username() {
+      return this.$store.getters.GetUsername;
+    },
+    getCountOrder() {
+      return this.$store.getters.getCountOrder;
+    },
+  },
 };
 </script>
 
@@ -51,16 +110,14 @@ export default {
   margin: 0 auto;
   display: none;
 
-  @media screen and (max-width: 1100px){
-      display: block;
+  @media screen and (max-width: 1100px) {
+    display: block;
   }
-
-  
 }
-.badge{
+.badge {
   position: absolute;
   background-color: orangered;
-  padding:1px 0 0 3px;
+  padding: 1px 0 0 3px;
   width: 15px;
   height: 15px;
   border-radius: 100px;
@@ -71,7 +128,7 @@ export default {
 .icon {
   display: block;
   margin-top: 15px;
-   margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .icon1 {
   margin-left: 6px;
@@ -88,7 +145,7 @@ export default {
 .icon5 {
   margin-left: 5px;
 }
-li{
+li {
   cursor: pointer;
 }
 .container {
@@ -118,5 +175,4 @@ a:hover {
 a:active {
   color: black;
 }
-
 </style>
