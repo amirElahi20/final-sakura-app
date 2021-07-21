@@ -35,49 +35,7 @@
         </div>
       </div>
     </main>
-    <!-- <main class="pos">
-      <section class="section-about">
-        <div class="u-center-text">
-          <h2 class="heading-secondary">باکیفیت ترین محصولات خوراکی</h2>
-        </div>
-        <div class="row">
-          <div class="col-1-of-1">
-            <h3 class="heading-teritary">تنوع محصول</h3>
-            <p class="paragraph">
-              جدیدترین محصولات خوراکی را با بهترین کیفیت و مناسب ترین قیمت در
-              ساکورا شاپ پیدا خواهید کرد. تنوع محصولات در اینجا بالاست.
-            </p>
-            <h3 class="heading-teritary">با خیال راحت خرید کنید</h3>
-            <p class="paragraph">
-              در کمترین زمان و با خیال راحت خرید خود را انجام دهید. محصولات در
-              کوتاه ترین زمان ممکن به دستتان خواهد رسید
-            </p>
-            <router-link to="/aboutus" class="btn-text"
-              >درباره ما &larr;</router-link
-            >
-          </div>
-          <div class="col-1-of-2">
-            <div class="composition">
-              <img
-                src="../../../public/img/mockup-graphics-enNffryKuQI-unsplash.jpg"
-                alt=""
-                class="composition__photo composition__photo--p1"
-              />
-              <img
-                src="../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg"
-                alt=""
-                class="composition__photo composition__photo--p2"
-              />
-              <img
-                src="../../../public/img/wp3997775-purple-grapes-wallpapers.jpg"
-                alt=""
-                class="composition__photo composition__photo--p3"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-    </main> -->
+ 
     <second-content></second-content>
     <the-carousel></the-carousel>
   </div>

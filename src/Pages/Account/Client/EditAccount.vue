@@ -2,24 +2,37 @@
   <div>
     <div class="contact-form">
       <div class="second-container">
-        <h2>ویرایش </h2>
-        <form>
+        <h2>ویرایش</h2>
+        <form @submit.prevent="EditClientInfo">
           <div class="form-group">
             <label for="name-input">نام خود را وارد کنید</label>
-            <input id="name-input" type="text" placeholder="نام" required />
-            <input type="text" placeholder="نام خانوادگی" required />
+            <input
+              id="name-input"
+              type="text"
+              placeholder="نام"
+              v-model="ShowInfoClient.user.first_name"
+            />
+            <input
+              type="text"
+              placeholder="نام خانوادگی"
+              v-model="ShowInfoClient.user.last_name"
+            />
           </div>
-           <div class="form-group">
+          <div class="form-group">
             <label for="name-input">نام کاربری خود را وارد کنید</label>
-            <input type="text" placeholder="نام کاربری" required />
+            <input
+              type="text"
+              placeholder="نام کاربری"
+              v-model="ShowInfoClient.user.username"
+            />
           </div>
           <div class="form-group">
             <label for="email-input">ایمیل خود را وارد کنید</label>
             <input
+              v-model="ShowInfoClient.user.email"
               id="email-input"
               type="text"
               placeholder="مثال : someone@gmail.com"
-              required
             />
           </div>
           <div class="form-group">
@@ -27,8 +40,8 @@
             <input
               id="phone-input"
               type="text"
+              v-model="ShowInfoClient.phone"
               placeholder="مثال:0912000004"
-              required
             />
           </div>
           <button>اعمال تغییرات</button>
@@ -40,7 +53,7 @@
 
 
 <script>
-import Vue from "vue";
+// import Vue from "vue";
 import {
   required,
   maxLength,
@@ -57,6 +70,7 @@ export default {
       email: "",
       phone: "",
       body: "",
+      valueName: "",
     };
   },
   validations: {
@@ -83,24 +97,16 @@ export default {
     },
   },
   methods: {
-    SendRequestToServer() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        const request = {
-          title: this.title,
-          name: this.name,
-          phone: this.phone,
-          email: this.email,
-          body: this.body,
-        };
-        Vue.http
-          .post("site_model/api/v1/contact_us/", request)
-
-          .then((response) => {
-            console.log(response);
-            this.toast.success("پیام شما با موفقیت ارسال شد");
-          });
-      }
+    EditClientInfo() {
+      this.$store.dispatch("Putinformtion");
+    },
+  },
+  created() {
+    this.$store.dispatch("Getinformtion");
+  },
+  computed: {
+    ShowInfoClient() {
+      return this.$store.getters.GetInfo;
     },
   },
 };
@@ -115,7 +121,7 @@ export default {
 }
 
 body {
-//   height: 100vh;
+  //   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -128,7 +134,7 @@ body {
   display: flex;
   justify-content: space-between;
   background: #fff;
-//   margin: 20px 0;
+  //   margin: 20px 0;
 }
 .contact-form > * {
   width: 50%;
@@ -203,7 +209,7 @@ body {
   margin-top: -2px;
   font-family: "BYekan";
 }
-.contact-form .second-container form .form-group select{
+.contact-form .second-container form .form-group select {
   width: 100%;
   font-size: 15px;
   height: 10px;
@@ -211,9 +217,8 @@ body {
   font-family: "BYekan";
   cursor: pointer;
 }
-.contact-form .second-container form .form-group select option{
-    font-family: "BYekan";
-
+.contact-form .second-container form .form-group select option {
+  font-family: "BYekan";
 }
 .contact-form .second-container form .form-group input::placeholder,
 .contact-form .second-container form .form-group textarea::placeholder {
@@ -274,6 +279,5 @@ body {
   color: white;
   text-decoration: none;
   padding: 10px 31.1px;
-
 }
 </style>

@@ -5,7 +5,7 @@
     </div>
     <carousel
       :per-page-custom="[
-        [400, 2],
+        [400, 1.3],
         [850, 3],
         [950, 4],
         [1200, 5],
@@ -27,7 +27,7 @@
             <div class="products-cost">
               <h3 class="product-name">{{ product.name }}</h3>
               <h4 class="product-cost">
-                <span>{{ product.show_cost.toLocaleString() }}</span
+                <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
                 >تومان
               </h4>
               <p class="available" v-if="!product.available">

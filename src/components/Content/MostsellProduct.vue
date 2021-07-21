@@ -5,7 +5,7 @@
     </div>
     <carousel
       :per-page-custom="[
-        [400, 2],
+        [400, 1.3],
         [850, 3],
         [950, 4],
         [1200, 5],
@@ -27,7 +27,7 @@
             <div class="products-cost">
               <h3 class="product-name">{{ product.name }}</h3>
               <h4 class="product-cost">
-                <span>{{ product.show_cost.toLocaleString() }}</span
+                <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
                 >تومان
               </h4>
               <p class="available" v-if="!product.available">
@@ -181,10 +181,17 @@ export default {
 .product-name {
   font-size: 18px;
   margin-bottom: 2px;
+  @media screen and (max-width: 700px) {
+    font-size: 25px;
+   }
 }
 .product-cost {
   font-size: 14px;
   margin-bottom: 15px;
+  @media screen and (max-width: 700px) {
+    margin-bottom: 2rem;
+    font-size: 18px;
+   }
 }
 .product-btn {
   text-decoration: none;
@@ -200,6 +207,9 @@ export default {
     color: orangered;
     border: 1px solid orangered;
   }
+   @media screen and (max-width: 700px) {
+     padding: 15px 20px;
+   }
 }
 .total-probtn {
   text-decoration: none;

@@ -1,31 +1,37 @@
 <template>
   <div>
+    {{ShowInfoClient}}
     <div class="contact-form">
       <div class="second-container">
         <h2>مشاهده</h2>
         <form>
           <div class="form-group">
             <label for="name-input">نام شما:</label>
-            <div id="name-input" type="text">امیررضا</div>
-            <div id="name-input" type="text">الهی</div>
+            <div id="name-input" type="text">{{ShowInfoClient.user.first_name}}</div>
+            <div id="name-input" type="text">{{ShowInfoClient.user.last_name}}</div>
           </div>
           <div class="form-group">
             <label for="name-input">نام کاربری:</label>
-            <div id="name-input" class="english" type="text">Amir24</div>
+            <div id="name-input" class="english" type="text">{{ShowInfoClient.user.username}}</div>
           </div>
           <div class="form-group">
             <label for="email-input">ایمیل شما:</label>
             <div id="name-input" class="english" type="text">
-              info@gmail.com
+             {{ShowInfoClient.user.email}}
             </div>
           </div>
           <div class="form-group">
             <label for="phone-input">شماره تماس خود را وارد کنید</label>
             <div id="name-input" class="english" type="text">
-              09033757791
+              {{ShowInfoClient.phone}}
             </div>
           </div>
-          <button>اعمال تغییرات</button>
+           <div class="form-group">
+            <label for="phone-input">موجودی شما</label>
+            <div id="name-input" class="english" type="text">
+              {{ShowInfoClient.money.toLocaleString()}}
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -97,6 +103,14 @@ export default {
       }
     },
   },
+  created(){
+    this.$store.dispatch("Getinformtion")
+  },
+  computed:{
+    ShowInfoClient(){
+      return this.$store.getters.GetInfo
+    }
+  }
 };
 </script>
 
