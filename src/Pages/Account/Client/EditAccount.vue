@@ -5,43 +5,33 @@
         <h2>ویرایش</h2>
         <form @submit.prevent="EditClientInfo">
           <div class="form-group">
-            <label for="name-input">نام خود را وارد کنید</label>
+            <label for="name-input">نام / نام خانوادگی </label>
             <input
               id="name-input"
               type="text"
-              placeholder="نام"
               v-model="ShowInfoClient.user.first_name"
             />
-            <input
-              type="text"
-              placeholder="نام خانوادگی"
-              v-model="ShowInfoClient.user.last_name"
-            />
+            <input type="text" v-model="ShowInfoClient.user.last_name" />
           </div>
           <div class="form-group">
             <label for="name-input">نام کاربری خود را وارد کنید</label>
-            <input
-              type="text"
-              placeholder="نام کاربری"
-              v-model="ShowInfoClient.user.username"
-            />
+            <input type="text" v-model="ShowInfoClient.user.username" />
           </div>
           <div class="form-group">
             <label for="email-input">ایمیل خود را وارد کنید</label>
             <input
-              v-model="ShowInfoClient.user.email"
               id="email-input"
               type="text"
-              placeholder="مثال : someone@gmail.com"
+              v-model="ShowInfoClient.user.email"
             />
           </div>
+            <p class="alert">توجه کنید اگر ایمیل خود را تغییر دهید باید مجددا احراز هویت کنید</p>
           <div class="form-group">
             <label for="phone-input">شماره تماس خود را وارد کنید</label>
             <input
               id="phone-input"
               type="text"
               v-model="ShowInfoClient.phone"
-              placeholder="مثال:0912000004"
             />
           </div>
           <button>اعمال تغییرات</button>
@@ -53,7 +43,6 @@
 
 
 <script>
-// import Vue from "vue";
 import {
   required,
   maxLength,
@@ -65,12 +54,7 @@ import {
 export default {
   data() {
     return {
-      title: "",
-      name: "",
-      email: "",
-      phone: "",
-      body: "",
-      valueName: "",
+
     };
   },
   validations: {
@@ -98,7 +82,18 @@ export default {
   },
   methods: {
     EditClientInfo() {
-      this.$store.dispatch("Putinformtion");
+      const EditInfoClint = {
+        username: this.ShowInfoClient.user.username,
+
+        Fname: this.ShowInfoClient.user.first_name,
+
+        Lname: this.ShowInfoClient.user.last_name,
+
+        phone: this.ShowInfoClient.phone,
+
+        email: this.ShowInfoClient.user.email,
+      };
+      this.$store.dispatch("Putinformtion", EditInfoClint);
     },
   },
   created() {
@@ -280,4 +275,58 @@ body {
   text-decoration: none;
   padding: 10px 31.1px;
 }
+.alert{
+  font-size: 15px;
+  color: red;
+  margin-bottom:20px;
+}
 </style>
+
+
+  Vue.swal({
+        title: "از ویرایش اطلاعات خود مطمئن هستید؟؟",
+        text: "توجه کنید ، اگر ایمیل و یا نام کاربری  خود را تغییر دهید ، مجددا باید احراز هویت کنید",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "بله ویرایش میکنم",
+        cancelButtonText: "خیر ویرایش نمیکنم",
+        showCloseButton: true,
+        showLoaderOnConfirm: true,
+      }).then((result) => {
+        if (result.value) {
+          if (this.phone == "") this.phone = this.$store.getters.GetInfo.phone;
+          if (this.Fname == "")
+            this.Fname = this.$store.getters.GetInfo.user.first_name;
+          if (this.Lname == "")
+            this.Lname = this.$store.getters.GetInfo.user.last_name;
+          if (this.email == "")
+            this.email = this.$store.getters.GetInfo.user.email;
+          if (this.Uname == "")
+            this.Uname = this.$store.getters.GetInfo.user.username;
+
+          const EditInfoClint = {
+            username: this.Uname,
+            first_name: this.Fname,
+            last_name: this.Lname,
+            email: this.email,
+            phone: this.phone,
+          };
+
+          this.$store.dispatch("Putinformtion", EditInfoClint);
+          (this.email = ""),
+            (this.phone = ""),
+            (this.Uname = ""),
+            (this.Fname = ""),
+            (this.Lname = "");
+          this.$store.dispatch("Getinformtion");
+
+          this.$swal("ویرایش با موفقیت انجام شد", "موفقیت آمیز", "success");
+        } else {
+          this.$swal("کنسل شد", "اطلاعات جدید ویرایش نشدند", "info");
+          (this.email = ""),
+            (this.phone = ""),
+            (this.Uname = ""),
+            (this.Fname = ""),
+            (this.Lname = "");
+        }
+      });

@@ -8,11 +8,15 @@
           $route.name == 'register' ||
           $route.name == 'forgetpass' ||
           $route.name == 'Confirm' ||
-          $route.name == 'shopcart'||
-          $route.name == 'ContactUs'||
-          $route.name =='purches' ||
+          $route.name == 'shopcart' ||
+          $route.name == 'ContactUs' ||
           $route.name == 'UserDashboard' ||
-          $route.name =='useraccount'
+          $route.name == 'useraccount' ||
+          $route.name == 'useraccountedit' ||
+          $route.name == 'useraccountpass' ||
+          $route.name == 'useraccountpurches' ||
+          $route.name == 'useraccounttickets' ||
+          $route.name == 'useraccountorders' ,
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />
@@ -52,7 +56,7 @@ img {
   width: 100%;
   height: 75vh;
   z-index: -1;
-   @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) {
     height: 50vh;
   }
 }

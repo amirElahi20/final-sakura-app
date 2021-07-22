@@ -185,12 +185,12 @@ export default {
   position: absolute;
   background-color: orangered;
   // padding: 2px 0 0px 3px;
-  padding: 0 0 0px 3px;
+  padding: 0 0 10px 3px;
   width: 17px;
   height: 17px;
   border-radius: 100px;
   font-size: 15px;
-  margin-top: -30px;
+  margin-top: -35px;
   margin-left: 30px;
 }
 .icon {

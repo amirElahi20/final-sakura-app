@@ -23,7 +23,45 @@ Vue.use(VueCookie);
 
 Vue.http.options.root = 'https://api.sdriedf.ir/';
 
+// console.log("autentication", store.getters);
+// console.log("autentication", store.getters.IsAuthenticated);
+// // 
+// if (store.getters.IsAuthenticated) {
+//     router.beforeEach((to, from, next) => {
+//         // if (store.getters.IsAuthenticated) {
+//         if (to.matched.some(record => record.meta.requiresAuth)) {
+//             // this route requires auth, check if logged in
+//             // console.log("before each", store.getters.IsAuthenticated)
+//             // console.log("before each2", !store.getters.IsAuthenticated)
+
+//             // if not, redirect to login page.
+//             if (store.getters.IsAuthenticated) {
+//                 next({ name: 'login' })
+//             } else {
+//                 next({ name: 'Home' }) // go to wherever I'm going
+//             }
+//         } else
+//             next() // does not require auth, make sure to always call next()!
+
+//     })
+// }
+
 // Vue.http.options.root = 'http://asha4f.pythonanywhere.com/'
+
+// router.beforeEach((to, from, next) => {
+//     // if the route is not public
+//     if (!to.meta) {
+//         // if the user authenticated
+//         if (store.getters.IsAuthenticated) { // I declared a `getter` function in the store to check if the user is authenticated.
+//             // continue to the route
+//             next({ name: 'Home' });
+//         } else {
+//             // redirect to login
+//             next({ name: 'login' });
+//         }
+//     }
+//     next();
+// });
 
 
 // Vue.http.interceptors.push((request, next) => {

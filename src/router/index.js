@@ -16,106 +16,115 @@ import EditAccount from '../Pages/Account/Client/EditAccount.vue';
 import ChangePass from '../Pages/Account/Client/ChangePass.vue';
 import UserOrders from '../Pages/Account/Client/UserOrders.vue';
 import UserPurches from '../Pages/Account/Client/UserPurches.vue';
-import UserTickets from '../Pages/Account/Client/UserTickets.vue'
+import UserTickets from '../Pages/Account/Client/UserTickets.vue';
+// import store from '../store/index';
 Vue.use(VueRouter)
 
 const routes = [{
-        path: '/',
-        name: 'Home',
-        component: FirstContent
-    },
-    {
-        path: '/products',
-        name: 'Products',
-        component: AllProducts
-    },
-    {
-        path: '/aboutus',
-        name: 'AboutUs',
-        component: AboutUs
-    },
-    {
-        path: '/contactus',
-        name: 'ContactUs',
-        component: ContactUs
-    },
-    {
-        path: '/login',
-        name: 'login',
-        component: LogIn
-    },
-    {
-        path: '/register',
-        name: 'register',
-        component: TheRegister
-    },
-    {
-        path: '/forget',
-        name: 'forgetpass',
-        component: ForgetPassword
-    },
-    {
-        path: '/singleproduct/:slug',
-        name: 'singleproduct',
-        component: SingleProduct
-    },
-    {
-        path: '/accounts/api/v1/check_confirm_email/:token',
-        component: ConfirmEmail,
-        name: 'Confirm'
-    },
-    {
-        path: '/shopcart',
-        name: 'shopcart',
-        component: ShopCart
-    },
-    {
-        path: '/UserDashboard',
-        name: 'UserDashboard',
-        component: UserDashboard,
-        TheAccount,
-        children: [
+            path: '/',
+            name: 'Home',
+            component: FirstContent
+        },
+        {
+            path: '/products',
+            name: 'Products',
+            component: AllProducts
+        },
+        {
+            path: '/aboutus',
+            name: 'AboutUs',
+            component: AboutUs
+        },
+        {
+            path: '/contactus',
+            name: 'ContactUs',
+            component: ContactUs
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: LogIn,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: TheRegister
+        },
+        {
+            path: '/forget',
+            name: 'forgetpass',
+            component: ForgetPassword
+        },
+        {
+            path: '/singleproduct/:slug',
+            name: 'singleproduct',
+            component: SingleProduct
+        },
+        {
+            path: '/accounts/api/v1/check_confirm_email/:token',
+            component: ConfirmEmail,
+            name: 'Confirm'
+        },
+        {
+            path: '/shopcart',
+            name: 'shopcart',
+            component: ShopCart
+        },
+        {
+            path: '/UserDashboard',
+            name: 'UserDashboard',
+            component: UserDashboard,
 
-            {
-                path: '/UserDashboard/Account',
-                name: 'useraccount',
-                component: TheAccount
-            },
+            TheAccount,
+            children: [
 
-            {
-                path: '/UserDashboard/edit',
-                name: 'useraccount',
-                component: EditAccount
-            },
-            {
-                path: '/UserDashboard/changepass',
-                name: 'useraccount',
-                component: ChangePass
-            },
-            {
-                path: '/UserDashboard/purches',
-                name: 'useraccount',
-                component: UserPurches
-            },
-            {
-                path: '/UserDashboard/tickets',
-                name: 'useraccount',
-                component: UserTickets
-            },
+                {
+                    path: '/UserDashboard/Account',
+                    name: 'useraccount',
+                    component: TheAccount,
+                    mata: {
+                        loginDashboard: true
+                    },
+                },
 
-            {
-                path: '/UserDashboard/orders',
-                name: 'useraccount',
-                component: UserOrders
-            },
-        ]
-    },
-    // {
-    //     path: '/UserDashboard/Account',
-    //     name: 'useraccount',
-    //     component: TheAccount
-    // }
-]
+                {
+                    path: '/UserDashboard/edit',
+                    name: 'useraccountedit',
+                    component: EditAccount
+                },
+                {
+                    path: '/UserDashboard/changepass',
+                    name: 'useraccountpass',
+                    component: ChangePass
+                },
+                {
+                    path: '/UserDashboard/purches',
+                    name: 'useraccountpurches',
+                    component: UserPurches
+                },
+                {
+                    path: '/UserDashboard/tickets',
+                    name: 'useraccounttickets',
+                    component: UserTickets
+                },
+
+                {
+                    path: '/UserDashboard/orders',
+                    name: 'useraccountorders',
+                    component: UserOrders
+                },
+            ]
+        },
+        // {
+        //     path: '/UserDashboard/Account',
+        //     name: 'useraccount',
+        //     component: TheAccount
+        // }
+    ]
+    // import { store } from "../store/index"; // import the store to check if authenticated
 
 const router = new VueRouter({
     mode: 'history',
@@ -130,3 +139,39 @@ const router = new VueRouter({
 })
 
 export default router
+
+
+
+
+
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.loginDashboard)) {
+//         // this route requires auth, check if logged in
+//         console.log("before each", store.getters.IsAuthenticated)
+//             // if not, redirect to login page.
+//         if (store.getters.IsAuthenticated) {
+//             next({ path: '/UserDashboard/Account' })
+//         } else {
+//             next({ name: 'register' }) // go to wherever I'm going
+//         }
+//     } else {
+//         next() // does not require auth, make sure to always call next()!
+//     }
+// })
+
+
+// router.beforeEach((to, from, next) => {
+//     // if the route is not public
+//     if (to.meta.public) {
+//         // if the user authenticated
+//         console.log("before each", to.meta.public)
+//         if (store.getters.IsAuthenticated) { // I declared a `getter` function in the store to check if the user is authenticated.
+//             // continue to the route
+//             next({ name: 'Home' });
+//         } else {
+//             // redirect to login
+//             next({ name: 'login' });
+//         }
+//     }
+//     next();
+// });

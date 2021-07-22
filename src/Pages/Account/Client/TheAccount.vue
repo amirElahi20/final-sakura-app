@@ -1,18 +1,24 @@
 <template>
   <div>
-    {{ShowInfoClient}}
+    
     <div class="contact-form">
       <div class="second-container">
         <h2>مشاهده</h2>
         <form>
           <div class="form-group">
             <label for="name-input">نام شما:</label>
-            <div id="name-input" type="text">{{ShowInfoClient.user.first_name}}</div>
-            <div id="name-input" type="text">{{ShowInfoClient.user.last_name}}</div>
+            <div id="name-input" type="text">
+              {{ShowInfoClient.user.first_name}}
+              </div>
+            <div id="name-input" type="text">
+              {{ShowInfoClient.user.last_name}}
+              </div>
           </div>
           <div class="form-group">
             <label for="name-input">نام کاربری:</label>
-            <div id="name-input" class="english" type="text">{{ShowInfoClient.user.username}}</div>
+            <div id="name-input" class="english" type="text">
+              {{ShowInfoClient.user.username}}
+              </div>
           </div>
           <div class="form-group">
             <label for="email-input">ایمیل شما:</label>
@@ -40,7 +46,6 @@
 
 
 <script>
-import Vue from "vue";
 import {
   required,
   maxLength,
@@ -82,35 +87,15 @@ export default {
       minLength: minLength(30),
     },
   },
-  methods: {
-    SendRequestToServer() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        const request = {
-          title: this.title,
-          name: this.name,
-          phone: this.phone,
-          email: this.email,
-          body: this.body,
-        };
-        Vue.http
-          .post("site_model/api/v1/contact_us/", request)
-
-          .then((response) => {
-            console.log(response);
-            this.toast.success("پیام شما با موفقیت ارسال شد");
-          });
-      }
-    },
-  },
-  created(){
-    this.$store.dispatch("Getinformtion")
-  },
   computed:{
     ShowInfoClient(){
       return this.$store.getters.GetInfo
     }
-  }
+  },
+  created(){
+    this.$store.dispatch("Getinformtion")
+  },
+  
 };
 </script>
 

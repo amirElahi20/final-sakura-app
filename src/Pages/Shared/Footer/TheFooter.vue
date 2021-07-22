@@ -1,17 +1,21 @@
 <template>
   <div
-    :class="{
-      layout:
-        $route.name == 'login' ||
-        $route.name == 'register' ||
-        $route.name == 'forgetpass' ||
-        $route.name == 'Confirm' ||
-        $route.name == 'shopcart' ||
-        $route.name == 'ContactUs' ||
-        $route.name == 'purches' ||
-        $route.name == 'UserDashboard' ||
-        $route.name == 'useraccount',
-    }"
+      :class="{
+        layout:
+          $route.name == 'login' ||
+          $route.name == 'register' ||
+          $route.name == 'forgetpass' ||
+          $route.name == 'Confirm' ||
+          $route.name == 'shopcart' ||
+          $route.name == 'ContactUs' ||
+          $route.name == 'UserDashboard' ||
+          $route.name == 'useraccount' ||
+          $route.name == 'useraccountedit' ||
+          $route.name == 'useraccountpass' ||
+          $route.name == 'useraccountpurches' ||
+          $route.name == 'useraccounttickets' ||
+          $route.name == 'useraccountorders' ,
+      }"
   >
     <!--Some of this HTML is directly from Pavilion.  You can change it to whatever you want if you want to mimic this design.-->
     <footer class="flex-rw">
