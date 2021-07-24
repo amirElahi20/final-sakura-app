@@ -9,7 +9,7 @@
           class="product-img"
           alt=""
         />
-        <h1 class="product-cost-cost">
+        <h1 class="product-cost-cost" v-if="SingleProduct.product_cost">
           {{ SingleProduct.product_cost[select].cost }}
           <span>تومان</span>
         </h1>
@@ -118,7 +118,7 @@
           alt=""
         />
         <div class="cost-box-product">
-          <h1 class="cost-of-product">
+          <h1 class="cost-of-product" v-if="SingleProduct.product_cost">
             {{ SingleProduct.product_cost[select].cost }}
             <span>تومان</span>
           </h1>

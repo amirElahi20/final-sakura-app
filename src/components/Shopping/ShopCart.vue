@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="total-shop" v-if="IsAuthenticated && getCountOrder != 0">
-      <h1 class="english heading-secondary">{{ Username }}</h1>
-      <!-- {{userOrders[0].rows}} -->
+      <h1 class="heading-secondary">سبد خرید</h1>
       <div class="shopping-cart">
         <div class="column-labels">
           <label class="product-image">عکس ها</label>
@@ -35,7 +34,6 @@
             <div class="product-title">{{ order.product.name }}</div>
             <br />
             <p class="product-description">
-              <!-- {{order.product_cost.discount}} -->
               <font-awesome-icon class="icon-pack" icon="box" />
               {{ order.product_cost.pack.title }} <br /><br />
               <font-awesome-icon class="icon-pack" icon="weight" /> تخفیف
@@ -102,7 +100,6 @@
             </button>
           </div>
           <div class="product-line-price">
-            <!-- {{ order.price.toLocaleString() }} -->
             {{ order.price.toLocaleString() }}
             <span class="toman">تومان</span>
           </div>
@@ -337,7 +334,11 @@ export default {
     transform: scale(1.1);
   }
 }
-
+.log{
+    @media screen and (max-width: 450px){
+font-size: 10px;
+  }
+}
 .counter {
   padding: 1px 10px;
   width: 30px;
@@ -485,7 +486,7 @@ label {
     border-bottom: 1px solid $color-border;
   }
   .product-details {
-    text-indent: 110px;
+    text-indent: 50px;
   }
   .product-image {
     text-indent: -9998px;
@@ -567,7 +568,7 @@ label {
 .checkout {
   float: right;
   border: 0;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 6px 25px;
   background-color: orange;
   color: #fff;
@@ -575,6 +576,9 @@ label {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.4s;
+  @media screen and (max-width: 450px){
+font-size: 15px;
+  }
 }
 
 .checkout:hover {

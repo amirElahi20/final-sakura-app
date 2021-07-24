@@ -1,40 +1,40 @@
 <template>
   <div>
-    
+    <!-- {{ShowInfoClient.user.email }} -->
     <div class="contact-form">
       <div class="second-container">
         <h2>مشاهده</h2>
         <form>
           <div class="form-group">
             <label for="name-input">نام شما:</label>
-            <div id="name-input" type="text">
+            <div v-if="ShowInfoClient.user" id="name-input" type="text">
               {{ShowInfoClient.user.first_name}}
-              </div>
-            <div id="name-input" type="text">
+            </div>
+            <div v-if="ShowInfoClient.user" id="name-input" type="text">
               {{ShowInfoClient.user.last_name}}
-              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="name-input">نام کاربری:</label>
-            <div id="name-input" class="english" type="text">
+            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
               {{ShowInfoClient.user.username}}
-              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="email-input">ایمیل شما:</label>
-            <div id="name-input" class="english" type="text">
-             {{ShowInfoClient.user.email}}
+            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
+              {{ShowInfoClient.user.email}}
             </div>
           </div>
           <div class="form-group">
             <label for="phone-input">شماره تماس خود را وارد کنید</label>
-            <div id="name-input" class="english" type="text">
+            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
               {{ShowInfoClient.phone}}
             </div>
           </div>
-           <div class="form-group">
+          <div class="form-group">
             <label for="phone-input">موجودی شما</label>
-            <div id="name-input" class="english" type="text">
+            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
               {{ShowInfoClient.money.toLocaleString()}}
             </div>
           </div>
@@ -62,8 +62,22 @@ export default {
       email: "",
       phone: "",
       body: "",
+      data: ["ali"],
     };
   },
+created() {
+  this.$store.dispatch("Getinformtion")
+},
+// watch:{
+//   showUsers(){
+//     this.showUser()
+//   }
+// },
+computed:{
+   ShowInfoClient(){
+    return this.$store.getters.GetInfo
+  }
+},
   validations: {
     title: {
       required,
@@ -87,15 +101,6 @@ export default {
       minLength: minLength(30),
     },
   },
-  computed:{
-    ShowInfoClient(){
-      return this.$store.getters.GetInfo
-    }
-  },
-  created(){
-    this.$store.dispatch("Getinformtion")
-  },
-  
 };
 </script>
 

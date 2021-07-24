@@ -77,7 +77,9 @@ const routes = [{
             path: '/UserDashboard',
             name: 'UserDashboard',
             component: UserDashboard,
-
+            mata: {
+                loginDashboard: false
+            },
             TheAccount,
             children: [
 
@@ -86,34 +88,49 @@ const routes = [{
                     name: 'useraccount',
                     component: TheAccount,
                     mata: {
-                        loginDashboard: true
+                        loginDashboard: false
                     },
                 },
 
                 {
                     path: '/UserDashboard/edit',
                     name: 'useraccountedit',
+                    mata: {
+                        loginDashboard: true
+                    },
                     component: EditAccount
                 },
                 {
                     path: '/UserDashboard/changepass',
                     name: 'useraccountpass',
+                    mata: {
+                        loginDashboard: false
+                    },
                     component: ChangePass
                 },
                 {
                     path: '/UserDashboard/purches',
                     name: 'useraccountpurches',
+                    mata: {
+                        loginDashboard: false
+                    },
                     component: UserPurches
                 },
                 {
                     path: '/UserDashboard/tickets',
                     name: 'useraccounttickets',
+                    mata: {
+                        loginDashboard: false
+                    },
                     component: UserTickets
                 },
 
                 {
                     path: '/UserDashboard/orders',
                     name: 'useraccountorders',
+                    mata: {
+                        loginDashboard: false
+                    },
                     component: UserOrders
                 },
             ]
@@ -173,5 +190,7 @@ export default router
 //             next({ name: 'login' });
 //         }
 //     }
+//     next();
+// }); }
 //     next();
 // });

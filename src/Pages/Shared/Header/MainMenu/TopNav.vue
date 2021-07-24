@@ -22,7 +22,7 @@
             </li>
             <li v-else>
               <router-link to="/UserDashboard/Account"
-                class="login english"
+                class="login"
                 @click="client"
                 exact
                 v-click-outside="hide"

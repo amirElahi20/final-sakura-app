@@ -24,27 +24,94 @@ Vue.use(VueCookie);
 Vue.http.options.root = 'https://api.sdriedf.ir/';
 
 // console.log("autentication", store.getters);
-// console.log("autentication", store.getters.IsAuthenticated);
-// // 
-// if (store.getters.IsAuthenticated) {
-//     router.beforeEach((to, from, next) => {
-//         // if (store.getters.IsAuthenticated) {
-//         if (to.matched.some(record => record.meta.requiresAuth)) {
-//             // this route requires auth, check if logged in
-//             // console.log("before each", store.getters.IsAuthenticated)
-//             // console.log("before each2", !store.getters.IsAuthenticated)
+console.log("autentication", store.getters.IsAuthenticated);
+console.log("Auth", Vue.cookie.get('Sakura'))
 
-//             // if not, redirect to login page.
-//             if (store.getters.IsAuthenticated) {
-//                 next({ name: 'login' })
-//             } else {
-//                 next({ name: 'Home' }) // go to wherever I'm going
-//             }
-//         } else
-//             next() // does not require auth, make sure to always call next()!
 
-//     })
-// }
+///true
+////////////////////////////
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (Vue.cookie.get('Sakura') != null) {
+            next({
+                path: '/',
+                query: { redirect: '/login' }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
+})
+
+///////////////////////////////////////
+// router.beforeEach((to, from, next) => {
+//     console.log("next", next)
+//     if (to.matched.some(record => record.meta.loginDashboard)) {
+//         // this route requires auth, check if logged in
+//         // if not, redirect to login page.
+//         if (Vue.cookie.get('Sakura') != null) {
+//             next()
+//                 // alert('hi')
+//         } else {
+//             next('UserDashboard/Account', '/')
+
+//             // next({
+//             //         path: '/UserDashboard',
+//             //         // path: '/UserDashboard/Account',
+//             //         query: { redirect: '/register' }
+//             //     })
+//             // next({ path: '/' })
+//             // alert('hello')
+//         }
+//     } else {
+//         next()
+//             // alert('hi')
+//             // make sure to always call next()!
+//     }
+// })
+
+
+
+
+// router.beforeEach((to, from, next) => {
+//     if (!to.matched.some(record => record.meta.loginDashboard)) {
+//         // this route requires auth, check if logged in
+//         // if not, redirect to login page.
+//         if (Vue.cookie.get('Sakura') != null) {
+//             // next({ name: 'register' })
+//             next()
+//         } else {
+//             next({
+//                     path: '/register',
+//                     // query: { redirect: '/login' }
+//                 })
+//                 // next({ name: 'register' })
+//                 // next({ path: '/UserDashboard/Account' })
+//         }
+//     } else {
+//         next()
+//     }
+// })
+
+
+
+
+// router.beforeEach((to, from, next) => {
+//     console.log("meta", to.matched.some)
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         if (Vue.cookie.get('Sakura') == null) {
+//             next({ name: 'login' })
+//         } else {
+//             next({ name: 'Home' }) // go to wherever I'm going
+//         }
+//     } else
+//         next() // does not require auth, make sure to always call next()!
+
+// })
 
 // Vue.http.options.root = 'http://asha4f.pythonanywhere.com/'
 

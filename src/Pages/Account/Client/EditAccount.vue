@@ -4,7 +4,7 @@
       <div class="second-container">
         <h2>ویرایش</h2>
         <form @submit.prevent="EditClientInfo">
-          <div class="form-group">
+          <div class="form-group" v-if="ShowInfoClient.user">
             <label for="name-input">نام / نام خانوادگی </label>
             <input
               id="name-input"
@@ -13,11 +13,11 @@
             />
             <input type="text" v-model="ShowInfoClient.user.last_name" />
           </div>
-          <div class="form-group">
+          <div v-if="ShowInfoClient.user" class="form-group">
             <label for="name-input">نام کاربری خود را وارد کنید</label>
             <input type="text" v-model="ShowInfoClient.user.username" />
           </div>
-          <div class="form-group">
+          <div v-if="ShowInfoClient.user" class="form-group">
             <label for="email-input">ایمیل خود را وارد کنید</label>
             <input
               id="email-input"

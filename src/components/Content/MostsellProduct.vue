@@ -5,10 +5,10 @@
     </div>
     <carousel
       :per-page-custom="[
-        [400, 1.3],
-        [850, 3],
-        [950, 4],
         [1200, 5],
+        [950, 4],
+        [850, 3],
+        [300, 1.4]
       ]"
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
@@ -157,6 +157,7 @@ export default {
 }
 .box {
   height: 420px;
+  // width: 210px;
   border: 1px solid black;
   margin: 0 5px;
   border-radius: 10px;
@@ -181,16 +182,16 @@ export default {
 .product-name {
   font-size: 18px;
   margin-bottom: 2px;
-  @media screen and (max-width: 700px) {
-    font-size: 25px;
-   }
+  // @media screen and (max-width: 700px) {
+  //   font-size: 15px;
+  //  }
 }
 .product-cost {
   font-size: 14px;
   margin-bottom: 15px;
   @media screen and (max-width: 700px) {
     margin-bottom: 2rem;
-    font-size: 18px;
+    // font-size: 18px;
    }
 }
 .product-btn {

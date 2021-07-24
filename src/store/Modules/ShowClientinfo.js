@@ -1,18 +1,26 @@
 import Vue from "vue";
 import store from '..'
+
 const state = {
-    UserClient: {}
+    UserClient: [],
+    User: {}
 };
 
 const getters = {
     GetInfo(state) {
         return state.UserClient
+    },
+    getUser(state) {
+        return state.User
     }
 };
 
 const mutations = {
     SetUserInfo(state, userInfo) {
         state.UserClient = userInfo
+    },
+    SetUser(state, user) {
+        state.user = user
     }
 };
 
@@ -20,11 +28,13 @@ const actions = {
     Getinformtion(context) {
         Vue.http.get('panel/api/v1/user_information/', {
             headers: {
-                'Authorization': 'Bearer ' + Vue.cookie.get('Sakura')
+                'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
+
             }
         }).then(response => {
-            console.log("user panel", response.data);
-            context.commit('SetUserInfo', response.data)
+            console.log("user panel", response.body);
+            // context.commit('SetUser', response.data.user);
+            context.commit('SetUserInfo', response.body)
         })
     },
     Putinformtion(context, User) {
