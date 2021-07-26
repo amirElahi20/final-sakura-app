@@ -23,20 +23,20 @@
         <li>
           <h4 class="footer-list-header">درباره ساکورا</h4>
         </li>
-        <li>
-          <a
-            href="/shop/about-mission"
+          <li>
+          <router-link
+            to="/aboutus"
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
-            >درباره ما</a
+            >درباره ما</router-link
           >
         </li>
         <li>
-          <a
-            href="/promos.html"
+          <router-link
+            to="/contactus"
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
-            >ارتباط با ما</a
+            >ارتباط با ما</router-link
           >
         </li>
         <li>

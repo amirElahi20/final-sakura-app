@@ -18,7 +18,7 @@
               <router-link to="/login" class="login" exact>ورود</router-link>
               <router-link to="/register" class="login" exact
                 >ثبت نام</router-link
-              ><p style="color:white;">{{IsAuthenticated}}</p>
+              >
             </li>
             <li v-else>
               <router-link to="/UserDashboard/Account"

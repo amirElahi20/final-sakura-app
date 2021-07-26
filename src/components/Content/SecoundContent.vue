@@ -4,14 +4,14 @@
       <div class="row">
         <div class="col-1-of-4">
           <div class="feature-box">
-              <font-awesome-icon class="fa" icon="check-circle" />
+            <font-awesome-icon class="fa" icon="check-circle" />
             <h3 class="heading-tertiary">ضمانت و تضمین اصل بودن</h3>
             <p class="feature-box__text">لذت خرید کالای درجه یک و اصل</p>
           </div>
         </div>
         <div class="col-1-of-4">
           <div class="feature-box">
-              <font-awesome-icon class="fa" icon="shopping-bag" />
+            <font-awesome-icon class="fa" icon="shopping-bag" />
             <h3 class="heading-tertiary">خرید راحت</h3>
             <p class="feature-box__text">
               به راحتی و با چندکلیک خرید خود را انجام دهید
@@ -20,21 +20,21 @@
         </div>
         <div class="col-1-of-4">
           <div class="feature-box">
-              <font-awesome-icon class="fa" icon="credit-card" />
+            <font-awesome-icon class="fa" icon="credit-card" />
             <h3 class="heading-tertiary">پرداخت آنی و سفارش آنلاین</h3>
             <p class="feature-box__text">پرداخت بدون دردسر و امن در خانه</p>
           </div>
         </div>
         <div class="col-1-of-4">
           <div class="feature-box">
-              <font-awesome-icon class="fa" icon="truck" />
+            <font-awesome-icon class="fa" icon="truck" />
             <h3 class="heading-tertiary">تحویل در کوتاه ترین زمان ممکن</h3>
             <p class="feature-box__text">ارسال کالا به تمام نقاط ایران</p>
           </div>
         </div>
         <div class="col-1-of-4">
           <div class="feature-box">
-              <font-awesome-icon class="fa" icon="undo" />
+            <font-awesome-icon class="fa" icon="undo" />
             <h3 class="heading-tertiary">بازگشت وجه</h3>
             <p class="feature-box__text">
               ارجاع کالا و بازگشت وجه درصورت عدم رضایت
@@ -43,14 +43,15 @@
         </div>
       </div>
     </section>
-  <mostsell-product></mostsell-product>
+    <mostsell-product></mostsell-product>
   </div>
 </template>
 
 <script>
-import MostsellProduct from './MostsellProduct.vue';
+import MostsellProduct from "./MostsellProduct.vue";
 export default {
-  components: { MostsellProduct },};
+  components: { MostsellProduct },
+};
 </script>
 
 
@@ -62,7 +63,7 @@ export default {
 .row {
   display: flex;
   justify-content: space-evenly;
-  flex-wrap:wrap ;
+  flex-wrap: wrap;
 }
 .feature-box {
   background-color: rgba(255, 255, 255, 0.37);
@@ -74,10 +75,17 @@ export default {
   transition: all 0.3s;
   color: white;
   margin-top: 30px;
+  @media screen and (max-width: 450px) {
+    width: 150px;
+      }
 
   &__icon {
     font-size: 50px;
     margin-bottom: 20px;
+    @media screen and (max-width: 450px) {
+    font-size: 40px;
+    margin-bottom: 25px;
+      }
   }
   &:hover {
     transform: translateY(-1.5rem) scale(1.03);
@@ -86,10 +94,14 @@ export default {
   &__text {
     font-size: 12px;
     margin-top: 5px;
+     @media screen and (max-width: 450px) {
+    font-size: 15px;
+    margin-top: 20px;
+      }
   }
 }
 .section-features {
-  padding: 13rem 0;
+  padding: 15rem 0;
   background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%),
     url("../../../public/img/zaib-tse-KVv5lFOMY1E-unsplash.jpg");
   background-color: #2d3436;
@@ -102,8 +114,11 @@ export default {
   & > * {
     transform: skewY(7deg);
   }
+  @media screen and (max-width: 450px) {
+    padding: 2rem;
+  }
 }
-.fa{
-    font-size: 35px;
+.fa {
+  font-size: 35px;
 }
 </style>

@@ -219,6 +219,10 @@
         paginationColor="#ffA400"
         paginationActiveColor="#ff4500"
         :mouse-drag="true"
+        :navigation-enabled="true"
+        navigation-next-label="&#10095;"
+        navigation-prev-label="&#10094;"
+        navigation-click-target-size="15"
       >
         <slide v-for="(similar, Index) in SimilarProduct" :key="Index">
           <div class="box">

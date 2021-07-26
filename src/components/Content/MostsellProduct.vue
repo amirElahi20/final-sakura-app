@@ -8,12 +8,15 @@
         [1200, 5],
         [950, 4],
         [850, 3],
-        [300, 1.4]
+        [300, 2],
       ]"
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
-     
+      :navigation-enabled="true"
+      navigation-next-label="&#10095;"
+      navigation-prev-label="&#10094;"
+      navigation-click-target-size=15
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box">
@@ -80,7 +83,9 @@ export default {
     Slide,
   },
   data() {
-    return {};
+    return {
+     
+    };
   },
   computed: {
     MostSellProducts() {
@@ -155,6 +160,30 @@ export default {
   color: transparent;
   transition: all 0.3s;
 }
+
+h2:before,
+h2:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 15%;
+}
+
+h2:before {
+  right: 0.5em;
+  margin-left: -50%;
+  // margin-top: 10px;
+}
+
+h2:after {
+  left: 0.5em;
+  margin-right: -50%;
+    margin-top: 8px;
+
+}
 .box {
   height: 420px;
   // width: 210px;
@@ -192,7 +221,7 @@ export default {
   @media screen and (max-width: 700px) {
     margin-bottom: 2rem;
     // font-size: 18px;
-   }
+  }
 }
 .product-btn {
   text-decoration: none;
@@ -208,9 +237,9 @@ export default {
     color: orangered;
     border: 1px solid orangered;
   }
-   @media screen and (max-width: 700px) {
-     padding: 15px 20px;
-   }
+  @media screen and (max-width: 700px) {
+    padding: 15px 20px;
+  }
 }
 .total-probtn {
   text-decoration: none;

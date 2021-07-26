@@ -5,7 +5,7 @@
     </div>
     <carousel
       :per-page-custom="[
-        [400, 1.3],
+        [400, 2],
         [850, 3],
         [950, 4],
         [1200, 5],
@@ -13,7 +13,10 @@
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
-      
+      :navigation-enabled="true"
+      navigation-next-label="&#10095;"
+      navigation-prev-label="&#10094;"
+      navigation-click-target-size="15"
     >
       <slide v-for="product in BestProducts" :key="product.id">
         <div class="box">
@@ -33,7 +36,11 @@
               <p class="available" v-if="!product.available">
                 کالای مورد نظر موجود نیست!
               </p>
-              <router-link :to="{name:'singleproduct' , params : {slug:product.slug}}" class="product-btn">مشاهده محصول</router-link>
+              <router-link
+                :to="{ name: 'singleproduct', params: { slug: product.slug } }"
+                class="product-btn"
+                >مشاهده محصول</router-link
+              >
             </div>
           </div>
         </div>
@@ -137,6 +144,26 @@ export default {
   display: inline-block;
   color: transparent;
   transition: all 0.3s;
+}
+h2:before,
+h2:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 30%;
+}
+
+h2:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+h2:after {
+  left: 0.5em;
+  margin-right: -50%;
 }
 .box {
   height: 420px;
