@@ -16,7 +16,7 @@
       :navigation-enabled="true"
       navigation-next-label="&#10095;"
       navigation-prev-label="&#10094;"
-      navigation-click-target-size="15"
+     :navigation-click-target-size=15
     >
       <slide v-for="product in BestProducts" :key="product.id">
         <div class="box">

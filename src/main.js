@@ -31,33 +31,49 @@ console.log("Auth", Vue.cookie.get('Sakura'))
 ///true
 ////////////////////////////
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        if (Vue.cookie.get('Sakura') != null) {
-            next({
-                path: '/',
-                query: { redirect: '/login' }
-            })
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+            // this route requires auth, check if logged in
+            // if not, redirect to login page.
+            if (Vue.cookie.get('Sakura') != null) {
+                next({
+                    path: '/',
+                    query: { redirect: '/login' }
+                })
+            } else {
+                next()
+            }
+        } else {
+            next() // make sure to always call next()!
+        }
+    })
+    // 
+router.beforeEach((to, from, next) => {
+        if (!to.matched.some(record => record.meta.loginDashboard)) {
+            // this route requires auth, check if logged in
+            // if not, redirect to login page.
+            if (Vue.cookie.get('Sakura') == null) {
+                next({ query: { redirect: '/contactus' } })
+                console.log('nokey')
+            } else {
+                next()
+                console.log('ok')
+            }
         } else {
             next()
+            console.log('finish')
         }
-    } else {
-        next() // make sure to always call next()!
-    }
-})
-
-///////////////////////////////////////
-// router.beforeEach((to, from, next) => {
-//     console.log("next", next)
-//     if (to.matched.some(record => record.meta.loginDashboard)) {
-//         // this route requires auth, check if logged in
-//         // if not, redirect to login page.
-//         if (Vue.cookie.get('Sakura') != null) {
-//             next()
-//                 // alert('hi')
-//         } else {
-//             next('UserDashboard/Account', '/')
+    })
+    ///////////////////////////////////////
+    // router.beforeEach((to, from, next) => {
+    //     console.log("next", next)
+    //     if (to.matched.some(record => record.meta.loginDashboard)) {
+    //         // this route requires auth, check if logged in
+    //         // if not, redirect to login page.
+    //         if (Vue.cookie.get('Sakura') != null) {
+    //             next()
+    //                 // alert('hi')
+    //         } else {
+    //             next('UserDashboard/Account', '/')
 
 //             // next({
 //             //         path: '/UserDashboard',

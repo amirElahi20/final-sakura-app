@@ -222,7 +222,7 @@
         :navigation-enabled="true"
         navigation-next-label="&#10095;"
         navigation-prev-label="&#10094;"
-        navigation-click-target-size="15"
+        :navigation-click-target-size=15
       >
         <slide v-for="(similar, Index) in SimilarProduct" :key="Index">
           <div class="box">
@@ -247,6 +247,7 @@
           </div>
         </slide>
       </carousel>
+      <the-questions></the-questions>
     </div>
   </div>
 </template>
@@ -254,7 +255,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-
+import TheQuestions from '../Questions/TheQuestions.vue';
 export default {
   data() {
     return {
@@ -270,6 +271,7 @@ export default {
   components: {
     Carousel,
     Slide,
+    TheQuestions
   },
   computed: {
     SingleProduct() {

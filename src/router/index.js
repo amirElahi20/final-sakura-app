@@ -1,147 +1,147 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import FirstContent from '../components/Content/FirstContent.vue';
-import AllProducts from '../components/ProductPages/AllProducts.vue';
-import ContactUs from '../Pages/Information/ContactUs.vue';
-import AboutUs from '../Pages/Information/AboutUs.vue';
-import LogIn from '../components/TheForms/LogIn.vue';
-import TheRegister from '../components/TheForms/TheRegister.vue';
-import ForgetPassword from '../components/TheForms/ForgetPassword.vue';
-import SingleProduct from '../components/ProductPages/SingleProduct.vue';
-import ConfirmEmail from '../components/TheForms/ConfirmEmail.vue';
-import UserDashboard from '../Pages/Account/Client/UserDashboard.vue';
-import ShopCart from '../components/Shopping/ShopCart.vue';
-import TheAccount from '../Pages/Account/Client/TheAccount.vue';
-import EditAccount from '../Pages/Account/Client/EditAccount.vue';
-import ChangePass from '../Pages/Account/Client/ChangePass.vue';
-import UserOrders from '../Pages/Account/Client/UserOrders.vue';
-import UserPurches from '../Pages/Account/Client/UserPurches.vue';
-import UserTickets from '../Pages/Account/Client/UserTickets.vue';
-// import store from '../store/index';
 Vue.use(VueRouter)
 
 const routes = [{
-            path: '/',
-            name: 'Home',
-            component: FirstContent
+        path: '/',
+        name: 'Home',
+        component: () =>
+            import ('../components/Content/FirstContent.vue')
+    },
+    {
+        path: '/products',
+        name: 'Products',
+        component: () =>
+            import ('../components/ProductPages/AllProducts.vue')
+    },
+    {
+        path: '/aboutus',
+        name: 'AboutUs',
+        component: () =>
+            import ('../Pages/Information/AboutUs.vue')
+    },
+    {
+        path: '/contactus',
+        name: 'ContactUs',
+        component: () =>
+            import ('../Pages/Information/ContactUs.vue')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () =>
+            import ('../components/TheForms/LogIn.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () =>
+            import ('../components/TheForms/TheRegister.vue')
+    },
+    {
+        path: '/forget',
+        name: 'forgetpass',
+        component: () =>
+            import ('../components/TheForms/ForgetPassword.vue')
+    },
+    {
+        path: '/singleproduct/:slug',
+        name: 'singleproduct',
+        component: () =>
+            import ('../components/ProductPages/SingleProduct.vue')
+    },
+    {
+        path: '/accounts/api/v1/check_confirm_email/:token',
+        component: () =>
+            import ('../components/TheForms/ConfirmEmail.vue'),
+        name: 'Confirm'
+    },
+    {
+        path: '/shopcart',
+        name: 'shopcart',
+        component: () =>
+            import ('../components/Shopping/ShopCart.vue')
+    },
+    {
+        path: '/UserDashboard',
+        name: 'UserDashboard',
+        component: () =>
+            import ('../Pages/Account/Client/UserDashboard.vue'),
+        mata: {
+            loginDashboard: true
         },
-        {
-            path: '/products',
-            name: 'Products',
-            component: AllProducts
-        },
-        {
-            path: '/aboutus',
-            name: 'AboutUs',
-            component: AboutUs
-        },
-        {
-            path: '/contactus',
-            name: 'ContactUs',
-            component: ContactUs
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: LogIn,
-            meta: {
-                requiresAuth: true
-            }
-        },
-        {
-            path: '/register',
-            name: 'register',
-            component: TheRegister
-        },
-        {
-            path: '/forget',
-            name: 'forgetpass',
-            component: ForgetPassword
-        },
-        {
-            path: '/singleproduct/:slug',
-            name: 'singleproduct',
-            component: SingleProduct
-        },
-        {
-            path: '/accounts/api/v1/check_confirm_email/:token',
-            component: ConfirmEmail,
-            name: 'Confirm'
-        },
-        {
-            path: '/shopcart',
-            name: 'shopcart',
-            component: ShopCart
-        },
-        {
-            path: '/UserDashboard',
-            name: 'UserDashboard',
-            component: UserDashboard,
-            mata: {
-                loginDashboard: false
+        children: [
+
+            {
+                path: '/UserDashboard/Account',
+                name: 'useraccount',
+                component: () =>
+                    import ('../Pages/Account/Client/TheAccount.vue'),
+                mata: {
+                    loginDashboard: true
+                },
             },
-            TheAccount,
-            children: [
 
-                {
-                    path: '/UserDashboard/Account',
-                    name: 'useraccount',
-                    component: TheAccount,
-                    mata: {
-                        loginDashboard: false
-                    },
+            {
+                path: '/UserDashboard/edit',
+                name: 'useraccountedit',
+                mata: {
+                    loginDashboard: true
                 },
+                component: () =>
+                    import ('../Pages/Account/Client/EditAccount.vue')
+            },
+            {
+                path: '/UserDashboard/changepass',
+                name: 'useraccountpass',
+                mata: {
+                    loginDashboard: true
+                },
+                component: () =>
+                    import ('../Pages/Account/Client/ChangePass.vue')
+            },
+            {
+                path: '/UserDashboard/purches',
+                name: 'useraccountpurches',
+                mata: {
+                    loginDashboard: true
+                },
+                component: () =>
+                    import ('../Pages/Account/Client/UserPurches.vue')
+            },
+            {
+                path: '/UserDashboard/tickets',
+                name: 'useraccounttickets',
+                mata: {
+                    loginDashboard: true
+                },
+                component: () =>
+                    import ('../Pages/Account/Client/UserTickets.vue')
 
-                {
-                    path: '/UserDashboard/edit',
-                    name: 'useraccountedit',
-                    mata: {
-                        loginDashboard: true
-                    },
-                    component: EditAccount
-                },
-                {
-                    path: '/UserDashboard/changepass',
-                    name: 'useraccountpass',
-                    mata: {
-                        loginDashboard: false
-                    },
-                    component: ChangePass
-                },
-                {
-                    path: '/UserDashboard/purches',
-                    name: 'useraccountpurches',
-                    mata: {
-                        loginDashboard: false
-                    },
-                    component: UserPurches
-                },
-                {
-                    path: '/UserDashboard/tickets',
-                    name: 'useraccounttickets',
-                    mata: {
-                        loginDashboard: false
-                    },
-                    component: UserTickets
-                },
+            },
 
-                {
-                    path: '/UserDashboard/orders',
-                    name: 'useraccountorders',
-                    mata: {
-                        loginDashboard: false
-                    },
-                    component: UserOrders
+            {
+                path: '/UserDashboard/orders',
+                name: 'useraccountorders',
+                mata: {
+                    loginDashboard: true
                 },
-            ]
-        },
-        // {
-        //     path: '/UserDashboard/Account',
-        //     name: 'useraccount',
-        //     component: TheAccount
-        // }
-    ]
-    // import { store } from "../store/index"; // import the store to check if authenticated
+                component: () =>
+                    import ('../Pages/Account/Client/UserOrders.vue')
+            },
+
+        ]
+    },
+    {
+        path: '/FrequentlyQuestions',
+        name: 'FrequentlyAskedQuestions',
+        component: () =>
+            import ('../components/Questions/TheQuestions.vue')
+    }
+]
 
 const router = new VueRouter({
     mode: 'history',

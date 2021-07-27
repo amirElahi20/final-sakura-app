@@ -96,7 +96,7 @@ import ClickOutside from "vue-click-outside";
 export default {
   data() {
     return {
-      isActive: false,
+      // isActive: false,
       activeSearch: false,
     };
   },
@@ -243,14 +243,14 @@ a:hover {
 a:active {
   color: black;
 }
-.popup {
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.836);
-  opacity: 1;
-}
+// .popup {
+//   height: 100vh;
+//   width: 100%;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   z-index: 50;
+//   background-color: rgba(0, 0, 0, 0.836);
+//   opacity: 1;
+// }
 </style>

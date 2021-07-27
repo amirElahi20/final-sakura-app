@@ -58,10 +58,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.u-center {
-  margin: 40px 0 50px 0;
-  text-align: center;
-}
 .heading-teritary {
   color: orangered;
   font-size: 22px;
@@ -70,6 +66,10 @@ export default {
   margin-top: 10px;
   margin-bottom: 2rem;
 }
+  .u-center {
+    margin: 40px 0 50px 0;
+    text-align: center;
+  }
 .header-title {
   font-size: 1.5rem;
   font-weight: 700;

@@ -1,21 +1,22 @@
 <template>
   <div
-      :class="{
-        layout:
-          $route.name == 'login' ||
-          $route.name == 'register' ||
-          $route.name == 'forgetpass' ||
-          $route.name == 'Confirm' ||
-          $route.name == 'shopcart' ||
-          $route.name == 'ContactUs' ||
-          $route.name == 'UserDashboard' ||
-          $route.name == 'useraccount' ||
-          $route.name == 'useraccountedit' ||
-          $route.name == 'useraccountpass' ||
-          $route.name == 'useraccountpurches' ||
-          $route.name == 'useraccounttickets' ||
-          $route.name == 'useraccountorders' ,
-      }"
+    :class="{
+      layout:
+        $route.name == 'login' ||
+        $route.name == 'register' ||
+        $route.name == 'forgetpass' ||
+        $route.name == 'Confirm' ||
+        $route.name == 'shopcart' ||
+        $route.name == 'ContactUs' ||
+        $route.name == 'UserDashboard' ||
+        $route.name == 'useraccount' ||
+        $route.name == 'useraccountedit' ||
+        $route.name == 'useraccountpass' ||
+        $route.name == 'useraccountpurches' ||
+        $route.name == 'useraccounttickets' ||
+        $route.name == 'useraccountorders' ||
+        $route.name == 'FrequentlyAskedQuestions',
+    }"
   >
     <!--Some of this HTML is directly from Pavilion.  You can change it to whatever you want if you want to mimic this design.-->
     <footer class="flex-rw">
@@ -23,7 +24,7 @@
         <li>
           <h4 class="footer-list-header">درباره ساکورا</h4>
         </li>
-          <li>
+        <li>
           <router-link
             to="/aboutus"
             class="generic-anchor footer-list-anchor"
@@ -117,11 +118,10 @@
           >
         </li>
         <li>
-          <a
-            href="/faq.html"
+          <router-link to='/FrequentlyQuestions'
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
-            >پاسخ به پرسش های متداول</a
+            >پاسخ به پرسش های متداول</router-link
           >
         </li>
         <li id="find-a-store">

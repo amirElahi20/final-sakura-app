@@ -16,7 +16,8 @@
           $route.name == 'useraccountpass' ||
           $route.name == 'useraccountpurches' ||
           $route.name == 'useraccounttickets' ||
-          $route.name == 'useraccountorders' ,
+          $route.name == 'useraccountorders' ||
+          $route.name == 'FrequentlyAskedQuestions'
       }"
     >
       <img src="../../../public/img/newheader.jpg" alt="" />
