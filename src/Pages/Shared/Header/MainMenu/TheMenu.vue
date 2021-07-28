@@ -6,8 +6,8 @@
     <div
       class="total"
       :class="{
-        scroll: scrollPosition >= 20,
-        container: scrollPosition < 20,
+        scroll: scrollPosition >= 160,
+        container: scrollPosition < 160,
       }"
     >
       <div class="container">
@@ -44,36 +44,17 @@
             </li>
           </ul>
         </div>
-        <div class="left">
-          <ul class="menu l">
-            <search-box></search-box>
-            <li v-if="IsAuthenticated" class="shopping">
-              <router-link to="/shopcart">
-                <span class="badge"
-                  ><h5 class="h4">{{getCountOrder}}</h5></span
-                >
-                <font-awesome-icon class="fa" icon="shopping-cart" />
-              </router-link>
-            </li>
-            <li v-else class="shopping">
-              <router-link to="/shopcart">
-                <span class="badge"><h5 class="h4">0</h5></span>
-                <font-awesome-icon class="fa" icon="shopping-cart" />
-              </router-link>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SearchBox from "../SearchBox/SearchBox.vue";
+// import SearchBox from "../SearchBox/SearchBox.vue";
 import SubMenu from "../SubMenus/SubMenu.vue";
 export default {
   components: {
-    SearchBox,
+    // SearchBox,
     SubMenu,
   },
   data() {
@@ -125,6 +106,13 @@ export default {
 
 
 <style lang="scss" scoped>
+.total{
+    padding-bottom: 1rem;
+    width: 100%;
+    border-bottom: 1px solid black;
+    background-color: whitesmoke;
+
+}
 .menu {
   display: flex;
   list-style: none;
@@ -137,7 +125,9 @@ display: none;
   }
 }
 .r li {
-  margin-left: 15px;
+  // margin-left: 80px;
+  margin-top: 15px;
+  margin-right: 80px;
 }
 .fa {
   font-size: 35px;
@@ -149,21 +139,23 @@ display: none;
 .container {
   display: flex;
   margin: 0 auto;
+  // justify-content: space-evenly;
+  // justify-content: start;
   justify-content: space-between;
   direction: rtl;
-  width: 89%;
+  width: 100%;
   transition: all 0.4s;
   z-index: 998;
 }
 .scroll {
-  background-color: brown;
+  background-color: whitesmoke;
   border-radius: 0px;
-  margin-top: -100px;
+  margin-top: -150px;
   justify-content: space-around;
   display: flex;
   direction: rtl;
   transition: all 0.4s;
-  padding: 20px 12px;
+  padding: -5px 12px;
   // margin: 5px;
   height: 80px;
   width: 100%;
@@ -171,10 +163,6 @@ display: none;
   z-index: 999;
     @media only screen and (max-width: 1100px){
 display: none;
-  }
-
-  .badge {
-    margin-top: -85px;
   }
 }
 
@@ -194,7 +182,7 @@ display: none;
 }
 
 a {
-  color: white;
+  color: black;
   font-size: 18px;
   text-decoration: none;
 }

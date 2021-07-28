@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="u-center">
-      <h2 class="header-title">پرفروش ترین محصولات</h2>
+      <h2 class="header-title">فروشگاه ساکورا</h2>
     </div>
     <main class="FirstContent">
       <div class="left">

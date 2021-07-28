@@ -73,10 +73,15 @@ export default {
 <style lang="scss" scoped>
 .sub-menu {
   width: 80%;
+  // margin-left: 550px;
+  margin-right: 0px;
+  // right: 200px;
   height: auto;
   display: flex;
-  margin-top: 8px;
+  margin-top: 10px;
   position: absolute;
+  // margin-right: 0px;
+  justify-content: start;
 }
 .active {
   background-color: orangered;

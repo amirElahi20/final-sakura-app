@@ -48,110 +48,22 @@ router.beforeEach((to, from, next) => {
     })
     // 
 router.beforeEach((to, from, next) => {
-        if (!to.matched.some(record => record.meta.loginDashboard)) {
-            // this route requires auth, check if logged in
-            // if not, redirect to login page.
-            if (Vue.cookie.get('Sakura') == null) {
-                next({ query: { redirect: '/contactus' } })
-                console.log('nokey')
-            } else {
-                next()
-                console.log('ok')
-            }
+    if (!to.matched.some(record => record.meta.loginDashboard)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (Vue.cookie.get('Sakura') == null) {
+            next({ query: { redirect: '/contactus' } })
+            console.log('nokey')
         } else {
             next()
-            console.log('finish')
+            console.log('ok')
         }
-    })
-    ///////////////////////////////////////
-    // router.beforeEach((to, from, next) => {
-    //     console.log("next", next)
-    //     if (to.matched.some(record => record.meta.loginDashboard)) {
-    //         // this route requires auth, check if logged in
-    //         // if not, redirect to login page.
-    //         if (Vue.cookie.get('Sakura') != null) {
-    //             next()
-    //                 // alert('hi')
-    //         } else {
-    //             next('UserDashboard/Account', '/')
+    } else {
+        next()
+        console.log('finish')
+    }
+})
 
-//             // next({
-//             //         path: '/UserDashboard',
-//             //         // path: '/UserDashboard/Account',
-//             //         query: { redirect: '/register' }
-//             //     })
-//             // next({ path: '/' })
-//             // alert('hello')
-//         }
-//     } else {
-//         next()
-//             // alert('hi')
-//             // make sure to always call next()!
-//     }
-// })
-
-
-
-
-// router.beforeEach((to, from, next) => {
-//     if (!to.matched.some(record => record.meta.loginDashboard)) {
-//         // this route requires auth, check if logged in
-//         // if not, redirect to login page.
-//         if (Vue.cookie.get('Sakura') != null) {
-//             // next({ name: 'register' })
-//             next()
-//         } else {
-//             next({
-//                     path: '/register',
-//                     // query: { redirect: '/login' }
-//                 })
-//                 // next({ name: 'register' })
-//                 // next({ path: '/UserDashboard/Account' })
-//         }
-//     } else {
-//         next()
-//     }
-// })
-
-
-
-
-// router.beforeEach((to, from, next) => {
-//     console.log("meta", to.matched.some)
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//         if (Vue.cookie.get('Sakura') == null) {
-//             next({ name: 'login' })
-//         } else {
-//             next({ name: 'Home' }) // go to wherever I'm going
-//         }
-//     } else
-//         next() // does not require auth, make sure to always call next()!
-
-// })
-
-// Vue.http.options.root = 'http://asha4f.pythonanywhere.com/'
-
-// router.beforeEach((to, from, next) => {
-//     // if the route is not public
-//     if (!to.meta) {
-//         // if the user authenticated
-//         if (store.getters.IsAuthenticated) { // I declared a `getter` function in the store to check if the user is authenticated.
-//             // continue to the route
-//             next({ name: 'Home' });
-//         } else {
-//             // redirect to login
-//             next({ name: 'login' });
-//         }
-//     }
-//     next();
-// });
-
-
-// Vue.http.interceptors.push((request, next) => {
-//     request.headers.set('Authorization', 'Bearer ' + Vue.cookie.get('Sakura'))
-//     request.headers.set('Accept', 'application/json')
-//     next()
-// });
 
 new Vue({
     router,

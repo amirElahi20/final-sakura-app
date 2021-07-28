@@ -20,7 +20,7 @@
     <div class="res-header">
       <div class="container">
         <ul>
-          <li v-if="!IsAuthenticated">
+          <!-- <li v-if="!IsAuthenticated">
             <router-link to="/login"
               ><font-awesome-icon
                 class="icon icon1"
@@ -28,14 +28,14 @@
               ></font-awesome-icon
               >ورود</router-link
             >
-          </li>
-          <li v-else>
+          </li> -->
+          <li v-if="IsAuthenticated">
             <router-link to="/UserDashboard/Account"
               ><font-awesome-icon
                 class="icon icon1"
                 icon="user"
               ></font-awesome-icon
-              >{{ Username }}</router-link
+              >پنل کاربری</router-link
             >
           </li>
           <li>
@@ -47,33 +47,16 @@
               >جست و جو</a
             >
           </li>
-          <li v-if="IsAuthenticated">
-            <router-link to="/shopcart"
-              ><font-awesome-icon
-                class="icon icon3"
-                icon="shopping-cart"
-              ></font-awesome-icon>
-              <span class="badge">{{ getCountOrder }}</span> سبد
-              خرید</router-link
-            >
-          </li>
-          <li v-else class="shopping">
-            <router-link to="/shopcart">
+      
+       
+          <li>
+            <router-link to="/products">
               <font-awesome-icon
                 class="icon icon3"
-                icon="shopping-cart"
+                icon="box"
               ></font-awesome-icon>
-              <span class="badge">0</span> سبد خرید
+            <span>محصولات</span>
             </router-link>
-          </li>
-          <li>
-            <a @click="showSubMenu"
-              ><font-awesome-icon
-                class="icon icon4"
-                icon="bars"
-              ></font-awesome-icon
-              >دسته بندی</a
-            >
           </li>
           <li>
             <router-link to="/"
@@ -199,7 +182,7 @@ export default {
   margin-bottom: 5px;
 }
 .icon1 {
-  margin-left: 6px;
+  margin-left: 25px;
 }
 .icon2 {
   margin-left: 20px;
