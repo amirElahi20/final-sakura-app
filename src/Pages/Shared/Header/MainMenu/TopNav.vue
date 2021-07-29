@@ -68,7 +68,7 @@
             </a>
           </li>
           <li v-if="!IsAuthenticated">
-            <router-link class="shoplink" to="/shopping">
+            <router-link class="shoplink" to="/shopcart">
               <font-awesome-icon class="shop-icon bag" icon="shopping-cart" />
               <div class="shop-count">
                 <span class="badge">0</span>
@@ -76,7 +76,7 @@
             </router-link>
           </li>
            <li v-if="IsAuthenticated">
-            <router-link class="shoplink" to="/shopping">
+            <router-link class="shoplink" to="/shopcart">
               <font-awesome-icon class="shop-icon bag" icon="shopping-cart" />
               <div class="shop-count">
                 <span class="badge">{{getCountOrder}}</span>

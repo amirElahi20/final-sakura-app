@@ -19,7 +19,7 @@
           "
           class="addbasket"
         >
-          <h3 class="add-to-basket">
+          <h3 class="addtobasket">
             افزودن به سبد خرید<font-awesome-icon
               class="fa"
               icon="shopping-cart"
@@ -96,6 +96,23 @@
               -
             </button>
           </footer>
+          <div class="properties">
+            <h4>خواص محصول :</h4>
+            <ol>
+              <li>سلامت دندان</li>
+              <li>پتاسیم</li>
+              <li>رفع یبوست</li>
+              <li>سلامت دندان</li>
+              <li>پتاسیم</li>
+              <li>رفع یبوست</li>
+              <li>سلامت دندان</li>
+              <li>پتاسیم</li>
+              <li>رفع یبوست</li>
+              <li>سلامت دندان</li>
+              <li>پتاسیم</li>
+              <li>رفع یبوست</li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
@@ -129,7 +146,9 @@
           "
           class="addbasket"
         >
-          <h3 class="add-to-basket2">
+          <h3 :class="{addtobasket2 :scrollPosition <=920,
+          scrollbasket : scrollPosition >= 920
+          }">
             <font-awesome-icon class="fa" icon="shopping-cart" />افزودن به سبد
             خرید
           </h3>
@@ -196,6 +215,27 @@
         <p class="product-paragraph2">
           {{ SingleProduct.description }}
         </p>
+        <div
+          class="properties"
+          style="direction: rtl; margintop: 20px; marginbottom: 20px"
+        >
+          <h4>خواص محصول :</h4>
+          <div class="list-ol">
+          <ol>
+            <li>سلامت دندان</li>
+            <li>پتاسیم</li>
+            <li>رفع یبوست</li>
+            <li>سلامت دندان</li>
+          </ol>
+          <ol>
+            <li>رفع یبوست</li>
+            <li>سلامت دندان</li>
+            <li>پتاسیم</li>
+            <li>رفع یبوست</li>
+          </ol>
+
+          </div>
+        </div>
       </div>
     </div>
 
@@ -222,27 +262,35 @@
         :navigation-enabled="true"
         navigation-next-label="&#10095;"
         navigation-prev-label="&#10094;"
-        :navigation-click-target-size=15
+        :navigation-click-target-size="15"
       >
         <slide v-for="(similar, Index) in SimilarProduct" :key="Index">
           <div class="box">
             <div class="product-informartion">
-              <img class="img-box" :src="similar.picture[0].picture" alt="" />
-              <div class="products-cost">
-                <h3 class="product-name">{{ similar.name }}</h3>
-                <h4 class="product-cost">
-                  <span>{{ similar.show_cost.toLocaleString() }}</span
-                  >تومان
-                </h4>
-                <router-link
-                  :to="{
-                    name: 'singleproduct',
-                    params: { slug: similar.slug },
-                  }"
-                  class="product-btn"
-                  >مشاهده محصول</router-link
-                >
-              </div>
+              <router-link
+                class="product-info"
+                :to="{
+                  name: 'singleproduct',
+                  params: { slug: similar.slug },
+                }"
+              >
+                <img class="img-box" :src="similar.picture[0].picture" alt="" />
+                <div class="products-cost">
+                  <h3 class="product-name">{{ similar.name }}</h3>
+                  <h4 class="product-cost">
+                    <span>از {{ similar.show_cost.toLocaleString() }} </span
+                    >تومان
+                  </h4>
+                  <router-link
+                    :to="{
+                      name: 'singleproduct',
+                      params: { slug: similar.slug },
+                    }"
+                    class="product-btn"
+                    >مشاهده محصول</router-link
+                  >
+                </div>
+              </router-link>
             </div>
           </div>
         </slide>
@@ -255,7 +303,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import TheQuestions from '../Questions/TheQuestions.vue';
+import TheQuestions from "../Questions/TheQuestions.vue";
 export default {
   data() {
     return {
@@ -266,12 +314,14 @@ export default {
       id: 5,
       pack: "",
       array: 0,
+      isSticky: false,
+      scrollPosition: 0,
     };
   },
   components: {
     Carousel,
     Slide,
-    TheQuestions
+    TheQuestions,
   },
   computed: {
     SingleProduct() {
@@ -290,6 +340,7 @@ export default {
   },
   created() {
     this.$store.dispatch("ShowOrderRows");
+    window.addEventListener("scroll", this.updateScroll);
 
     this.$store.dispatch("GetSinlgeProductsFromServer", {
       slug: this.$route.params.slug,
@@ -298,11 +349,22 @@ export default {
       slug: this.$route.params.slug,
     });
   },
+  unmounted() {
+    window.removeEventListener("scroll", this.updateScroll);
+  },
   methods: {
     selectenvelope() {
       this.glass = false;
       this.packet = true;
       this.select = 0;
+    },
+    updateScroll() {
+      this.scrollPosition = window.scrollY;
+      if (this.scrollPosition >= 100) {
+        this.isSticky = true;
+      } else {
+        this.isSticky = false;
+      }
     },
     selectglass() {
       this.glass = true;
@@ -352,6 +414,25 @@ export default {
   // margin: 0 auto;
   // width: 100%;
 }
+.properties {
+  text-align: right;
+  margin-top: 15px;
+}
+.properties ol {
+  list-style: none;
+  margin-right: 15px;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: flex-start;
+}
+.list-ol{
+  display: flex;
+}
+.properties ol li {
+  margin-left: 35px;
+    text-align: right;
+
+}
 .count-box2 h5 {
   text-align: center;
 }
@@ -359,6 +440,25 @@ export default {
   // background-color: red;
   width: 100%;
   margin: 1rem auto;
+}
+.product-info {
+  text-decoration: none;
+  color: black;
+}
+.scrollbasket{
+  background-color: orange;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  padding: 15px;
+  width: 100%;
+  right: 0px;
+  transition: all 0.2s;
+  // margin-right: 10px;
+  text-align: center;
+  margin: 0 auto;
+  z-index: 99999999;
+  
 }
 .format2 {
   width: 50%;
@@ -378,7 +478,7 @@ export default {
   margin-right: 30px;
   cursor: pointer;
 }
-.add-to-basket2 {
+.addtobasket2 {
   text-align: center;
   margin-top: 10px;
   background-color: orangered;
@@ -488,7 +588,7 @@ export default {
   border: 1px solid black;
   border-radius: 10px;
 }
-.add-to-basket {
+.addtobasket {
   text-align: center;
   margin-top: 10px;
   background-color: orangered;

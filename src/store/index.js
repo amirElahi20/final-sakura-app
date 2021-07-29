@@ -5,6 +5,7 @@ import SubMenu from '../store/Modules/SubMenu';
 import User from '../store/Modules/User';
 import Order from '../store/Modules/Order';
 import ShowClient from '../store/Modules/ShowClientinfo';
+import Images from '../store/Modules/images';
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         SubMenu,
         User,
         Order,
-        ShowClient
+        ShowClient,
+        Images
     }
 })

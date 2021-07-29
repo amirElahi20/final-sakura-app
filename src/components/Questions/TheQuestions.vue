@@ -5,7 +5,10 @@
         <h2 class="header-title">سوالات متداول</h2>
       </div>
       <div class="questions" v-for="question in 5" :key="question">
-        
+        <details>
+          <summary class="question">آیا چه میشود؟؟</summary>
+          <p class="answer">بله</p>
+        </details>
       </div>
       <div class="back-btn">
         <router-link class="back" to="/">بازگشت به صفحه اصلی</router-link>

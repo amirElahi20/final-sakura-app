@@ -7,18 +7,29 @@
         </div>
         <div class="row">
           <div class="box" v-for="product in FilterProducts" :key="product.id">
-            <img
-            :class="{blurimg :!product.available }"
-              class="image"
-              :src="product.picture[0].picture"
-              alt=""
-            />
-            <p class="paragraph">{{ product.name }}</p>
-            <h5 class="cost">{{ product.show_cost.toLocaleString() }} تومان</h5>
-            <router-link :to="{name:'singleproduct' , params : {slug:product.slug}}" class="btn">مشاهده محصول</router-link>
-            <p class="available" v-if="!product.available">
-              کالای مورد نظر موجود نیست!
-            </p>
+            <router-link
+              :to="{ name: 'singleproduct', params: { slug: product.slug } }"
+              class="product-info"
+            >
+              <img
+                :class="{ blurimg: !product.available }"
+                class="image"
+                :src="product.picture[0].picture"
+                alt=""
+              />
+              <p class="paragraph">{{ product.name }}</p>
+              <h5 class="cost">
+                {{ product.show_cost.toLocaleString() }} تومان
+              </h5>
+              <router-link
+                :to="{ name: 'singleproduct', params: { slug: product.slug } }"
+                class="btn"
+                >مشاهده محصول</router-link
+              >
+              <p class="available" v-if="!product.available">
+                کالای مورد نظر موجود نیست!
+              </p>
+            </router-link>
           </div>
         </div>
       </div>
@@ -59,6 +70,10 @@ $color-primary-light: orangered;
 .u-center-text {
   text-align: center;
   padding-bottom: 1rem;
+}
+.product-info{
+  color: black;
+  text-decoration: none;
 }
 .available {
   font-size: 12px;
@@ -111,16 +126,14 @@ $color-primary-light: orangered;
   padding: 2rem 0 5rem 0;
 }
 .left {
-  width: 80%;
-  // background-color: red;
+  width: 100%;
   margin: 0 auto;
 }
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  // padding: 10px;
-  margin-right: 20px;
+  justify-content:center;
+  // margin-right: 20px;
 }
 .box {
   background-color: white;
@@ -128,25 +141,24 @@ $color-primary-light: orangered;
   padding: 15px;
   margin-left: 20px;
   margin-top: 20px;
-  // border-radius: 35px;
-  width: 240px;
-  border: 1px solid brown;
+  width: 250px;
   transition: all 0.5s;
-  &:hover {
-    box-shadow: 0.5rem 1rem 1rem rgba(rgb(163, 158, 158), 0.5);
+  box-shadow: 0.5rem 1rem 1rem rgba(rgb(163, 158, 158), 0.5);
+
+  @media screen and (max-width: 740px) {
+    width: 190px;
   }
-  @media screen and (max-width: 540px) {
-    width: 200px;
+  @media screen and (max-width: 500px) {
+    width: 170px;
+    // height: 200px;
   }
-  @media screen and (max-width: 460px) {
-    width: 250px;
+   @media screen and (max-width: 380px) {
+    width: 100%;
   }
 }
 .image {
   width: 100%;
   height: 190px;
-  // border: 1px solid brown;
-  // border-radius: 35px;
 }
 .blurimg {
   filter: blur(7px);
@@ -164,12 +176,14 @@ $color-primary-light: orangered;
   background-color: orange;
   text-decoration: none;
   padding: 10px 5px;
-  // border-radius: 40px;
   font-size: 16px;
   margin-top: 10px;
   cursor: pointer;
   color: white;
   border: 1px solid orange;
   transition: all 0.5s;
+   @media screen and (max-width: 500px) {
+    // display: none;
+  }
 }
 </style>

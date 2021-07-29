@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="slider">
-      <carousel
+      <carousel v-if="GetSlider[0]"
         :per-page="1"
         :mouse-drag="true"
         paginationColor="#ffA400"
@@ -9,13 +9,16 @@
         paginationActiveColor="#ff4500"
         navigation-next-label="&#10095;"
         navigation-prev-label="&#10094;"
-        :navigation-click-target-size="20"
+        :navigation-click-target-size="10"
         :autoplay="true"
         :loop="true"
         :autoplayTimeout="7000"
       >
-        <slide class="slide" v-for="num in 5" :key="num">
-          <img src="../../../../../public/img/newheader.jpg" alt="" />
+        <slide class="slide">
+          <img :src="GetSlider[0].main_img_1" alt="1" />
+        </slide>
+         <slide class="slide">
+          <img :src="GetSlider[0].main_img_2" alt="2" />
         </slide>
       </carousel>
     </div>
@@ -32,6 +35,14 @@ export default {
     Carousel,
     Slide,
   },
+  created(){
+    this.$store.dispatch("GetImagesFromServer");
+  },
+  computed:{
+    GetSlider(){
+     return this.$store.getters.GetImg
+    }
+  }
 };
 </script>
 

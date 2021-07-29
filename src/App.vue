@@ -12,13 +12,11 @@
 <script>
 import TheFooter from './Pages/Shared/Footer/TheFooter.vue';
 import TheHeader from "./Pages/Shared/TheHeader.vue";
-// import SubmenuResponsive from "./Pages/Responsive/SubmenuResponsive.vue";
 
 export default {
   components: {
     TheHeader,
     TheFooter,
-    // SubmenuResponsive,
   },
 };
 </script>
@@ -36,6 +34,8 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  // overflow-x: hidden;
+  // overflow-y: hidden;
 }
 
 body {

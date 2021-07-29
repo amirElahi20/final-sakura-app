@@ -1,7 +1,9 @@
 <template>
   <div>
     <section class="section-features">
-      <div class="row">
+      <img class="back-img" v-if="showImg[0]" :src="showImg[0].main_img_2" alt="">
+      <div class="shadow"></div>
+       <div class="row">
         <div class="col-1-of-4">
           <div class="feature-box">
             <font-awesome-icon class="fa" icon="check-circle" />
@@ -32,15 +34,6 @@
             <p class="feature-box__text">ارسال کالا به تمام نقاط ایران</p>
           </div>
         </div>
-        <div class="col-1-of-4">
-          <div class="feature-box">
-            <font-awesome-icon class="fa" icon="undo" />
-            <h3 class="heading-tertiary">بازگشت وجه</h3>
-            <p class="feature-box__text">
-              ارجاع کالا و بازگشت وجه درصورت عدم رضایت
-            </p>
-          </div>
-        </div>
       </div>
     </section>
     <mostsell-product></mostsell-product>
@@ -51,6 +44,11 @@
 import MostsellProduct from "./MostsellProduct.vue";
 export default {
   components: { MostsellProduct },
+  computed:{
+    showImg(){
+      return this.$store.getters.GetImg
+    }
+  }
 };
 </script>
 
@@ -58,25 +56,45 @@ export default {
 <style lang="scss" scoped>
 .heading-tertiary {
   font-size: 15px;
-  // color: white;
 }
 .row {
   display: flex;
+  align-items: flex-end;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+.shadow{
+  background-color: rgba(0, 0, 0, 0.658);
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  z-index: -10;
+    width: 100%;
+    margin-top: -10rem;
+    transform: skewY(-5deg);
+
+  & > * {
+    transform: skewY(5deg);
+  }
+   @media screen and (max-width: 500px) {
+    height: 600px;
+      }
+}
 .feature-box {
   background-color: rgba(255, 255, 255, 0.37);
-  width: 220px;
+  width: 250px;
   font-size: 20px;
   padding: 2.5rem 0px;
   text-align: center;
   border-radius: 5px;
   transition: all 0.3s;
   color: white;
-  margin-top: 30px;
-  @media screen and (max-width: 450px) {
-    width: 150px;
+  z-index: 999;
+  margin-top: -50px;
+  margin-bottom: 65px;
+
+  @media screen and (max-width: 500px) {
+    width: 170px;
       }
 
   &__icon {
@@ -87,10 +105,6 @@ export default {
     margin-bottom: 25px;
       }
   }
-  &:hover {
-    transform: translateY(-1.5rem) scale(1.03);
-    cursor: pointer;
-  }
   &__text {
     font-size: 12px;
     margin-top: 5px;
@@ -100,24 +114,42 @@ export default {
       }
   }
 }
-.section-features {
-  padding: 15rem 0;
-  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%),
-    url("../../../public/img/zaib-tse-KVv5lFOMY1E-unsplash.jpg");
-  background-color: #2d3436;
-  background-size: cover;
-  background-position: bottom;
+.back-img{
+  width: 100%;
+  height: 500px;
+  z-index: -9999;
+  position: absolute;
   margin-top: -10rem;
-
-  transform: skewY(-7deg);
+    transform: skewY(-5deg);
 
   & > * {
-    transform: skewY(7deg);
+    transform: skewY(5deg);
   }
-  @media screen and (max-width: 450px) {
-    padding: 2rem;
-  }
+  @media screen and (max-width: 500px) {
+    height: 600px;
+      }
 }
+.section-features {
+  margin-top: 50px;
+}
+// .section-features {
+//   padding: 15rem 0;
+//   background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%),
+//     url("../../../public/img/zaib-tse-KVv5lFOMY1E-unsplash.jpg");
+//   background-color: #2d3436;
+//   background-size: cover;
+//   background-position: bottom;
+//   margin-top: -10rem;
+
+//   transform: skewY(-7deg);
+
+//   & > * {
+//     transform: skewY(7deg);
+//   }
+//   @media screen and (max-width: 450px) {
+//     padding: 2rem;
+//   }
+// }
 .fa {
   font-size: 35px;
 }

@@ -81,7 +81,7 @@ export default {
   margin-top: 10px;
   position: absolute;
   // margin-right: 0px;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .active {
   background-color: orangered;

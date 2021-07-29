@@ -16,36 +16,43 @@
       :navigation-enabled="true"
       navigation-next-label="&#10095;"
       navigation-prev-label="&#10094;"
-      :navigation-click-target-size=15
+      :navigation-click-target-size="15"
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box">
           <div class="product-informartion">
-            <img
-              :class="{ blurimg: !product.available }"
-              class="img-box"
-              :src="product.picture[0].picture"
-              alt=""
-            />
-            <div class="products-cost">
-              <h3 class="product-name">{{ product.name }}</h3>
-              <h4 class="product-cost">
-                <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
-                >تومان
-              </h4>
-              <p class="available" v-if="!product.available">
-                کالای مورد نظر موجود نیست!
-              </p>
-              <router-link
-                :to="{ name: 'singleproduct', params: { slug: product.slug } }"
-                class="product-btn"
-                >مشاهده محصول</router-link
-              >
-            </div>
+            <router-link class="product-info"
+              :to="{ name: 'singleproduct', params: { slug: product.slug } }"
+            >
+              <img
+                :class="{ blurimg: !product.available }"
+                class="img-box"
+                :src="product.picture[0].picture"
+                alt=""
+              />
+              <div class="products-cost">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <h4 class="product-cost">
+                  <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
+                  >تومان
+                </h4>
+                <p class="available" v-if="!product.available">
+                  کالای مورد نظر موجود نیست!
+                </p>
+                <router-link
+                  :to="{
+                    name: 'singleproduct',
+                    params: { slug: product.slug },
+                  }"
+                  class="product-btn"
+                  >مشاهده محصول</router-link
+                >
+              </div>
+            </router-link>
           </div>
         </div>
       </slide>
-      <slide>
+      <!-- <slide>
         <router-link class="show" to="/products">
           <div class="box">
             <div class="show-more">
@@ -54,22 +61,13 @@
             </div>
           </div>
         </router-link>
-      </slide>
+      </slide> -->
     </carousel>
-    <div class="u-center mybtn">
+    <!-- <div class="u-center mybtn">
       <div class="btn-btn">
         <a class="total-probtn" href="#">مشاهده همه</a>
       </div>
-    </div>
-    <svg class="svg" height="1" width="98%">
-      <line
-        x1="10%"
-        y1="0"
-        x2="92%"
-        y2="0"
-        style="stroke: rgb(255, 69, 0); stroke-width: 0.5"
-      />
-    </svg>
+    </div> -->
   </div>
 </template>
 
@@ -83,9 +81,7 @@ export default {
     Slide,
   },
   data() {
-    return {
-     
-    };
+    return {};
   },
   computed: {
     MostSellProducts() {
@@ -107,6 +103,10 @@ export default {
 .u-center {
   margin: 70px 0 50px 0;
   text-align: center;
+}
+.product-info{
+  text-decoration: none;
+  color: black;
 }
 .available {
   font-size: 12px;
@@ -175,18 +175,15 @@ h2:after {
 h2:before {
   right: 0.5em;
   margin-left: -50%;
-  // margin-top: 10px;
 }
 
 h2:after {
   left: 0.5em;
   margin-right: -50%;
-    margin-top: 8px;
-
+  margin-top: 8px;
 }
 .box {
   height: 420px;
-  // width: 210px;
   border: 1px solid black;
   margin: 0 5px;
   border-radius: 10px;
@@ -195,6 +192,10 @@ h2:after {
 .swiper {
   width: 80%;
   margin: 0 auto;
+  margin-top: 15rem;
+  @media screen and (max-width: 880px) {
+    margin-top: 2rem;
+  }
 }
 .img-box {
   width: 100%;
@@ -211,16 +212,12 @@ h2:after {
 .product-name {
   font-size: 18px;
   margin-bottom: 2px;
-  // @media screen and (max-width: 700px) {
-  //   font-size: 15px;
-  //  }
 }
 .product-cost {
   font-size: 14px;
   margin-bottom: 15px;
   @media screen and (max-width: 700px) {
     margin-bottom: 2rem;
-    // font-size: 18px;
   }
 }
 .product-btn {
