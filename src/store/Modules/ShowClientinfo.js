@@ -52,7 +52,8 @@ const actions = {
                 'Authorization': 'Bearer ' + Vue.cookie.get('Sakura')
             }
         }).then(response => {
-            console.log("user panel", response.body);
+            // console.log("user panel", response.body);
+            console.log(response.status)
             store.dispatch("Getinformtion")
             Vue.swal("انجام شد", "اطلاعات ویرایش شد", "success");
         }).catch(() => {

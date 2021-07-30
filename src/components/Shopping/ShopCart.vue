@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="total-shop" v-if="IsAuthenticated && getCountOrder != 0">
-      <h1 class="heading-secondary">سبد خرید</h1>
+      <!-- <h1 class="heading-secondary">سبد خرید</h1> -->
       <div class="shopping-cart">
         <div class="column-labels">
           <label class="product-image">عکس ها</label>
@@ -41,9 +41,11 @@
               <br />
             </p>
           </div>
-          <div class="product-price">
+          <div class="product-price" style="direction:rtl">
             {{ order.product_cost.cost.toLocaleString() }}
             <span class="toman">تومان</span>
+            <span class="toman bargain">150تومان تخفیف</span>
+            
           </div>
 
           <div class="product-quantity">
@@ -99,11 +101,13 @@
               حذف
             </button>
           </div>
-          <div class="product-line-price">
+          <div class="product-line-price" style="direction:rtl">
             {{ order.price.toLocaleString() }}
             <span class="toman">تومان</span>
           </div>
         </div>
+
+        
 
         <div class="totals">
           <div class="totals-item">
@@ -316,7 +320,12 @@ export default {
   padding: 50px;
   border-radius: 15px;
 }
-
+.bargain{
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+}
 .shop-bag {
   font-size: 80px;
   margin: 20px 0px;
@@ -379,8 +388,10 @@ font-size: 10px;
 $color-primary-dark: orange;
 $color-primary-light: orangered;
 .heading-secondary {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  float: right;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  margin-top: -2rem;
   font-weight: 700;
   background-image: linear-gradient(
     to right,
@@ -408,32 +419,34 @@ $font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 
 /* Global "table" column settings */
 .product-image {
-  float: left;
-  width: 30%;
+  float: right;
+  width: 25%;
+  // background-color: red;
   height: 20%;
 }
 .product-details {
-  float: left;
-  width: 15%;
+  float: right;
+  width: 20%;
+  // background-color: yellow;
 }
 .product-price {
-  float: left;
+  float: right;
   text-align: center;
   width: 24%;
 }
 .product-quantity {
-  float: left;
+  float: right;
   width: 10%;
 }
 .product-removal {
-  float: left;
+  float: right;
   width: 9%;
   color: orangered;
 }
 .product-line-price {
-  float: left;
+  float: right;
   width: 12%;
-  text-align: right;
+  text-align: center;
 }
 
 /* This is used as the traditional .clearfix class */
@@ -486,10 +499,12 @@ label {
     border-bottom: 1px solid $color-border;
   }
   .product-details {
-    text-indent: 50px;
+    // text-indent: 150px;
+    text-align: right;
   }
   .product-image {
-    text-indent: -9998px;
+    text-align: right;
+    // text-indent: -9999px;
   }
   .product-removal {
     text-indent: 5px;
@@ -503,7 +518,7 @@ label {
   border-bottom: 1px solid $color-border;
 
   .product-image {
-    text-align: center;
+    text-align: right;
     img {
       width: 100px;
     }
@@ -513,6 +528,7 @@ label {
     .product-title {
       margin-right: 20px;
       direction: rtl;
+      // background-color: red;
       font-weight: bold;
     }
     .product-description {
@@ -541,11 +557,12 @@ label {
 /* Totals section */
 .totals {
   .totals-item {
-    float: right;
-    clear: both;
-    direction: rtl;
+    float: left;
+    // clear: both;
+    direction: ltr;
     width: 100%;
     margin-bottom: 10px;
+    // background-color: red;
 
     label {
       float: left;
@@ -559,9 +576,6 @@ label {
       width: 21%;
       text-align: right;
     }
-  }
-
-  .totals-item-total {
   }
 }
 
@@ -601,7 +615,7 @@ font-size: 15px;
     float: right;
     width: auto;
     img {
-      margin: 0 0 10px 10px;
+      margin: 0 0 10px 40px;
     }
   }
 
@@ -619,16 +633,19 @@ font-size: 15px;
   .product-quantity {
     width: 100px;
     .counter-counter {
-      margin-left: 20px;
+      margin-left: 7px;
+      margin-top: 15px;
     }
   }
 
   .product-removal {
     width: auto;
+    float: left;
+    margin-right: 30px;
   }
 
   .product-line-price {
-    float: right;
+    float: left;
     width: 70px;
   }
 }
@@ -636,12 +653,12 @@ font-size: 15px;
 /* Make more adjustments for phone */
 @media screen and (max-width: 350px) {
   .product-removal {
-    float: right;
+    float: left;
   }
 
   .product-line-price {
-    float: right;
-    clear: left;
+    float: left;
+    clear: right;
     width: auto;
     margin-top: 10px;
   }
@@ -649,7 +666,7 @@ font-size: 15px;
   .totals {
     .totals-item {
       label {
-        width: 60%;
+        width: 20%;
       }
 
       .totals-value {
