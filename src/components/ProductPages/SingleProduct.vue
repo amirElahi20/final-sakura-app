@@ -5,37 +5,33 @@
         <img
           v-for="(pic, I) in SingleProduct.picture"
           :key="I"
-          :src="pic.picture"
+          :src="src"
           class="product-img"
           alt=""
         />
-        <h1 class="product-cost-cost" v-if="SingleProduct.product_cost">
-          {{ SingleProduct.product_cost[select].cost }}
-          <span>تومان</span>
-        </h1>
-        <a
-          @click="
-            AddToOrder(SingleProduct.id, SingleProduct.product_cost[select].id)
-          "
-          class="addbasket"
-        >
-          <h3 class="addtobasket">
-            افزودن به سبد خرید<font-awesome-icon
-              class="fa"
-              icon="shopping-cart"
-            />
-          </h3>
-        </a>
+        <div class="images">
+          <img
+            class="small-img"
+            src="../../../public/img/oriol-portell-bL6VgDDsS8M-unsplash.jpg"
+            alt=""
+          />
+          <img
+          @click="SelectProductImage"
+            class="small-img"
+            src="../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg"
+            alt=""
+          />
+           <img
+          @click="SelectProductImage"
+            class="small-img"
+            src="../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg"
+            alt=""
+          />
+        </div>
       </div>
       <div class="left">
         <div class="product-info">
-          <h2 class="product-name">{{ SingleProduct.name }}</h2>
-          <div class="product-explain">
-            <h4>توضیح محصول :</h4>
-            <p class="product-paragraph">
-              {{ SingleProduct.description }}
-            </p>
-          </div>
+          <h2 class="product-name pname">{{ SingleProduct.name }}</h2>
           <div class="pack-type">
             <h3 class="title-pack">نوع بسته بندی را انتخاب کنید</h3>
             <img
@@ -96,30 +92,65 @@
               -
             </button>
           </footer>
-          <div class="properties">
-            <h4>خواص محصول :</h4>
-            <ol>
-              <li>سلامت دندان</li>
-              <li>پتاسیم</li>
-              <li>رفع یبوست</li>
-              <li>سلامت دندان</li>
-              <li>پتاسیم</li>
-              <li>رفع یبوست</li>
-              <li>سلامت دندان</li>
-              <li>پتاسیم</li>
-              <li>رفع یبوست</li>
-              <li>سلامت دندان</li>
-              <li>پتاسیم</li>
-              <li>رفع یبوست</li>
-            </ol>
+          <div class="basket-info">
+            <h1 class="product-cost-cost" v-if="SingleProduct.product_cost">
+              {{ SingleProduct.product_cost[select].cost }}
+              <span>تومان</span>
+            </h1>
+            <a
+              @click="
+                AddToOrder(
+                  SingleProduct.id,
+                  SingleProduct.product_cost[select].id
+                )
+              "
+              class="addbasket"
+            >
+              <h3 class="addtobasket">
+                افزودن به سبد خرید<font-awesome-icon
+                  class="fa"
+                  icon="shopping-cart"
+                />
+              </h3>
+            </a>
           </div>
         </div>
       </div>
+      <div class="middle">
+        <div class="properties">
+          <h4>خواص محصول :</h4>
+          <ol>
+            <li>سلامت دندان</li>
+            <li>پتاسیم</li>
+            <li>رفع یبوست</li>
+            <li>سلامت دندان</li>
+            <li>پتاسیم</li>
+            <li>رفع یبوست</li>
+            <li>سلامت دندان</li>
+            <li>پتاسیم</li>
+            <li>رفع یبوست</li>
+            <li>سلامت دندان</li>
+            <li>پتاسیم</li>
+            <li>رفع یبوست</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="description">
+      <h3 class="desc-title">توضیحات محصول :</h3>
+      <p class="desc-explain">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum ut
+        obcaecati, natus perferendis illum nesciunt enim totam, iusto officia
+        maiores numquam at quis vero illo ratione excepturi magnam blanditiis
+        atque consequuntur temporibus veniam quia! Qui cum obcaecati, non quas
+        at autem veniam harum laboriosam voluptates ut excepturi, ipsum pariatur
+        repudiandae.
+      </p>
     </div>
 
     <!-- **********
     *************************
-    this isstart of  reponsive page of single prodict pages
+    this is start of  reponsive page of single prodict pages
     ******************************
     ********************************** -->
     <div class="class-box">
@@ -131,9 +162,28 @@
           v-for="(pic, I) in SingleProduct.picture"
           :key="I"
           :src="pic.picture"
-          class="product-img"
+          class="product-img2"
           alt=""
         />
+        <div class="images">
+          <img
+            class="small-img"
+            src="../../../public/img/oriol-portell-bL6VgDDsS8M-unsplash.jpg"
+            alt=""
+          />
+          <img
+          @click="SelectProductImage"
+            class="small-img"
+            src="../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg"
+            alt=""
+          />
+           <img
+          @click="SelectProductImage"
+            class="small-img"
+            src="../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg"
+            alt=""
+          />
+        </div>
         <div class="cost-box-product">
           <h1 class="cost-of-product" v-if="SingleProduct.product_cost">
             {{ SingleProduct.product_cost[select].cost }}
@@ -146,9 +196,12 @@
           "
           class="addbasket"
         >
-          <h3 :class="{addtobasket2 :scrollPosition <=920,
-          scrollbasket : scrollPosition >= 920
-          }">
+          <h3
+            :class="{
+              addtobasket2: scrollPosition <= 920,
+              scrollbasket: scrollPosition >= 920,
+            }"
+          >
             <font-awesome-icon class="fa" icon="shopping-cart" />افزودن به سبد
             خرید
           </h3>
@@ -221,19 +274,18 @@
         >
           <h4>خواص محصول :</h4>
           <div class="list-ol">
-          <ol>
-            <li>سلامت دندان</li>
-            <li>پتاسیم</li>
-            <li>رفع یبوست</li>
-            <li>سلامت دندان</li>
-          </ol>
-          <ol>
-            <li>رفع یبوست</li>
-            <li>سلامت دندان</li>
-            <li>پتاسیم</li>
-            <li>رفع یبوست</li>
-          </ol>
-
+            <ol>
+              <li>سلامت دندان</li>
+              <li>پتاسیم</li>
+              <li>رفع یبوست</li>
+              <li>سلامت دندان</li>
+            </ol>
+            <ol>
+              <li>رفع یبوست</li>
+              <li>سلامت دندان</li>
+              <li>پتاسیم</li>
+              <li>رفع یبوست</li>
+            </ol>
           </div>
         </div>
       </div>
@@ -316,6 +368,8 @@ export default {
       array: 0,
       isSticky: false,
       scrollPosition: 0,
+      CurrentPic : 1,
+      src : require('../../../public/img/oriol-portell-bL6VgDDsS8M-unsplash.jpg')
     };
   },
   components: {
@@ -358,6 +412,16 @@ export default {
       this.packet = true;
       this.select = 0;
     },
+    ChangeProductImage(){
+      if(this.CurrentPic == 2){
+       this.src = require('../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg')
+      }
+    },
+    SelectProductImage(){
+      this.CurrentPic = 2;
+      // alert(this.CurrentPic)
+      this.ChangeProductImage()
+    },
     updateScroll() {
       this.scrollPosition = window.scrollY;
       if (this.scrollPosition >= 100) {
@@ -397,6 +461,10 @@ export default {
   margin-bottom: 0.4rem;
   font-size: 20px;
 }
+.middle {
+  // background-color: red;
+  margin-right: 40px;
+}
 .input-count2 {
   width: 20%;
   padding-top: 5px;
@@ -415,23 +483,42 @@ export default {
   // width: 100%;
 }
 .properties {
-  text-align: right;
+  // text-align: right;
+  // text-align: center;
   margin-top: 15px;
+}
+.basket-info {
+  // background-color: red;
+  width: 60%;
+  margin: 80px 15px 0 0;
 }
 .properties ol {
   list-style: none;
-  margin-right: 15px;
+  // margin-right: 15px;
   // display: flex;
   // flex-wrap: wrap;
   // justify-content: flex-start;
 }
-.list-ol{
+.fa{
+  margin-right: 10px;
+  font-size: 20px;
+}
+.images{
+  display: flex;
+  justify-content: space-around;
+}
+.small-img {
+  width: 30%;
+  height: 110px;
+  // margin-left: 5px;
+  border-radius: 10px;
+}
+.list-ol {
   display: flex;
 }
 .properties ol li {
   margin-left: 35px;
-    text-align: right;
-
+  text-align: right;
 }
 .count-box2 h5 {
   text-align: center;
@@ -445,7 +532,12 @@ export default {
   text-decoration: none;
   color: black;
 }
-.scrollbasket{
+.description{
+  width: 80%;
+  direction: rtl;
+  margin: 0 auto;
+}
+.scrollbasket {
   background-color: orange;
   color: white;
   position: fixed;
@@ -458,7 +550,6 @@ export default {
   text-align: center;
   margin: 0 auto;
   z-index: 99999999;
-  
 }
 .format2 {
   width: 50%;
@@ -524,12 +615,13 @@ export default {
   @media screen and (max-width: 500px) {
     width: 70%;
   }
-  @media screen and (max-width: 922px) {
+  @media screen and (max-width: 1220px) {
     display: flex;
   }
 }
 .product-img2 {
   width: 100%;
+  height: 220px;
   border-radius: 10px;
 }
 
@@ -544,7 +636,8 @@ export default {
 
 .product-img {
   width: 100%;
-  height: 300px;
+  height: 70%;
+  // background-color: red;
   border-radius: 10px;
 }
 .singleproduct {
@@ -559,7 +652,8 @@ export default {
   direction: rtl;
   display: flex;
   flex-wrap: wrap;
-  @media screen and (max-width: 922px) {
+  justify-content: space-around;
+  @media screen and (max-width: 1220px) {
     display: none;
   }
 }
@@ -591,8 +685,9 @@ export default {
 .addtobasket {
   text-align: center;
   margin-top: 10px;
+  // height: 50px;
   background-color: orangered;
-  padding: 1px 0;
+  padding: 12px 0;
   border-radius: 10px;
   color: white;
   transition: all 0.4s;
@@ -610,7 +705,8 @@ export default {
 }
 .left {
   margin-right: 70px;
-  width: 50%;
+  // background-color: yellow;
+  width: 40%;
   @media screen and (max-width: 1096px) {
     width: 60%;
   }
@@ -707,8 +803,15 @@ export default {
   direction: rtl;
 }
 .product-name {
-  font-size: 18px;
-  margin-bottom: 2px;
+  font-size: 25px;
+  margin-bottom: 0.3rem;
+
+}
+.pname{
+  text-align: center;
+  margin-top: -20px;
+  margin-left: 145px;
+  border-bottom: 1px solid black;
 }
 .product-cost {
   font-size: 14px;
