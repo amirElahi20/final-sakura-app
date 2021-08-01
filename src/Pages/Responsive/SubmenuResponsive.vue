@@ -4,11 +4,45 @@
       <font-awesome-icon icon="times" @click="closeMenu" class="close-icon" />
       <ul class="list">
         <li>
-          <router-link to="/">خانه</router-link>
+          <a href="/" class="sub-links"
+            ><font-awesome-icon class="sub-menu-icon" icon="home" /> خانه</a
+          >
         </li>
-        <li><router-link to="/products">محصولات</router-link></li>
-        <li><router-link to="/products">ارتباط با ما</router-link></li>
-        <li><router-link to="/products">درباره ما</router-link></li>
+        <li>
+          <a class="sub-links" href="/shopcart"
+            ><font-awesome-icon class="sub-menu-icon" icon="shopping-cart" />
+            سبدخرید</a
+          >
+        </li>
+        <li>
+          <a class="sub-links" href="/products"
+            ><font-awesome-icon class="sub-menu-icon" icon="box" /> محصولات</a
+          >
+        </li>
+        <li>
+          <a class="sub-links" href="/contactus"
+            ><font-awesome-icon class="sub-menu-icon" icon="phone" /> ارتباط با
+            ما</a
+          >
+        </li>
+        <li>
+          <a class="sub-links" href="/aboutus"
+            ><font-awesome-icon class="sub-menu-icon" icon="comments" /> درباره
+            ما</a
+          >
+        </li>
+        <li>
+          <a class="sub-links" href="/login"
+            ><font-awesome-icon class="sub-menu-icon" icon="sign-in-alt" />
+            ورود</a
+          >
+        </li>
+        <li>
+          <a @click="signOut" class="sub-links" href="/aboutus"
+            ><font-awesome-icon class="sub-menu-icon" icon="sign-out-alt" />
+            خروج</a
+          >
+        </li>
       </ul>
       <details
         v-for="(title, index) in SubMenus"
@@ -32,6 +66,7 @@
 </template>
 
 <script>
+import Vue from "vue";
 export default {
   data() {
     return {
@@ -47,6 +82,31 @@ export default {
     getIndex(id) {
       console.log("right id", id);
       this.resId = id;
+    },
+    signOut() {
+      Vue.swal({
+        title: "خارج میشوید؟؟",
+        text: "مطمئن هستید؟؟",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "بله خارج میشوم",
+        cancelButtonText: "خیر ، کنسل کن",
+        showCloseButton: true,
+        showLoaderOnConfirm: true,
+      }).then((result) => {
+        if (result.value) {
+          this.$store.dispatch("SignOutUser");
+
+          this.$swal(
+            "خارج شدید",
+            "از سایت خارج شدید ، برای خرید میتوانید مجددا وارد شوید",
+            "success"
+          );
+          this.$router.push("/");
+        } else {
+          this.$swal("کنسل شد", "همچنان در سایت هستید", "info");
+        }
+      });
     },
     leftIndex(id) {
       console.log("left id", id);
@@ -87,9 +147,6 @@ export default {
   direction: rtl;
 }
 .sub-title {
-  // margin-right: -40px;
-  // direction: rtl;
-  // text-align: center;
   font-size: 15px;
 }
 .details {
@@ -101,6 +158,8 @@ export default {
 }
 details > summary {
   list-style-type: none;
+  margin-bottom: 1rem;
+  outline: none;
 }
 
 details > summary::-webkit-details-marker {
@@ -108,14 +167,15 @@ details > summary::-webkit-details-marker {
 }
 
 details > summary::after {
-  content: "\2190";
+  // content: "\2190"
+  content: "\21B6";
   margin-right: 5px;
   font-size: 15px;
   font-weight: bold;
 }
 
 details[open] > summary::after {
-  content: "\2193";
+  content: "\21BB";
   padding-right: 0px;
   vertical-align: middle;
   font-weight: bold;
@@ -152,7 +212,7 @@ h2:after {
 }
 
 .sub-menu {
-  width: 40%;
+  width: 50%;
   height: 100vh;
   color: black;
   text-align: right;
@@ -163,10 +223,28 @@ h2:after {
   z-index: 999;
   position: fixed;
   direction: rtl;
+  overflow-y: scroll;
   top: 0;
   right: 0;
   @media screen and (max-width: 670px) {
     font-size: 12px;
   }
+}
+.sub-title {
+  margin-top: 15px;
+}
+.sub-links {
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+}
+.sub-menu-icon {
+  // color: orangered;
+  margin-left: 5px;
+  font-size: 15px;
+}
+li {
+  // background-color: red;
+  padding: 10px 0px;
 }
 </style>

@@ -22,45 +22,45 @@
         </header>
         <ul class="nav">
           <li @click="hide">
-            <router-link to="/UserDashboard/Account" @click="hide">
+            <a href="/UserDashboard/Account">
               <font-awesome-icon icon="tachometer-alt"></font-awesome-icon>
               مشاهده حساب کاربری
-            </router-link>
+            </a>
           </li>
           <li @click="hide">
-            <router-link to="/UserDashboard/edit">
+            <a href="/UserDashboard/edit">
               <font-awesome-icon icon="edit"></font-awesome-icon>
               ویرایش حساب کاربری
-            </router-link>
+            </a>
           </li>
           <li @click="hide">
-            <router-link to="/UserDashboard/changepass">
+            <a href="/UserDashboard/changepass">
               <font-awesome-icon icon="lock"></font-awesome-icon>
               تغییر رمز
-            </router-link>
+            </a>
           </li>
           <li @click="hide">
-            <router-link to="/UserDashboard/purches">
+            <a href="/UserDashboard/purches">
               <font-awesome-icon icon="newspaper"></font-awesome-icon>
               فاکتورهای من
-            </router-link>
+            </a>
           </li>
           <li @click="hide">
-            <router-link to="/UserDashboard/orders">
+            <a href="/UserDashboard/orders">
               <font-awesome-icon icon="shopping-bag"></font-awesome-icon>
               سفارش های من
-            </router-link>
+            </a>
           </li>
           <li @click="hide">
-            <router-link to="/UserDashboard/tickets">
+            <a href="/UserDashboard/tickets">
               <font-awesome-icon icon="question"></font-awesome-icon>
               سوالات من
-            </router-link>
+            </a>
           </li>
           <li>
-            <router-link to="/" class="back-btn"
+            <a href="/" class="back-btn"
               ><font-awesome-icon icon="undo"></font-awesome-icon> بازگشت به
-              صفحه اصلی</router-link
+              صفحه اصلی</a
             >
           </li>
           <li>
@@ -170,7 +170,7 @@ body {
   // display: block;
   margin-right: -250px;
   overflow-y: auto;
-  background: rgb(182, 181, 181);
+  background: whitesmoke;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
