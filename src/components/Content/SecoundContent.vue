@@ -37,13 +37,15 @@
       </div>
     </section>
     <mostsell-product></mostsell-product>
+    <best-product></best-product>
   </div>
 </template>
 
 <script>
+import BestProduct from './BestProduct.vue';
 import MostsellProduct from "./MostsellProduct.vue";
 export default {
-  components: { MostsellProduct },
+  components: { MostsellProduct, BestProduct },
   computed:{
     showImg(){
       return this.$store.getters.GetImg

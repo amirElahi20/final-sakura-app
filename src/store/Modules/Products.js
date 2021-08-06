@@ -2,7 +2,7 @@ import Vue from "vue";
 
 const state = {
     MostSellProducts: [],
-    BestProducts: [],
+    LastProducts: [],
     Products: [],
     SingleProduct: {},
     SimilarProduct: {}
@@ -12,8 +12,8 @@ const getters = {
     GetMostSellProducts(state) {
         return state.MostSellProducts
     },
-    GetBestProducts(state) {
-        return state.BestProducts
+    GetLastProducts(state) {
+        return state.LastProducts
     },
     GetProducts(state) {
         return state.Products
@@ -30,8 +30,8 @@ const mutations = {
     SetMostSellProducts(state, mostSellProducts) {
         state.MostSellProducts = mostSellProducts;
     },
-    SetBestProducts(state, bestProducts) {
-        state.BestProducts = bestProducts;
+    SetLastProducts(state, bestProducts) {
+        state.LastProducts = bestProducts;
     },
     SetProducts(state, products) {
         state.Products = products
@@ -49,16 +49,16 @@ const actions = {
         Vue.http.get('product/api/v1/top_product/', {
             responseType: 'json'
         }).then(response => {
-            // console.log(response)
-            context.commit('SetMostSellProducts', response.body)
+            // console.log("Get most sell product from server", response.data)
+            context.commit('SetMostSellProducts', response.data)
         })
     },
-    GetBestProductsFromServer(context) {
-        Vue.http.get('product/api/v1/best_product/', {
+    GetLastProductsFromServer(context) {
+        Vue.http.get('product/api/v1/last_product/', {
             responseType: 'json'
         }).then(response => {
-            // console.log(response)
-            context.commit('SetBestProducts', response.body)
+            console.log("last product ", response.data)
+            context.commit('SetLastProducts', response.data)
         })
 
     },
@@ -81,7 +81,7 @@ const actions = {
     },
     // product/api/v1/similar_product/موز/
     GetSimilarProductsFromServer(context, name) {
-        console.log("similar product slug", name.slug)
+        // console.log("similar product slug", name.slug)
         Vue.http.get('product/api/v1/similar_product/' + name.slug)
             .then(response => {
                 return response.json()

@@ -112,6 +112,9 @@ export default {
     width: 100%;
     border-bottom: 1px solid black;
     background-color: whitesmoke;
+     @media only screen and (max-width: 1100px){
+border-bottom: 0px;
+  }
 
 }
 .menu {

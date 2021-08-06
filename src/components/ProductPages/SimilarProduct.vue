@@ -1,9 +1,8 @@
 <template>
   <div class="swiper">
-    <!-- {{root}} -->
-      <!-- {{MostSellProducts.picture[0].picture}} -->
+
     <div class="u-center">
-      <h2 class="header-title">پرفروش ترین محصولات</h2>
+      <h2 class="header-title">محصولات مشابه</h2>
     </div>
     <carousel
       :per-page-custom="[
@@ -56,22 +55,9 @@
           </div>
         </div>
       </slide>
-      <!-- <slide>
-        <router-link class="show" to="/products">
-          <div class="box">
-            <div class="show-more">
-              <font-awesome-icon class="fa" icon="chevron-circle-right" />
-              <h3>مشاهده همه محصولات</h3>
-            </div>
-          </div>
-        </router-link>
-      </slide> -->
+
     </carousel>
-    <!-- <div class="u-center mybtn">
-      <div class="btn-btn">
-        <a class="total-probtn" href="#">مشاهده همه</a>
-      </div>
-    </div> -->
+
   </div>
 </template>
 
@@ -92,12 +78,12 @@ export default {
   },
   computed: {
     MostSellProducts() {
-      return this.$store.getters.GetMostSellProducts;
+      return this.$store.getters.GetSimilarProduct;
     },
   },
   created() {
     if (this.MostSellProducts.length == 0) {
-      this.$store.dispatch("GetMostSellProductsFromServer");
+      this.$store.dispatch("GetSimilarProductsFromServer");
     }
   },
 };
@@ -108,7 +94,7 @@ export default {
 
 <style lang="scss" scoped>
 .u-center {
-  margin: 70px 0 50px 0;
+  margin: 0px 0 50px 0;
   text-align: center;
 }
 .product-info{

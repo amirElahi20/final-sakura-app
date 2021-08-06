@@ -1,10 +1,9 @@
 <template>
   <div class="swiper">
-    <!-- {{root}} -->
-      <!-- {{MostSellProducts.picture[0].picture}} -->
     <div class="u-center">
-      <h2 class="header-title">پرفروش ترین محصولات</h2>
+      <h2 class="header-title">جدیدترین محصولات</h2>
     </div>
+    <!-- {{LastProduct}} -->
     <carousel
       :per-page-custom="[
         [1200, 5],
@@ -22,16 +21,15 @@
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
-          <!-- {{product.picture[0].picture}} -->
           <div class="product-informartion">
-            <router-link class="product-info"
+            <router-link
+              class="product-info"
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
             >
               <img
                 :class="{ blurimg: !product.available }"
                 class="img-box"
                 :src="`https://api.sdriedf.ir` + product.picture[0].picture"
-                
                 alt=""
               />
               <div class="products-cost">
@@ -56,22 +54,7 @@
           </div>
         </div>
       </slide>
-      <!-- <slide>
-        <router-link class="show" to="/products">
-          <div class="box">
-            <div class="show-more">
-              <font-awesome-icon class="fa" icon="chevron-circle-right" />
-              <h3>مشاهده همه محصولات</h3>
-            </div>
-          </div>
-        </router-link>
-      </slide> -->
     </carousel>
-    <!-- <div class="u-center mybtn">
-      <div class="btn-btn">
-        <a class="total-probtn" href="#">مشاهده همه</a>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -79,7 +62,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import Vue from 'vue';
+import Vue from "vue";
 export default {
   components: {
     Carousel,
@@ -87,17 +70,17 @@ export default {
   },
   data() {
     return {
-      root : Vue.http.options.root
+      root: Vue.http.options.root,
     };
   },
   computed: {
     MostSellProducts() {
-      return this.$store.getters.GetMostSellProducts;
+      return this.$store.getters.GetLastProducts;
     },
   },
   created() {
     if (this.MostSellProducts.length == 0) {
-      this.$store.dispatch("GetMostSellProductsFromServer");
+      this.$store.dispatch("GetLastProductsFromServer");
     }
   },
 };
@@ -108,10 +91,10 @@ export default {
 
 <style lang="scss" scoped>
 .u-center {
-  margin: 70px 0 50px 0;
+  margin: 0px 0 50px 0;
   text-align: center;
 }
-.product-info{
+.product-info {
   text-decoration: none;
   color: black;
 }
