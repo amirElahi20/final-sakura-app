@@ -5,7 +5,8 @@ const state = {
     LastProducts: [],
     Products: [],
     SingleProduct: {},
-    SimilarProduct: {}
+    SimilarProduct: {},
+    SearchProduct: []
 };
 
 const getters = {
@@ -23,6 +24,9 @@ const getters = {
     },
     GetSimilarProduct(state) {
         return state.SimilarProduct
+    },
+    GetSearchProduct(state) {
+        return state.SearchProduct
     }
 };
 
@@ -41,6 +45,9 @@ const mutations = {
     },
     SetSimilarProduct(state, similarproduct) {
         state.SimilarProduct = similarproduct
+    },
+    SetSearchProduct(state, search) {
+        state.SearchProduct = search
     }
 };
 
@@ -79,9 +86,7 @@ const actions = {
                 context.commit("SetSingleProduct", response.data)
             })
     },
-    // product/api/v1/similar_product/موز/
     GetSimilarProductsFromServer(context, name) {
-        // console.log("similar product slug", name.slug)
         Vue.http.get('product/api/v1/similar_product/' + name.slug)
             .then(response => {
                 return response.json()
@@ -90,6 +95,16 @@ const actions = {
                 // console.log("this is slug", name.slug)
                 // console.log("this is similar product", response.body);
                 context.commit("SetSimilarProduct", data)
+            })
+    },
+    GetSearchProductsFromServer(context, name) {
+        console.log("Search slug", name.slug)
+        Vue.http.get('product/api/v1/search/' + name.slug)
+            .then(response => {
+                return response.json()
+            }).then(data => {
+                console.log("search data", data)
+                context.commit("SetSearchProduct", data)
             })
     },
 };

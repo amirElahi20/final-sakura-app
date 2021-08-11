@@ -13,13 +13,12 @@
     <transition name="fade2">
       <div class="popup" v-if="show"></div>
     </transition>
-    <!-- <top-responsive @show="showValue"></top-responsive> -->
     <div class="top-top">
       <font-awesome-icon @click="showSub" class="bars" icon="bars" />
       <div class="contact">
         <ul class="social-icon">
           <li>
-            <a href="">
+            <a :href="GetSlider[0].instagram_id" target="_blank">
               <font-awesome-icon
                 class="instagram insta"
                 :icon="['fab', 'instagram']"
@@ -46,9 +45,9 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="tel:09361231129">
               <font-awesome-icon class="instagram phone" icon="phone" />
-              <h4>021458963</h4>
+              <h4>تماس</h4>
             </a>
           </li>
         </ul>
@@ -63,10 +62,41 @@
       <div class="shop">
         <ul class="shop-ul">
           <li>
-            <a>
+            <a @click="showSearchBox = true">
               <font-awesome-icon class="shop-icon search" icon="search" />
             </a>
           </li>
+          <transition name="fade2">
+            <div v-if="showSearchBox" class="search-box">
+              <div class="close-search">
+                <font-awesome-icon
+                  @click="showSearchBox = false"
+                  class="close-icon"
+                  icon="times"
+                />
+              </div>
+              <div class="right-searchinput">
+                <input
+                  v-model="searchName"
+                  class="search-input"
+                  maxlength="30"
+                  type="text"
+                  placeholder="نام محصول"
+                />
+              </div>
+              <div class="left-searchbtn">
+                <a class="search-btn"
+                  :href="
+                    $router.resolve({
+                      name: 'searchproduct',
+                      params: { slug: searchName.split(' ').join('-') },
+                    }).href
+                  "
+                  >جست و جو</a
+                >
+              </div>
+            </div>
+          </transition>
           <li v-if="!IsAuthenticated">
             <router-link class="shoplink" to="/shopcart">
               <font-awesome-icon class="shop-icon bag" icon="shopping-cart" />
@@ -75,25 +105,23 @@
               </div>
             </router-link>
           </li>
-           <li v-if="IsAuthenticated">
+          <li v-if="IsAuthenticated">
             <router-link class="shoplink" to="/shopcart">
               <font-awesome-icon class="shop-icon bag" icon="shopping-cart" />
               <div class="shop-count">
-                <span class="badge">{{getCountOrder}}</span>
+                <span class="badge">{{ getCountOrder }}</span>
               </div>
             </router-link>
           </li>
           <li v-if="!IsAuthenticated">
             <router-link to="/register" class="login"> ثبت نام </router-link>
-            <router-link to="/login" class="register">
-              وارد شوید
-            </router-link>
+            <router-link to="/login" class="register"> وارد شوید </router-link>
           </li>
-           <li v-if="IsAuthenticated">
-            <router-link to="/UserDashboard/Account" class="login"> {{Username}} </router-link>
-            <a @click="signout" to="/register" class="register">
-              خروج
-            </a>
+          <li v-if="IsAuthenticated">
+            <router-link to="/UserDashboard/Account" class="login">
+              {{ Username }}
+            </router-link>
+            <a @click="signout" to="/register" class="register"> خروج </a>
             <div class="attention">
               <p>باکلیک بر روی نام خود وارد حساب کاربری میشوید</p>
             </div>
@@ -105,7 +133,6 @@
 </template>
 
 <script>
-// import TopResponsive from "../../../Responsive/TopResponsive.vue";
 import Vue from "vue";
 import ClickOutside from "vue-click-outside";
 import SubmenuResponsive from "../../../Responsive/SubmenuResponsive.vue";
@@ -115,10 +142,11 @@ export default {
       subClient: false,
       activeSub: false,
       show: false,
+      showSearchBox: false,
+      searchName: "",
     };
   },
   components: {
-    // TopResponsive,
     SubmenuResponsive,
   },
   computed: {
@@ -128,12 +156,16 @@ export default {
     Username() {
       return this.$store.getters.GetUsername;
     },
-     getCountOrder() {
+    getCountOrder() {
       return this.$store.getters.getCountOrder;
+    },
+    GetSlider() {
+      return this.$store.getters.GetImg;
     },
   },
   created() {
     this.$store.dispatch("checkForLogin");
+    this.$store.dispatch("GetImagesFromServer");
   },
   methods: {
     signout() {
@@ -188,7 +220,7 @@ export default {
   margin-left: 5px;
   font-size: 22px;
 }
-.attention{
+.attention {
   font-size: 12px;
   background-color: orange;
   border-radius: 10px;
@@ -197,7 +229,6 @@ export default {
   width: 90px;
   padding: 5px;
   margin-top: 10px;
-
 }
 .top-top {
   background-color: white;
@@ -210,6 +241,54 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
+.search-box {
+  display: flex;
+  border: 1px solid black;
+  width: 300px;
+  margin-top: -15px;
+  // border-radius: 5px;
+  position: absolute;
+  z-index: 99999;
+  height: 60px;
+  justify-content: space-between;
+  background-color: white;
+}
+.search-input {
+  border: none;
+  width: 200px;
+  height: 100%;
+  text-indent: 10px;
+  font-size: 14px;
+  // padding: 15px;
+}
+.search {
+  cursor: pointer;
+}
+.search-btn {
+  padding: 7px;
+  background-color: orange;
+  border: none;
+  // cursor: not-allowed;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+}
+.left-searchbtn {
+  display: flex;
+  justify-content: center;
+  margin-left: 5px;
+  align-items: center;
+}
+.close-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
 .contact {
   @media screen and (max-width: 1100px) {
     display: none;
@@ -219,7 +298,7 @@ export default {
   font-size: 25px;
   cursor: pointer;
   display: none;
-   @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1100px) {
     display: block;
   }
 }
@@ -278,7 +357,6 @@ export default {
   width: 60px;
 }
 .insta {
-  // font-size: 20px;
   border: 0.1px solid #d6249f;
   color: white;
   border-radius: 5px;
@@ -293,15 +371,12 @@ export default {
 }
 .telegram {
   color: #2693c9;
-  // font-size: 20px;
 }
 .whatsapp {
-  // font-size: 20px;
   color: rgb(6, 184, 6);
 }
 .phone {
   color: black;
-  // font-size: 20px;
 }
 .popup {
   height: 100vh;
@@ -313,171 +388,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.836);
   opacity: 1;
 }
-.shoplink{
+.shoplink {
   text-decoration: none;
   color: black;
 }
-// .sub-client {
-//   background-color: white;
-//   z-index: 999;
-//   position: absolute;
-//   margin-top: 0px;
-//   border-radius: 10px;
-//   margin-right: 114px;
-//   padding: 15px;
-// }
-// .sub-client ul {
-//   list-style: none;
-//   color: black;
-// }
-// .sub-client ul li {
-//   margin-top: 10px;
-// }
-// .sub-client ul li a {
-//   color: black;
-//   transition: all 0.4s;
-//   &:hover {
-//     color: orange;
-//   }
-// }
-// .caret {
-//   margin-right: 10px;
-//   position: absolute;
-//   margin-top: 2px;
-// }
-// .topnav {
-//   padding-top: 20px;
-//   height: 100%;
-//   display: flex;
-
-//   @media screen and (max-width: 900px) {
-//     display: none;
-//   }
-// }
-// .svg {
-//   @media screen and (max-width: 900px) {
-//     display: none;
-//   }
-// }
-
-// .left {
-//   height: 50px;
-// }
-// .right {
-//   height: 50px;
-// }
-// .container {
-//   display: flex;
-//   justify-content: space-between;
-//   direction: rtl;
-//   margin: 0 auto;
-//   width: 79%;
-// }
-// .whatsapp {
-//   transition: all 0.3s;
-//   border-radius: 100px;
-//   font-size: 30px;
-//   padding: 1px;
-// }
-// .whatsapp:hover {
-//   color: green;
-// }
-
-// .telegram {
-//   transition: all 0.3s;
-//   font-size: 30px;
-//   padding: 2px;
-// }
-// .telegram:hover {
-//   color: #2693c9;
-//   background-color: white;
-//   border-radius: 40px;
-// }
-// .instagram {
-//   transition: all 0.4s;
-//   border-radius: 10px;
-//   padding: 2px;
-//   font-size: 30px;
-// }
-// .instagram:hover {
-//   background: radial-gradient(
-//     circle at 30% 107%,
-//     #fdf497 0%,
-//     #fdf497 5%,
-//     #fd5949 45%,
-//     #d6249f 60%,
-//     #285aeb 90%
-//   );
-// }
-// .menu {
-//   display: flex;
-//   list-style: none;
-//   text-decoration: none;
-// }
-// .l li {
-//   padding-right: 10px;
-// }
-// .r li {
-//   padding-left: 30px;
-// }
-// .login {
-//   color: whitesmoke;
-//   background-color: orange;
-//   cursor: pointer;
-//   text-decoration: none;
-//   padding: 8px 25px;
-//   border-radius: 15px;
-//   border: 1px solid gold;
-//   margin-top: -10px;
-//   margin-left: 10px;
-// }
-// .login:active {
-//   color: black;
-// }
-// .login:hover {
-//   color: black;
-//   border: 1px solid gold;
-//   background: white;
-//   transition: all 0.5s;
-
-//   &:hover .tit {
-//     color: black;
-//     transition: all 0.5s;
-//   }
-// }
-// span {
-//   color: white;
-// }
-// a {
-//   text-decoration: none;
-//   cursor: pointer;
-//   color: white;
-//   font-weight: 400;
-//   font-size: 17px;
-// }
-// .fa {
-//   text-decoration: none;
-//   color: white;
-//   font-weight: 400;
-//   font-size: 17px;
-// }
-// .num {
-//   font-family: sans-serif;
-// }
-// .email {
-//   font-family: sans-serif;
-// }
-// span {
-//   padding-left: 3px;
-// }
-// .fade-enter-active,
-// .fade-leave-active {
-//   transition: opacity 0.2s;
-// }
-// .fade-enter,
-// .fade-leave-to {
-//   opacity: 0;
-// }
 .fade2-enter-active,
 .fade2-leave-active {
   transition: opacity 1s;

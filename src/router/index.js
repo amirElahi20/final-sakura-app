@@ -14,6 +14,7 @@ const routes = [{
         component: () =>
             import ('../components/ProductPages/AllProducts.vue')
     },
+
     {
         path: '/aboutus',
         name: 'AboutUs',
@@ -52,6 +53,12 @@ const routes = [{
         name: 'singleproduct',
         component: () =>
             import ('../components/ProductPages/SingleProduct.vue')
+    },
+    {
+        path: '/searchproduct/:slug',
+        name: 'searchproduct',
+        component: () =>
+            import ('../components/ProductPages/SearchProduct.vue')
     },
     {
         path: '/accounts/api/v1/check_confirm_email/:token',
