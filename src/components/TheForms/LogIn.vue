@@ -1,5 +1,14 @@
 <template>
   <div>
+       <loading
+                class="vld-parent"
+                :active="Loading"
+                :is-full-page="fullPage"
+                loader="dots"
+                backgroundColor="#ffffff"
+                color="#FFA500"
+                blue="10px"
+              />
     <div class="log">
       <section class="login">
         <div class="row">
@@ -107,6 +116,10 @@
 
 
 <script>
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
+// import Vue from "vue";
 import {
   required,
   // maxLength,
@@ -121,6 +134,14 @@ export default {
       password: "",
       visibility: "password",
     };
+  },
+    components: {
+    Loading,
+  },
+  computed:{
+    Loading(){
+      return this.$store.getters.GetPending
+    }
   },
   methods: {
     LoginUser() {

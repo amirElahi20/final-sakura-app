@@ -4,7 +4,7 @@
       <div class="right">
         <ul>
           <li
-          :class="{menu_list : sub.id == resId || sub.id == leftId}"
+            :class="{ menu_list: sub.id == resId || sub.id == leftId }"
             @mouseover="getIndex(sub.id)"
             class="menu-list"
             v-for="sub in SubMenus"
@@ -21,14 +21,15 @@
         </ul>
       </div>
       <div v-if="resId != 0" class="left">
-        <ul>
+        <ul class="left-items">
           <li
-          @mouseover="leftIndex(sub.group)"
-          @mouseleave="mouseleave"
+            @mouseover="leftIndex(sub.group)"
+            @mouseleave="mouseleave"
             v-for="sub in SubMenus"
             v-show="sub.group != null && sub.group == resId"
-            :key="sub.id"          >
-            <p>{{ sub.name }}</p>
+            :key="sub.id"
+          >
+              <a href="#" class="product-sub">{{ sub.name }}</a>
           </li>
         </ul>
       </div>
@@ -41,7 +42,7 @@ export default {
   data() {
     return {
       resId: "",
-      leftId : "",
+      leftId: "",
     };
   },
   computed: {
@@ -51,17 +52,17 @@ export default {
   },
   methods: {
     getIndex(id) {
-      console.log("right id",id);
+      console.log("right id", id);
       this.resId = id;
     },
-    leftIndex(id){
-        console.log("left id",id);
-        this.leftId = id;
+    leftIndex(id) {
+      console.log("left id", id);
+      this.leftId = id;
     },
-    mouseleave(){
-        // this.resId = "",
-        this.leftId =""
-    }
+    mouseleave() {
+      // this.resId = "",
+      this.leftId = "";
+    },
   },
   created() {
     this.$store.dispatch("GetSubMenuFromServer");
@@ -73,15 +74,12 @@ export default {
 <style lang="scss" scoped>
 .sub-menu {
   width: 80%;
-  // margin-left: 550px;
   margin-right: 0px;
-  // right: 200px;
   height: auto;
   display: flex;
   margin-top: 10px;
   position: absolute;
-  // margin-right: 0px;
-  justify-content: flex-start;
+  justify-content: start;
 }
 .active {
   background-color: orangered;
@@ -105,15 +103,15 @@ ul {
   padding: 25px 0;
   transition: all 0.4s;
 }
-.menu_list{
-    background-color: orange;
-    color: white;
+.menu_list {
+  background-color: orange;
+  color: white;
 }
-.menu_list a{
-    color: white;
+.menu_list a {
+  color: white;
 }
-.menu_list .icon{
-    color: yellow;
+.menu_list .icon {
+  color: yellow;
 }
 .icon {
   transition: all 0.4s;
@@ -133,5 +131,19 @@ ul {
   float: left;
   margin-left: 15px;
   margin-top: 4px;
+}
+.left-items {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+}
+.left-items li{
+  // background-color: red;
+  padding: 15px;
+}
+.product-sub{
+  color: white;
+  text-decoration: none;
 }
 </style>

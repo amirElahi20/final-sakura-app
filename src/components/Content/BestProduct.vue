@@ -3,7 +3,6 @@
     <div class="u-center">
       <h2 class="header-title">جدیدترین محصولات</h2>
     </div>
-    <!-- {{LastProduct}} -->
     <carousel
       :per-page-custom="[
         [1200, 5],
@@ -21,6 +20,7 @@
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
+          <!-- {{product.picture}} -->
           <div class="product-informartion">
             <router-link
               class="product-info"
@@ -28,10 +28,11 @@
             >
               <img
                 :class="{ blurimg: !product.available }"
-                class="img-box"
-                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+                class="img-box"                
+                :src="`https://api.sdriedf.ir`+ product.picture[0].picture"
                 alt=""
               />
+              
               <div class="products-cost">
                 <h3 class="product-name">{{ product.name }}</h3>
                 <h4 class="product-cost">
@@ -62,7 +63,6 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import Vue from "vue";
 export default {
   components: {
     Carousel,
@@ -70,7 +70,7 @@ export default {
   },
   data() {
     return {
-      root: Vue.http.options.root,
+
     };
   },
   computed: {
@@ -91,8 +91,12 @@ export default {
 
 <style lang="scss" scoped>
 .u-center {
-  margin: 0px 0 50px 0;
+  margin: -150px 0 50px 0;
   text-align: center;
+
+   @media screen and (max-width: 880px) {
+    margin-top: 2rem;
+  }
 }
 .product-info {
   text-decoration: none;

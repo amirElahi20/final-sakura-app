@@ -48,10 +48,18 @@
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
               class="product-info"
             >
-              <img
+                   <img
                 :class="{ blurimg: !product.available }"
                 class="image"
-                :src="product.picture[0].picture"
+                @mouseover="
+                  (src = product.picture[0].picture),
+                    (product.picture[0].picture = product.picture[1].picture),
+                    (product.picture[1].picture = src)"
+                @mouseleave="
+                  (product.picture[1].picture = product.picture[0].picture),
+                    (product.picture[0].picture = src)
+                "
+                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
                 alt=""
               />
               <p class="paragraph">{{ product.name }}</p>

@@ -4,15 +4,19 @@ import router from '../../router/index';
 
 const state = {
     IsUserAuthenticated: false,
-    UserName: ''
+    UserName: '',
+    pendingRequest: false
 };
 
 const getters = {
     IsAuthenticated(state) {
         return state.IsUserAuthenticated;
     },
-    GetUsername() {
+    GetUsername(state) {
         return state.UserName;
+    },
+    GetPending(state) {
+        return state.pendingRequest
     }
 };
 
@@ -32,16 +36,22 @@ const mutations = {
     },
     SetUsername(state, username) {
         state.UserName = username
+    },
+    setPending(state, pending) {
+        state.pendingRequest = pending
     }
 
 };
 
 const actions = {
     RegisterUser(context, registerData) {
+        context.commit("setPending", true)
+
         Vue.http.post('accounts/api/v1/register/', registerData)
             .then((response) => response.json())
             .then((json) => {
-                    // console.log("my json", json);
+                    context.commit("setPending", false)
+
                     if (json.user == false) {
                         Vue.swal("انجام نشد", "نام کاربری تکراری است", "error");
                     } else if (json.email == false) {
@@ -53,22 +63,29 @@ const actions = {
                     }
                 }
 
-            )
+            ).catch(err => {
+                console.log(err)
+                context.commit("setPending", false)
+
+            })
     },
     LoginUser(context, loginData) {
+        context.commit("setPending", true)
         Vue.http.post('accounts/api/v1/obtain_token/', loginData)
             .then(response => {
-                // console.log("this is login", response.body.access)
                 context.commit("SetAuthCookie", response.body.access)
                 context.commit("SetUserAuth", true);
                 store.dispatch("checkForLogin");
                 store.dispatch("CountUserOrders")
                 Vue.swal("انجام شد", "ورود با موفقیت انجام شد", "success");
-
                 router.push('/')
+                context.commit("setPending", false)
+
             }).catch(error => {
                 Vue.swal("انجام نشد", "اطلاعات وارد شده صحیح نیستند", "error");
                 console.log(error)
+                context.commit("setPending", false)
+
             })
     },
     // accounts/api/v1/username/

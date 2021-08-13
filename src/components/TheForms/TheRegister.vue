@@ -1,13 +1,21 @@
 <template>
   <div>
     <div class="log">
+           <loading
+                class="vld-parent"
+                :active="Loading"
+                :is-full-page="fullPage"
+                loader="dots"
+                backgroundColor="#ffffff"
+                color="#FFA500"
+                blue="10px"
+              />
       <section class="login">
         <div class="row">
           <div class="form">
             <div class="form__login">
               <form class="list" @submit.prevent="RegisterUser">
                 <h2 class="topform">ثبت نام</h2>
-
                 <div
                   class="list__group"
                   :class="{ invalid: $v.username.$error }"
@@ -124,6 +132,9 @@
 
 
 <script>
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
 import {
   required,
   maxLength,
@@ -138,7 +149,15 @@ export default {
       password: "",
       email: "",
       visibility: "password",
-    };
+    }
+  },
+     components:{
+      Loading
+    },
+      computed:{
+    Loading(){
+      return this.$store.getters.GetPending
+    }
   },
   validations: {
     email: {
@@ -238,7 +257,7 @@ p {
 .form {
   width: 100%;
   margin: 0 auto;
-  height: 38rem;
+  height: 40rem;
   background-image: linear-gradient(
       105deg,
       rgba(white, 0.9) 0%,

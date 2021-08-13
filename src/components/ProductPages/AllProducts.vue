@@ -6,18 +6,28 @@
           <h2 class="heading-secondary">محصولات</h2>
         </div>
         <div class="row">
-          <div class="box" v-for="product in FilterProducts" :key="product.id">
+          <div class="box"  v-for="product in FilterProducts" :key="product.id">
             <router-link
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
               class="product-info"
             >
+              <transition name="bounce" >
               <img
                 :class="{ blurimg: !product.available }"
                 class="image"
-                :src="product.picture[0].picture"
+                @mouseover="
+                  (src = product.picture[0].picture),
+                    (product.picture[0].picture = product.picture[1].picture),
+                    (product.picture[1].picture = src)"
+                @mouseleave="
+                  (product.picture[1].picture = product.picture[0].picture),
+                    (product.picture[0].picture = src)
+                "
+                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
                 alt=""
               />
-              <p class="paragraph">{{ product.name }}</p>
+              </transition>
+                <p class="paragraph">{{ product.name }}</p>
               <h5 class="cost">
                 {{ product.show_cost.toLocaleString() }} تومان
               </h5>
@@ -39,6 +49,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      show : true
+    };
+  },
   computed: {
     FilterProducts() {
       return this.$store.getters.GetProducts;
@@ -50,6 +65,11 @@ export default {
 };
 </script>
 
+    @mouseover="
+                  (src = product.picture[0].picture),
+                    (product.picture[0].picture = product.picture[1].picture) , 
+                    product.picture[1].picture = src
+                "
 
 <style lang="scss" scoped>
 $color-primary-dark: orange;
@@ -71,7 +91,7 @@ $color-primary-light: orangered;
   text-align: center;
   padding-bottom: 1rem;
 }
-.product-info{
+.product-info {
   color: black;
   text-decoration: none;
 }
@@ -132,7 +152,9 @@ $color-primary-light: orangered;
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content:center;
+  width:85%;
+  margin: 0 auto;
+  justify-content: center;
   // margin-right: 20px;
 }
 .box {
@@ -141,7 +163,7 @@ $color-primary-light: orangered;
   padding: 15px;
   margin-left: 20px;
   margin-top: 20px;
-  width: 250px;
+  width: 310px;
   transition: all 0.5s;
   box-shadow: 0.5rem 1rem 1rem rgba(rgb(163, 158, 158), 0.5);
 
@@ -152,7 +174,7 @@ $color-primary-light: orangered;
     width: 170px;
     // height: 200px;
   }
-   @media screen and (max-width: 380px) {
+  @media screen and (max-width: 380px) {
     width: 100%;
   }
 }
@@ -182,8 +204,33 @@ $color-primary-light: orangered;
   color: white;
   border: 1px solid orange;
   transition: all 0.5s;
-   @media screen and (max-width: 500px) {
+  @media screen and (max-width: 500px) {
     // display: none;
+  }
+}
+// .fade-enter-active,
+// .fade-leave-active {
+//   transition: opacity 3s;
+// }
+// .fade-enter,
+// .fade-leave-to {
+//   opacity: 0;
+// }
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

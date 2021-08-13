@@ -22,7 +22,6 @@
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
-          <!-- {{product.picture[0].picture}} -->
           <div class="product-informartion">
             <router-link class="product-info"
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
@@ -56,22 +55,9 @@
           </div>
         </div>
       </slide>
-      <!-- <slide>
-        <router-link class="show" to="/products">
-          <div class="box">
-            <div class="show-more">
-              <font-awesome-icon class="fa" icon="chevron-circle-right" />
-              <h3>مشاهده همه محصولات</h3>
-            </div>
-          </div>
-        </router-link>
-      </slide> -->
+
     </carousel>
-    <!-- <div class="u-center mybtn">
-      <div class="btn-btn">
-        <a class="total-probtn" href="#">مشاهده همه</a>
-      </div>
-    </div> -->
+
   </div>
 </template>
 

@@ -111,7 +111,7 @@ export default {
     padding-bottom: 1rem;
     width: 100%;
     border-bottom: 1px solid black;
-    background-color: whitesmoke;
+    background-color: orange;
      @media only screen and (max-width: 1100px){
 border-bottom: 0px;
   }
@@ -152,7 +152,7 @@ display: none;
   z-index: 998;
 }
 .scroll {
-  background-color: whitesmoke;
+  background-color: orangered;
   border-radius: 0px;
   margin-top: -150px;
   justify-content: space-around;
@@ -186,7 +186,7 @@ display: none;
 }
 
 a {
-  color: black;
+  color: white;
   font-size: 18px;
   text-decoration: none;
 }

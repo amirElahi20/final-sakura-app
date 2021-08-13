@@ -19,7 +19,6 @@
           </div>
           <div style="direction: rtl" class="count-box">
             <h2>تعداد:</h2>
-            {{ count }}
             <input
               v-model="count"
               class="count"
@@ -121,7 +120,7 @@
           paginationActiveColor="#ff4500"
           :autoplay="true"
           :loop="true"
-          :autoplayTimeout="4000"
+          :autoplayTimeout="2000"
         >
           <slide
             class="slide"
