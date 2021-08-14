@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="slider">
-      <carousel v-if="GetSlider[0]"
+      <carousel
         :per-page="1"
         :mouse-drag="true"
         paginationColor="#ffA400"
@@ -14,11 +14,9 @@
         :loop="true"
         :autoplayTimeout="7000"
       >
-        <slide class="slide">
-          <img :src="GetSlider[0].main_img_1" alt="1" />
-        </slide>
-         <slide class="slide">
-          <img :src="GetSlider[0].main_img_2" alt="2" />
+      {{GetSlider.picture}}
+        <slide class="slide" v-for="pic in GetSlider" :key="pic.id">
+          <img :src="pic.picture" />
         </slide>
       </carousel>
     </div>

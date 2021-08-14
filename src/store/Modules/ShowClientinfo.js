@@ -1,9 +1,11 @@
 import Vue from "vue";
 import store from '..'
+import router from "../../router";
 
 const state = {
     UserClient: [],
-    User: {}
+    User: {},
+    Pending: false
 };
 
 const getters = {
@@ -12,6 +14,9 @@ const getters = {
     },
     getUser(state) {
         return state.User
+    },
+    GetPendingLoading(state) {
+        return state.Pending
     }
 };
 
@@ -21,6 +26,9 @@ const mutations = {
     },
     SetUser(state, user) {
         state.user = user
+    },
+    SetPendingLoading(state, loading) {
+        state.Pending = loading
     }
 };
 
@@ -39,6 +47,7 @@ const actions = {
     },
     Putinformtion(context, User) {
         console.log("this is user", User)
+        context.commit("SetPendingLoading", true)
         Vue.http.put('panel/api/v1/user_information/', {
             user: {
                 username: User.username,
@@ -52,11 +61,19 @@ const actions = {
                 'Authorization': 'Bearer ' + Vue.cookie.get('Sakura')
             }
         }).then(response => {
-            // console.log("user panel", response.body);
+            context.commit("SetPendingLoading", false)
             console.log(response.status)
             store.dispatch("Getinformtion")
             Vue.swal("انجام شد", "اطلاعات ویرایش شد", "success");
+            if (response.data.status == true) {
+                router.push('/')
+                Vue.swal("ایمیل خود را تغییر دادید", "لینک احراز هویت برای ایمیل شما ارسال شد", "success");
+                store.dispatch("SignOutUser")
+
+            }
         }).catch(() => {
+            context.commit("SetPendingLoading", false)
+
             Vue.swal("انجام نشد", "ویرایش اطلاعات موفقیت آمیز نبود", "success");
 
         })

@@ -11,7 +11,7 @@
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
               class="product-info"
             >
-              <transition name="bounce" >
+              <transition name="bounce">
               <img
                 :class="{ blurimg: !product.available }"
                 class="image"
@@ -41,6 +41,7 @@
               </p>
             </router-link>
           </div>
+
         </div>
       </div>
     </div>
@@ -51,7 +52,7 @@
 export default {
   data() {
     return {
-      show : true
+      show : true,
     };
   },
   computed: {
@@ -62,14 +63,15 @@ export default {
   created() {
     this.$store.dispatch("GetProductsFromServer");
   },
+  methods:{
+     hoverOutTimeout: function() {
+        setTimeout(() => { 
+          alert('ok')
+      }, 3000);
+     }
+  }
 };
 </script>
-
-    @mouseover="
-                  (src = product.picture[0].picture),
-                    (product.picture[0].picture = product.picture[1].picture) , 
-                    product.picture[1].picture = src
-                "
 
 <style lang="scss" scoped>
 $color-primary-dark: orange;
@@ -181,7 +183,12 @@ $color-primary-light: orangered;
 .image {
   width: 100%;
   height: 190px;
+transition: all 0.4s;
+  &:hover{
+    transform: scale(1.1);
+  }
 }
+
 .blurimg {
   filter: blur(7px);
 }

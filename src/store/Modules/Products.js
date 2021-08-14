@@ -3,7 +3,7 @@ import Vue from "vue";
 const state = {
     MostSellProducts: [],
     LastProducts: [],
-    Products: [],
+    Products: {},
     SingleProduct: {},
     SimilarProduct: {},
     SearchProduct: []

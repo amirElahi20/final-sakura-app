@@ -204,14 +204,7 @@ export default {
       });
     },
   },
-  // created() {
-  //   this.$store.dispatch("ShowOrderRows");
 
-  //   this.$store.dispatch("GetSinlgeProductsFromServer", {
-  //     slug: this.$route.params.slug,
-  //   });
-
-  // },
 };
 </script>
 
@@ -241,13 +234,7 @@ a.disabled {
   pointer-events: none;
   cursor: not-allowed;
 }
-  //   @media screen and (max-width: 800px){
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     flex-direction: column;
-  // }
-  // direction: rtl;
+
 }
 .left {
   width: 400px;
@@ -288,8 +275,7 @@ a.disabled {
   width: 100%;
   height: 500px;
   @media screen and (max-width: 380px) {
-    // width: 75%;
-    // height: 250px;
+
   }
 }
 .product-info {

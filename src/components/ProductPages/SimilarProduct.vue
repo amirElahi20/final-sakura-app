@@ -21,7 +21,6 @@
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
-          <!-- {{product.picture[0].picture}} -->
           <div class="product-informartion">
             <router-link class="product-info"
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
@@ -33,6 +32,7 @@
                 
                 alt=""
               />
+            </router-link>
               <div class="products-cost">
                 <h3 class="product-name">{{ product.name }}</h3>
                 <h4 class="product-cost">
@@ -51,7 +51,6 @@
                   >مشاهده محصول</router-link
                 >
               </div>
-            </router-link>
           </div>
         </div>
       </slide>
@@ -184,8 +183,9 @@ h2:after {
 }
 .swiper {
   width: 80%;
-  margin: 0 auto;
-  margin-top: 15rem;
+  margin: auto;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
   @media screen and (max-width: 880px) {
     margin-top: 2rem;
   }

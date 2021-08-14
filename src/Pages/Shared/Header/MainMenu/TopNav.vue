@@ -17,8 +17,8 @@
       <font-awesome-icon @click="showSub" class="bars" icon="bars" />
       <div class="contact">
         <ul class="social-icon">
-          <li>
-            <a :href="GetSlider[0].instagram_id" target="_blank">
+          <li v-if="GetInformation[0]">
+            <a :href="GetInformation[0].instagram_id" target="_blank">
               <font-awesome-icon
                 class="instagram insta"
                 :icon="['fab', 'instagram']"
@@ -159,13 +159,14 @@ export default {
     getCountOrder() {
       return this.$store.getters.getCountOrder;
     },
-    GetSlider() {
-      return this.$store.getters.GetImg;
+    GetInformation() {
+      return this.$store.getters.GetSiteInformation;
     },
   },
   created() {
     this.$store.dispatch("checkForLogin");
     this.$store.dispatch("GetImagesFromServer");
+    this.$store.dispatch("GetInformationFromServer");
   },
   methods: {
     signout() {

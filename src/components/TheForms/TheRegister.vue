@@ -149,6 +149,8 @@ export default {
       password: "",
       email: "",
       visibility: "password",
+            fullPage: true,
+
     }
   },
      components:{

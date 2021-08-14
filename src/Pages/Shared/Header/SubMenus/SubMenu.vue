@@ -12,7 +12,7 @@
             :key="sub.id"
           >
             <font-awesome-icon class="icon circle-icon" icon="circle" />
-            <a class="sub-list" href="#">{{ sub.name }}</a>
+            <a class="sub-list">{{ sub.name }}</a>
             <font-awesome-icon
               class="icon angle-icon"
               icon="angle-double-left"
@@ -29,7 +29,16 @@
             v-show="sub.group != null && sub.group == resId"
             :key="sub.id"
           >
-              <a href="#" class="product-sub">{{ sub.name }}</a>
+            <a
+              :href="
+                $router.resolve({
+                  name: 'singleproduct',
+                  params: { slug: sub.slug },
+                }).href
+              "
+              class="product-sub"
+              >{{ sub.name }}</a
+            >
           </li>
         </ul>
       </div>
@@ -92,7 +101,7 @@ export default {
 .left {
   color: white;
   width: 80%;
-  background-color: orange;
+  background-color: rgb(97, 96, 96);
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -106,6 +115,7 @@ ul {
 .menu_list {
   background-color: orange;
   color: white;
+  cursor: pointer;
 }
 .menu_list a {
   color: white;
@@ -138,12 +148,17 @@ ul {
   grid-template-columns: repeat(3, 1fr);
   text-align: center;
 }
-.left-items li{
-  // background-color: red;
+.left-items li {
   padding: 15px;
+
+ 
 }
-.product-sub{
+.product-sub {
   color: white;
   text-decoration: none;
+  transition: all 0.4s;
+   &:hover{
+    color: orange;
+  }
 }
 </style>

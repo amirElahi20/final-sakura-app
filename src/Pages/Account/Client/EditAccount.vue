@@ -1,5 +1,14 @@
 <template>
   <div>
+    <loading
+      class="vld-parent"
+      :active="WaitForLoading"
+      :is-full-page="fullPage"
+      loader="dots"
+      backgroundColor="#ffffff"
+      color="#FFA500"
+      blue="10px"
+    />
     <div class="contact-form">
       <div class="second-container">
         <h2>ویرایش</h2>
@@ -25,7 +34,9 @@
               v-model="ShowInfoClient.user.email"
             />
           </div>
-            <p class="alert">توجه کنید اگر ایمیل خود را تغییر دهید باید مجددا احراز هویت کنید</p>
+          <p class="alert">
+            توجه کنید اگر ایمیل خود را تغییر دهید باید مجددا احراز هویت کنید
+          </p>
           <div class="form-group">
             <label for="phone-input">شماره تماس خود را وارد کنید</label>
             <input
@@ -43,6 +54,9 @@
 
 
 <script>
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
 import {
   required,
   maxLength,
@@ -54,8 +68,11 @@ import {
 export default {
   data() {
     return {
-
+      fullPage: true,
     };
+  },
+  components: {
+    Loading,
   },
   validations: {
     title: {
@@ -103,6 +120,9 @@ export default {
     ShowInfoClient() {
       return this.$store.getters.GetInfo;
     },
+    WaitForLoading(){
+      return this.$store.getters.GetPendingLoading
+    }
   },
 };
 </script>
@@ -275,10 +295,10 @@ body {
   text-decoration: none;
   padding: 10px 31.1px;
 }
-.alert{
+.alert {
   font-size: 15px;
   color: red;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 </style>
 

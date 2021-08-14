@@ -1,20 +1,18 @@
 <template>
-  <div>
+  <div v-if="GetInformation[0]">
     <div class="u-center">
-      <h2 class="header-title">فروشگاه ساکورا</h2>
+      <h2 class="header-title">{{GetInformation[0].name}}</h2>
     </div>
     <main class="FirstContent">
       <div class="left">
         <div class="site-info">
-          <h3 class="heading-teritary">تنوع محصول</h3>
+          <h3 class="heading-teritary">{{GetInformation[0].title_1}}</h3>
           <p class="paragraph">
-            جدیدترین محصولات خوراکی را با بهترین کیفیت و مناسب ترین قیمت در
-            ساکورا شاپ پیدا خواهید کرد. تنوع محصولات در اینجا بالاست.
+           {{GetInformation[0].body_1}}
           </p>
-          <h3 class="heading-teritary">با خیال راحت خرید کنید</h3>
+          <h3 class="heading-teritary">{{GetInformation[0].title_2}}</h3>
           <p class="paragraph">
-            در کمترین زمان و با خیال راحت خرید خود را انجام دهید. محصولات در
-            کوتاه ترین زمان ممکن به دستتان خواهد رسید
+           {{GetInformation[0].body_2}}
           </p>
           <router-link to="/aboutus" class="btn-text"
             >درباره ما &larr;</router-link
@@ -60,6 +58,9 @@ export default {
   computed: {
     getImages() {
       return this.$store.getters.GetImg;
+    },
+      GetInformation() {
+      return this.$store.getters.GetSiteInformation;
     },
   },
 };

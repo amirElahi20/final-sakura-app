@@ -133,6 +133,8 @@ export default {
       username: "",
       password: "",
       visibility: "password",
+            fullPage: true,
+
     };
   },
     components: {
