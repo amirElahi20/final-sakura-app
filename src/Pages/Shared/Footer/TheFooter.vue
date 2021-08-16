@@ -18,11 +18,18 @@
         $route.name == 'FrequentlyAskedQuestions',
     }"
   >
-    <!--Some of this HTML is directly from Pavilion.  You can change it to whatever you want if you want to mimic this design.-->
     <footer class="flex-rw">
       <ul class="footer-list-top">
         <li>
           <h4 class="footer-list-header">درباره ساکورا</h4>
+        </li>
+           <li>
+        <router-link
+            to="/"
+            class="generic-anchor footer-list-anchor"
+            itemprop="significantLink"
+            >خانه</router-link
+          >
         </li>
         <li>
           <router-link
@@ -41,31 +48,23 @@
           >
         </li>
         <li>
-          <a
-            href="/retailers/new-retailers.html"
+          <router-link
+            to="/products"
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
-            >لیست محصولات</a
+            >لیست محصولات</router-link
           >
         </li>
 
         <li>
-          <a
-            href="/job-openings.html"
-            itemprop="significantLink"
+        <router-link
+            to="/shopcart"
             class="generic-anchor footer-list-anchor"
-            >موقعیت های شغلی</a
+            itemprop="significantLink"
+            >سبد خرید</router-link
           >
         </li>
 
-        <li>
-          <a
-            href="/shop/about-show-schedule"
-            class="generic-anchor footer-list-anchor"
-            itemprop="significantLink"
-            >اخبار</a
-          >
-        </li>
       </ul>
       <ul class="footer-list-top">
         <li>

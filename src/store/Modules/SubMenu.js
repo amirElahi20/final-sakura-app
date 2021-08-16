@@ -21,7 +21,7 @@ const actions = {
         Vue.http.get('product/api/v1/group_list/', {
             responseType: 'json'
         }).then(response => {
-            console.log("this is response of sub menu", response.body);
+            // console.log("this is response of sub menu", response.body);
             context.commit('SetSubMenu', response.body)
         })
     }

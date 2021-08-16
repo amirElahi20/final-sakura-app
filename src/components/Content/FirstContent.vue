@@ -52,6 +52,7 @@ export default {
   data() {
     return {};
   },
+  
   created() {
     this.$store.dispatch("GetImagesFromServer");
   },

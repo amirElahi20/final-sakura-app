@@ -70,7 +70,16 @@
 
 
 <script>
-export default {};
+export default {
+   metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - درباره ما',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
+};
 </script>
 
 

@@ -64,7 +64,7 @@
             >
           </li>
           <li>
-            <a @click="signOut"  class="login" exact>
+            <a @click="signOut" class="login" exact>
               <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
               خروج</a
             >
@@ -80,7 +80,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
-import Vue from 'vue'
+import Vue from "vue";
 // import TheAccount from "../Client/TheAccount.vue";
 export default {
   data() {
@@ -88,11 +88,21 @@ export default {
       activeSide: true,
     };
   },
+  created() {
+    if (this.isAuth == false) {
+      this.$router.push("/");
+    }
+  },
+    computed:{
+    isAuth(){
+      return this.$store.getters.IsAuthenticated;
+    },
+    },
   methods: {
     Showsidebar() {
       this.activeSide = false;
     },
-     signOut() {
+    signOut() {
       Vue.swal({
         title: "خارج میشوید؟؟",
         text: "مطمئن هستید؟؟",
@@ -111,7 +121,7 @@ export default {
             "از سایت خارج شدید ، برای خرید میتوانید مجددا وارد شوید",
             "success"
           );
-          this.$router.push('/')
+          this.$router.push("/");
         } else {
           this.$swal("کنسل شد", "همچنان در سایت هستید", "info");
         }
@@ -135,7 +145,7 @@ body {
   overflow-x: hidden;
   font-size: 16px;
 }
-.login{
+.login {
   cursor: pointer;
 }
 /* Toggle Styles */

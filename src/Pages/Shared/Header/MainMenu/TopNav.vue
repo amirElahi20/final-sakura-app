@@ -4,17 +4,13 @@
 **********************and instagram . Also you can find the login , register and log out button here *******
 ************************************************************************************************************ -->
   <div>
-    <transition name="fade">
       <submenu-responsive
         @closeSub="closeValue"
         v-if="show"
       ></submenu-responsive>
-    </transition>
-    <transition name="fade2">
       <div class="popup" v-if="show"></div>
-    </transition>
     <div class="top-top">
-      <font-awesome-icon @click="showSub" class="bars" icon="bars" />
+      <font-awesome-icon @click="show= true" class="bars" icon="bars" />
       <div class="contact">
         <ul class="social-icon">
           <li v-if="GetInformation[0]">
@@ -167,6 +163,7 @@ export default {
     this.$store.dispatch("checkForLogin");
     this.$store.dispatch("GetImagesFromServer");
     this.$store.dispatch("GetInformationFromServer");
+    
   },
   methods: {
     signout() {
@@ -221,6 +218,7 @@ export default {
   margin-left: 5px;
   font-size: 22px;
 }
+
 .attention {
   font-size: 12px;
   background-color: orange;
@@ -235,6 +233,7 @@ export default {
   background-color: white;
   border-bottom: 1px solid black;
   display: flex;
+  z-index: 99999;
   justify-content: space-around;
   direction: rtl;
   height: 150px;
@@ -395,10 +394,11 @@ export default {
 }
 .fade2-enter-active,
 .fade2-leave-active {
-  transition: opacity 1s;
+  transition: opacity 0.5s;
 }
 .fade2-enter,
 .fade2-leave-to {
   opacity: 0;
 }
+
 </style>

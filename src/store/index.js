@@ -6,6 +6,7 @@ import User from '../store/Modules/User';
 import Order from '../store/Modules/Order';
 import ShowClient from '../store/Modules/ShowClientinfo';
 import Images from '../store/Modules/images';
+import Questions from '../store/Modules/TheQuestions'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
         User,
         Order,
         ShowClient,
-        Images
+        Images,
+        Questions
     }
 })

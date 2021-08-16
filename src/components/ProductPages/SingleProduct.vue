@@ -4,7 +4,6 @@
       <div class="right">
         <div class="product-info">
           <h1 class="product-name">{{ singleProduct.name }}</h1>
-          <!-- {{SimilarProduct}} -->
           <div class="cost-box" v-if="singleProduct.product_cost">
             <p v-if="Select == 'انتخاب حجم' && jar" class="alert">
               برای نمایش قیمت ، ابتدا حجم شیشه را مشخص کنید
@@ -18,7 +17,7 @@
             </h2>
           </div>
           <div style="direction: rtl" class="count-box">
-            <h2>تعداد:</h2>
+            <h2 class="count-lable">تعداد:</h2>
             <input
               v-model="count"
               class="count"
@@ -94,9 +93,10 @@
           <!-- {{singleProduct.product}} -->
           <br />
           <div style="direction: rtl" class="addtobasket">
-            <a type="submit"
+            <a
+              type="submit"
               class="basket"
-              :class="{disabled : Select=='انتخاب حجم' }"
+              :class="{ disabled: Select == 'انتخاب حجم' }"
               @click="
                 AddToOrder(
                   singleProduct.id,
@@ -135,19 +135,22 @@
     <similar-product></similar-product>
     <div class="product-explanation"></div>
     <div class="product-properties"></div>
+    <the-questions></the-questions>
   </div>
 </template>
 
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import Vue from 'vue';
-import SimilarProduct from './SimilarProduct.vue';
+import Vue from "vue";
+import SimilarProduct from "./SimilarProduct.vue";
+import TheQuestions from '../Questions/TheQuestions.vue';
 export default {
   components: {
     Carousel,
     Slide,
     SimilarProduct,
+    TheQuestions,
   },
   data() {
     return {
@@ -156,8 +159,19 @@ export default {
       envelope: true,
       Select: 0,
       count: 1,
+      title : this.$route.params.slug
     };
   },
+   metaInfo() {
+     return{
+       titleTemplate: `فروشگاه ساکورا - ${this.title}` ,
+       htmlAttrs: {
+         lang: 'utf-8',
+         amp: true
+       }
+
+     }
+    },
   methods: {
     activeJar() {
       (this.jar = true), (this.envelope = false), (this.Select = "انتخاب حجم");
@@ -166,7 +180,6 @@ export default {
       (this.envelope = true), (this.jar = false), (this.Select = 0);
     },
     AddToOrder(resId, packID) {
-      // this.pack = packID;
       const orderDetail = {
         product: resId,
         amount: this.count,
@@ -175,9 +188,8 @@ export default {
       console.log(orderDetail);
       if (orderDetail.amount < 1) {
         Vue.swal("توجه", "تعداد کالا را درست انتخاب کنید", "info");
-      }else{
+      } else {
         this.$store.dispatch("AddProductToOrder", orderDetail);
-
       }
     },
   },
@@ -185,17 +197,19 @@ export default {
     singleProduct() {
       return this.$store.getters.GetSingleProduct;
     },
-      SimilarProduct() {
+    SimilarProduct() {
       return this.$store.getters.GetSimilarProduct;
     },
   },
   created() {
     this.$store.dispatch("GetSinlgeProductsFromServer", {
       slug: this.$route.params.slug,
+    
     });
-        this.$store.dispatch("GetSimilarProductsFromServer", {
+    this.$store.dispatch("GetSimilarProductsFromServer", {
       slug: this.$route.params.slug,
     });
+    
   },
   watch: {
     $route() {
@@ -204,7 +218,6 @@ export default {
       });
     },
   },
-
 };
 </script>
 
@@ -230,11 +243,10 @@ export default {
   @media screen and (max-width: 686px) {
     margin-top: 25rem;
   }
-a.disabled {
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
+  a.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 }
 .left {
   width: 400px;
@@ -248,6 +260,7 @@ a.disabled {
     margin-top: 25rem;
   }
 }
+
 .right {
   background-color: whitesmoke;
   border: 1px solid black;
@@ -267,6 +280,17 @@ a.disabled {
 }
 .product-name {
   margin-top: 15px;
+  margin-bottom: 0.4rem;
+
+  @media screen and (max-width: 450px) {
+    font-size: 22px;
+    margin: 2rem 0 1rem 0;
+  }
+}
+.count-lable {
+  @media screen and (max-width: 450px) {
+    font-size: 18px;
+  }
 }
 .carousel {
   height: 100%;
@@ -274,9 +298,6 @@ a.disabled {
 .img-carousel {
   width: 100%;
   height: 500px;
-  @media screen and (max-width: 380px) {
-
-  }
 }
 .product-info {
   text-align: center;
@@ -290,6 +311,9 @@ a.disabled {
   border: 1px solid black;
   @media screen and (max-width: 385px) {
     width: 200px;
+  }
+  @media screen and (max-width: 450px) {
+    margin: 15px 0;
   }
 }
 input {
@@ -305,6 +329,10 @@ option {
   width: 150px;
   border-radius: 10px;
   font-size: 20px;
+
+  @media screen and (max-width: 450px) {
+    margin: 0.5rem 0;
+  }
 }
 .select {
   padding: 10px;
@@ -343,7 +371,6 @@ option {
   margin-top: 20px;
 }
 .check-jar {
-  // margin-right: 25px;
   margin-left: -48px;
   margin-top: 20px;
 }

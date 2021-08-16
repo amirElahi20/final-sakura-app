@@ -1,6 +1,5 @@
 <template>
   <div class="swiper">
-
     <div class="u-center">
       <h2 class="header-title">محصولات مشابه</h2>
     </div>
@@ -22,41 +21,46 @@
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
           <div class="product-informartion">
-            <router-link class="product-info"
-              :to="{ name: 'singleproduct', params: { slug: product.slug } }"
+            <a
+              class="product-info"
+              :href="
+                  $router.resolve({
+                    name: 'singleproduct',
+                    params: { slug: product.slug },
+                  }).href
+                "
             >
               <img
                 :class="{ blurimg: !product.available }"
                 class="img-box"
                 :src="`https://api.sdriedf.ir` + product.picture[0].picture"
-                
                 alt=""
               />
-            </router-link>
-              <div class="products-cost">
-                <h3 class="product-name">{{ product.name }}</h3>
-                <h4 class="product-cost">
-                  <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
-                  >تومان
-                </h4>
-                <p class="available" v-if="!product.available">
-                  کالای مورد نظر موجود نیست!
-                </p>
-                <router-link
-                  :to="{
+            </a>
+            <div class="products-cost">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <h4 class="product-cost">
+                <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
+                >تومان
+              </h4>
+              <p class="available" v-if="!product.available">
+                کالای مورد نظر موجود نیست!
+              </p>
+              <a
+                :href="
+                  $router.resolve({
                     name: 'singleproduct',
                     params: { slug: product.slug },
-                  }"
-                  class="product-btn"
-                  >مشاهده محصول</router-link
-                >
-              </div>
+                  }).href
+                "
+                class="product-btn"
+                >مشاهده محصول</a
+              >
+            </div>
           </div>
         </div>
       </slide>
-
     </carousel>
-
   </div>
 </template>
 
@@ -64,7 +68,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import Vue from 'vue';
+import Vue from "vue";
 export default {
   components: {
     Carousel,
@@ -72,7 +76,7 @@ export default {
   },
   data() {
     return {
-      root : Vue.http.options.root
+      root: Vue.http.options.root,
     };
   },
   computed: {
@@ -96,7 +100,7 @@ export default {
   margin: 0px 0 50px 0;
   text-align: center;
 }
-.product-info{
+.product-info {
   text-decoration: none;
   color: black;
 }
@@ -226,9 +230,6 @@ h2:after {
     background-color: white;
     color: orangered;
     border: 1px solid orangered;
-  }
-  @media screen and (max-width: 700px) {
-    padding: 15px 20px;
   }
 }
 .total-probtn {

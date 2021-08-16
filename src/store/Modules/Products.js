@@ -64,7 +64,7 @@ const actions = {
         Vue.http.get('product/api/v1/last_product/', {
             responseType: 'json'
         }).then(response => {
-            console.log("last product ", response.data)
+            // console.log("last product ", response.data)
             context.commit('SetLastProducts', response.data)
         })
 
@@ -82,7 +82,7 @@ const actions = {
         console.log("Single product slug", Filter.slug);
         Vue.http.get('product/api/v1/product/' + Filter.slug)
             .then(response => {
-                console.log("Single product", response.data);
+                // console.log("Single product", response.data);
                 context.commit("SetSingleProduct", response.data)
             })
     },
@@ -103,7 +103,7 @@ const actions = {
             .then(response => {
                 return response.json()
             }).then(data => {
-                console.log("search data", data)
+                // console.log("search data", data)
                 context.commit("SetSearchProduct", data)
             })
     },

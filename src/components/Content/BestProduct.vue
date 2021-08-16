@@ -228,9 +228,6 @@ h2:after {
     color: orangered;
     border: 1px solid orangered;
   }
-  @media screen and (max-width: 700px) {
-    padding: 15px 20px;
-  }
 }
 .total-probtn {
   text-decoration: none;

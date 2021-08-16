@@ -71,6 +71,7 @@ export default {
       fullPage: true,
     };
   },
+
   components: {
     Loading,
   },
@@ -115,6 +116,9 @@ export default {
   },
   created() {
     this.$store.dispatch("Getinformtion");
+      if (this.isAuth == false) {
+      this.$router.push("/");
+    }
   },
   computed: {
     ShowInfoClient() {
@@ -122,6 +126,9 @@ export default {
     },
     WaitForLoading(){
       return this.$store.getters.GetPendingLoading
+    },
+    isAuth(){
+      return this.$store.getters.IsAuthenticated;
     }
   },
 };

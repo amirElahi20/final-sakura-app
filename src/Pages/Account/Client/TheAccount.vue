@@ -8,34 +8,54 @@
           <div class="form-group">
             <label for="name-input">نام شما:</label>
             <div v-if="ShowInfoClient.user" id="name-input" type="text">
-              {{ShowInfoClient.user.first_name}}
+              {{ ShowInfoClient.user.first_name }}
             </div>
             <div v-if="ShowInfoClient.user" id="name-input" type="text">
-              {{ShowInfoClient.user.last_name}}
+              {{ ShowInfoClient.user.last_name }}
             </div>
           </div>
           <div class="form-group">
             <label for="name-input">نام کاربری:</label>
-            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
-              {{ShowInfoClient.user.username}}
+            <div
+              v-if="ShowInfoClient.user"
+              id="name-input"
+              class="english"
+              type="text"
+            >
+              {{ ShowInfoClient.user.username }}
             </div>
           </div>
           <div class="form-group">
             <label for="email-input">ایمیل شما:</label>
-            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
-              {{ShowInfoClient.user.email}}
+            <div
+              v-if="ShowInfoClient.user"
+              id="name-input"
+              class="english"
+              type="text"
+            >
+              {{ ShowInfoClient.user.email }}
             </div>
           </div>
           <div class="form-group">
             <label for="phone-input">شماره تماس خود را وارد کنید</label>
-            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
-              {{ShowInfoClient.phone}}
+            <div
+              v-if="ShowInfoClient.user"
+              id="name-input"
+              class="english"
+              type="text"
+            >
+              {{ ShowInfoClient.phone }}
             </div>
           </div>
           <div class="form-group">
             <label for="phone-input">موجودی شما</label>
-            <div v-if="ShowInfoClient.user" id="name-input" class="english" type="text">
-              {{ShowInfoClient.money.toLocaleString()}}
+            <div
+              v-if="ShowInfoClient.user"
+              id="name-input"
+              class="english"
+              type="text"
+            >
+              {{ ShowInfoClient.money.toLocaleString() }}
             </div>
           </div>
         </form>
@@ -54,6 +74,7 @@ import {
   email,
   not,
 } from "vuelidate/lib/validators";
+
 export default {
   data() {
     return {
@@ -65,19 +86,22 @@ export default {
       data: ["ali"],
     };
   },
-created() {
-  this.$store.dispatch("Getinformtion")
-},
-// watch:{
-//   showUsers(){
-//     this.showUser()
-//   }
-// },
-computed:{
-   ShowInfoClient(){
-    return this.$store.getters.GetInfo
-  }
-},
+  created() {
+    this.$store.dispatch("Getinformtion");
+
+    // alert(this.isAuth)
+    if (this.isAuth == false) {
+      this.$router.push("/");
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters.IsAuthenticated;
+    },
+    ShowInfoClient() {
+      return this.$store.getters.GetInfo;
+    },
+  },
   validations: {
     title: {
       required,

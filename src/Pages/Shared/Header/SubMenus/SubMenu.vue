@@ -88,7 +88,7 @@ export default {
   display: flex;
   margin-top: 10px;
   position: absolute;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .active {
   background-color: orangered;
@@ -101,7 +101,8 @@ export default {
 .left {
   color: white;
   width: 80%;
-  background-color: rgb(97, 96, 96);
+  background-color: #cd853f;
+  // border: 1px solid black;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -113,7 +114,7 @@ ul {
   transition: all 0.4s;
 }
 .menu_list {
-  background-color: orange;
+  background-color:#cd853f;
   color: white;
   cursor: pointer;
 }
@@ -158,7 +159,7 @@ ul {
   text-decoration: none;
   transition: all 0.4s;
    &:hover{
-    color: orange;
+    color: black;
   }
 }
 </style>

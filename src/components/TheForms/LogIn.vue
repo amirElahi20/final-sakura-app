@@ -119,13 +119,10 @@
 import Loading from "vue-loading-overlay";
 
 import "vue-loading-overlay/dist/vue-loading.css";
-// import Vue from "vue";
 import {
   required,
-  // maxLength,
   minLength,
   alphaNum,
-  // email,
 } from "vuelidate/lib/validators";
 export default {
   data() {
@@ -137,6 +134,14 @@ export default {
 
     };
   },
+   metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - ورود',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
     components: {
     Loading,
   },

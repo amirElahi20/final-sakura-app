@@ -99,6 +99,14 @@ export default {
       body: "",
     };
   },
+   metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - ارتباط با ما',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   validations: {
     title: {
       required,

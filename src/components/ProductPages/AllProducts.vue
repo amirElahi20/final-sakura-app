@@ -55,6 +55,14 @@ export default {
       show : true,
     };
   },
+   metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - محصولات',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   computed: {
     FilterProducts() {
       return this.$store.getters.GetProducts;
@@ -63,13 +71,6 @@ export default {
   created() {
     this.$store.dispatch("GetProductsFromServer");
   },
-  methods:{
-     hoverOutTimeout: function() {
-        setTimeout(() => { 
-          alert('ok')
-      }, 3000);
-     }
-  }
 };
 </script>
 
@@ -157,7 +158,6 @@ $color-primary-light: orangered;
   width:85%;
   margin: 0 auto;
   justify-content: center;
-  // margin-right: 20px;
 }
 .box {
   background-color: white;
@@ -174,9 +174,8 @@ $color-primary-light: orangered;
   }
   @media screen and (max-width: 500px) {
     width: 170px;
-    // height: 200px;
   }
-  @media screen and (max-width: 380px) {
+  @media screen and (max-width: 447px) {
     width: 100%;
   }
 }
@@ -212,17 +211,9 @@ transition: all 0.4s;
   border: 1px solid orange;
   transition: all 0.5s;
   @media screen and (max-width: 500px) {
-    // display: none;
   }
 }
-// .fade-enter-active,
-// .fade-leave-active {
-//   transition: opacity 3s;
-// }
-// .fade-enter,
-// .fade-leave-to {
-//   opacity: 0;
-// }
+
 .bounce-enter-active {
   animation: bounce-in 0.5s;
 }

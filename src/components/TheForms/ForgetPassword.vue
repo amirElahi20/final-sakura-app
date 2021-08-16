@@ -51,7 +51,21 @@
 
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email : ''
+    }
+  },
+   metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - فراموشی رمز',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
+};
 </script>
 
 

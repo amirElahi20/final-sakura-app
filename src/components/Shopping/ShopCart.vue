@@ -179,6 +179,14 @@ export default {
       loader: "bars",
     };
   },
+   metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - سبدخرید',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   components: {
     Loading,
   },

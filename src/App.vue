@@ -18,6 +18,14 @@ export default {
     TheHeader,
     TheFooter,
   },
+     metaInfo: {
+      title: 'فروشگاه ساکورا',
+      titleTemplate: '%s - صفحه اصلی',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
 };
 </script>
 

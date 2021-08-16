@@ -1,6 +1,6 @@
 <template>
   <div class="sub-responsive">
-    <div class="sub-menu">
+    <div class="sub-menu subMenuBar">
       <font-awesome-icon icon="times" @click="closeMenu" class="close-icon" />
       <ul class="list">
         <li>
@@ -54,11 +54,20 @@
           <font-awesome-icon class="title-icon circle-icon" icon="circle" />
           {{ title.name }}
         </summary>
-        <div v-for="sub in SubMenus" :key="sub.id">
-          <p class="sub-title" v-show="sub.group == title.id">
+        <div class="sub-title-box" v-for="sub in SubMenus" :key="sub.id">
+          <a 
+            :href="
+              $router.resolve({
+                name: 'singleproduct',
+                params: { slug: sub.slug },
+              }).href
+            "
+            class="sub-title"
+            v-show="sub.group == title.id"
+          >
             <font-awesome-icon class="sub-icon circle-icon" icon="circle" />
             {{ sub.name }}
-          </p>
+          </a>
         </div>
       </details>
     </div>
@@ -132,11 +141,28 @@ export default {
 
 
 <style lang="scss" scoped>
+.subMenuBar {
+  animation-name: MoveToLeft;
+  animation-duration: 0.4s;
+}
+@keyframes MoveToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  50% {
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 .circle-icon {
   font-size: 7px;
 }
 .sub-icon {
   color: orangered;
+  margin-right: 10px;
 }
 .title-icon {
   color: orange;
@@ -148,18 +174,25 @@ export default {
 }
 .sub-title {
   font-size: 15px;
+  text-decoration: none;
+  color: black;
+}
+.sub-title-box{
+  margin-top: 15px;
+
 }
 .details {
   margin-right: 15px;
   font-size: 18px;
-  cursor: pointer;
   margin-top: 30px;
   margin-bottom: 20px;
 }
 details > summary {
   list-style-type: none;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   outline: none;
+  cursor: pointer;
+  display: inline;
 }
 
 details > summary::-webkit-details-marker {
@@ -187,7 +220,6 @@ details[open] > summary::after {
   list-style: none;
 }
 .list li {
-  cursor: pointer;
   margin-top: 40px;
   margin-bottom: 40px;
 }
@@ -212,7 +244,7 @@ h2:after {
 }
 
 .sub-menu {
-  width: 50%;
+  width: 60%;
   height: 100vh;
   color: black;
   text-align: right;
@@ -230,9 +262,7 @@ h2:after {
     font-size: 12px;
   }
 }
-.sub-title {
-  margin-top: 15px;
-}
+
 .sub-links {
   text-decoration: none;
   color: black;

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueMeta from 'vue-meta'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -20,47 +21,27 @@ Vue.use(VueResource);
 Vue.use(VueSweetalert2)
 Vue.use(Vuelidate);
 Vue.use(VueCookie);
+Vue.use(VueMeta, {
+    refreshOnceOnNavigation: true
+})
 
 Vue.http.options.root = 'https://api.sdriedf.ir/';
 
-// console.log("autentication", store.getters);
-console.log("autentication", store.getters.IsAuthenticated);
-console.log("Auth", Vue.cookie.get('Sakura'))
 
-
-///true
-////////////////////////////
 router.beforeEach((to, from, next) => {
-        if (to.matched.some(record => record.meta.requiresAuth)) {
-            // this route requires auth, check if logged in
-            // if not, redirect to login page.
-            if (Vue.cookie.get('Sakura') != null) {
-                next({
-                    path: '/',
-                    query: { redirect: '/login' }
-                })
-            } else {
-                next()
-            }
-        } else {
-            next() // make sure to always call next()!
-        }
-    })
-    // 
-router.beforeEach((to, from, next) => {
-    if (!to.matched.some(record => record.meta.loginDashboard)) {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
         // this route requires auth, check if logged in
         // if not, redirect to login page.
-        if (Vue.cookie.get('Sakura') == null) {
-            next({ query: { redirect: '/contactus' } })
-            console.log('nokey')
+        if (Vue.cookie.get('Sakura') != null) {
+            next({
+                path: '/',
+                query: { redirect: '/login' }
+            })
         } else {
             next()
-            console.log('ok')
         }
     } else {
-        next()
-        console.log('finish')
+        next() // make sure to always call next()!
     }
 })
 

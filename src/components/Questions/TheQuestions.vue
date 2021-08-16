@@ -17,7 +17,18 @@
   </div>
 </template>
 
-
+<script>
+export default {
+  data() {
+    return {
+      closeDetails: true
+    }
+  },
+  created(){
+    this.$store.dispatch("GetQuestionsFromServer")
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .box {
@@ -34,9 +45,7 @@
   text-align: right;
   cursor: pointer;
 }
-details:last-child {
-  //   margin-bottom: 35px;
-}
+
 .answer {
   background-color: orange;
   padding: 10px;
@@ -52,7 +61,6 @@ details:last-child {
 details > summary {
   list-style-type: none;
 }
-
 details > summary::-webkit-details-marker {
   display: none;
 }
@@ -69,6 +77,15 @@ details[open] > summary::before {
   padding-right: 0px;
   vertical-align: middle;
   font-weight: bold;
+}
+details[open] summary ~ * {
+  animation: sweep 1s ;
+    transition: .25s transform ease;
+
+}
+@keyframes sweep {
+  0%    {opacity: 0; transform: translatey(-10px)}
+  100%  {opacity: 1; transform: translatey(0)}
 }
 .u-center {
   margin: 40px 0 50px 0;
