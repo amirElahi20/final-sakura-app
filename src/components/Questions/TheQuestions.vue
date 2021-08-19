@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 .box {
   margin-top: 5rem;
-  width: 95%;
+  width: 75%;
   margin: 0 auto;
 }
 .question {

@@ -22,10 +22,10 @@
         <div class="box" v-if="product.picture">
           <!-- {{product.picture}} -->
           <div class="product-informartion">
-            <router-link
+            <!-- <router-link
               class="product-info"
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
-            >
+            > -->
               <img
                 :class="{ blurimg: !product.available }"
                 class="img-box"                
@@ -51,7 +51,7 @@
                   >مشاهده محصول</router-link
                 >
               </div>
-            </router-link>
+            <!-- </router-link> -->
           </div>
         </div>
       </slide>
@@ -209,7 +209,8 @@ h2:after {
 }
 .product-cost {
   font-size: 14px;
-  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 25px;
   @media screen and (max-width: 700px) {
     margin-bottom: 2rem;
   }

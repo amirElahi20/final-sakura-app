@@ -73,6 +73,12 @@ const routes = [{
             import ('../components/Shopping/ShopCart.vue')
     },
     {
+        path: '/bugs_reaport',
+        name: 'reaport',
+        component: () =>
+            import ("../Pages/BugReaport/BugsReaport.vue")
+    },
+    {
         path: '/UserDashboard',
         name: 'UserDashboard',
         component: () =>
@@ -130,6 +136,7 @@ const routes = [{
 
             },
 
+
             {
                 path: '/UserDashboard/orders',
                 name: 'useraccountorders',
@@ -163,41 +170,3 @@ const router = new VueRouter({
 })
 
 export default router
-
-
-
-
-
-// router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.loginDashboard)) {
-//         // this route requires auth, check if logged in
-//         console.log("before each", store.getters.IsAuthenticated)
-//             // if not, redirect to login page.
-//         if (store.getters.IsAuthenticated) {
-//             next({ path: '/UserDashboard/Account' })
-//         } else {
-//             next({ name: 'register' }) // go to wherever I'm going
-//         }
-//     } else {
-//         next() // does not require auth, make sure to always call next()!
-//     }
-// })
-
-
-// router.beforeEach((to, from, next) => {
-//     // if the route is not public
-//     if (to.meta.public) {
-//         // if the user authenticated
-//         console.log("before each", to.meta.public)
-//         if (store.getters.IsAuthenticated) { // I declared a `getter` function in the store to check if the user is authenticated.
-//             // continue to the route
-//             next({ name: 'Home' });
-//         } else {
-//             // redirect to login
-//             next({ name: 'login' });
-//         }
-//     }
-//     next();
-// }); }
-//     next();
-// });

@@ -75,7 +75,7 @@
                 <input
                   v-model="searchName"
                   class="search-input"
-                  maxlength="30"
+                maxlength="30"
                   type="text"
                   placeholder="نام محصول"
                 />

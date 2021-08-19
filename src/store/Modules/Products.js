@@ -82,7 +82,7 @@ const actions = {
         console.log("Single product slug", Filter.slug);
         Vue.http.get('product/api/v1/product/' + Filter.slug)
             .then(response => {
-                // console.log("Single product", response.data);
+                console.log("Single product", response.data);
                 context.commit("SetSingleProduct", response.data)
             })
     },
@@ -91,9 +91,6 @@ const actions = {
             .then(response => {
                 return response.json()
             }).then(data => {
-                // console.log("similar product", data)
-                // console.log("this is slug", name.slug)
-                // console.log("this is similar product", response.body);
                 context.commit("SetSimilarProduct", data)
             })
     },

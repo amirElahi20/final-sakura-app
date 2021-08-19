@@ -15,7 +15,8 @@
         $route.name == 'useraccountpurches' ||
         $route.name == 'useraccounttickets' ||
         $route.name == 'useraccountorders' ||
-        $route.name == 'FrequentlyAskedQuestions',
+        $route.name == 'FrequentlyAskedQuestions'||
+        $route.name == 'reaport'
     }"
   >
     <footer class="flex-rw">
@@ -141,7 +142,7 @@
         </li>
         <li id="order-tracking">
           <a
-            href="/shop/order-status"
+            href="/bugs_reaport"
             itemprop="significantLink"
             class="generic-anchor footer-list-anchor"
             >گزارش باگ</a

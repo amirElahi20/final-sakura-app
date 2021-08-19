@@ -69,6 +69,7 @@ export default {
   data() {
     return {
       fullPage: true,
+    
     };
   },
 
@@ -116,7 +117,7 @@ export default {
   },
   created() {
     this.$store.dispatch("Getinformtion");
-      if (this.isAuth == false) {
+      if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");
     }
   },

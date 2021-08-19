@@ -89,7 +89,7 @@ export default {
     };
   },
   created() {
-    if (this.isAuth == false) {
+         if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");
     }
   },
@@ -230,7 +230,7 @@ body {
 
 .sidebar .nav a:hover {
   background: none;
-  color: orangered;
+  color: orange;
 }
 
 .bars-icon {

@@ -122,13 +122,7 @@ h2:after {
   margin-bottom: 30rem;
   @media screen and (max-width: 1260px) {
     margin-top: -180px;
-  }
-  @media screen and (max-width: 700px) {
-    margin-right: 30%;
-    margin-top: -160px;
-  }
-  @media screen and (max-width: 400px) {
-    margin-top: -120px;
+    display: none;
   }
 }
 .left {
@@ -164,10 +158,7 @@ img {
   &:hover {
     outline: 5px solid rgb(173, 4, 173);
   }
-  @media screen and (max-width: 700px) {
-    width: 45%;
-    margin-left: 28%;
-  }
+ 
 }
 .img2 {
   margin-left: 20px;
@@ -179,10 +170,7 @@ img {
   &:hover {
     outline: 5px solid red;
   }
-  @media screen and (max-width: 700px) {
-    width: 45%;
-    margin-left: 13%;
-  }
+  
 }
 .img1 {
   margin-left: 200px;
@@ -194,10 +182,6 @@ img {
 
   &:hover {
     outline: 5px solid yellow;
-  }
-  @media screen and (max-width: 700px) {
-    width: 50%;
-    margin-left: 40%;
   }
 }
 .site-info {

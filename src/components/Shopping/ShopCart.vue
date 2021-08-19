@@ -41,15 +41,21 @@
               <br />
             </p>
           </div>
-          <div class="product-price" style="direction:rtl">
+          <div class="product-price" style="direction: rtl">
             {{ order.product_cost.cost.toLocaleString() }}
             <span class="toman">تومان</span>
             <span class="toman bargain">150تومان تخفیف</span>
-            
           </div>
 
           <div class="product-quantity">
             <div class="counter-counter">
+              <div
+                :disabled="pendingRequest"
+                @click="addone(order.product_cost.pack.id, order.product.id)"
+                class="counter plus"
+              >
+                +
+              </div>
               <div v-if="!pendingRequest" class="cost-box">
                 {{ order.amount }}
               </div>
@@ -62,13 +68,7 @@
                 color="#FFA500"
                 blue="10px"
               />
-              <div
-                :disabled="pendingRequest"
-                @click="addone(order.product_cost.pack.id, order.product.id)"
-                class="counter plus"
-              >
-                +
-              </div>
+
               <div
                 v-if="order.amount != 1"
                 :disabled="pendingRequest"
@@ -101,13 +101,11 @@
               حذف
             </button>
           </div>
-          <div class="product-line-price" style="direction:rtl">
+          <div class="product-line-price" style="direction: rtl">
             {{ order.price.toLocaleString() }}
             <span class="toman">تومان</span>
           </div>
         </div>
-
-        
 
         <div class="totals">
           <div class="totals-item">
@@ -179,14 +177,14 @@ export default {
       loader: "bars",
     };
   },
-   metaInfo: {
-      title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - سبدخرید',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "فروشگاه ساکورا",
+    titleTemplate: "%s - سبدخرید",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
+  },
   components: {
     Loading,
   },
@@ -328,7 +326,7 @@ export default {
   padding: 50px;
   border-radius: 15px;
 }
-.bargain{
+.bargain {
   display: block;
   text-align: center;
   margin-top: 10px;
@@ -351,9 +349,9 @@ export default {
     transform: scale(1.1);
   }
 }
-.log{
-    @media screen and (max-width: 450px){
-font-size: 10px;
+.log {
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
   }
 }
 .counter {
@@ -366,21 +364,52 @@ font-size: 10px;
 }
 .plus {
   background-color: orange;
-  margin-top: 15px;
-  padding-top: 5px;
+  margin-top: -7px;
+  padding-top: 2px;
   margin-bottom: 10px;
+  @media screen and (max-width: 649px) {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  @media screen and (max-width: 370px) {
+    // display: inline-block; 
+    // margin-left: 10px; 
+    display: block;
+    margin-right: 0;
+  }
 }
 .minus {
   background-color: orangered;
-  margin-left: 1px;
-  padding-top: 5px;
+  margin-top: -7px;
+  padding-top: 2px;
+  margin-bottom: 10px;
   margin-top: 10px;
+  @media screen and (max-width: 649px) {
+    display: inline-block; 
+    margin-left: 10px; 
+  }
+    @media screen and (max-width: 370px) {
+    // display: inline-block; 
+    // margin-left: 10px; 
+    display: block;
+    margin-left: 0px;
+  }
 }
 .cost-box {
   border: 1px solid black;
   display: inline;
   padding: 2px 10px;
   border-radius: 10px;
+  @media screen and (max-width: 649px) {
+    display: inline-block;
+    // margin-right: 10px;
+    // margin-left: 10px;
+  }
+    @media screen and (max-width: 370px) {
+    // display: inline-block; 
+    // margin-left: 10px; 
+    margin-right: 72%;
+  }
 }
 .toman {
   font-size: 10px;
@@ -444,7 +473,13 @@ $font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 }
 .product-quantity {
   float: right;
-  width: 10%;
+  text-align: center;
+  // width: 10%;
+     @media screen and (max-width: 649px) {
+         width: 50%;
+         margin-top: 0px;
+        //  background-color: red;
+         }
 }
 .product-removal {
   float: right;
@@ -598,8 +633,8 @@ label {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.4s;
-  @media screen and (max-width: 450px){
-font-size: 15px;
+  @media screen and (max-width: 450px) {
+    font-size: 15px;
   }
 }
 
@@ -639,10 +674,11 @@ font-size: 15px;
   }
 
   .product-quantity {
-    width: 100px;
+    // width: 100px;
     .counter-counter {
       margin-left: 7px;
       margin-top: 15px;
+       
     }
   }
 

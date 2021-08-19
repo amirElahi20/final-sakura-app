@@ -16,7 +16,8 @@
           $route.name == 'useraccountpurches' ||
           $route.name == 'useraccounttickets' ||
           $route.name == 'useraccountorders' ||
-          $route.name == 'FrequentlyAskedQuestions',
+          $route.name == 'FrequentlyAskedQuestions' ||
+          $route.name == 'reaport'
       }"
     >
       <top-nav></top-nav>

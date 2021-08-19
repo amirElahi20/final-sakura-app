@@ -13,7 +13,8 @@
             </p>
 
             <h2 v-if="Select !== 'انتخاب حجم'" style="direction: rtl">
-              {{ singleProduct.product_cost[Select].cost }} تومان
+              {{ singleProduct.product_cost[Select].cost.toLocaleString() }}
+              تومان
             </h2>
           </div>
           <div style="direction: rtl" class="count-box">
@@ -90,7 +91,6 @@
               </option>
             </select>
           </div>
-          <!-- {{singleProduct.product}} -->
           <br />
           <div style="direction: rtl" class="addtobasket">
             <a
@@ -132,8 +132,9 @@
         </carousel>
       </div>
     </div>
+    <div class="product-explanation" v-html="singleProduct.description"></div>
+
     <similar-product></similar-product>
-    <div class="product-explanation"></div>
     <div class="product-properties"></div>
     <the-questions></the-questions>
   </div>
@@ -144,7 +145,7 @@
 import { Carousel, Slide } from "vue-carousel";
 import Vue from "vue";
 import SimilarProduct from "./SimilarProduct.vue";
-import TheQuestions from '../Questions/TheQuestions.vue';
+import TheQuestions from "../Questions/TheQuestions.vue";
 export default {
   components: {
     Carousel,
@@ -159,19 +160,18 @@ export default {
       envelope: true,
       Select: 0,
       count: 1,
-      title : this.$route.params.slug
+      title: this.$route.params.slug,
     };
   },
-   metaInfo() {
-     return{
-       titleTemplate: `فروشگاه ساکورا - ${this.title}` ,
-       htmlAttrs: {
-         lang: 'utf-8',
-         amp: true
-       }
-
-     }
-    },
+  metaInfo() {
+    return {
+      titleTemplate: `فروشگاه ساکورا - ${this.title}`,
+      htmlAttrs: {
+        lang: "utf-8",
+        amp: true,
+      },
+    };
+  },
   methods: {
     activeJar() {
       (this.jar = true), (this.envelope = false), (this.Select = "انتخاب حجم");
@@ -204,12 +204,10 @@ export default {
   created() {
     this.$store.dispatch("GetSinlgeProductsFromServer", {
       slug: this.$route.params.slug,
-    
     });
     this.$store.dispatch("GetSimilarProductsFromServer", {
       slug: this.$route.params.slug,
     });
-    
   },
   watch: {
     $route() {
@@ -230,7 +228,6 @@ export default {
   width: 80%;
   height: 500px;
   margin: 6rem auto;
-  // margin-top: 10rem;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center;
@@ -250,12 +247,12 @@ export default {
 }
 .left {
   width: 400px;
-  height: 500px;
+  height: 100%;
   @media screen and (max-width: 895px) {
     width: 300px;
   }
   @media screen and (max-width: 686px) {
-    width: 75%;
+    width: 85%;
     height: 300px;
     margin-top: 25rem;
   }
@@ -274,8 +271,11 @@ export default {
     padding-right: 0px;
   }
   @media screen and (max-width: 686px) {
-    width: 75%;
+    width: 85%;
     height: 520px;
+  }
+    @media screen and (max-width: 450px) {
+    height: 550px;
   }
 }
 .product-name {
@@ -296,8 +296,12 @@ export default {
   height: 100%;
 }
 .img-carousel {
-  width: 100%;
-  height: 500px;
+width: 100%;
+height: 500px;
+ @media screen and (max-width: 686px) {
+   height: 300px;
+ }
+
 }
 .product-info {
   text-align: center;
@@ -334,6 +338,11 @@ option {
     margin: 0.5rem 0;
   }
 }
+.product-explanation{
+  width: 80%;
+  margin: -50px auto 3rem auto;
+  direction: rtl;
+}
 .select {
   padding: 10px;
   font-family: "BYekan";
@@ -366,7 +375,6 @@ option {
   position: absolute;
 }
 .check-envelope {
-  // margin-right: 25px;
   margin-left: -48px;
   margin-top: 20px;
 }

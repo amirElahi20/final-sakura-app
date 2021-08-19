@@ -88,9 +88,7 @@ export default {
   },
   created() {
     this.$store.dispatch("Getinformtion");
-
-    // alert(this.isAuth)
-    if (this.isAuth == false) {
+      if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");
     }
   },

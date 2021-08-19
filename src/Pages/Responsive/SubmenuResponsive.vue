@@ -31,11 +31,11 @@
             ما</a
           >
         </li>
-        <li>
+        <li  v-if="!IsAuthenticated">
           <a class="sub-links" href="/login"
             ><font-awesome-icon class="sub-menu-icon" icon="sign-in-alt" />
             ورود</a
-          >
+        >
         </li>
         <li>
           <a @click="signOut" class="sub-links" href="/aboutus"
@@ -85,6 +85,9 @@ export default {
   computed: {
     SubMenus() {
       return this.$store.getters.GetSubMenu;
+    },
+     IsAuthenticated() {
+      return this.$store.getters.IsAuthenticated;
     },
   },
   methods: {

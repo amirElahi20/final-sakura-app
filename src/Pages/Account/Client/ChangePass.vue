@@ -45,7 +45,7 @@ export default {
     };
   },
     created() {
-    if (this.isAuth == false) {
+     if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");
     }
   },

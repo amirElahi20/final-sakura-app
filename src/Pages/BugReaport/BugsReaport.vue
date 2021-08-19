@@ -28,48 +28,41 @@
         </div>
       </div>
       <div class="second-container">
-        <h2>پیغام به ساکورا</h2>
+        <h2>گزارش باگ</h2>
         <form>
           <div class="form-group">
             <label for="name-input">نام خود را وارد کنید</label>
             <input id="name-input" type="text" placeholder="نام" required />
             <input type="text" placeholder="نام خانوادگی" required />
           </div>
-           <div class="form-group">
-            <label for="name-input">موضوع خود را انتخاب کنید</label>
-             <select
-              name="format"
-            >
-              <option value="" selected disabled>انتخاب موضوع</option>
-              <option value="1">پیشنهادات</option>
-              <option value="2">انتقادات</option>
-              <option value="3">مدیریت</option>
-              <option value="4">حسابداری</option>
-              <option value="5">سایر موضوعات</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="email-input">ایمیل خود را وارد کنید</label>
-            <input
-              id="email-input"
-              type="text"
-              placeholder="مثال : someone@gmail.com"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="phone-input">شماره تماس خود را وارد کنید</label>
-            <input
-              id="phone-input"
-              type="text"
-              placeholder="مثال:0912000004"
-              required
-            />
+
+          <label for="email-input">ارسال تصویر مربوط به باگ</label>
+          <input
+            id="email-input"
+            type="file"
+            placeholder="مثال : someone@gmail.com"
+            required
+          />
+            <div class="form-group">
+            <label for="message-textarea">باگ در کدام بخش دیده شد؟؟</label>
+            <textarea id="message-textarea" placeholder="پیام شما"></textarea>
           </div>
           <div class="form-group">
             <label for="message-textarea">پیغام خود را بنویسید</label>
             <textarea id="message-textarea" placeholder="پیام شما"></textarea>
           </div>
+        
+          <p class="pay-attention">
+            لطفا توجه داشته باشید قبل از برطرف شدن خطای گزارش شده، هیچگونه
+            اطلاعاتی در مورد آن را عمومی نکرده یا با دیگران به اشتراک نگذارید.
+            بدون رضایت افراد با حساب کاربری آن‌ها تعاملی نداشته باشید و از شکستن
+            حریم شخصی افراد و ایجاد مشکل در اطلاعات دیگران اجتناب کنید. همچنین
+            به هیچ عنوان از مشکلات که یافته‌اید، بهره‌برداری و سوءاستفاده نکنید
+            و به قوانین کشور پایبند باشید. با توجه به اهمیت خطای گزارش شده از
+            سوی شما، ساکورا به پاس قدردانی هدیه‌ای برای شما در نظر خواهد
+            گرفت. توجه داشته باشید بعضی از مشکلات به دلیل کم اهمیت بودن شامل
+            هدیه نخواهند بود.
+          </p>
           <button>ارسال پیام</button>
         </form>
         <router-link to="/" class="back-btn">بازگشت به صفحه اصلی</router-link>
@@ -99,14 +92,14 @@ export default {
       body: "",
     };
   },
-   metaInfo: {
-      title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - گزارش باگ',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "فروشگاه ساکورا",
+    titleTemplate: "%s - ارتباط با ما",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
+  },
   validations: {
     title: {
       required,
@@ -169,7 +162,41 @@ body {
   align-items: flex-start;
   background: #f2f2f2;
 }
-
+#email-input {
+  // padding: 1x;
+  padding: 20px;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+#email-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+#email-input::before {
+  content: "انتخاب تصویر";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 10px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+  width: 103%;
+  //   margin: 0 auto;
+  height: 100%;
+  text-align: center;
+  margin-right: -15px;
+}
+#email-input:hover::before {
+  border-color: black;
+}
+#email-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
 .contact-form {
   width: 80vw;
   direction: rtl;
@@ -250,7 +277,7 @@ body {
   margin-top: -2px;
   font-family: "BYekan";
 }
-.contact-form .second-container form .form-group select{
+.contact-form .second-container form .form-group select {
   width: 100%;
   font-size: 15px;
   height: 10px;
@@ -258,9 +285,8 @@ body {
   font-family: "BYekan";
   cursor: pointer;
 }
-.contact-form .second-container form .form-group select option{
-    font-family: "BYekan";
-
+.contact-form .second-container form .form-group select option {
+  font-family: "BYekan";
 }
 .contact-form .second-container form .form-group input::placeholder,
 .contact-form .second-container form .form-group textarea::placeholder {
@@ -321,6 +347,10 @@ body {
   color: white;
   text-decoration: none;
   padding: 10px 31.1px;
-
+}
+.pay-attention{
+    margin-bottom: 1rem;
+    font-size: 14px;
+    direction: rtl;
 }
 </style>
