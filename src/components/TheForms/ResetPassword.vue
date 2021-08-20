@@ -1,6 +1,15 @@
 <template>
   <div>
     <div class="log">
+      <loading
+        class="vld-parent"
+        :active="Loading"
+        :is-full-page="fullPage"
+        loader="dots"
+        backgroundColor="#ffffff"
+        color="#FFA500"
+        blue="10px"
+      />
       <section class="login">
         <div class="row">
           <div class="form">
@@ -17,7 +26,7 @@
                   >
 
                   <input
-                  v-model="password"
+                    v-model="password"
                     type="password"
                     class="list__input"
                     placeholder="رمز عبور جدید"
@@ -26,7 +35,7 @@
                 </div>
 
                 <button
-                @click.prevent="ResetPassword"
+                  @click.prevent="ResetPassword"
                   class="submit-btn"
                   type="submit"
                 >
@@ -58,11 +67,19 @@
 
 <script>
 import Vue from "vue";
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
   data() {
     return {
       password: "",
+      fullPage: true,
+      Loading: false,
     };
+  },
+  components: {
+    Loading,
   },
   metaInfo: {
     title: "فروشگاه ساکورا",
@@ -74,16 +91,23 @@ export default {
   },
   methods: {
     ResetPassword() {
+      this.Loading = true;
       Vue.http
-        .patch("accounts/api/v1/request_reset_email/", {
-          password : this.password , 
-          token : this.$route.params.token,
-          uidb64 : this.$route.params.uidb64,
-
-        }).then(res =>{
-          console.log(res)
+        .patch("accounts/api/v1/change_password/", {
+          password: this.password,
+          token: this.$route.params.token,
+          uidb64: this.$route.params.uidb64,
         })
-     
+        .then((res) => {
+          this.Loading = false;
+          console.log(res);
+          Vue.swal("انجام شد", "تغییر رمز با موفقیت انجام شد", "success");
+          this.$router.push("/login");
+        })
+        .catch(() => {
+          this.Loading = false;
+          Vue.swal("انجام نشد", "تغییر رمز موفیت آمیز نبود", "error");
+        });
     },
   },
 };
