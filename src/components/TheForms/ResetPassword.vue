@@ -8,35 +8,45 @@
               <form class="list">
                 <h2 class="topform">بازنشانی رمز</h2>
                 <div class="list__group">
-                  <label for="name" class="list__label"
-                    ><fa class="fa" icon="lock"></fa>رمز عبور</label
+                  <label for="name" class="list__label">
+                    <font-awesome-icon
+                      class="fa"
+                      icon="lock"
+                    ></font-awesome-icon
+                    >رمز عبور جدید</label
                   >
+
                   <input
-                    :type="visibility"
+                  v-model="password"
+                    type="password"
                     class="list__input"
-                    placeholder="رمز عبورتو وارد کن"
-                    id="password"
-                    v-model="password"
+                    placeholder="رمز عبور جدید"
+                    id="email"
                   />
-                  <fa
-                    @click="hidePassword"
-                    v-if="visibility == 'text'"
-                    class="eye eye-slash"
-                    icon="eye-slash"
-                  ></fa
-                  ><fa
-                    @click="showPassword"
-                    v-if="visibility == 'password'"
-                    class="eye eye-on"
-                    icon="eye"
-                  ></fa>
                 </div>
 
-                <button class="submit-btn" type="submit">تغییر رمز</button>
+                <button
+                @click.prevent="ResetPassword"
+                  class="submit-btn"
+                  type="submit"
+                >
+                  ارسال
+                </button>
               </form>
+              <h5 class="txt">
+                میتوانید
+                <router-link class="router" to="/register"
+                  >ثبت نام کنید</router-link
+                >
+              </h5>
               <router-link class="back-btn" to="/"
                 >بازگشت به صفحه اصلی</router-link
               >
+              <h5 class="txt">
+                <router-link class="router forget" to="/login"
+                  >بازگشت به صفحه ورود</router-link
+                >
+              </h5>
             </div>
           </div>
         </div>
@@ -47,15 +57,44 @@
 
 
 <script>
-export default {};
-</script>
+import Vue from "vue";
+export default {
+  data() {
+    return {
+      password: "",
+    };
+  },
+  metaInfo: {
+    title: "فروشگاه ساکورا",
+    titleTemplate: "%s - بازیابی رمز",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
+    },
+  },
+  methods: {
+    ResetPassword() {
+      Vue.http
+        .patch("accounts/api/v1/request_reset_email/", {
+          password : this.password , 
+          token : this.$route.params.token,
+          uidb64 : this.$route.params.uidb64,
 
+        }).then(res =>{
+          console.log(res)
+        })
+     
+    },
+  },
+};
+</script>
 
 
 <style lang="scss" scoped>
 .router {
   text-decoration: none;
-  color: #500a61;
+  color: orange;
+  border-bottom: 0.5px solid orange;
 }
 .invalid input {
   border: 1px solid red !important;
@@ -65,7 +104,9 @@ export default {};
 }
 .alert {
   color: red;
-  text-align: start;
+  // text-align: start;
+  text-align: end;
+  margin-top: -15px;
 }
 .eye {
   position: absolute;
@@ -84,7 +125,8 @@ export default {};
 .forget {
   font-size: 15px;
   text-align: center;
-  color: #500a61;
+  color: orangered;
+  border-bottom: 0.5px solid orangered;
 }
 .log {
   display: flex;
@@ -97,7 +139,7 @@ export default {};
 .topform {
   margin-bottom: 20px;
   text-align: center;
-  margin-top: -50px;
+  margin-top: 40px;
 }
 .fa {
   margin-left: 5px;
@@ -107,25 +149,34 @@ p {
 }
 .form {
   width: 100%;
+  margin: 0 auto;
   height: 38rem;
   background-image: linear-gradient(
       105deg,
       rgba(white, 0.9) 0%,
-      rgba(white, 0.7) 50%,
+      rgba(white, 0.7) 60%,
       transparent 50%
     ),
-    url("../../../public/img/neha-deshmukh-GoKXJaQoLQs-unsplash.jpg");
-  //   background-color: #2d3436;
+    url("../../../public/img/tamas-tuzes-katai-GZ9_EfvDCFU-unsplash.jpg");
   background-size: cover;
   background-position: left;
   position: relative;
-  border-radius: 30px;
-  box-shadow: 1rem 2rem 2rem rgba(rgb(15, 15, 15), 0.8);
-
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.4) 0px 10px 10px -5px;
   &__login {
-    width: 50%;
+    width: 60%;
     padding: 6rem;
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(315deg, #fffdfd 0%, #fffdfda2 74%);
+      background-position: left;
+      position: relative;
+      background-size: cover;
+    }
   }
+  //  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);
 }
 .list {
   &__group:not(:last-child) {
@@ -136,14 +187,20 @@ p {
     font-size: 17px;
     height: 50px;
     padding-right: 10px;
-    border-radius: 10px;
+    // border-radius: 10px;
     background-color: rgba(rgb(255, 255, 255), 0.9);
     border: none;
     text-align: right;
     border: 1px solid black;
     width: 90%;
+    // width: 250px;
+    position: relative;
+    // margin: 0 auto;
     display: block;
     color: inherit;
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
   }
 
   &__label {
@@ -155,6 +212,12 @@ p {
     direction: rtl;
     transition: all 0.3s;
     margin-bottom: 10px;
+    color: black;
+    @media screen and (max-width: 500px) {
+      // margin-right: 3.5rem;
+      // text-align: left;
+      // margin-right: 15%;
+    }
   }
 }
 .submit-btn {
@@ -162,16 +225,19 @@ p {
   display: flex;
   width: 90%;
   cursor: pointer;
-  border-radius: 10px;
+  // border-radius: 10px;
   justify-content: center;
   align-items: center;
-  color: white;
-  background-color: orangered;
-  border: 1px solid orangered;
+  color: black;
+  background-color: orange;
+  border: 1px solid orange;
   transition: all 0.3s;
   margin-top: 30px;
   &:hover {
     transform: scale(1.1);
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
   }
 }
 
@@ -187,14 +253,17 @@ p {
   justify-content: center;
   width: 90%;
   margin-top: 1rem;
-  border-radius: 10px;
-  background-color: orange;
+  // border-radius: 10px;
+  background-color: orangered;
   color: white;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.3s;
   &:hover {
     transform: scale(1.1);
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
   }
 }
 </style>

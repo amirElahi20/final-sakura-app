@@ -15,8 +15,9 @@
         $route.name == 'useraccountpurches' ||
         $route.name == 'useraccounttickets' ||
         $route.name == 'useraccountorders' ||
-        $route.name == 'FrequentlyAskedQuestions'||
-        $route.name == 'reaport'
+        $route.name == 'FrequentlyAskedQuestions' ||
+        $route.name == 'reaport' ||
+        $route.name == 'resetpassword',
     }"
   >
     <footer class="flex-rw">
@@ -24,8 +25,8 @@
         <li>
           <h4 class="footer-list-header">درباره ساکورا</h4>
         </li>
-           <li>
-        <router-link
+        <li>
+          <router-link
             to="/"
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
@@ -58,14 +59,13 @@
         </li>
 
         <li>
-        <router-link
+          <router-link
             to="/shopcart"
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
             >سبد خرید</router-link
           >
         </li>
-
       </ul>
       <ul class="footer-list-top">
         <li>
@@ -118,7 +118,8 @@
           >
         </li>
         <li>
-          <router-link to='/FrequentlyQuestions'
+          <router-link
+            to="/FrequentlyQuestions"
             class="generic-anchor footer-list-anchor"
             itemprop="significantLink"
             >پاسخ به پرسش های متداول</router-link

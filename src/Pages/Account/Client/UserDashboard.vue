@@ -93,11 +93,6 @@ export default {
       this.$router.push("/");
     }
   },
-    computed:{
-    isAuth(){
-      return this.$store.getters.IsAuthenticated;
-    },
-    },
   methods: {
     Showsidebar() {
       this.activeSide = false;

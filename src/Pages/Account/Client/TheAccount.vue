@@ -93,9 +93,6 @@ export default {
     }
   },
   computed: {
-    isAuth() {
-      return this.$store.getters.IsAuthenticated;
-    },
     ShowInfoClient() {
       return this.$store.getters.GetInfo;
     },

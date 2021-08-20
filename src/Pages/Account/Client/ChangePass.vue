@@ -49,11 +49,6 @@ export default {
       this.$router.push("/");
     }
   },
-    computed:{
-    isAuth(){
-      return this.$store.getters.IsAuthenticated;
-    }
-    },
   validations: {
     title: {
       required,

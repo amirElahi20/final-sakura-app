@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="log">
-           <loading
-                class="vld-parent"
-                :active="Loading"
-                :is-full-page="fullPage"
-                loader="dots"
-                backgroundColor="#ffffff"
-                color="#FFA500"
-                blue="10px"
-              />
+      <loading
+        class="vld-parent"
+        :active="Loading"
+        :is-full-page="fullPage"
+        loader="dots"
+        backgroundColor="#ffffff"
+        color="#FFA500"
+        blue="10px"
+      />
       <section class="login">
         <div class="row">
           <div class="form">
@@ -149,25 +149,24 @@ export default {
       password: "",
       email: "",
       visibility: "password",
-            fullPage: true,
-
-    }
+      fullPage: true,
+    };
   },
-   metaInfo: {
-      title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - ثبت نام',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "فروشگاه ساکورا",
+    titleTemplate: "%s - ثبت نام",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
-     components:{
-      Loading
+  },
+  components: {
+    Loading,
+  },
+  computed: {
+    Loading() {
+      return this.$store.getters.GetPending;
     },
-      computed:{
-    Loading(){
-      return this.$store.getters.GetPending
-    }
   },
   validations: {
     email: {
@@ -290,8 +289,7 @@ p {
       background-image: linear-gradient(315deg, #fffdfd 0%, #fffdfda2 74%);
       background-position: left;
       position: relative;
-        background-size: cover;
-
+      background-size: cover;
     }
   }
   //  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);

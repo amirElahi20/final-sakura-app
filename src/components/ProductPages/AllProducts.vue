@@ -182,9 +182,10 @@ $color-primary-light: orangered;
 .image {
   width: 100%;
   height: 190px;
-transition: all 0.4s;
+transition: all 1s;
   &:hover{
     transform: scale(1.1);
+    opacity: 1s;
   }
 }
 

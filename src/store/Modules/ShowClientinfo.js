@@ -74,7 +74,7 @@ const actions = {
         }).catch(() => {
             context.commit("SetPendingLoading", false)
 
-            Vue.swal("انجام نشد", "ویرایش اطلاعات موفقیت آمیز نبود", "success");
+            Vue.swal("انجام نشد", "ایمیل وارد شده تکراری است", "error");
 
         })
     }

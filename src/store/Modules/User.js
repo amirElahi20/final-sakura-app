@@ -106,7 +106,7 @@ const actions = {
         context.commit('SetUsername', '');
         context.commit("SetUserAuth", false);
         context.commit("DeleteAuthCookie");
-    }
+    },
 };
 
 export default {

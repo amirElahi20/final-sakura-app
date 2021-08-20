@@ -1,6 +1,15 @@
 <template>
   <div>
     <div class="log">
+      <loading
+        class="vld-parent"
+        :active="Loading"
+        :is-full-page="fullPage"
+        loader="dots"
+        backgroundColor="#ffffff"
+        color="#FFA500"
+        blue="10px"
+      />
       <section class="login">
         <div class="row">
           <div class="form">
@@ -9,7 +18,7 @@
                 <h2 class="topform">فراموشی رمز</h2>
                 <div class="list__group">
                   <label for="name" class="list__label">
-                     <font-awesome-icon
+                    <font-awesome-icon
                       class="fa"
                       icon="envelope"
                     ></font-awesome-icon
@@ -25,7 +34,13 @@
                   />
                 </div>
 
-                <button class="submit-btn" type="submit">ارسال</button>
+                <button
+                  class="submit-btn"
+                  @click.prevent="SendEmailToResetPassword"
+                  type="submit"
+                >
+                  ارسال
+                </button>
               </form>
               <h5 class="txt">
                 میتوانید
@@ -51,20 +66,53 @@
 
 
 <script>
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
+import Vue from "vue";
 export default {
   data() {
     return {
-      email : ''
-    }
+      email: "",
+      fullPage: true,
+      Loading: false,
+    };
   },
-   metaInfo: {
-      title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - فراموشی رمز',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  components: {
+    Loading,
+  },
+  metaInfo: {
+    title: "فروشگاه ساکورا",
+    titleTemplate: "%s - فراموشی رمز",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
+  },
+  methods: {
+    SendEmailToResetPassword() {
+      this.Loading = true;
+      Vue.http
+        .post("accounts/api/v1/request_reset_email/", {
+          email: this.email,
+        })
+        .then(() => {
+          this.Loading = false;
+          // if(res.body.success == 'Email sent'){
+          Vue.swal(
+            "انجام شد",
+            "لینک بازیابی رمز برای ایمیل وارد شده ارسال شد",
+            "success"
+          );
+          // }
+        })
+        .catch(() => {
+          this.Loading = false;
+
+          Vue.swal("انجام نشد", "مشکلی پیش آمد مجددا تلاش فرمایید", "error");
+        });
+    },
+  },
 };
 </script>
 
@@ -152,8 +200,7 @@ p {
       background-image: linear-gradient(315deg, #fffdfd 0%, #fffdfda2 74%);
       background-position: left;
       position: relative;
-        background-size: cover;
-
+      background-size: cover;
     }
   }
   //  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);
@@ -246,5 +293,4 @@ p {
     width: 100%;
   }
 }
-
 </style>

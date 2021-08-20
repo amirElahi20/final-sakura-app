@@ -67,6 +67,11 @@ const routes = [{
         name: 'Confirm'
     },
     {
+        path: '/accounts/api/v1/check_reset_token/:uidb64/:token',
+        name: 'resetpassword',
+        component: () =>
+            import ('../components/TheForms/ResetPassword.vue')
+    }, {
         path: '/shopcart',
         name: 'shopcart',
         component: () =>
