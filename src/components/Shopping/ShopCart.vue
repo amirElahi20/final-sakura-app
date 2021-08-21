@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="total-shop" v-if="IsAuthenticated && getCountOrder != 0">
-      <!-- <h1 class="heading-secondary">سبد خرید</h1> -->
       <div class="shopping-cart">
         <div class="column-labels">
           <label class="product-image">عکس ها</label>
@@ -70,20 +69,11 @@
               />
 
               <div
-                v-if="order.amount != 1"
                 :disabled="pendingRequest"
                 @click="removeone(order.product_cost.pack.id, order.product.id)"
                 class="counter minus"
               >
                 -
-              </div>
-              <div
-                v-if="order.amount == 1"
-                :disabled="pendingRequest"
-                @click="removeone(order.product_cost.pack.id, order.product.id)"
-                class="counter minus"
-              >
-                <font-awesome-icon icon="trash-alt" class="trash-icon" />
               </div>
             </div>
           </div>
@@ -257,7 +247,7 @@ export default {
           "shop/api/v1/Cancel_Order_Row/",
           {
             product: productproduct,
-            amount: productamount,
+            amount:"-"+ productamount,
             pack: productpack,
           },
           {
@@ -302,6 +292,7 @@ export default {
 .trash-icon {
   margin: 5px -2px;
   padding-bottom: 1px;
+  background-color: red;
 }
 .back {
   margin-top: 200px;
@@ -364,16 +355,16 @@ export default {
 }
 .plus {
   background-color: orange;
-  margin-top: -7px;
-  padding-top: 2px;
+  text-align: center;
+  line-height: -30px;
+
   margin-bottom: 10px;
   @media screen and (max-width: 649px) {
     display: inline-block;
     margin-right: 10px;
+    line-height: 25px;
   }
   @media screen and (max-width: 370px) {
-    // display: inline-block; 
-    // margin-left: 10px; 
     display: block;
     margin-right: 0;
   }
@@ -385,12 +376,12 @@ export default {
   margin-bottom: 10px;
   margin-top: 10px;
   @media screen and (max-width: 649px) {
-    display: inline-block; 
-    margin-left: 10px; 
+    display: inline-block;
+    margin-left: 10px;
+    line-height: 25px;
   }
-    @media screen and (max-width: 370px) {
-    // display: inline-block; 
-    // margin-left: 10px; 
+  @media screen and (max-width: 370px) {
+
     display: block;
     margin-left: 0px;
   }
@@ -402,13 +393,9 @@ export default {
   border-radius: 10px;
   @media screen and (max-width: 649px) {
     display: inline-block;
-    // margin-right: 10px;
-    // margin-left: 10px;
   }
-    @media screen and (max-width: 370px) {
-    // display: inline-block; 
-    // margin-left: 10px; 
-    margin-right: 72%;
+  @media screen and (max-width: 370px) {
+    margin-right: 77%;
   }
 }
 .toman {
@@ -457,29 +444,34 @@ $font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 /* Global "table" column settings */
 .product-image {
   float: right;
-  width: 25%;
-  // background-color: red;
+  width: 28%;
   height: 20%;
+  @media screen and (max-width: 1379px) {
+    width: 26%;
+  }
 }
 .product-details {
   float: right;
-  width: 20%;
-  // background-color: yellow;
+  width: 21%;
+  @media screen and (max-width: 1379px) {
+    width: 20%;
+  }
 }
 .product-price {
   float: right;
   text-align: center;
-  width: 24%;
+  width: 27%;
+  @media screen and (max-width: 1379px) {
+    width: 26%;
+  }
 }
 .product-quantity {
   float: right;
   text-align: center;
-  // width: 10%;
-     @media screen and (max-width: 649px) {
-         width: 50%;
-         margin-top: 0px;
-        //  background-color: red;
-         }
+  @media screen and (max-width: 649px) {
+    width: 50%;
+    margin-top: 0px;
+  }
 }
 .product-removal {
   float: right;
@@ -542,12 +534,10 @@ label {
     border-bottom: 1px solid $color-border;
   }
   .product-details {
-    // text-indent: 150px;
     text-align: right;
   }
   .product-image {
     text-align: right;
-    // text-indent: -9999px;
   }
   .product-removal {
     text-indent: 5px;
@@ -571,7 +561,6 @@ label {
     .product-title {
       margin-right: 20px;
       direction: rtl;
-      // background-color: red;
       font-weight: bold;
     }
     .product-description {
@@ -601,11 +590,9 @@ label {
 .totals {
   .totals-item {
     float: left;
-    // clear: both;
     direction: ltr;
     width: 100%;
     margin-bottom: 10px;
-    // background-color: red;
 
     label {
       float: left;
@@ -674,11 +661,9 @@ label {
   }
 
   .product-quantity {
-    // width: 100px;
     .counter-counter {
       margin-left: 7px;
       margin-top: 15px;
-       
     }
   }
 
@@ -690,7 +675,8 @@ label {
 
   .product-line-price {
     float: left;
-    width: 70px;
+    width: auto;
+    margin-top: 20px;
   }
 }
 

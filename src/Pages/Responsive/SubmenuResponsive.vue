@@ -1,7 +1,7 @@
 <template>
   <div class="sub-responsive">
-    <div class="sub-menu subMenuBar">
       <font-awesome-icon icon="times" @click="closeMenu" class="close-icon" />
+    <div class="sub-menu subMenuBar">
       <ul class="list">
         <li>
           <a href="/" class="sub-links"
@@ -125,7 +125,6 @@ export default {
       this.leftId = id;
     },
     mouseleave() {
-      // this.resId = "",
       this.leftId = "";
     },
     closeMenu() {
@@ -238,12 +237,14 @@ h2:after {
 }
 
 .close-icon {
-  color: orangered;
-  font-size: 25px;
-  // margin: 15px 10px 10px 0;
-  margin-right: 20px;
-  margin-top: 20px;
+    font-size: 35px;
+  position: fixed;
+  z-index: 9999;
+  margin: 15px 10px;
+  left: 0;
   cursor: pointer;
+  color: red;
+
 }
 
 .sub-menu {
@@ -270,14 +271,17 @@ h2:after {
   text-decoration: none;
   color: black;
   font-size: 15px;
+  transition: all 0.4s;
+
+  &:hover{
+    color: rgb(206, 134, 1);
+  }
 }
 .sub-menu-icon {
-  // color: orangered;
   margin-left: 5px;
   font-size: 15px;
 }
 li {
-  // background-color: red;
   padding: 10px 0px;
 }
 </style>

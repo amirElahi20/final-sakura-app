@@ -20,38 +20,32 @@
     >
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
-          <!-- {{product.picture}} -->
           <div class="product-informartion">
-            <!-- <router-link
-              class="product-info"
-              :to="{ name: 'singleproduct', params: { slug: product.slug } }"
-            > -->
-              <img
-                :class="{ blurimg: !product.available }"
-                class="img-box"                
-                :src="`https://api.sdriedf.ir`+ product.picture[0].picture"
-                alt=""
-              />
-              
-              <div class="products-cost">
-                <h3 class="product-name">{{ product.name }}</h3>
-                <h4 class="product-cost">
-                  <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
-                  >تومان
-                </h4>
-                <p class="available" v-if="!product.available">
-                  کالای مورد نظر موجود نیست!
-                </p>
-                <router-link
-                  :to="{
-                    name: 'singleproduct',
-                    params: { slug: product.slug },
-                  }"
-                  class="product-btn"
-                  >مشاهده محصول</router-link
-                >
-              </div>
-            <!-- </router-link> -->
+            <img
+              :class="{ blurimg: !product.available }"
+              class="img-box"
+              :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+              alt=""
+            />
+
+            <div class="products-cost">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <h4 class="product-cost">
+                <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
+                >تومان
+              </h4>
+              <p class="available" v-if="!product.available">
+                کالای مورد نظر موجود نیست!
+              </p>
+              <router-link
+                :to="{
+                  name: 'singleproduct',
+                  params: { slug: product.slug },
+                }"
+                class="product-btn"
+                >مشاهده محصول</router-link
+              >
+            </div>
           </div>
         </div>
       </slide>
@@ -69,9 +63,7 @@ export default {
     Slide,
   },
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
     MostSellProducts() {
@@ -94,7 +86,7 @@ export default {
   margin: -150px 0 50px 0;
   text-align: center;
 
-   @media screen and (max-width: 880px) {
+  @media screen and (max-width: 880px) {
     margin-top: 2rem;
   }
 }

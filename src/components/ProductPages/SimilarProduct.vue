@@ -24,11 +24,11 @@
             <a
               class="product-info"
               :href="
-                  $router.resolve({
-                    name: 'singleproduct',
-                    params: { slug: product.slug },
-                  }).href
-                "
+                $router.resolve({
+                  name: 'singleproduct',
+                  params: { slug: product.slug },
+                }).href
+              "
             >
               <img
                 :class="{ blurimg: !product.available }"

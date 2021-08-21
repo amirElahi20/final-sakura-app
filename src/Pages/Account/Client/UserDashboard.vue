@@ -16,7 +16,7 @@
         class="times-icon"
       />
 
-      <div class="sidebar" :class="{ side: activeSide }">
+      <div class="sidebar subMenuBar" :class="{ side: activeSide }">
         <header>
           <a href="#">امیررضا</a>
         </header>
@@ -79,9 +79,7 @@
 </template>
 
 <script>
-import ClickOutside from "vue-click-outside";
 import Vue from "vue";
-// import TheAccount from "../Client/TheAccount.vue";
 export default {
   data() {
     return {
@@ -126,16 +124,26 @@ export default {
       this.activeSide = true;
     },
   },
-  directives: {
-    ClickOutside,
-  },
-  //  components:{
-  //    TheAccount
-  //  }
 };
 </script>
 
 <style lang="scss" scoped>
+.subMenuBar {
+  animation-name: MoveToLeft;
+  animation-duration: 0.4s;
+}
+@keyframes MoveToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  50% {
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 body {
   overflow-x: hidden;
   font-size: 16px;
@@ -146,7 +154,6 @@ body {
 /* Toggle Styles */
 
 #viewport {
-  // display: none;
   padding-right: 270px;
   direction: rtl;
   -webkit-transition: all 0.5s ease;
@@ -172,7 +179,6 @@ body {
   right: 250px;
   width: 250px;
   height: 100%;
-  // display: block;
   margin-right: -250px;
   overflow-y: auto;
   background: whitesmoke;
@@ -192,7 +198,6 @@ body {
   background-color: orange;
   font-size: 25px;
   line-height: 52px;
-  // margin-left: 1px;
   text-align: center;
   @media screen and (max-width: 700px) {
     margin-top: 55px;
@@ -241,9 +246,10 @@ body {
 }
 .times-icon {
   font-size: 35px;
-  position: absolute;
+  position: fixed;
   z-index: 9999;
-  margin: 15px 10px;
+  left: 0;
+  margin: 10px 0 0 15px;
   display: none;
   cursor: pointer;
   color: red;

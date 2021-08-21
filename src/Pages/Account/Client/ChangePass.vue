@@ -105,7 +105,6 @@ export default {
 }
 
 body {
-//   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -118,7 +117,6 @@ body {
   display: flex;
   justify-content: space-between;
   background: #fff;
-//   margin: 20px 0;
 }
 .contact-form > * {
   width: 50%;

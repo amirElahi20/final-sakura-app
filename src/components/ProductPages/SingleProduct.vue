@@ -274,7 +274,7 @@ export default {
     width: 85%;
     height: 520px;
   }
-    @media screen and (max-width: 450px) {
+  @media screen and (max-width: 450px) {
     height: 550px;
   }
 }
@@ -296,12 +296,11 @@ export default {
   height: 100%;
 }
 .img-carousel {
-width: 100%;
-height: 500px;
- @media screen and (max-width: 686px) {
-   height: 300px;
- }
-
+  width: 100%;
+  height: 500px;
+  @media screen and (max-width: 686px) {
+    height: 300px;
+  }
 }
 .product-info {
   text-align: center;
@@ -338,7 +337,7 @@ option {
     margin: 0.5rem 0;
   }
 }
-.product-explanation{
+.product-explanation {
   width: 80%;
   margin: -50px auto 3rem auto;
   direction: rtl;

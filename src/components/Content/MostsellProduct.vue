@@ -1,7 +1,6 @@
 <template>
   <div class="swiper">
-    <!-- {{root}} -->
-      <!-- {{MostSellProducts.picture[0].picture}} -->
+
     <div class="u-center">
       <h2 class="header-title">پرفروش ترین محصولات</h2>
     </div>
@@ -23,41 +22,34 @@
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
           <div class="product-informartion">
-            <!-- <router-link class="product-info"
-              :to="{ name: 'singleproduct', params: { slug: product.slug } }"
-            > -->
-              <img
-                :class="{ blurimg: !product.available }"
-                class="img-box"
-                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
-                
-                alt=""
-              />
-              <div class="products-cost">
-                <h3 class="product-name">{{ product.name }}</h3>
-                <h4 class="product-cost">
-                  <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
-                  >تومان
-                </h4>
-                <p class="available" v-if="!product.available">
-                  کالای مورد نظر موجود نیست!
-                </p>
-                <router-link
-                  :to="{
-                    name: 'singleproduct',
-                    params: { slug: product.slug },
-                  }"
-                  class="product-btn"
-                  >مشاهده محصول</router-link
-                >
-              </div>
-            <!-- </router-link> -->
+            <img
+              :class="{ blurimg: !product.available }"
+              class="img-box"
+              :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+              alt=""
+            />
+            <div class="products-cost">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <h4 class="product-cost">
+                <span>قیمت از{{ product.show_cost.toLocaleString() }}</span
+                >تومان
+              </h4>
+              <p class="available" v-if="!product.available">
+                کالای مورد نظر موجود نیست!
+              </p>
+              <router-link
+                :to="{
+                  name: 'singleproduct',
+                  params: { slug: product.slug },
+                }"
+                class="product-btn"
+                >مشاهده محصول</router-link
+              >
+            </div>
           </div>
         </div>
       </slide>
-
     </carousel>
-
   </div>
 </template>
 
@@ -65,7 +57,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import Vue from 'vue';
+import Vue from "vue";
 export default {
   components: {
     Carousel,
@@ -73,7 +65,7 @@ export default {
   },
   data() {
     return {
-      root : Vue.http.options.root
+      root: Vue.http.options.root,
     };
   },
   computed: {
@@ -97,7 +89,7 @@ export default {
   margin: 70px 0 50px 0;
   text-align: center;
 }
-.product-info{
+.product-info {
   text-decoration: none;
   color: black;
 }
@@ -208,7 +200,6 @@ h2:after {
 }
 .product-cost {
   font-size: 14px;
-  // margin-bottom: 5rem;
   margin-top: 15px;
   margin-bottom: 25px;
   @media screen and (max-width: 700px) {

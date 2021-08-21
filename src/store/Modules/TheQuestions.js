@@ -1,6 +1,3 @@
-// https: //api.sdriedf.ir/site_model/api/v1/FAQ
-
-
 import Vue from "vue";
 
 const state = {
@@ -24,7 +21,6 @@ const actions = {
         Vue.http.get('site_model/api/v1/FAQ/', {
             responseType: 'json'
         }).then(response => {
-            console.log("this is Questions", response.data);
             context.commit('SetQuestions', response.data)
         })
     }

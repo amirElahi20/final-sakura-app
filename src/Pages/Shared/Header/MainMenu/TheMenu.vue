@@ -44,18 +44,15 @@
             </li>
           </ul>
         </div>
-        <!-- <div class="left">bfdb</div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import SearchBox from "../SearchBox/SearchBox.vue";
 import SubMenu from "../SubMenus/SubMenu.vue";
 export default {
   components: {
-    // SearchBox,
     SubMenu,
   },
   data() {
@@ -129,7 +126,6 @@ display: none;
   }
 }
 .r li {
-  // margin-left: 80px;
   margin-top: 15px;
   margin-right: 80px;
 }
@@ -143,8 +139,6 @@ display: none;
 .container {
   display: flex;
   margin: 0 auto;
-  // justify-content: space-evenly;
-  // justify-content: start;
   justify-content: space-between;
   direction: rtl;
   width: 100%;
@@ -160,7 +154,6 @@ display: none;
   direction: rtl;
   transition: all 0.4s;
   padding: -5px 12px;
-  // margin: 5px;
   height: 80px;
   width: 100%;
   position: fixed;

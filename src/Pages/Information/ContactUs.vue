@@ -101,7 +101,7 @@ export default {
   },
    metaInfo: {
       title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - گزارش باگ',
+      titleTemplate: '%s - ارتباط با ساکورا',
       htmlAttrs: {
         lang: 'utf-8',
         amp: true

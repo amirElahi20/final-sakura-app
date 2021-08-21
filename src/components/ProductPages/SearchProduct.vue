@@ -11,7 +11,6 @@
       <div class="left-search">
         <div class="search-box">
           <div class="close-search">
-            <!-- <font-awesome-icon @click="searchName = ''" icon="times" /> -->
           </div>
           <div class="right-searchinput">
             <input
@@ -28,7 +27,12 @@
               :href="
                 $router.resolve({
                   name: 'searchproduct',
-                  params: { slug: searchName.split(' ').join('-') },
+                  params: {
+                    slug: searchName
+                      .replace(/\s\s+/g, ' ')
+                      .split(' ')
+                      .join('-'),
+                  },
                 }).href
               "
               >جست و جو</a
@@ -48,13 +52,14 @@
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
               class="product-info"
             >
-                   <img
+              <img
                 :class="{ blurimg: !product.available }"
                 class="image"
                 @mouseover="
                   (src = product.picture[0].picture),
                     (product.picture[0].picture = product.picture[1].picture),
-                    (product.picture[1].picture = src)"
+                    (product.picture[1].picture = src)
+                "
                 @mouseleave="
                   (product.picture[1].picture = product.picture[0].picture),
                     (product.picture[0].picture = src)
@@ -131,11 +136,11 @@ export default {
 .search-input {
   border: none;
   width: 100%;
-  // background-color: orange;
   height: 58px;
-  // align-items: center;
   font-size: 24px;
-  // padding-right: 50px;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 }
 .search {
   cursor: pointer;
@@ -159,6 +164,10 @@ export default {
   cursor: pointer;
   color: white;
   font-size: 15px;
+  @media screen and (max-width: 500px) {
+    width: 40px;
+    font-size: 12px;
+  }
 }
 .left-searchbtn {
   display: flex;
@@ -178,11 +187,9 @@ export default {
   height: 200px;
 }
 .right-search {
-  // background-color: yellowgreen;
   width: 30%;
 }
 .left-search {
-  // background-color: yellow;
   width: 65%;
 }
 $color-primary-dark: orange;
@@ -297,6 +304,11 @@ $color-primary-light: orangered;
 .image {
   width: 100%;
   height: 190px;
+  transition: all 1s;
+  &:hover {
+    transform: scale(1.1);
+    opacity: 1s;
+  }
 }
 
 .blurimg {

@@ -38,12 +38,17 @@
 
           <label for="email-input">ارسال تصویر مربوط به باگ</label>
           <input
+            @change="fileChange"
             id="email-input"
             type="file"
             placeholder="مثال : someone@gmail.com"
             required
           />
-            <div class="form-group">
+          <div v-if="!noFiles" class="confirm_pic">
+            <p>عکس اضافه شد</p>
+            <p>نام فایل :{{ FileName }}</p>
+          </div>
+          <div class="form-group">
             <label for="message-textarea">باگ در کدام بخش دیده شد؟؟</label>
             <textarea id="message-textarea" placeholder="پیام شما"></textarea>
           </div>
@@ -51,7 +56,7 @@
             <label for="message-textarea">پیغام خود را بنویسید</label>
             <textarea id="message-textarea" placeholder="پیام شما"></textarea>
           </div>
-        
+
           <p class="pay-attention">
             لطفا توجه داشته باشید قبل از برطرف شدن خطای گزارش شده، هیچگونه
             اطلاعاتی در مورد آن را عمومی نکرده یا با دیگران به اشتراک نگذارید.
@@ -59,9 +64,9 @@
             حریم شخصی افراد و ایجاد مشکل در اطلاعات دیگران اجتناب کنید. همچنین
             به هیچ عنوان از مشکلات که یافته‌اید، بهره‌برداری و سوءاستفاده نکنید
             و به قوانین کشور پایبند باشید. با توجه به اهمیت خطای گزارش شده از
-            سوی شما، ساکورا به پاس قدردانی هدیه‌ای برای شما در نظر خواهد
-            گرفت. توجه داشته باشید بعضی از مشکلات به دلیل کم اهمیت بودن شامل
-            هدیه نخواهند بود.
+            سوی شما، ساکورا به پاس قدردانی هدیه‌ای برای شما در نظر خواهد گرفت.
+            توجه داشته باشید بعضی از مشکلات به دلیل کم اهمیت بودن شامل هدیه
+            نخواهند بود.
           </p>
           <button>ارسال پیام</button>
         </form>
@@ -90,6 +95,8 @@ export default {
       email: "",
       phone: "",
       body: "",
+      noFiles: true,
+      FileName: "",
     };
   },
   metaInfo: {
@@ -143,6 +150,10 @@ export default {
           });
       }
     },
+    fileChange(event) {
+      this.noFiles = !event.target.files.length;
+      this.FileName = event.target.files[0].name;
+    },
   },
 };
 </script>
@@ -163,7 +174,6 @@ body {
   background: #f2f2f2;
 }
 #email-input {
-  // padding: 1x;
   padding: 20px;
   margin-bottom: 2rem;
   width: 100%;
@@ -186,7 +196,6 @@ body {
   font-weight: 700;
   font-size: 10pt;
   width: 103%;
-  //   margin: 0 auto;
   height: 100%;
   text-align: center;
   margin-right: -15px;
@@ -250,6 +259,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .contact-form .second-container form .form-group {
   margin-bottom: 10px;
 }
@@ -348,9 +358,14 @@ body {
   text-decoration: none;
   padding: 10px 31.1px;
 }
-.pay-attention{
-    margin-bottom: 1rem;
-    font-size: 14px;
-    direction: rtl;
+.pay-attention {
+  margin-bottom: 1rem;
+  font-size: 14px;
+  direction: rtl;
+}
+.confirm_pic{
+color: green;
+font-size: 12px;
+margin: -45px 10px 30px 0;
 }
 </style>

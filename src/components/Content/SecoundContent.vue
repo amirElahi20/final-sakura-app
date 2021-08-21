@@ -134,24 +134,7 @@ export default {
 .section-features {
   margin-top: 50px;
 }
-// .section-features {
-//   padding: 15rem 0;
-//   background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%),
-//     url("../../../public/img/zaib-tse-KVv5lFOMY1E-unsplash.jpg");
-//   background-color: #2d3436;
-//   background-size: cover;
-//   background-position: bottom;
-//   margin-top: -10rem;
 
-//   transform: skewY(-7deg);
-
-//   & > * {
-//     transform: skewY(7deg);
-//   }
-//   @media screen and (max-width: 450px) {
-//     padding: 2rem;
-//   }
-// }
 .fa {
   font-size: 35px;
 }

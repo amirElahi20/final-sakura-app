@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <submenu-responsive></submenu-responsive> -->
     <the-header></the-header>
     <transition name="fade">
       <router-view></router-view>
@@ -42,12 +41,9 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // overflow-x: hidden;
-  // overflow-y: hidden;
 }
 
 body {
-  // padding: 5px;
   font-family: "BYekan";
 }
 .english {

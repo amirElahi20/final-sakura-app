@@ -6,28 +6,29 @@
           <h2 class="heading-secondary">محصولات</h2>
         </div>
         <div class="row">
-          <div class="box"  v-for="product in FilterProducts" :key="product.id">
+          <div class="box" v-for="product in FilterProducts" :key="product.id">
             <router-link
               :to="{ name: 'singleproduct', params: { slug: product.slug } }"
               class="product-info"
             >
               <transition name="bounce">
-              <img
-                :class="{ blurimg: !product.available }"
-                class="image"
-                @mouseover="
-                  (src = product.picture[0].picture),
-                    (product.picture[0].picture = product.picture[1].picture),
-                    (product.picture[1].picture = src)"
-                @mouseleave="
-                  (product.picture[1].picture = product.picture[0].picture),
-                    (product.picture[0].picture = src)
-                "
-                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
-                alt=""
-              />
+                <img
+                  :class="{ blurimg: !product.available }"
+                  class="image"
+                  @mouseover="
+                    (src = product.picture[0].picture),
+                      (product.picture[0].picture = product.picture[1].picture),
+                      (product.picture[1].picture = src)
+                  "
+                  @mouseleave="
+                    (product.picture[1].picture = product.picture[0].picture),
+                      (product.picture[0].picture = src)
+                  "
+                  :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+                  alt=""
+                />
               </transition>
-                <p class="paragraph">{{ product.name }}</p>
+              <p class="paragraph">{{ product.name }}</p>
               <h5 class="cost">
                 {{ product.show_cost.toLocaleString() }} تومان
               </h5>
@@ -41,7 +42,6 @@
               </p>
             </router-link>
           </div>
-
         </div>
       </div>
     </div>
@@ -52,17 +52,17 @@
 export default {
   data() {
     return {
-      show : true,
+      show: true,
     };
   },
-   metaInfo: {
-      title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - محصولات',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "فروشگاه ساکورا",
+    titleTemplate: "%s - محصولات",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
+  },
   computed: {
     FilterProducts() {
       return this.$store.getters.GetProducts;
@@ -155,7 +155,7 @@ $color-primary-light: orangered;
 .row {
   display: flex;
   flex-wrap: wrap;
-  width:85%;
+  width: 85%;
   margin: 0 auto;
   justify-content: center;
 }
@@ -182,8 +182,8 @@ $color-primary-light: orangered;
 .image {
   width: 100%;
   height: 190px;
-transition: all 1s;
-  &:hover{
+  transition: all 1s;
+  &:hover {
     transform: scale(1.1);
     opacity: 1s;
   }

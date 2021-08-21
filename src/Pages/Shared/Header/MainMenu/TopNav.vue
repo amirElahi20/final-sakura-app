@@ -40,8 +40,8 @@
               <h4>واتساپ</h4>
             </a>
           </li>
-          <li>
-            <a href="tel:09361231129">
+          <li v-if="GetInformation[0]">
+            <a  :href="`tel:${GetInformation[0].phone}`">
               <font-awesome-icon class="instagram phone" icon="phone" />
               <h4>تماس</h4>
             </a>
@@ -85,7 +85,7 @@
                   :href="
                     $router.resolve({
                       name: 'searchproduct',
-                      params: { slug: searchName.split(' ').join('-') },
+                      params: { slug: (searchName.replace(/\s\s+/g, ' ')).split(' ').join('-') },
                     }).href
                   "
                   >جست و جو</a
@@ -110,7 +110,7 @@
             </router-link>
           </li>
           <li v-if="!IsAuthenticated">
-            <router-link to="/register" class="login"> ثبت نام </router-link>
+            <router-link to="/register" class="login"> ثبت نام  </router-link>
             <router-link to="/login" class="register"> وارد شوید </router-link>
           </li>
           <li v-if="IsAuthenticated">
@@ -130,7 +130,6 @@
 
 <script>
 import Vue from "vue";
-import ClickOutside from "vue-click-outside";
 import SubmenuResponsive from "../../../Responsive/SubmenuResponsive.vue";
 export default {
   data() {
@@ -207,9 +206,6 @@ export default {
       this.show = true;
     },
   },
-  directives: {
-    ClickOutside,
-  },
 };
 </script>
 
@@ -246,7 +242,6 @@ export default {
   border: 1px solid black;
   width: 300px;
   margin-top: -15px;
-  // border-radius: 5px;
   position: absolute;
   z-index: 99999;
   height: 60px;
@@ -259,7 +254,6 @@ export default {
   height: 100%;
   text-indent: 10px;
   font-size: 14px;
-  // padding: 15px;
 }
 .search {
   cursor: pointer;
@@ -268,7 +262,6 @@ export default {
   padding: 7px;
   background-color: orange;
   border: none;
-  // cursor: not-allowed;
   text-decoration: none;
   cursor: pointer;
   color: white;

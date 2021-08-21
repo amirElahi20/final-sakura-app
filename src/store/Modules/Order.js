@@ -46,11 +46,9 @@ const actions = {
                 'Authorization': 'Bearer ' + Vue.cookie.get('Sakura')
             }
         }).then(() => {
-            // console.log(response)
             store.dispatch("ShowOrderRows")
             Vue.swal("انجام شد", "محصول مورد نظر با موفقیت به سبد خرید اضافه شد", "success");
         }).catch((error) => {
-            // console.log(error.status)
             if (error.status == 401) {
                 Vue.swal("توجه", "برای خرید باید ابتدا وارد سایت شوید", "info");
             }
@@ -67,11 +65,8 @@ const actions = {
                 'Authorization': 'Bearer ' + Vue.cookie.get('Sakura'),
             }
         }).then(response => {
-            // store.dispatch('CountUserOrders');
             commit('SetUserShopCart', response.body)
             commit('SetCount', response.data[0].rows.length)
-                // console.log("length", response.data[0].rows.length)
-            console.log("response show order", response.body)
         }).catch(err => {
             console.log(err);
         })
@@ -83,7 +78,6 @@ const actions = {
             }
         }).then(response => {
             commit('SetCount', response.data[0].rows.length)
-                // return response.json();
         }).catch(err => {
             console.log(err);
         })

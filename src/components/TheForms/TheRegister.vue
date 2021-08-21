@@ -220,13 +220,11 @@ export default {
 }
 .alert {
   color: red;
-  // text-align: start;
   text-align: end;
   margin-top: -15px;
 }
 .eye {
   position: absolute;
-  // top: 15.7rem;
   margin-top: -34px;
   margin-left: 10px;
   color: rgb(90, 92, 92);
@@ -292,7 +290,6 @@ p {
       background-size: cover;
     }
   }
-  //  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);
 }
 .list {
   &__group:not(:last-child) {
@@ -303,15 +300,12 @@ p {
     font-size: 17px;
     height: 50px;
     padding-right: 10px;
-    // border-radius: 10px;
     background-color: rgba(rgb(255, 255, 255), 0.9);
     border: none;
     text-align: right;
     border: 1px solid black;
     width: 90%;
-    // width: 250px;
     position: relative;
-    // margin: 0 auto;
     display: block;
     color: inherit;
     @media screen and (max-width: 500px) {
@@ -329,11 +323,6 @@ p {
     transition: all 0.3s;
     margin-bottom: 10px;
     color: black;
-    @media screen and (max-width: 500px) {
-      // margin-right: 3.5rem;
-      // text-align: left;
-      // margin-right: 15%;
-    }
   }
 }
 .submit-btn {
@@ -341,7 +330,6 @@ p {
   display: flex;
   width: 90%;
   cursor: pointer;
-  // border-radius: 10px;
   justify-content: center;
   align-items: center;
   color: black;
@@ -369,7 +357,6 @@ p {
   justify-content: center;
   width: 90%;
   margin-top: 1rem;
-  // border-radius: 10px;
   background-color: orangered;
   color: white;
   cursor: pointer;

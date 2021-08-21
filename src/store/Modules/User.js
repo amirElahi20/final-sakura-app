@@ -88,7 +88,6 @@ const actions = {
 
             })
     },
-    // accounts/api/v1/username/
     checkForLogin(context) {
         Vue.http.get('accounts/api/v1/username/', {
             headers: {
@@ -96,7 +95,6 @@ const actions = {
                 'Accept': 'application/json'
             }
         }).then(response => {
-            // console.log("username-username", response.body.username);
             context.commit('SetUsername', response.body.username);
             context.commit("SetUserAuth", true);
 

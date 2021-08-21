@@ -14,7 +14,6 @@
         :loop="true"
         :autoplayTimeout="7000"
       >
-      {{GetSlider.picture}}
         <slide class="slide" v-for="pic in GetSlider" :key="pic.id">
           <img :src="pic.picture" />
         </slide>

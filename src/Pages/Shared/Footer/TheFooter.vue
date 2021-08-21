@@ -280,9 +280,7 @@ footer {
   justify-content: space-around;
   position: relative;
   margin-top: 5px;
-  // margin-bottom: 5rem;
   @media screen and (max-width: 800px) {
-    // font: 7vw "BYekan";
     margin-bottom: 5rem;
   }
 }

@@ -40,8 +40,6 @@ const actions = {
 
             }
         }).then(response => {
-            console.log("user panel", response.body);
-            // context.commit('SetUser', response.data.user);
             context.commit('SetUserInfo', response.body)
         })
     },
@@ -62,7 +60,6 @@ const actions = {
             }
         }).then(response => {
             context.commit("SetPendingLoading", false)
-            console.log(response.status)
             store.dispatch("Getinformtion")
             Vue.swal("انجام شد", "اطلاعات ویرایش شد", "success");
             if (response.data.status == true) {
@@ -73,7 +70,6 @@ const actions = {
             }
         }).catch(() => {
             context.commit("SetPendingLoading", false)
-
             Vue.swal("انجام نشد", "ایمیل وارد شده تکراری است", "error");
 
         })

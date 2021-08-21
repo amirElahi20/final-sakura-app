@@ -1,18 +1,18 @@
 <template>
   <div v-if="GetInformation[0]">
     <div class="u-center">
-      <h2 class="header-title">{{GetInformation[0].name}}</h2>
+      <h2 class="header-title">{{ GetInformation[0].name }}</h2>
     </div>
     <main class="FirstContent">
       <div class="left">
         <div class="site-info">
-          <h3 class="heading-teritary">{{GetInformation[0].title_1}}</h3>
+          <h3 class="heading-teritary">{{ GetInformation[0].title_1 }}</h3>
           <p class="paragraph">
-           {{GetInformation[0].body_1}}
+            {{ GetInformation[0].body_1 }}
           </p>
-          <h3 class="heading-teritary">{{GetInformation[0].title_2}}</h3>
+          <h3 class="heading-teritary">{{ GetInformation[0].title_2 }}</h3>
           <p class="paragraph">
-           {{GetInformation[0].body_2}}
+            {{ GetInformation[0].body_2 }}
           </p>
           <router-link to="/aboutus" class="btn-text"
             >درباره ما &larr;</router-link
@@ -21,21 +21,9 @@
       </div>
       <div class="right">
         <div class="img-box" v-if="getImages[0]">
-          <img
-            class="image img1"
-            :src="getImages[0].product_img_1"
-            alt=""
-          />
-          <img
-            class="image img2"
-            :src="getImages[0].product_img_3"
-            alt=""
-          />
-          <img
-            class="image img3"
-            :src="getImages[0].product_img_2"
-            alt=""
-          />
+          <img class="image img1" :src="getImages[0].product_img_1" alt="" />
+          <img class="image img2" :src="getImages[0].product_img_3" alt="" />
+          <img class="image img3" :src="getImages[0].product_img_2" alt="" />
         </div>
       </div>
     </main>
@@ -52,7 +40,7 @@ export default {
   data() {
     return {};
   },
-  
+
   created() {
     this.$store.dispatch("GetImagesFromServer");
   },
@@ -60,7 +48,7 @@ export default {
     getImages() {
       return this.$store.getters.GetImg;
     },
-      GetInformation() {
+    GetInformation() {
       return this.$store.getters.GetSiteInformation;
     },
   },
@@ -111,7 +99,6 @@ h2:after {
   margin-right: -50%;
 }
 .FirstContent {
-  // margin-bottom: 4rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -148,7 +135,6 @@ img {
 }
 
 .img3 {
-
   margin-left: 100px;
   margin-top: 85px;
   width: 300px;
@@ -158,7 +144,6 @@ img {
   &:hover {
     outline: 5px solid rgb(173, 4, 173);
   }
- 
 }
 .img2 {
   margin-left: 20px;
@@ -170,7 +155,6 @@ img {
   &:hover {
     outline: 5px solid red;
   }
-  
 }
 .img1 {
   margin-left: 200px;
@@ -196,6 +180,5 @@ img {
   padding: 5px;
   border-radius: 5px;
 }
-
 </style>
 

@@ -101,7 +101,6 @@ body {
   padding: 5% 0;
   width: 100%;
   height: auto;
-  // background-color: #fff;
 }
 .about .left {
   padding: 2% 0;
@@ -126,7 +125,6 @@ body {
   width: 80%;
   border-top: 2px solid orangered;
   border-bottom: none;
-  // margin-right: 50px;
   margin-right: 10%;
 }
 .about .left p {

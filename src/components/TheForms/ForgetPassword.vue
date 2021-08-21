@@ -98,13 +98,11 @@ export default {
         })
         .then(() => {
           this.Loading = false;
-          // if(res.body.success == 'Email sent'){
           Vue.swal(
             "انجام شد",
             "لینک بازیابی رمز برای ایمیل وارد شده ارسال شد",
             "success"
           );
-          // }
         })
         .catch(() => {
           this.Loading = false;
@@ -131,13 +129,11 @@ export default {
 }
 .alert {
   color: red;
-  // text-align: start;
   text-align: end;
   margin-top: -15px;
 }
 .eye {
   position: absolute;
-  // top: 15.7rem;
   margin-top: -34px;
   margin-left: 10px;
   color: rgb(90, 92, 92);
@@ -203,7 +199,6 @@ p {
       background-size: cover;
     }
   }
-  //  background-image: linear-gradient(315deg, #000000 0%, #0000003a 74%);
 }
 .list {
   &__group:not(:last-child) {
@@ -240,11 +235,6 @@ p {
     transition: all 0.3s;
     margin-bottom: 10px;
     color: black;
-    @media screen and (max-width: 500px) {
-      // margin-right: 3.5rem;
-      // text-align: left;
-      // margin-right: 15%;
-    }
   }
 }
 .submit-btn {
@@ -252,7 +242,6 @@ p {
   display: flex;
   width: 90%;
   cursor: pointer;
-  // border-radius: 10px;
   justify-content: center;
   align-items: center;
   color: black;
@@ -280,7 +269,6 @@ p {
   justify-content: center;
   width: 90%;
   margin-top: 1rem;
-  // border-radius: 10px;
   background-color: orangered;
   color: white;
   cursor: pointer;
