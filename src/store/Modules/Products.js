@@ -6,7 +6,8 @@ const state = {
     Products: {},
     SingleProduct: {},
     SimilarProduct: {},
-    SearchProduct: []
+    SearchProduct: [],
+    GroupProducts: []
 };
 
 const getters = {
@@ -27,6 +28,9 @@ const getters = {
     },
     GetSearchProduct(state) {
         return state.SearchProduct
+    },
+    GetGroupProduct(state) {
+        return state.GroupProducts
     }
 };
 
@@ -48,6 +52,9 @@ const mutations = {
     },
     SetSearchProduct(state, search) {
         state.SearchProduct = search
+    },
+    SetGroupProduct(state, group) {
+        state.GroupProducts = group
     }
 };
 
@@ -97,6 +104,16 @@ const actions = {
                 return response.json()
             }).then(data => {
                 context.commit("SetSearchProduct", data)
+            })
+    },
+    GetGroupProductsFromServer(context, name) {
+        console.log("group slug", name.slug)
+        Vue.http.get('product/api/v1/search/group/' + name.slug + '/')
+            .then(response => {
+                return response.json()
+            }).then(data => {
+                console.log("group product", data)
+                context.commit("SetGroupProduct", data)
             })
     },
 };

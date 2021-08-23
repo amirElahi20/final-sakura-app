@@ -1,163 +1,214 @@
 <template>
   <div>
-    <div class="sub-menu">
-      <div class="right">
-        <ul>
-          <li
-            :class="{ menu_list: sub.id == resId || sub.id == leftId }"
-            @mouseover="getIndex(sub.id)"
-            class="menu-list"
-            v-for="sub in SubMenus"
-            v-show="sub.group == null"
-            :key="sub.id"
-          >
-            <font-awesome-icon class="icon circle-icon" icon="circle" />
-            <a class="sub-list">{{ sub.name }}</a>
-            <font-awesome-icon
-              class="icon angle-icon"
-              icon="angle-double-left"
-            />
-          </li>
-        </ul>
-      </div>
-      <div v-if="resId != 0" class="left">
-        <ul class="left-items">
-          <li
-            @mouseover="leftIndex(sub.group)"
-            @mouseleave="mouseleave"
-            v-for="sub in SubMenus"
-            v-show="sub.group != null && sub.group == resId"
-            :key="sub.id"
-          >
-            <a
-              :href="
-                $router.resolve({
-                  name: 'singleproduct',
-                  params: { slug: sub.slug },
-                }).href
-              "
-              class="product-sub"
-              >{{ sub.name }}</a
+    <transition name="fade">
+      <!-- <div class="popup" v-show="!activePopup"></div> -->
+    </transition>
+    {{ SubMenus }}
+    <div
+      class="total"
+      :class="{
+        scroll: scrollPosition >= 160,
+        container: scrollPosition < 160,
+      }"
+    >
+      <div class="container">
+        <div class="right">
+          <ul class="menu r">
+            <!-- <li
+              class="subbox"
+              @mouseover="mouseover"
+              @mouseleave="mouseleave"
+              :class="{ active: !activePopup }"
             >
-          </li>
-        </ul>
+              <a href="#" class="sub">دسته بندی</a>
+              <transition name="fade">
+                <sub-menu v-show="!activePopup"></sub-menu>
+              </transition>
+            </li> -->
+            <li>
+              <router-link class="router forget" to="/">خانه</router-link>
+            </li>
+            <li
+              v-for="sub in SubMenus"
+              v-show="sub.group == null"
+              :key="sub.id"
+            >
+              <a class="sub-list">{{ sub.name }}</a>
+
+              <div class="sub-product">
+                <ul>
+                  <li>پرتقال</li>
+                  <li>سیب</li>
+                  <li>هلو</li>
+                  <li>شلیل</li>
+                  <li>آلو</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// import SubMenu from "../SubMenus/SubMenu.vue";
 export default {
+  // components: {
+  //   SubMenu,
+  // },
   data() {
     return {
-      resId: "",
-      leftId: "",
+      activePopup: true,
+      scrollPosition: 0,
+      isSticky: false,
     };
+  },
+
+  created() {
+    this.$store.dispatch("GetSubMenuFromServer");
+
+    // this.$store.dispatch("ShowOrderRows");
+    window.addEventListener("scroll", this.updateScroll);
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.updateScroll);
+  },
+  methods: {
+    mouseover() {
+      this.activePopup = false;
+    },
+    mouseleave() {
+      this.activePopup = true;
+    },
+    updateScroll() {
+      this.scrollPosition = window.scrollY;
+      if (this.scrollPosition >= 100) {
+        this.isSticky = true;
+      } else {
+        this.isSticky = false;
+      }
+    },
   },
   computed: {
     SubMenus() {
       return this.$store.getters.GetSubMenu;
     },
-  },
-  methods: {
-    getIndex(id) {
-      console.log("right id", id);
-      this.resId = id;
-    },
-    leftIndex(id) {
-      console.log("left id", id);
-      this.leftId = id;
-    },
-    mouseleave() {
-      this.leftId = "";
-    },
-  },
-  created() {
-    this.$store.dispatch("GetSubMenuFromServer");
+    // userOrders() {
+    //   return this.$store.getters.GetUserShopCart;
+    // },
+    // IsAuthenticated() {
+    //   return this.$store.getters.IsAuthenticated;
+    // },
+    // getCountOrder(){
+    //   return this.$store.getters.getCountOrder;
+    // }
   },
 };
 </script>
 
 
 <style lang="scss" scoped>
-.sub-menu {
-  width: 80%;
-  margin-right: 0px;
-  height: auto;
+.total {
+  padding-bottom: 1rem;
+  width: 100%;
+  border-bottom: 1px solid black;
+  background-color: #373737;
+  @media only screen and (max-width: 1100px) {
+    border-bottom: 0px;
+  }
+}
+.menu {
   display: flex;
-  margin-top: 10px;
-  position: absolute;
-  justify-content: flex-start;
-}
-.active {
-  background-color: orangered;
-}
-.right {
-  background-color: white;
-  direction: rtl;
-  width: 20%;
-}
-.left {
-  color: white;
-  width: 80%;
-  background-color: #cd853f;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-ul {
   list-style: none;
+  text-decoration: none;
+  direction: rtl;
+  height: auto;
+  margin-top: 10px;
+  @media only screen and (max-width: 1100px) {
+    display: none;
+  }
 }
-.menu-list {
-  padding: 25px 0;
-  transition: all 0.4s;
+.r li {
+  padding: 10px 0;
+  margin-right: 80px;
 }
-.menu_list {
-  background-color:#cd853f;
-  color: white;
-  cursor: pointer;
-}
-.menu_list a {
-  color: white;
-}
-.menu_list .icon {
-  color: yellow;
-}
-.icon {
-  transition: all 0.4s;
+.fa {
+  font-size: 35px;
+  margin-top: -5px;
+  margin-right: 10px;
+  transition: all 0.3s;
 }
 .sub-list {
-  text-decoration: none;
-  color: black;
+  cursor: pointer;
+}
+.sub-product {
+  background-color: white;
+  position: absolute;
+  width:10%;
+  border-radius: 5px;
+  height: auto;
+}
+.container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  direction: rtl;
+  width: 100%;
   transition: all 0.4s;
+  z-index: 998;
 }
-.circle-icon {
-  font-size: 10px;
-  color: orange;
-  margin: 0 5px;
-}
-.angle-icon {
-  color: orange;
-  float: left;
-  margin-left: 15px;
-  margin-top: 4px;
-}
-.left-items {
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  text-align: center;
-}
-.left-items li {
-  padding: 15px;
-
- 
-}
-.product-sub {
-  color: white;
-  text-decoration: none;
+.scroll {
+  background-color: #373737;
+  border-radius: 0px;
+  margin-top: -150px;
+  justify-content: center;
+  display: flex;
+  direction: rtl;
   transition: all 0.4s;
-   &:hover{
-    color: black;
+  padding: -5px 12px;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  @media only screen and (max-width: 1100px) {
+    display: none;
   }
+}
+
+a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.badge {
+  background-color: red;
+  z-index: 999;
+  position: absolute;
+  border-radius: 50px;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-left: 7px;
+  top: 6rem;
+}
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.836);
+  opacity: 1;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

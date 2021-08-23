@@ -55,6 +55,11 @@ const routes = [{
             import ('../components/ProductPages/SingleProduct.vue')
     },
     {
+        path: '/group/:slug',
+        name: 'groupproduct',
+        component: () =>
+            import ('../components/ProductPages/GroupProducts.vue')
+    }, {
         path: '/searchproduct/:slug',
         name: 'searchproduct',
         component: () =>

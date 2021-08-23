@@ -1,82 +1,90 @@
 <template>
   <div>
-    <transition name="fade">
-      <div class="popup" v-show="!activePopup"></div>
-    </transition>
     <div
-      class="total"
+      class="menu"
       :class="{
         scroll: scrollPosition >= 160,
-        container: scrollPosition < 160,
+        menu: scrollPosition < 160,
       }"
     >
-      <div class="container">
-        <div class="right">
-          <ul class="menu r">
-            <li
-              class="subbox"
-              @mouseover="mouseover"
-              @mouseleave="mouseleave"
-              :class="{ active: !activePopup }"
+      <ul class="list-menu">
+        <li class="list-items">
+          <router-link class="home-link" to="/">
+            <h4 class="sub-name">خانه</h4>
+          </router-link>
+        </li>
+        <li class="list-items">
+          <router-link class="home-link" to="/products">
+            <h4 class="sub-name">محصولات</h4>
+          </router-link>
+        </li>
+        <li
+          @mouseover="sub.open = true"
+          @mouseleave="sub.open = false"
+          class="list-items"
+          v-for="sub in SubMenus"
+          v-show="sub.group == null"
+          :key="sub.id"
+        >
+          <h4 class="sub-name">
+            <a
+            class="sub-link"
+              :href="
+                $router.resolve({
+                  name: 'groupproduct',
+                  params: { slug: sub.slug },
+                }).href
+              "
+              >{{ sub.name }}</a
             >
-              <a href="#" class="sub">دسته بندی</a>
-              <transition name="fade">
-                <sub-menu v-show="!activePopup"></sub-menu>
-              </transition>
-            </li>
-            <li>
-              <router-link class="router forget" to="/">خانه</router-link>
-            </li>
-            <li>
-              <router-link class="router forget" to="/products"
-                >محصولات</router-link
+          </h4>
+          <div class="sub-product" v-show="sub.open">
+            <ul>
+              <li
+                v-for="subproduct in SubMenus"
+                v-show="subproduct.group != null && sub.id == subproduct.group"
+                :key="subproduct.id"
               >
-            </li>
-            <li>
-              <router-link class="router forget" to="/aboutus"
-                >درباره ما</router-link
-              >
-            </li>
-            <li>
-              <router-link class="router forget" to="/contactus"
-                >ارتباط با ما</router-link
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+                <a
+                  :href="
+                    $router.resolve({
+                      name: 'singleproduct',
+                      params: { slug: subproduct.slug },
+                    }).href
+                  "
+                  class="product-sub"
+                  >{{ subproduct.name }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import SubMenu from "../SubMenus/SubMenu.vue";
 export default {
-  components: {
-    SubMenu,
-  },
   data() {
     return {
-      activePopup: true,
       scrollPosition: 0,
       isSticky: false,
     };
   },
-
-  created() {
-    this.$store.dispatch("ShowOrderRows");
-    window.addEventListener("scroll", this.updateScroll);
-  },
   unmounted() {
     window.removeEventListener("scroll", this.updateScroll);
   },
+  created() {
+    this.$store.dispatch("GetSubMenuFromServer");
+    window.addEventListener("scroll", this.updateScroll);
+  },
+  computed: {
+    SubMenus() {
+      return this.$store.getters.GetSubMenu;
+    },
+  },
   methods: {
-    mouseover() {
-      this.activePopup = false;
-    },
-    mouseleave() {
-      this.activePopup = true;
-    },
     updateScroll() {
       this.scrollPosition = window.scrollY;
       if (this.scrollPosition >= 100) {
@@ -85,157 +93,125 @@ export default {
         this.isSticky = false;
       }
     },
-   
-  },
-  computed: {
-    userOrders() {
-      return this.$store.getters.GetUserShopCart;
-    },
-    IsAuthenticated() {
-      return this.$store.getters.IsAuthenticated;
-    },
-    getCountOrder(){
-      return this.$store.getters.getCountOrder;
-    }
-   
   },
 };
 </script>
 
-
 <style lang="scss" scoped>
-.total{
-    padding-bottom: 1rem;
-    width: 100%;
-    border-bottom: 1px solid black;
-    background-color: #373737;
-     @media only screen and (max-width: 1100px){
-border-bottom: 0px;
-  }
-
-}
 .menu {
-  display: flex;
-  list-style: none;
-  text-decoration: none;
-  direction: rtl;
-  height: auto;
-  margin-top: 10px;
-  @media only screen and (max-width: 1100px){
-display: none;
+  background-color: black;
+  width: 100%;
+  @media screen and (max-width: 1100px) {
+    display: none;
   }
 }
-.r li {
-  margin-top: 15px;
-  margin-right: 80px;
-}
-.fa {
-  font-size: 35px;
-  margin-top: -5px;
-  margin-right: 10px;
-  transition: all 0.3s;
-}
-
-.container {
-  display: flex;
-  margin: 0 auto;
-  justify-content: space-between;
-  direction: rtl;
-  width: 100%;
-  transition: all 0.4s;
-  z-index: 998;
-}
-.scroll {
-    background-color: #373737;
-  border-radius: 0px;
-  margin-top: -150px;
-  justify-content: space-around;
-  display: flex;
-  direction: rtl;
-  transition: all 0.4s;
-  padding: -5px 12px;
-  height: 80px;
-  width: 100%;
-  position: fixed;
-  z-index: 999;
-    @media only screen and (max-width: 1100px){
-display: none;
-  }
-}
-
-.rightmenu li .sub {
-  color: black;
-}
-.sub {
-  background-color: white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  margin-top: -5px;
-  margin-left: 20px;
-  padding: 12px 7px;
-  transition: all 1s;
-  color: black;
-}
-
-a {
+.list-items {
   color: white;
-  font-size: 18px;
-  text-decoration: none;
-}
+  padding: 15px 25px;
+  font-size: 17px;
+  width: 180px;
 
-.rightmenu {
-  display: flex;
-  text-decoration: none;
-  list-style: none;
-}
-.rightmenu li {
-  padding-right: 50px;
-}
-.rightmenu li a {
-  color: white;
-  text-decoration: none;
-}
-.leftmenu {
-  display: flex;
-  text-decoration: none;
-  list-style: none;
-}
-.leftmenu li a {
-  color: white;
-  text-decoration: none;
-  display: flex;
   text-align: center;
 }
-.leftmenu li a i {
-  font-size: 20px;
+.list-menu {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  direction: rtl;
 }
-.badge {
-  background-color: red;
-  z-index: 999;
+.sub-name {
+  cursor: pointer;
+}
+.sub-link{
+  text-decoration: none;
+  color: white;
+}
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    transform: translatey(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}
+
+.sub-product ul li:last-child {
+  border-bottom: none;
+}
+.sub-product {
   position: absolute;
-  border-radius: 50px;
-  padding-top: 2px;
-  padding-right: 7px;
-  padding-left: 7px;
-  top: 6rem;
+  height: 100px;
+  width: 179px;
+  // background-color: yellow;
+  z-index: 999999;
+  margin-right: -25px;
+  margin-top: 15px;
+  animation: sweep 0.4s;
+
+  & ul {
+    list-style: none;
+    background-color: black;
+    width: 180px;
+    // text-align: center;
+    // border-radius: 5px;
+    border: 1px solid black;
+    padding: 0 10px;
+    margin-left: -30px;
+
+    & li {
+      font-size: 15px;
+      margin-top: 10px;
+      padding: 10px;
+      border-bottom: 1px solid white;
+      // width: 50px;
+    }
+  }
 }
-.popup {
-  height: 100vh;
+.scroll {
+  // background-color: ;
+  border-radius: 0px;
+  margin-top: -150px;
+  justify-content: center;
+  display: flex;
+  direction: rtl;
+  transition: all 0.4s;
+  height: 80px;
+  padding-top: 10px;
   width: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.836);
-  opacity: 1;
+  z-index: 999;
+  @media only screen and (max-width: 1100px) {
+    display: none;
+  }
 }
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+.home-link {
+  text-decoration: none;
+  color: white;
 }
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.dropdown-content {
+  // display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  // box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.product-sub {
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+
+  &:hover {
+    transform: scale(2);
+  }
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 </style>

@@ -6,7 +6,7 @@
   <div>
       <submenu-responsive
         @closeSub="closeValue"
-        v-if="show"
+        v-show="show"
       ></submenu-responsive>
       <div class="popup" v-if="show"></div>
     <div class="top-top">
