@@ -46,14 +46,14 @@ export default {
 <style lang="scss" scoped>
 .slider {
   width: 80%;
-  margin: 50px auto;
+  margin: 30px auto 10px auto;
 }
 h1 {
   color: black;
 }
 img {
   width: 100%;
-  height: 320px;
+  height: 300px;
   border-radius: 10px;
    @media screen and (max-width: 670px) {
     height: 150px;

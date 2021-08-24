@@ -1,20 +1,44 @@
 <template>
   <div>
-    <div class="group-product-name">
-      <h1>{{ GroupProduct[0].name }}</h1>
-    </div>
-    <div class="group-product">
-      <div
-        v-for="(group, index) in GroupProduct[0].sub_group"
-        :key="index"
-        class="group-product-box"
-      >
-        <img class="group-picture"
-          :src="`https://api.sdriedf.ir` + img.picture"
-          v-for="(img, imgindex) in group.products[0].picture"
-          :key="imgindex"
-          alt=""
-        />
+    <div class="total">
+      <div class="left">
+        <div class="u-center-text">
+          <h2 class="heading-secondary" v-if="SearchProduct[0]">{{SearchProduct[0].name}}</h2>
+        </div>
+        <div class="row" v-if="SearchProduct[0]">
+          <div class="box" v-for="product in SearchProduct[0].sub_group" :key="product.id">
+
+            <router-link v-if="product.products[0]"
+              :to="{ name: 'singleproduct', params: { slug: product.products[0].slug } }"
+              class="product-info"
+            >
+              <img
+                :class="{ blurimg: !product.products[0].available }"
+                class="image"
+                @mouseover="
+                  (src = product.products[0].picture[0].picture),
+                    (product.products[0].picture[0].picture = product.products[0].picture[1].picture),
+                    (product.products[0].picture[1].picture = src)
+                "
+                @mouseleave="
+                  (product.products[0].picture[1].picture = product.products[0].picture[0].picture),
+                    (product.products[0].picture[0].picture = src)
+                "
+                :src="`https://api.sdriedf.ir` + product.products[0].picture[0].picture"
+                alt=""
+              />
+              <p class="paragraph">{{ product.products[0].name }}</p>
+              <h5 class="cost">
+                {{ (product.products[0].show_cost).toLocaleString() }} تومان
+              </h5>
+              <router-link
+                :to="{ name: 'singleproduct', params: { slug: product.products[0].slug } }"
+                class="btn"
+                >مشاهده محصول</router-link
+              >
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -25,7 +49,7 @@
 export default {
   data() {
     return {
-      ref: this.$route.params.slug,
+      searchName: this.$route.params.slug,
     };
   },
   created() {
@@ -34,7 +58,7 @@ export default {
     });
   },
   computed: {
-    GroupProduct() {
+    SearchProduct() {
       return this.$store.getters.GetGroupProduct;
     },
   },
@@ -54,16 +78,6 @@ export default {
   text-align: start;
   justify-content: space-between;
   background-color: white;
-}
-.group-picture{
-    width: 100px;
-}
-.group-product-box{
-    width: 80%;
-    background-color: red;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
 }
 .nothing {
   text-align: center;

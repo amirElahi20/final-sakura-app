@@ -20,7 +20,8 @@
         $route.name == 'resetpassword',
     }"
   >
-    <footer class="flex-rw">
+    <footer >
+      <div class="flex-rw">
       <ul class="footer-list-top">
         <li>
           <h4 class="footer-list-header">درباره ساکورا</h4>
@@ -67,49 +68,13 @@
           >
         </li>
       </ul>
-      <ul class="footer-list-top">
-        <li>
-          <h4 class="footer-list-header">محصولات</h4>
-        </li>
-
-        <li>
-          <a href="/Angels/cat/id/70" class="generic-anchor footer-list-anchor"
-            >میوه خشک</a
-          >
-        </li>
-        <li>
-          <a
-            href="/Home-Decor/cat/id/64"
-            class="generic-anchor footer-list-anchor"
-            >آجیل</a
-          >
-        </li>
-        <li>
-          <a href="/Mugs/cat/id/32" class="generic-anchor footer-list-anchor"
-            >گز</a
-          >
-        </li>
-        <li>
-          <a
-            href="/Pet-Lover/cat/id/108"
-            class="generic-anchor footer-list-anchor"
-            >خشکبار</a
-          >
-        </li>
-        <li>
-          <a
-            href="/Ladies-Accessories/cat/id/117"
-            class="generic-anchor footer-list-anchor"
-            target="_blank"
-            >محصولات تر</a
-          >
-        </li>
-      </ul>
+    
       <ul class="footer-list-top">
         <li id="help">
           <h4 class="footer-list-header">خدمات مشتریان</h4>
         </li>
         <li>
+          
           <a
             href="/shop/about-contact"
             class="generic-anchor footer-list-anchor"
@@ -183,6 +148,11 @@
           ></a>
         </span>
       </section>
+      </div>
+      <div class="footer-img">
+        <img class="img-footer" src="../../../../public/img/jar.png" alt="">
+        <img class="img-footer" src="../../../../public/img/tamas-tuzes-katai-GZ9_EfvDCFU-unsplash.jpg" alt="">
+      </div>
     </footer>
   </div>
 </template>
@@ -230,6 +200,7 @@ a {
 
 .flex-rw {
   display: flex;
+  justify-content: space-around;
   flex-flow: row wrap;
   margin-top: 3rem;
 }
@@ -251,6 +222,7 @@ footer {
 
 .footer-list-top {
   width: 33.333%;
+  padding: 10px;
 }
 
 .footer-list-top > li {
@@ -294,7 +266,10 @@ footer {
   border-top: 1px solid #ccc;
   width: calc(100% - 20px);
 }
-
+.footer-img{
+  display: flex;
+  justify-content: space-around;
+}
 .footer-social-overlap {
   position: relative;
   z-index: 2;
@@ -305,6 +280,7 @@ footer {
 .footer-social-connect {
   display: flex;
   align-items: center;
+  // justify-content: center;
   font: 3.5em "BYekan";
   color: #fff;
   @media screen and (max-width: 500px) {
@@ -388,5 +364,18 @@ footer {
 }
 .layout {
   display: none;
+}
+.img-footer{
+  width: 40%;
+  height: 150px;
+  margin-bottom: 40px;
+    @media screen and (max-width: 500px) {
+   height: 100px;
+   margin-top: -60px;
+  }
+  //    @media screen and (max-width: 800px) {
+  // display: none;
+  // }
+  // padding: 20px;
 }
 </style>
