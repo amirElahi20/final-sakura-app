@@ -49,7 +49,6 @@ export default {
   margin-top: 20px;
   text-align: right;
   cursor: pointer;
-  font-size: 10px;
   @media screen and (max-width: 500px) {
     font-size: 11px;
   }
