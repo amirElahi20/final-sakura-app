@@ -109,27 +109,8 @@
         </div>
       </div>
       <div class="left">
-        <carousel
-          class="carousel"
-          :per-page="1"
-          :mouse-drag="true"
-          paginationColor="#ffA400"
-          :navigation-enabled="false"
-          :pagination-enabled="false"
-          :center-mode="true"
-          paginationActiveColor="#ff4500"
-          :autoplay="true"
-          :loop="true"
-          :autoplayTimeout="2000"
-        >
-          <slide
-            class="slide"
-            v-for="(img, index) in singleProduct.picture"
-            :key="index"
-          >
-            <img class="img-carousel" :src="img.picture" alt="" />
-          </slide>
-        </carousel>
+     
+            <img v-if="singleProduct.picture" class="img-carousel" :src="singleProduct.picture[0].picture" alt="" />
       </div>
     </div>
     <div class="product-explanation" v-html="singleProduct.description"></div>
@@ -142,14 +123,14 @@
 
 
 <script>
-import { Carousel, Slide } from "vue-carousel";
+// import { Carousel, Slide } from "vue-carousel";
 import Vue from "vue";
 import SimilarProduct from "./SimilarProduct.vue";
 import TheQuestions from "../Questions/TheQuestions.vue";
 export default {
   components: {
-    Carousel,
-    Slide,
+    // Carousel,
+    // Slide,
     SimilarProduct,
     TheQuestions,
   },
@@ -246,7 +227,9 @@ export default {
   }
 }
 .left {
-  width: 400px;
+  // border: 1px solid black;
+  // padding: 10px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;  width: 400px;
   height: 100%;
   @media screen and (max-width: 895px) {
     width: 300px;

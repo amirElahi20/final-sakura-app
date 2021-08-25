@@ -20,10 +20,10 @@
         </div>
       </div>
       <div class="right">
-        <div class="img-box" v-if="getImages[0]">
-          <img class="image img1" :src="getImages[0].product_img_1" alt="" />
-          <img class="image img2" :src="getImages[0].product_img_3" alt="" />
-          <img class="image img3" :src="getImages[0].product_img_2" alt="" />
+        <div class="img-box">
+          <img class="image img1" :src="GetInformation[0].product_img_1" alt="" />
+          <img class="image img2" :src="GetInformation[0].product_img_2" alt="" />
+          <img class="image img3" :src="GetInformation[0].product_img_3" alt="" />
         </div>
       </div>
     </main>
@@ -41,9 +41,7 @@ export default {
     return {};
   },
 
-  created() {
-    this.$store.dispatch("GetImagesFromServer");
-  },
+
   computed: {
     getImages() {
       return this.$store.getters.GetImg;
@@ -142,7 +140,7 @@ img {
   height: 240px;
   transition: all 0.3s;
   &:hover {
-    outline: 5px solid rgb(173, 4, 173);
+    outline: 5px solid orange;
   }
 }
 .img2 {

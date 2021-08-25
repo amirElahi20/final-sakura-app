@@ -34,6 +34,7 @@ const actions = {
     GetInformationFromServer(context) {
         Vue.http.get('site_model/api/v1/site_information/')
             .then(response => {
+                console.log("site information", response.data)
                 context.commit("SetInfo", response.data)
             })
     }

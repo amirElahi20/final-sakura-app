@@ -9,6 +9,7 @@
         [950, 4],
         [850, 3],
         [300, 2],
+        [360, 1.4],
       ]"
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"

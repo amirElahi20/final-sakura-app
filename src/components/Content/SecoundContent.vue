@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section-features">
-      <img class="back-img" v-if="showImg[0]" :src="showImg[0].main_img_2" alt="">
+      <img class="back-img" :src="GetInformation[0].site_img" alt="">
       <div class="shadow"></div>
        <div class="row">
         <div class="col-1-of-4">
@@ -47,9 +47,9 @@ import MostsellProduct from "./MostsellProduct.vue";
 export default {
   components: { MostsellProduct, BestProduct },
   computed:{
-    showImg(){
-      return this.$store.getters.GetImg
-    }
+     GetInformation() {
+      return this.$store.getters.GetSiteInformation;
+    },
   }
 };
 </script>

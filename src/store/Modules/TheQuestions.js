@@ -21,6 +21,7 @@ const actions = {
         Vue.http.get('site_model/api/v1/FAQ/', {
             responseType: 'json'
         }).then(response => {
+            console.log("FAQ", response.data)
             context.commit('SetQuestions', response.data)
         })
     }

@@ -25,15 +25,6 @@
           <li>
             <a href="">
               <font-awesome-icon
-                class="instagram telegram"
-                :icon="['fab', 'telegram']"
-              />
-              <h4>تلگرام</h4>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <font-awesome-icon
                 class="instagram whatsapp"
                 :icon="['fab', 'whatsapp']"
               />
@@ -309,7 +300,7 @@ export default {
 }
 .logo {
   margin-top: -10px;
-  margin-left: 100px;
+  margin-left: px;
   @media screen and (max-width: 1100px) {
     display: none;
   }

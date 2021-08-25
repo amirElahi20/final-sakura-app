@@ -55,15 +55,7 @@
               <img
                 :class="{ blurimg: !product.available }"
                 class="image"
-                @mouseover="
-                  (src = product.picture[0].picture),
-                    (product.picture[0].picture = product.picture[1].picture),
-                    (product.picture[1].picture = src)
-                "
-                @mouseleave="
-                  (product.picture[1].picture = product.picture[0].picture),
-                    (product.picture[0].picture = src)
-                "
+             
                 :src="`https://api.sdriedf.ir` + product.picture[0].picture"
                 alt=""
               />

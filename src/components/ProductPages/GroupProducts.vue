@@ -14,16 +14,7 @@
             >
               <img
                 :class="{ blurimg: !product.products[0].available }"
-                class="image"
-                @mouseover="
-                  (src = product.products[0].picture[0].picture),
-                    (product.products[0].picture[0].picture = product.products[0].picture[1].picture),
-                    (product.products[0].picture[1].picture = src)
-                "
-                @mouseleave="
-                  (product.products[0].picture[1].picture = product.products[0].picture[0].picture),
-                    (product.products[0].picture[0].picture = src)
-                "
+                class="image"                
                 :src="`https://api.sdriedf.ir` + product.products[0].picture[0].picture"
                 alt=""
               />
@@ -150,6 +141,7 @@ $color-primary-dark: orange;
 $color-primary-light: orangered;
 .heading-secondary {
   font-size: 2rem;
+  margin-bottom: 1rem;
   font-weight: 700;
   background-image: linear-gradient(
     to right,

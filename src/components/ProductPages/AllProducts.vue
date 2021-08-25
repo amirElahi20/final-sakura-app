@@ -2,9 +2,9 @@
   <div>
     <div class="total">
       <div class="left">
-        <div class="u-center-text">
-          <h2 class="heading-secondary">محصولات</h2>
-        </div>
+        <div class="u-center">
+      <h2 class="header-title"> محصولات</h2>
+    </div>
         <div class="row">
           <div class="box" v-for="product in FilterProducts" :key="product.id">
             <router-link
@@ -15,15 +15,7 @@
                 <img
                   :class="{ blurimg: !product.available }"
                   class="image"
-                  @mouseover="
-                    (src = product.picture[0].picture),
-                      (product.picture[0].picture = product.picture[1].picture),
-                      (product.picture[1].picture = src)
-                  "
-                  @mouseleave="
-                    (product.picture[1].picture = product.picture[0].picture),
-                      (product.picture[0].picture = src)
-                  "
+                 
                   :src="`https://api.sdriedf.ir` + product.picture[0].picture"
                   alt=""
                 />
@@ -77,23 +69,22 @@ export default {
 <style lang="scss" scoped>
 $color-primary-dark: orange;
 $color-primary-light: orangered;
-.heading-secondary {
+.u-center {
+  margin: 10px 0 50px 0;
+  text-align: center;
+}
+.header-title {
   font-size: 2rem;
   font-weight: 700;
-  background-image: linear-gradient(
-    to right,
-    $color-primary-dark,
-    $color-primary-light
-  );
+  background-image: linear-gradient(to right, orange, orangered);
   -webkit-background-clip: text;
   display: inline-block;
   color: transparent;
   transition: all 0.3s;
 }
-.u-center-text {
-  text-align: center;
-  padding-bottom: 1rem;
-}
+
+
+
 .product-info {
   color: black;
   text-decoration: none;
@@ -155,7 +146,7 @@ $color-primary-light: orangered;
 .row {
   display: flex;
   flex-wrap: wrap;
-  width: 85%;
+  width: 90%;
   margin: 0 auto;
   justify-content: center;
 }

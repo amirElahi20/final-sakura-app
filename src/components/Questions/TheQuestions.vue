@@ -4,10 +4,10 @@
       <div class="u-center">
         <h2 class="header-title">سوالات متداول</h2>
       </div>
-      <div class="questions" v-for="question in 5" :key="question">
+      <div class="questions" v-for="question in FAQ" :key="question.id">
         <details>
-          <summary class="question">آیا چه میشود؟؟</summary>
-          <p class="answer">بله</p>
+          <summary class="question"  v-html="question.title"></summary>
+          <p class="answer" v-html="question.body"></p>
         </details>
       </div>
       <div class="back-btn">
@@ -26,6 +26,11 @@ export default {
   },
   created(){
     this.$store.dispatch("GetQuestionsFromServer")
+  },
+  computed:{
+    FAQ(){
+      return this.$store.getters.GetQuestions
+    }
   }
 }
 </script>
@@ -44,6 +49,10 @@ export default {
   margin-top: 20px;
   text-align: right;
   cursor: pointer;
+  font-size: 10px;
+  @media screen and (max-width: 500px) {
+    font-size: 11px;
+  }
 }
 
 .answer {
@@ -52,6 +61,9 @@ export default {
   text-align: right;
   color: white;
   margin-top: 2px;
+  @media screen and (max-width: 500px) {
+    font-size: 11px;
+  }
 }
 .icon {
   margin-right: 5px;
@@ -70,6 +82,9 @@ details > summary::before {
   margin-right: 5px;
   font-size: 15px;
   font-weight: bold;
+  @media screen and (max-width: 500px) {
+    font-size: 11px;
+  }
 }
 
 details[open] > summary::before {
@@ -77,6 +92,9 @@ details[open] > summary::before {
   padding-right: 0px;
   vertical-align: middle;
   font-weight: bold;
+  @media screen and (max-width: 500px) {
+    font-size: 11px;
+  }
 }
 details[open] summary ~ * {
   animation: sweep 1s ;
