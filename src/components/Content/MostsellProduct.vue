@@ -9,11 +9,12 @@
         [1200, 5],
         [950, 4],
         [850, 3],
-        [360, 1.4],
+        [360, 2],
       ]"
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
+      :paginationEnabled="false"
       :navigation-enabled="true"
       navigation-next-label="&#10095;"
       navigation-prev-label="&#10094;"
@@ -173,6 +174,9 @@ h2:after {
   margin: 0 5px;
   border-radius: 10px;
   background-color: whitesmoke;
+     @media screen and (max-width: 450px) {
+    height: 310px;
+  }
 }
 .swiper {
   width: 80%;
@@ -189,6 +193,9 @@ h2:after {
   border-top-left-radius: 10px;
   border-bottom: 1px solid black;
   margin-bottom: 20px;
+   @media screen and (max-width: 450px) {
+    height: 150px;
+  }
 }
 .products-cost {
   text-align: center;
@@ -197,6 +204,9 @@ h2:after {
 .product-name {
   font-size: 18px;
   margin-bottom: 2px;
+   @media screen and (max-width: 500px) {
+       font-size: 14px;
+    }
 }
 .product-cost {
   font-size: 14px;
@@ -220,6 +230,10 @@ h2:after {
     color: orangered;
     border: 1px solid orangered;
   }
+   @media screen and (max-width: 500px) {
+       font-size: 12px;
+       padding: 5px;
+    }
 }
 .total-probtn {
   text-decoration: none;
@@ -251,5 +265,10 @@ h2:after {
   cursor: pointer;
   text-decoration: none;
   color: orangered;
+}
+span{
+   @media screen and (max-width: 500px) {
+       font-size: 12px;
+    }
 }
 </style>

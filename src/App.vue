@@ -18,7 +18,7 @@ export default {
     TheFooter,
   },
      metaInfo: {
-      title: 'فروشگاه ساکورا',
+      title: 'فروشگاه اینترنتی',
       titleTemplate: '%s - صفحه اصلی',
       htmlAttrs: {
         lang: 'utf-8',

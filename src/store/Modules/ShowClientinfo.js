@@ -73,6 +73,12 @@ const actions = {
             Vue.swal("انجام نشد", "ایمیل وارد شده تکراری است", "error");
 
         })
+    },
+    ChangePasswordInPanel() {
+        Vue.http.put('panel/api/v1/change_password/')
+            .then(response => {
+                console.log("changepassword", response)
+            })
     }
 };
 export default {

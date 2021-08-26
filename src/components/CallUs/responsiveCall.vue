@@ -1,23 +1,17 @@
+
 <template>
-  <div v-if="GetInformation[0]">
-    <a class="phone-link" :href="`tel:${GetInformation[0].phone}`">
+
+  <!-- this part is for phone pulsing that has shown in 1100px size.
+with this pulse , client can call to the site admin number -->
+
+  <div>
+    <a class="phone-link" href="tel:123456">
       <div class="pulse">
         <font-awesome-icon class="phone" icon="phone" />
       </div>
     </a>
   </div>
 </template>
-
-
-<script>
-export default {
-  computed: {
-    GetInformation() {
-      return this.$store.getters.GetSiteInformation;
-    },
-  },
-};
-</script>
 
 
 <style lang="scss" scoped>

@@ -2,21 +2,38 @@
   <div>
     <div class="contact-form">
       <div class="second-container">
+        <loading
+          class="vld-parent"
+          :active="WaitForLoading"
+          :is-full-page="fullPage"
+          loader="dots"
+          backgroundColor="#ffffff"
+          color="#FFA500"
+          blue="10px"
+        />
         <h2>تغییر رمز</h2>
         <form>
-           <div class="form-group">
+          <div class="form-group">
             <label for="name-input">رمز کنونی را وارد کنید</label>
-            <input type="password" placeholder="رمز" required />
+            <input
+              type="password"
+              placeholder="رمز"
+              v-model="CurrentPassword"
+            />
           </div>
+          {{ CurrentPassword }} <br />
+          {{ NewPassword }}
           <div class="form-group">
             <label for="name-input">رمز جدید را وارد کنید</label>
-            <input type="password" placeholder="رمز جدید" required />
+            <input
+              type="password"
+              placeholder="رمز جدید "
+              v-model="NewPassword"
+            />
           </div>
-         <div class="form-group">
-            <label for="name-input">تکرار رمز جدید</label>
-            <input type="password" placeholder="تکرار رمز" required />
-          </div>
-          <button>اعمال تغییرات</button>
+          <button @click.prevent="SendRequestToChangePass">
+            اعمال تغییرات
+          </button>
         </form>
       </div>
     </div>
@@ -25,6 +42,9 @@
 
 
 <script>
+import Loading from "vue-loading-overlay";
+
+import "vue-loading-overlay/dist/vue-loading.css";
 import Vue from "vue";
 import {
   required,
@@ -37,15 +57,17 @@ import {
 export default {
   data() {
     return {
-      title: "",
-      name: "",
-      email: "",
-      phone: "",
-      body: "",
+      NewPassword: "",
+      CurrentPassword: "",
+      fullPage: true,
+      WaitForLoading : false
     };
   },
-    created() {
-     if (this.$cookie.get('Sakura') == null) {
+  components: {
+    Loading,
+  },
+  created() {
+    if (this.$cookie.get("Sakura") == null) {
       this.$router.push("/");
     }
   },
@@ -73,24 +95,36 @@ export default {
     },
   },
   methods: {
-    SendRequestToServer() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        const request = {
-          title: this.title,
-          name: this.name,
-          phone: this.phone,
-          email: this.email,
-          body: this.body,
-        };
-        Vue.http
-          .post("site_model/api/v1/contact_us/", request)
-
-          .then((response) => {
-            console.log(response);
-            this.toast.success("پیام شما با موفقیت ارسال شد");
-          });
-      }
+    SendRequestToChangePass() {
+      this.WaitForLoading = true
+      const requestForChangePass = {
+        old_password: this.CurrentPassword,
+        new_password: this.NewPassword,
+      };
+      Vue.http
+        .put("panel/api/v1/change_password/", requestForChangePass, {
+          headers: {
+            Authorization: "Bearer " + Vue.cookie.get("Sakura"),
+          },
+        })
+        .then((response) => {
+          this.WaitForLoading = false
+          console.log(response);
+          Vue.swal("انجام شد", "رمز با موفقیت تغییر کرد", "success");
+        })
+        .catch((err) => {
+          this.WaitForLoading = false
+          console.log(err.data.error);
+          if (err.data.error === "Invalid old password") {
+            Vue.swal("انجام نشد", "رمز کنونی خود را درست وارد کنید", "info");
+          } else {
+            Vue.swal(
+              "انجام نشد",
+              "مشکلی پیش آمد لطفا در زمان دیگری امتحان کنید",
+              "error"
+            );
+          }
+        });
     },
   },
 };
@@ -191,7 +225,7 @@ body {
   margin-top: -2px;
   font-family: "BYekan";
 }
-.contact-form .second-container form .form-group select{
+.contact-form .second-container form .form-group select {
   width: 100%;
   font-size: 15px;
   height: 10px;
@@ -199,9 +233,8 @@ body {
   font-family: "BYekan";
   cursor: pointer;
 }
-.contact-form .second-container form .form-group select option{
-    font-family: "BYekan";
-
+.contact-form .second-container form .form-group select option {
+  font-family: "BYekan";
 }
 .contact-form .second-container form .form-group input::placeholder,
 .contact-form .second-container form .form-group textarea::placeholder {
@@ -262,6 +295,5 @@ body {
   color: white;
   text-decoration: none;
   padding: 10px 31.1px;
-
 }
 </style>

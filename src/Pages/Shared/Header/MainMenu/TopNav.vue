@@ -151,6 +151,7 @@ export default {
   },
   created() {
     this.$store.dispatch("checkForLogin");
+    this.$store.dispatch("CountUserOrders")
     this.$store.dispatch("GetImagesFromServer");
     this.$store.dispatch("GetInformationFromServer");
     

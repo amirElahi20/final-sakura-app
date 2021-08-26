@@ -9,11 +9,12 @@
         [950, 4],
         [850, 3],
         [300, 2],
-        [360, 1.4],
+        [360, 2],
       ]"
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
+      :paginationEnabled="false"
       :navigation-enabled="true"
       navigation-next-label="&#10095;"
       navigation-prev-label="&#10094;"
@@ -86,15 +87,16 @@ export default {
 .u-center {
   margin: -150px 0 50px 0;
   text-align: center;
-
   @media screen and (max-width: 880px) {
     margin-top: 2rem;
   }
 }
+
 .product-info {
   text-decoration: none;
   color: black;
 }
+
 .available {
   font-size: 12px;
   direction: rtl;
@@ -109,6 +111,7 @@ export default {
   transform-origin: 50% 50%;
   margin-top: -230px;
 }
+
 @keyframes shake-animation {
   0% {
     transform: translate(0, 0);
@@ -135,9 +138,11 @@ export default {
     transform: translate(0, 0);
   }
 }
+
 .blurimg {
   filter: blur(4px);
 }
+
 .header-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -169,13 +174,18 @@ h2:after {
   margin-right: -50%;
   margin-top: 8px;
 }
+
 .box {
   height: 420px;
   border: 1px solid black;
   margin: 0 5px;
   border-radius: 10px;
   background-color: whitesmoke;
+   @media screen and (max-width: 450px) {
+    height: 300px;
+  }
 }
+
 .swiper {
   width: 80%;
   margin: 0 auto;
@@ -184,6 +194,7 @@ h2:after {
     margin-top: 2rem;
   }
 }
+
 .img-box {
   width: 100%;
   height: 240px;
@@ -191,15 +202,25 @@ h2:after {
   border-top-left-radius: 10px;
   border-bottom: 1px solid black;
   margin-bottom: 20px;
+  @media screen and (max-width: 450px) {
+    height: 120px;
+  }
 }
+
 .products-cost {
   text-align: center;
   direction: rtl;
 }
+
 .product-name {
   font-size: 18px;
   margin-bottom: 2px;
+
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 }
+
 .product-cost {
   font-size: 14px;
   margin-top: 15px;
@@ -208,6 +229,7 @@ h2:after {
     margin-bottom: 2rem;
   }
 }
+
 .product-btn {
   text-decoration: none;
   color: white;
@@ -222,7 +244,12 @@ h2:after {
     color: orangered;
     border: 1px solid orangered;
   }
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+    padding: 5px;
+  }
 }
+
 .total-probtn {
   text-decoration: none;
   color: white;
@@ -230,9 +257,11 @@ h2:after {
   padding: 15px 20px;
   border-radius: 10px;
 }
+
 .mybtn {
   margin-top: 25px;
 }
+
 .btn-btn {
   background-color: green;
   display: inline-block;
@@ -241,17 +270,20 @@ h2:after {
     transform: scale(1.1);
   }
 }
+
 .show-more {
   text-align: center;
 }
-.fa {
-  font-size: 50px;
-  margin-top: 150px;
-  color: orange;
-}
+
 .show {
   cursor: pointer;
   text-decoration: none;
   color: orangered;
+}
+
+span {
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 }
 </style>

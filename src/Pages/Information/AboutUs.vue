@@ -1,66 +1,22 @@
 <template>
   <div>
     <div class="container">
-      <div class="about">
+      <div class="about"  v-for="about in AboutUs" :key="about.title">
         <div class="left">
-          <h1>درباره ساکورا</h1>
+          <h1>{{ about.title }}</h1>
+          
           <hr />
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            {{about.sub_title}}
           </p>
-
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            {{about.body}}
           </p>
         </div>
         <div class="right">
           <img
-            src="../../../public/img/mockup-graphics-enNffryKuQI-unsplash.jpg"
+            :src="about.picture"
           />
-        </div>
-        <div class="clear"></div>
-      </div>
-
-      <div class="mission">
-        <div class="left">
-          <img
-            src="../../../public/img/koen-emmers-uYM_PQJ8VvY-unsplash.jpg"
-          />
-        </div>
-        <div class="right">
-          <h1>خدمات ساکورا</h1>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
         </div>
         <div class="clear"></div>
       </div>
@@ -71,6 +27,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      AboutUs : []
+    }
+  },
    metaInfo: {
       title: 'فروشگاه ساکورا',
       titleTemplate: '%s - درباره ما',
@@ -79,6 +40,17 @@ export default {
         amp: true
       }
     },
+    methods:{
+      GetAboutUsFromServer(){
+        this.$http.get('site_model/api/v1/About_Us/').then(response =>{
+          console.log( "this is about us page", response.data);
+          this.AboutUs = response.data
+        })
+      }
+    },
+    created(){
+      this.GetAboutUsFromServer()
+    }
 };
 </script>
 

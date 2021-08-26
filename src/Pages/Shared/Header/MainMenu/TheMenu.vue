@@ -9,11 +9,6 @@
     >
       <ul class="list-menu">
         <li class="list-items">
-          <router-link class="home-link" to="/">
-            <h4 class="sub-name">خانه</h4>
-          </router-link>
-        </li>
-        <li class="list-items">
           <router-link class="home-link" to="/products">
             <h4 class="sub-name">محصولات</h4>
           </router-link>
@@ -172,15 +167,15 @@ export default {
 }
 .scroll {
   // background-color: ;
-  border-radius: 0px;
+  // border-radius: 0px;
   margin-top: -150px;
-  justify-content: center;
-  display: flex;
-  direction: rtl;
+  // justify-content: center;
+  // display: flex;
+  // direction: rtl;
   transition: all 0.4s;
-  height: 80px;
+  // height: 80px;
   padding-top: 10px;
-  width: 100%;
+  // width: 100%;
   position: fixed;
   z-index: 999;
   @media only screen and (max-width: 1100px) {

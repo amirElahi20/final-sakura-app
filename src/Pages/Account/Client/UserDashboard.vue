@@ -18,7 +18,7 @@
 
       <div class="sidebar subMenuBar" :class="{ side: activeSide }">
         <header>
-          <a href="#">امیررضا</a>
+          <a href="#">{{Username}}</a>
         </header>
         <ul class="nav">
           <li @click="hide">
@@ -90,6 +90,11 @@ export default {
          if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");
     }
+  },
+  computed:{
+  Username() {
+      return this.$store.getters.GetUsername;
+    },
   },
   methods: {
     Showsidebar() {

@@ -16,7 +16,7 @@
             <font-awesome-icon class="fa" icon="shopping-bag" />
             <h3 class="heading-tertiary">خرید راحت</h3>
             <p class="feature-box__text">
-              به راحتی و با چندکلیک خرید خود را انجام دهید
+             به راحتی خرید کنید
             </p>
           </div>
         </div>
@@ -30,7 +30,7 @@
         <div class="col-1-of-4">
           <div class="feature-box">
             <font-awesome-icon class="fa" icon="truck" />
-            <h3 class="heading-tertiary">تحویل در کوتاه ترین زمان ممکن</h3>
+            <h3 class="heading-tertiary">تحویل سریع</h3>
             <p class="feature-box__text">ارسال کالا به تمام نقاط ایران</p>
           </div>
         </div>
@@ -78,8 +78,11 @@ export default {
   & > * {
     transform: skewY(5deg);
   }
-   @media screen and (max-width: 500px) {
-    height: 600px;
+   @media screen and (max-width: 450px) {
+    height: 550px;
+      }
+        @media screen and (max-width: 401px) {
+    height: 950px;
       }
 }
 .feature-box {
@@ -97,6 +100,9 @@ export default {
 
   @media screen and (max-width: 500px) {
     width: 170px;
+      }
+        @media screen and (max-width: 450px) {
+    width: 200px;
       }
 
   &__icon {
@@ -120,6 +126,7 @@ export default {
   width: 100%;
   height: 500px;
   z-index: -9999;
+  // margin-bottom: 1rem;
   position: absolute;
   margin-top: -10rem;
     transform: skewY(-5deg);
@@ -127,8 +134,15 @@ export default {
   & > * {
     transform: skewY(5deg);
   }
-  @media screen and (max-width: 500px) {
-    height: 600px;
+   @media screen and (max-width: 450px) {
+    height: 550px;
+      }
+  // @media screen and (max-width: 500px) {
+  //   height: 550px;
+  //   margin-bottom: 2rem;
+  //     }
+      @media screen and (max-width: 401px) {
+    height: 950px;
       }
 }
 .section-features {
