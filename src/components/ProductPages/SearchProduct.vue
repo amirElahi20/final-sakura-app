@@ -44,7 +44,7 @@
     <div v-if="SearchProduct.length != 0" class="total">
       <div class="left">
         <div class="u-center-text">
-          <h2 class="heading-secondary">محصولات</h2>
+          <h2 class="heading-secondary">جست و جو</h2>
         </div>
         <div class="row">
           <div class="box" v-for="product in SearchProduct" :key="product.id">
@@ -56,7 +56,7 @@
                 :class="{ blurimg: !product.available }"
                 class="image"
              
-                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+                :src="`https://sdriedf.ir` + product.picture[0].picture"
                 alt=""
               />
               <p class="paragraph">{{ product.name }}</p>
@@ -88,6 +88,15 @@ export default {
   data() {
     return {
       searchName: this.$route.params.slug,
+    };
+  },
+   metaInfo() {
+    return {
+      titleTemplate: `فروشگاه اینترنتی - ${this.title}`,
+      htmlAttrs: {
+        lang: "utf-8",
+        amp: true,
+      },
     };
   },
   created() {
@@ -285,11 +294,12 @@ $color-primary-light: orangered;
   @media screen and (max-width: 740px) {
     width: 190px;
   }
-  @media screen and (max-width: 500px) {
-    width: 170px;
+  @media screen and (max-width: 550px) {
+    width: 200px;
   }
-  @media screen and (max-width: 380px) {
+  @media screen and (max-width: 440px) {
     width: 100%;
+    height: 400px;
   }
 }
 
@@ -300,6 +310,9 @@ $color-primary-light: orangered;
   &:hover {
     transform: scale(1.1);
     opacity: 1s;
+  }
+   @media screen and (max-width: 440px) {
+    height: 250px;
   }
 }
 

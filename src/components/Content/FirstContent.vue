@@ -21,9 +21,21 @@
       </div>
       <div class="right">
         <div class="img-box">
-          <img class="image img1" :src="GetInformation[0].product_img_1" alt="" />
-          <img class="image img2" :src="GetInformation[0].product_img_2" alt="" />
-          <img class="image img3" :src="GetInformation[0].product_img_3" alt="" />
+          <img
+            class="image img1"
+            :src="`https://sdriedf.ir` + GetInformation[0].product_img_1"
+            alt=""
+          />
+          <img
+            class="image img2"
+            :src="`https://sdriedf.ir` + GetInformation[0].product_img_2"
+            alt=""
+          />
+          <img
+            class="image img3"
+            :src="`https://sdriedf.ir` + GetInformation[0].product_img_3"
+            alt=""
+          />
         </div>
       </div>
     </main>
@@ -40,7 +52,6 @@ export default {
   data() {
     return {};
   },
-
 
   computed: {
     getImages() {

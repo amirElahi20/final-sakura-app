@@ -29,34 +29,48 @@
       </div>
       <div class="second-container">
         <h2>گزارش باگ</h2>
+        {{ selectedFile }}
         <form>
           <div class="form-group">
             <label for="name-input">نام خود را وارد کنید</label>
-            <input id="name-input" type="text" placeholder="نام" required />
-            <input type="text" placeholder="نام خانوادگی" required />
+            <input
+              id="name-input"
+              v-model="name"
+              type="text"
+              placeholder="نام"
+              required
+            />
+            <input
+              type="text"
+              v-model="Lname"
+              placeholder="نام خانوادگی"
+              required
+            />
           </div>
 
           <label for="email-input">ارسال تصویر مربوط به باگ</label>
           <input
-            @change="fileChange"
+            @change="fileChange($event.target.files[0])"
             id="email-input"
             type="file"
             placeholder="مثال : someone@gmail.com"
-            required
           />
-          <div v-if="!noFiles" class="confirm_pic">
+          <!-- <div v-if="!noFiles" class="confirm_pic">
             <p>عکس اضافه شد</p>
             <p>نام فایل :{{ FileName }}</p>
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="message-textarea">باگ در کدام بخش دیده شد؟؟</label>
-            <textarea id="message-textarea" placeholder="پیام شما"></textarea>
+            <textarea
+              id="message-textarea"
+              v-model="title"
+              placeholder="پیام شما"
+            ></textarea>
           </div>
           <div class="form-group">
             <label for="message-textarea">پیغام خود را بنویسید</label>
             <textarea id="message-textarea" placeholder="پیام شما"></textarea>
           </div>
-
           <p class="pay-attention">
             لطفا توجه داشته باشید قبل از برطرف شدن خطای گزارش شده، هیچگونه
             اطلاعاتی در مورد آن را عمومی نکرده یا با دیگران به اشتراک نگذارید.
@@ -64,11 +78,11 @@
             حریم شخصی افراد و ایجاد مشکل در اطلاعات دیگران اجتناب کنید. همچنین
             به هیچ عنوان از مشکلات که یافته‌اید، بهره‌برداری و سوءاستفاده نکنید
             و به قوانین کشور پایبند باشید. با توجه به اهمیت خطای گزارش شده از
-            سوی شما، ساکورا به پاس قدردانی هدیه‌ای برای شما در نظر خواهد گرفت.
-            توجه داشته باشید بعضی از مشکلات به دلیل کم اهمیت بودن شامل هدیه
-            نخواهند بود.
+            سوی شما، ما به پاس قدردانی هدیه‌ای برای شما در نظر خواهد گرفت. توجه
+            داشته باشید بعضی از مشکلات به دلیل کم اهمیت بودن شامل هدیه نخواهند
+            بود.
           </p>
-          <button>ارسال پیام</button>
+          <button @click.prevent="SendBugToServer">ارسال پیام</button>
         </form>
         <router-link to="/" class="back-btn">بازگشت به صفحه اصلی</router-link>
       </div>
@@ -92,16 +106,16 @@ export default {
     return {
       title: "",
       name: "",
-      email: "",
-      phone: "",
+      Lname: "",
       body: "",
       noFiles: true,
       FileName: "",
+      selectedFile: null,
     };
   },
   metaInfo: {
-    title: "فروشگاه ساکورا",
-    titleTemplate: "%s - ارتباط با ما",
+    title: "فروشگاه اینترنتی",
+    titleTemplate: "%s - گزارش باگ",
     htmlAttrs: {
       lang: "utf-8",
       amp: true,
@@ -131,28 +145,34 @@ export default {
     },
   },
   methods: {
-    SendRequestToServer() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        const request = {
-          title: this.title,
-          name: this.name,
-          phone: this.phone,
-          email: this.email,
-          body: this.body,
-        };
-        Vue.http
-          .post("site_model/api/v1/contact_us/", request)
+    SendBugToServer() {
+      const fd = new FormData();
+      fd.append("image", this.selectedFile)
+      
+      const request = {
+        title: this.title,
+        name: this.name,
+        last_name : this.Lname,
+        body: this.body,
+      };
+      Vue.http
+        .post("site_model/api/v1/bugs/", request)
 
-          .then((response) => {
-            console.log(response);
-            this.toast.success("پیام شما با موفقیت ارسال شد");
-          });
-      }
+        .then((response) => {
+          console.log(response);
+          alert('ok')
+        }).catch(err =>{
+          console.log(err)
+          alert('nokey')
+        })
     },
     fileChange(event) {
-      this.noFiles = !event.target.files.length;
-      this.FileName = event.target.files[0].name;
+      // this.noFiles = !event.target.files.length;
+      // this.FileName = event.target.files[0].name;
+      // this.selectedFile = event.target.files[0];
+      console.log(event);
+      this.selectedFile = event;
+      // alert(event.target.files[0])
     },
   },
 };
@@ -363,9 +383,9 @@ body {
   font-size: 14px;
   direction: rtl;
 }
-.confirm_pic{
-color: green;
-font-size: 12px;
-margin: -45px 10px 30px 0;
+.confirm_pic {
+  color: green;
+  font-size: 12px;
+  margin: -45px 10px 30px 0;
 }
 </style>

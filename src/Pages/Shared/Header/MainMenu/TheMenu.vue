@@ -96,6 +96,7 @@ export default {
 .menu {
   background-color: black;
   width: 100%;
+  // position: fixed;
   @media screen and (max-width: 1100px) {
     display: none;
   }

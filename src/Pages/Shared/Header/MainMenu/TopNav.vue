@@ -10,7 +10,7 @@
       ></submenu-responsive>
       <div class="popup" v-if="show"></div>
     <div class="top-top">
-      <font-awesome-icon @click="show= true" class="bars" icon="bars" />
+      <font-awesome-icon @click="show= true , showSearchBox = false" class="bars" icon="bars" />
       <div class="contact">
         <ul class="social-icon">
           <li v-if="GetInformation[0]">
@@ -40,11 +40,13 @@
         </ul>
       </div>
       <div class="logo">
+        <router-link to="/">
         <img
           class="header-img"
-          src="../../../../../public/img/header3.png"
+          src="../../../../../public/img/logo.jpg"
           alt=""
         />
+        </router-link>
       </div>
       <div class="shop">
         <ul class="shop-ul">
@@ -71,12 +73,13 @@
                   placeholder="نام محصول"
                 />
               </div>
+              <!-- .split(' ').join('-') -->
               <div class="left-searchbtn">
                 <a class="search-btn"
                   :href="
                     $router.resolve({
                       name: 'searchproduct',
-                      params: { slug: (searchName.replace(/\s\s+/g, ' ')).split(' ').join('-') },
+                      params: { slug: ((searchName.replace(/\s\s+/g, ' ')).trim()).split(' ').join('-') },
                     }).href
                   "
                   >جست و جو</a
@@ -339,7 +342,8 @@ export default {
   margin-right: 35px;
 }
 .header-img {
-  width: 60px;
+  width: 90px;
+  margin-top: -20px;
 }
 .insta {
   border: 0.1px solid #d6249f;

@@ -153,7 +153,7 @@ export default {
     };
   },
   metaInfo: {
-    title: "فروشگاه ساکورا",
+    title: "فروشگاه اینترنتی",
     titleTemplate: "%s - ثبت نام",
     htmlAttrs: {
       lang: "utf-8",

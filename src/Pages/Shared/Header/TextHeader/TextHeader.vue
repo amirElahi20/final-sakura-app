@@ -6,6 +6,7 @@
         :mouse-drag="true"
         paginationColor="#ffA400"
         :navigation-enabled="true"
+        :paginationEnabled="false"
         paginationActiveColor="#ff4500"
         navigation-next-label="&#10095;"
         navigation-prev-label="&#10094;"
@@ -32,21 +33,21 @@ export default {
     Carousel,
     Slide,
   },
-  created(){
+  created() {
     this.$store.dispatch("GetImagesFromServer");
   },
-  computed:{
-    GetSlider(){
-     return this.$store.getters.GetImg
-    }
-  }
+  computed: {
+    GetSlider() {
+      return this.$store.getters.GetImg;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .slider {
   width: 80%;
-  margin: 30px auto 10px auto;
+  margin: 30px auto 40px auto;
 }
 h1 {
   color: black;
@@ -55,7 +56,7 @@ img {
   width: 100%;
   height: 300px;
   border-radius: 10px;
-   @media screen and (max-width: 670px) {
+  @media screen and (max-width: 670px) {
     height: 150px;
   }
 }

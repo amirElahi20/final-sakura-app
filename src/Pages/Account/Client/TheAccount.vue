@@ -77,13 +77,17 @@ import {
 export default {
   data() {
     return {
-      title: "",
-      name: "",
-      email: "",
-      phone: "",
-      body: "",
+  
     };
   },
+     metaInfo: {
+      title: 'پنل کاربری',
+      titleTemplate: '%s - مشاهده حساب',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   created() {
     this.$store.dispatch("Getinformtion");
       if (this.$cookie.get('Sakura') == null) {

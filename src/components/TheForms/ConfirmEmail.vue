@@ -16,6 +16,14 @@ export default {
       token: this.$route.params.token,
     };
   },
+     metaInfo: {
+      title: 'فروشگاه اینترنتی',
+      titleTemplate: '%s - تاییدیه ایمیل',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   methods: {
     confirm() {
       this.$http

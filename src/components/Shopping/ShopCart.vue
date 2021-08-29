@@ -168,7 +168,7 @@ export default {
     };
   },
   metaInfo: {
-    title: "فروشگاه ساکورا",
+    title: "فروشگاه اینترنتی",
     titleTemplate: "%s - سبدخرید",
     htmlAttrs: {
       lang: "utf-8",

@@ -26,7 +26,7 @@
             <img
               :class="{ blurimg: !product.available }"
               class="img-box"
-              :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+              :src="`https://sdriedf.ir` + product.picture[0].picture"
               alt=""
             />
             <div class="products-cost">
@@ -193,6 +193,7 @@ h2:after {
   border-top-left-radius: 10px;
   border-bottom: 1px solid black;
   margin-bottom: 20px;
+  cursor: pointer;
    @media screen and (max-width: 450px) {
     height: 150px;
   }

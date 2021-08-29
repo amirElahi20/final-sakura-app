@@ -109,6 +109,7 @@
         </div>
       </div>
       <div class="left">
+        <!-- {{singleProduct.picture[0].picture}} -->
      
             <img v-if="singleProduct.picture" class="img-carousel" :src="singleProduct.picture[0].picture" alt="" />
       </div>
@@ -123,7 +124,6 @@
 
 
 <script>
-// import { Carousel, Slide } from "vue-carousel";
 import Vue from "vue";
 import SimilarProduct from "./SimilarProduct.vue";
 import TheQuestions from "../Questions/TheQuestions.vue";
@@ -146,7 +146,7 @@ export default {
   },
   metaInfo() {
     return {
-      titleTemplate: `فروشگاه ساکورا - ${this.title}`,
+      titleTemplate: `فروشگاه اینترنتی - ${this.title}`,
       htmlAttrs: {
         lang: "utf-8",
         amp: true,
@@ -222,7 +222,7 @@ export default {
     margin-top: 25rem;
   }
   a.disabled {
-    pointer-events: none;
+    // pointer-events: none;
     cursor: not-allowed;
   }
 }
@@ -331,7 +331,7 @@ option {
   direction: rtl;
   border-radius: 10px;
   cursor: pointer;
-  margin: 1rem 0 2rem 0;
+  margin: 1rem 0 1rem 0;
 }
 
 .pack-icon {

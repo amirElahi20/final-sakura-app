@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section-features">
-      <img class="back-img" :src="GetInformation[0].site_img" alt="">
+      <img class="back-img" :src=" `https://sdriedf.ir` +GetInformation[0].site_img" alt="">
       <div class="shadow"></div>
        <div class="row">
         <div class="col-1-of-4">

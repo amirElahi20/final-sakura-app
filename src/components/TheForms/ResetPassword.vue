@@ -82,7 +82,7 @@ export default {
     Loading,
   },
   metaInfo: {
-    title: "فروشگاه ساکورا",
+    title: "فروشگاه اینترنتی",
     titleTemplate: "%s - بازیابی رمز",
     htmlAttrs: {
       lang: "utf-8",

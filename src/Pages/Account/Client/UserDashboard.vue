@@ -86,6 +86,14 @@ export default {
       activeSide: true,
     };
   },
+     metaInfo: {
+      title: 'پنل کاربری',
+      titleTemplate: '%s - داشبورد',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   created() {
          if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");

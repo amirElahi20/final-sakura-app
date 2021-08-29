@@ -1,14 +1,14 @@
 <template>
   <div>
-       <loading
-                class="vld-parent"
-                :active="Loading"
-                :is-full-page="fullPage"
-                loader="dots"
-                backgroundColor="#ffffff"
-                color="#FFA500"
-                blue="10px"
-              />
+    <loading
+      class="vld-parent"
+      :active="Loading"
+      :is-full-page="fullPage"
+      loader="dots"
+      backgroundColor="#ffffff"
+      color="#FFA500"
+      blue="10px"
+    />
     <div class="log">
       <section class="login">
         <div class="row">
@@ -119,45 +119,42 @@
 import Loading from "vue-loading-overlay";
 
 import "vue-loading-overlay/dist/vue-loading.css";
-import {
-  required,
-  minLength,
-  alphaNum,
-} from "vuelidate/lib/validators";
+import { required, minLength, alphaNum } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
       username: "",
       password: "",
       visibility: "password",
-            fullPage: true,
-
+      fullPage: true,
     };
   },
-   metaInfo: {
-      title: 'فروشگاه ساکورا',
-      titleTemplate: '%s - ورود',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "فروشگاه اینترنتی",
+    titleTemplate: "%s - ورود",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
-    components: {
+  },
+  components: {
     Loading,
   },
-  computed:{
-    Loading(){
-      return this.$store.getters.GetPending
-    }
+  computed: {
+    Loading() {
+      return this.$store.getters.GetPending;
+    },
   },
   methods: {
     LoginUser() {
       this.$v.$touch();
-      const login = {
-        username: this.username,
-        password: this.password,
-      };
-      this.$store.dispatch("LoginUser", login);
+      if (!this.$v.$error) {
+        const login = {
+          username: this.username,
+          password: this.password,
+        };
+        this.$store.dispatch("LoginUser", login);
+      }
     },
     showpassword() {
       this.visibility = "text";
@@ -255,14 +252,13 @@ p {
   &__login {
     width: 60%;
     padding: 6rem;
-      @media screen and (max-width: 800px) {
+    @media screen and (max-width: 800px) {
       width: 100%;
       height: 100%;
       background-image: linear-gradient(315deg, #fffdfd 0%, #fffdfda2 74%);
       background-position: left;
       position: relative;
-        background-size: cover;
-
+      background-size: cover;
     }
   }
 }
@@ -315,8 +311,8 @@ p {
     transform: scale(1.1);
   }
   @media screen and (max-width: 500px) {
-      width: 100%;
-    }
+    width: 100%;
+  }
 }
 
 .txt {
@@ -339,8 +335,8 @@ p {
   &:hover {
     transform: scale(1.1);
   }
-   @media screen and (max-width: 500px) {
-      width: 100%;
-    }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 }
 </style>

@@ -69,6 +69,14 @@ export default {
     
     };
   },
+     metaInfo: {
+      title: 'پنل کاربری',
+      titleTemplate: '%s - ویرایش اطلاعات',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
 
   components: {
     Loading,

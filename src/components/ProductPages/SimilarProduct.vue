@@ -13,6 +13,7 @@
       paginationColor="#ffA400"
       paginationActiveColor="#ff4500"
       :mouse-drag="true"
+      :paginationEnabled="false"
       :navigation-enabled="true"
       navigation-next-label="&#10095;"
       navigation-prev-label="&#10094;"
@@ -21,22 +22,13 @@
       <slide v-for="product in MostSellProducts" :key="product.id">
         <div class="box" v-if="product.picture">
           <div class="product-informartion">
-            <a
-              class="product-info"
-              :href="
-                $router.resolve({
-                  name: 'singleproduct',
-                  params: { slug: product.slug },
-                }).href
-              "
-            >
-              <img
-                :class="{ blurimg: !product.available }"
-                class="img-box"
-                :src="`https://api.sdriedf.ir` + product.picture[0].picture"
-                alt=""
-              />
-            </a>
+            <!-- {{ product.picture[0].picture}} -->
+            <img
+              :class="{ blurimg: !product.available }"
+              class="img-box"
+              :src="`https://sdriedf.ir` + product.picture[0].picture"
+              alt=""
+            />
             <div class="products-cost">
               <h3 class="product-name">{{ product.name }}</h3>
               <h4 class="product-cost">
@@ -184,6 +176,9 @@ h2:after {
   margin: 0 5px;
   border-radius: 10px;
   background-color: whitesmoke;
+  @media screen and (max-width: 450px) {
+    height: 300px;
+  }
 }
 .swiper {
   width: 80%;
@@ -201,6 +196,10 @@ h2:after {
   border-top-left-radius: 10px;
   border-bottom: 1px solid black;
   margin-bottom: 20px;
+  cursor: pointer;
+  @media screen and (max-width: 450px) {
+    height: 120px;
+  }
 }
 .products-cost {
   text-align: center;
@@ -230,6 +229,10 @@ h2:after {
     background-color: white;
     color: orangered;
     border: 1px solid orangered;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+    padding: 5px;
   }
 }
 .total-probtn {

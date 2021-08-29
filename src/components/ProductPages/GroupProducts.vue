@@ -15,7 +15,7 @@
               <img
                 :class="{ blurimg: !product.products[0].available }"
                 class="image"                
-                :src="`https://api.sdriedf.ir` + product.products[0].picture[0].picture"
+                :src="`https://sdriedf.ir` + product.products[0].picture[0].picture"
                 alt=""
               />
               <p class="paragraph">{{ product.products[0].name }}</p>
@@ -41,6 +41,16 @@ export default {
   data() {
     return {
       searchName: this.$route.params.slug,
+      title : this.$route.params.slug
+    };
+  },
+   metaInfo() {
+    return {
+      titleTemplate: `فروشگاه اینترنتی - ${this.title}`,
+      htmlAttrs: {
+        lang: "utf-8",
+        amp: true,
+      },
     };
   },
   created() {

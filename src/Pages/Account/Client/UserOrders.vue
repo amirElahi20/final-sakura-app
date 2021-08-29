@@ -11,7 +11,15 @@ export default {
          if (this.$cookie.get('Sakura') == null) {
       this.$router.push("/");
     }
-    }
+    },
+       metaInfo: {
+      title: 'پنل کاربری',
+      titleTemplate: '%s - سفارش ها',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
 }
 </script>
     

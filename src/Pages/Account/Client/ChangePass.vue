@@ -21,8 +21,6 @@
               v-model="CurrentPassword"
             />
           </div>
-          {{ CurrentPassword }} <br />
-          {{ NewPassword }}
           <div class="form-group">
             <label for="name-input">رمز جدید را وارد کنید</label>
             <input
@@ -63,6 +61,14 @@ export default {
       WaitForLoading : false
     };
   },
+     metaInfo: {
+      title: 'پنل کاربری',
+      titleTemplate: '%s - تغییر رمز',
+      htmlAttrs: {
+        lang: 'utf-8',
+        amp: true
+      }
+    },
   components: {
     Loading,
   },

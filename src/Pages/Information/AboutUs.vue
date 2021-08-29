@@ -14,6 +14,7 @@
           </p>
         </div>
         <div class="right">
+          <!-- {{about.picture}} -->
           <img
             :src="about.picture"
           />
@@ -33,7 +34,7 @@ export default {
     }
   },
    metaInfo: {
-      title: 'فروشگاه ساکورا',
+      title: 'فروشگاه اینترنتی',
       titleTemplate: '%s - درباره ما',
       htmlAttrs: {
         lang: 'utf-8',

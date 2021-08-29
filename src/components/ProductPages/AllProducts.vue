@@ -16,7 +16,7 @@
                   :class="{ blurimg: !product.available }"
                   class="image"
                  
-                  :src="`https://api.sdriedf.ir` + product.picture[0].picture"
+                  :src="`https://sdriedf.ir` + product.picture[0].picture"
                   alt=""
                 />
               </transition>
@@ -48,7 +48,7 @@ export default {
     };
   },
   metaInfo: {
-    title: "فروشگاه ساکورا",
+    title: "فروشگاه اینترنتی",
     titleTemplate: "%s - محصولات",
     htmlAttrs: {
       lang: "utf-8",
