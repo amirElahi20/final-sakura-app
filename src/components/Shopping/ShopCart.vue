@@ -25,7 +25,7 @@
             >
               <img
                 class="img-product"
-                :src="order.product.picture[0].picture"
+                :src="`https://sdriedf.ir`+order.product.picture[0].picture"
               />
             </router-link>
           </div>

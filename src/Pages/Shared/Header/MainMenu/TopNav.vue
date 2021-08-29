@@ -75,7 +75,7 @@
               </div>
               <!-- .split(' ').join('-') -->
               <div class="left-searchbtn">
-                <a class="search-btn"
+                <a type="submit" class="search-btn"
                   :href="
                     $router.resolve({
                       name: 'searchproduct',

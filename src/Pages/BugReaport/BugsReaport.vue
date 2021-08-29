@@ -55,10 +55,6 @@
             type="file"
             placeholder="مثال : someone@gmail.com"
           />
-          <!-- <div v-if="!noFiles" class="confirm_pic">
-            <p>عکس اضافه شد</p>
-            <p>نام فایل :{{ FileName }}</p>
-          </div> -->
           <div class="form-group">
             <label for="message-textarea">باگ در کدام بخش دیده شد؟؟</label>
             <textarea
@@ -147,24 +143,28 @@ export default {
   methods: {
     SendBugToServer() {
       const fd = new FormData();
-      fd.append("image", this.selectedFile)
-      
+      fd.append("image", this.selectedFile);
+
       const request = {
         title: this.title,
         name: this.name,
-        last_name : this.Lname,
+        last_name: this.Lname,
         body: this.body,
+        picture: {
+          fd
+        },
       };
       Vue.http
         .post("site_model/api/v1/bugs/", request)
 
         .then((response) => {
           console.log(response);
-          alert('ok')
-        }).catch(err =>{
-          console.log(err)
-          alert('nokey')
+          alert("ok");
         })
+        .catch((err) => {
+          console.log(err);
+          alert("nokey");
+        });
     },
     fileChange(event) {
       // this.noFiles = !event.target.files.length;

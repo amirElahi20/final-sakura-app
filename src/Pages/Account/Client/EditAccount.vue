@@ -22,13 +22,13 @@
             />
             <input type="text" v-model="ShowInfoClient.user.last_name" />
           </div>
- 
+
           <div v-if="ShowInfoClient.user" class="form-group">
             <label for="email-input">ایمیل خود را وارد کنید</label>
             <input
               id="email-input"
-              type="text"
               v-model="ShowInfoClient.user.email"
+             type="email"
             />
           </div>
           <p class="alert">
@@ -54,54 +54,30 @@
 import Loading from "vue-loading-overlay";
 
 import "vue-loading-overlay/dist/vue-loading.css";
-import {
-  required,
-  maxLength,
-  minLength,
-  numeric,
-  email,
-  not,
-} from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
       fullPage: true,
-    
+      ref : ""
     };
   },
-     metaInfo: {
-      title: 'پنل کاربری',
-      titleTemplate: '%s - ویرایش اطلاعات',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "پنل کاربری",
+    titleTemplate: "%s - ویرایش اطلاعات",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
+  },
 
   components: {
     Loading,
   },
   validations: {
-    title: {
-      required,
-    },
-    name: {
-      persianalpha: not(numeric),
-      required,
-    },
-    email: {
+    ref: {
       email,
       required,
-    },
-    phone: {
-      numeric,
-      required,
-      minLength: minLength(11),
-      maxLength: maxLength(11),
-    },
-    body: {
-      required,
-      minLength: minLength(30),
     },
   },
   methods: {
@@ -122,7 +98,7 @@ export default {
   },
   created() {
     this.$store.dispatch("Getinformtion");
-      if (this.$cookie.get('Sakura') == null) {
+    if (this.$cookie.get("Sakura") == null) {
       this.$router.push("/");
     }
   },
@@ -130,12 +106,12 @@ export default {
     ShowInfoClient() {
       return this.$store.getters.GetInfo;
     },
-    WaitForLoading(){
-      return this.$store.getters.GetPendingLoading
+    WaitForLoading() {
+      return this.$store.getters.GetPendingLoading;
     },
-    isAuth(){
+    isAuth() {
       return this.$store.getters.IsAuthenticated;
-    }
+    },
   },
 };
 </script>

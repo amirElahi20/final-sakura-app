@@ -109,9 +109,7 @@
         </div>
       </div>
       <div class="left">
-        <!-- {{singleProduct.picture[0].picture}} -->
-     
-            <img v-if="singleProduct.picture" class="img-carousel" :src="singleProduct.picture[0].picture" alt="" />
+            <img v-if="singleProduct.picture" class="img-carousel" :src="`https://sdriedf.ir`+ singleProduct.picture[0].picture" alt="" />
       </div>
     </div>
     <div class="product-explanation" v-html="singleProduct.description"></div>

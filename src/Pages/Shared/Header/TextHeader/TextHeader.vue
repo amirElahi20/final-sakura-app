@@ -16,7 +16,7 @@
         :autoplayTimeout="7000"
       >
         <slide class="slide" v-for="pic in GetSlider" :key="pic.id">
-          <img :src="pic.picture" />
+          <img :src="`https://sdriedf.ir` + pic.picture" />
         </slide>
       </carousel>
     </div>

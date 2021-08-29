@@ -27,8 +27,12 @@
               type="password"
               placeholder="رمز جدید "
               v-model="NewPassword"
+              @input="$v.NewPassword.$touch()"
             />
           </div>
+           <p class="alert" v-if="!$v.NewPassword.minLength">
+                  رمز نباید کمتر از 6 کاراکتر باشد
+                </p>
           <button @click.prevent="SendRequestToChangePass">
             اعمال تغییرات
           </button>
@@ -44,31 +48,24 @@ import Loading from "vue-loading-overlay";
 
 import "vue-loading-overlay/dist/vue-loading.css";
 import Vue from "vue";
-import {
-  required,
-  maxLength,
-  minLength,
-  numeric,
-  email,
-  not,
-} from "vuelidate/lib/validators";
+import { minLength } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
       NewPassword: "",
       CurrentPassword: "",
       fullPage: true,
-      WaitForLoading : false
+      WaitForLoading: false,
     };
   },
-     metaInfo: {
-      title: 'پنل کاربری',
-      titleTemplate: '%s - تغییر رمز',
-      htmlAttrs: {
-        lang: 'utf-8',
-        amp: true
-      }
+  metaInfo: {
+    title: "پنل کاربری",
+    titleTemplate: "%s - تغییر رمز",
+    htmlAttrs: {
+      lang: "utf-8",
+      amp: true,
     },
+  },
   components: {
     Loading,
   },
@@ -78,31 +75,13 @@ export default {
     }
   },
   validations: {
-    title: {
-      required,
-    },
-    name: {
-      persianalpha: not(numeric),
-      required,
-    },
-    email: {
-      email,
-      required,
-    },
-    phone: {
-      numeric,
-      required,
-      minLength: minLength(11),
-      maxLength: maxLength(11),
-    },
-    body: {
-      required,
-      minLength: minLength(30),
+    NewPassword: {
+      minLength: minLength(6),
     },
   },
   methods: {
     SendRequestToChangePass() {
-      this.WaitForLoading = true
+      this.WaitForLoading = true;
       const requestForChangePass = {
         old_password: this.CurrentPassword,
         new_password: this.NewPassword,
@@ -114,12 +93,12 @@ export default {
           },
         })
         .then((response) => {
-          this.WaitForLoading = false
+          this.WaitForLoading = false;
           console.log(response);
           Vue.swal("انجام شد", "رمز با موفقیت تغییر کرد", "success");
         })
         .catch((err) => {
-          this.WaitForLoading = false
+          this.WaitForLoading = false;
           console.log(err.data.error);
           if (err.data.error === "Invalid old password") {
             Vue.swal("انجام نشد", "رمز کنونی خود را درست وارد کنید", "info");
@@ -150,7 +129,13 @@ body {
   align-items: flex-start;
   background: #f2f2f2;
 }
-
+.alert {
+  color: red;
+  text-align: end;
+  margin-top: -10px;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
 .contact-form {
   width: 80%;
   direction: rtl;
